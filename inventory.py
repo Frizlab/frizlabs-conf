@@ -1,9 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # vim: ts=3 sw=3 noet
 # Adapted from https://github.com/wincent/wincent
-
-from __future__ import print_function
 
 import json
 import os
@@ -31,11 +29,11 @@ def eprint(*args, **kwargs):
 	print(*args, file=sys.stderr, **kwargs)
 
 
-def raw_input_stderr(*args):
+def input_stderr(*args):
 	old_stdout = sys.stdout
 	try:
 		sys.stdout = sys.stderr
-		return raw_input(*args)
+		return input(*args)
 	finally:
 		sys.stdout = old_stdout
 
@@ -51,35 +49,50 @@ def get_group_no_cache():
 	group_input_str += "\n"
 	group_input_str += "Your choice: "
 	
-	group_number = raw_input_stderr(group_input_str)
-	return groups.get(group_number, "unknown")
+	group_number = input_stderr(group_input_str)
+	return groups.get(group_number.strip(), "unknown")
 
 
 def get_cached_group():
 	try:
-		with file(cached_group_path) as f:
+		with open(cached_group_path, "r") as f:
 			s = f.read()
+		return s.strip()
 	except:
 		return None
-	return s.strip()
 
 
+# Returns True on success, False on failure
 def update_cached_group(group):
-	eprint("Updating cached group with new value: “%s”" % group)
+	print("Updating cached Ansible group with new value: “%s”" % group)
 	try:
 		with open(cached_group_path, "w") as text_file:
 			text_file.write(group)
+		return True
 	except:
 		e = sys.exc_info()[0]
-		eprint("   -> Failed with error %s" % str(e))
+		eprint("   -> Failed cache update with error %s" % str(e))
+		return False
+
+
+
+update_cache_only = False
+if len(sys.argv) >= 2:
+	update_cache_only = (sys.argv[1] == "--update-cache-only")
 
 
 group = get_cached_group()
 if group is None:
 	group = get_group_no_cache()
-	update_cached_group(group)
+	did_update = update_cached_group(group)
+	if update_cache_only:
+		sys.exit(0 if did_update else 1)
 else:
-	eprint("Using cached group: “%s”" % group)
+	# Printing to stderr will print an error in Ansible; printing on stdout will
+	# make Ansible fail (will try to parse this as part of the expected JSON).
+	if update_cache_only:
+		print("Using cached group: “%s”" % group)
+		sys.exit(0)
 
 
 inventory = {
