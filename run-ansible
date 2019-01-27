@@ -38,6 +38,9 @@ usage() {
 	echo "   2. Installs Ansible prerequisites in the virtualenv"
 	echo "   3. Hands off to Ansible to complete actual installation of dotfiles etc."
 	echo
+	echo "Note: Python3 is required for the script to launch. Try to launch the script"
+	echo "      without Python3 installed for a rationale."
+	echo
 	echo "Supported roles:"
 	pushd roles >/dev/null 2>&1
 	for ROLE in *; do
@@ -99,7 +102,7 @@ if ! which -s python3; then
 	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
 	echo >/dev/stderr
 	echo "Ansible works fine with Python 2, and Python 2 is the only Python" >/dev/stderr
-	echo "installed on macOS by default; it would make sense to use Python2" >/dev/stderr
+	echo "installed on macOS by default. Would it make sense to use Python2" >/dev/stderr
 	echo "instead of Python 3? Yes. However I consider Python 2 as obsolete" >/dev/stderr
 	echo "(and so does Python: https://www.python.org/dev/peps/pep-0373/)." >/dev/stderr
 	echo "Thus, I force the usage of Python 3 whenever I can…" >/dev/stderr
