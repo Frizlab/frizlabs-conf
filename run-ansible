@@ -1,0 +1,141 @@
+#!/bin/bash
+# vim: ts=3 sw=3 noet
+# Adapted from https://github.com/wincent/wincent
+
+# 1. Sets up a local Python environment via virtualenv
+# 2. Installs Ansible prerequisites in the virtualenv
+# 3. Hands off to Ansible to complete actual installation of dotfiles etc.
+
+
+set -e
+shopt -s nullglob
+cd "$(dirname "$0")"
+
+
+readonly DEPENDENCIES_DIR="dependencies"
+readonly ANSIBLE_ENV_SETUP="$DEPENDENCIES_DIR/ansible/hacking/env-setup"
+readonly VIRTUALENV_SETUP="$DEPENDENCIES_DIR/virtualenv/virtualenv.py"
+readonly VIRTUALENV_TARGET_DIR="virtualenv_python"
+readonly VIRTUALENV_ACTIVATE="$VIRTUALENV_TARGET_DIR/bin/activate"
+
+
+usage() {
+	echo "run-ansible [options] [roles...]"
+	echo
+	echo "Supported options:"
+	echo "   -f/--force"
+	echo "   -h/--help"
+	echo "   -v/--verbose (repeat up to four times for more verbosity)"
+	echo
+	echo "Other options (passed through to Ansible):"
+	echo "   --check"
+	echo "   --step"
+	echo "   --start-at-task='role | task'"
+	echo
+	echo "The script will:"
+	echo "   1. Sets up a local Python environment via virtualenv"
+	echo "   2. Installs Ansible prerequisites in the virtualenv"
+	echo "   3. Hands off to Ansible to complete actual installation of dotfiles etc."
+	echo
+	echo "Supported roles:"
+	pushd roles >/dev/null 2>&1
+	for ROLE in *; do
+		echo "   $ROLE: $(cat $ROLE/description 2>/dev/null || echo "<no description>")"
+	done
+	popd >/dev/null 2>&1
+}
+
+EXTRA_ARGS=()
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--force   | -f) FORCE=1;;
+		--verbose | -v) VERBOSE=$((VERBOSE + 1));;
+		-vv)            VERBOSE=$((VERBOSE + 2));;
+		-vvv)           VERBOSE=$((VERBOSE + 3));;
+		-vvvv)          VERBOSE=$((VERBOSE + 4));;
+		--help | -h | help)
+			usage
+			exit 0
+		;;
+		"")
+			echo "Empty arg" >/dev/null
+			usage
+			exit 1
+		;;
+		*)
+			if [ -d "roles/$1" ]; then
+				if [ -z "$ROLES" ]; then
+					ROLES="--tags $1"
+				else
+					ROLES="$ROLES,$1"
+				fi
+			elif [[ "$1" == --* ]]; then
+				EXTRA_ARGS+=("$1")
+			else
+				echo "Unrecognized argument(s): $*"
+				usage
+				exit 1
+			fi
+		;;
+	esac
+	shift
+done
+
+if [[ "$VERBOSE" ]]; then
+	DEV_NULL=/dev/stdout
+	if [ "$VERBOSE" -ge 4 ]; then
+		echo 'Enabling extremely verbose output'
+		set -x
+	fi
+else
+	trap 'echo "Exiting: run with -v/--verbose for more info"' EXIT
+	DEV_NULL=/dev/null
+fi
+
+if [ ! -e "$VIRTUALENV_SETUP" ]; then
+	echo "Not found: $VIRTUALENV_SETUP" >/dev/stderr
+	echo "Did you forget to 'git submodule update --init --recursive'?" >/dev/stderr
+	exit 1
+fi
+
+if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
+	echo "Not found: $ANSIBLE_ENV_SETUP" >/dev/stderr
+	echo "Did you forget to 'git submodule update --init --recursive'?" >/dev/stderr
+	exit 1
+fi
+
+if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$FORCE" ]]; then
+	python "$VIRTUALENV_SETUP" "$VIRTUALENV_TARGET_DIR" &>"$DEV_NULL"
+elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
+	echo "Skipping virtualenv install (already exists); use --force to override"
+fi
+
+source "$VIRTUALENV_ACTIVATE"
+
+# Troubleshooting during OS upgrades, or new machine installs: may need:
+#
+#   sudo -H pip install --upgrade cryptography
+#   pip install --upgrade pip
+#
+if [[ -z "$(pip show paramiko pycrypto PyYAML Jinja2 httplib2)" || "$FORCE" ]]; then
+	if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 &>"$DEV_NULL"; then
+		echo "Failed: pip install" >/dev/stderr
+		echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
+		exit 1
+	fi
+elif [[ ! "$FORCE" ]]; then
+	echo "Skipping pip installs (already exists); use --force to override"
+fi
+
+source "$DEPENDENCIES_DIR/ansible/hacking/env-setup" &>"$DEV_NULL"
+
+readonly HOST_OS="$(uname)"
+readonly ANSIBLE_VERBOSE_OPTION="${VERBOSE+-$(printf 'v%.0s' $(seq $VERBOSE))}"
+
+case "$HOST_OS" in
+	Darwin) ansible-playbook --ask-become-pass $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}" darwin.yml;;
+	Linux)  ansible-playbook                   $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}" linux.yml;;
+	*) echo "Unknown host OS: $HOST_OS" >/dev/stderr; exit 1;;
+esac
+
+trap - EXIT
