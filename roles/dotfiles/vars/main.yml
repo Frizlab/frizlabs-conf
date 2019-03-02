@@ -1,0 +1,10 @@
+---
+# Note: If dotfile_files is empty, declare it like so (yaml syntax for empty list):
+# dotfile_files: []
+dotfile_files:
+  - .bash_profile
+
+dotfile_templates:
+  - .bash_profile.d/homebrew.sh
+
+# vim: ts=2 sw=2 et

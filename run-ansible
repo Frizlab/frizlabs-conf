@@ -12,6 +12,8 @@ shopt -s nullglob
 cd "$(dirname "$0")"
 
 
+readonly VAULT_ID_PATH=".vault-id"
+
 readonly DEPENDENCIES_DIR="dependencies"
 readonly ANSIBLE_ENV_SETUP="$DEPENDENCIES_DIR/ansible/hacking/env-setup"
 readonly VIRTUALENV_SETUP="$DEPENDENCIES_DIR/virtualenv/virtualenv.py"
@@ -27,6 +29,11 @@ usage() {
 	echo "   -f/--force   force the reinstallation of the virtualenv and the pip dependencies"
 	echo "   -h/--help    show the help and exit"
 	echo "   -v/--verbose (repeat up to four times for more verbosity)"
+	echo
+	echo "Choosing the Ansible module to run:"
+	echo "   -m/--module ansible_module   which Ansible module to run (default “playbook”)"
+	echo "      This is useful to encrypt a string for instance:"
+	echo "         ./run-ansible -m vault encrypt_string \"secret\""
 	echo
 	echo "Other options (passed through to Ansible):"
 	echo "   --check"
@@ -49,7 +56,12 @@ usage() {
 	popd >/dev/null 2>&1
 }
 
+
+ROLES=
+FORCE=0
+VERBOSE=0
 EXTRA_ARGS=()
+ANSIBLE_MODULE="playbook"
 while [ $# -gt 0 ]; do
 	case "$1" in
 		--force   | -f) FORCE=1;;
@@ -60,6 +72,16 @@ while [ $# -gt 0 ]; do
 		--help | -h | help)
 			usage
 			exit 0
+		;;
+		--module | -m)
+			shift
+			ANSIBLE_MODULE="$1"
+			if [ -z "$ANSIBLE_MODULE" ]; then
+				echo "Got invalid empty Ansible module" >/dev/stderr
+				echo >/dev/stderr
+				usage >/dev/stderr
+				exit 1
+			fi
 		;;
 		"")
 			echo "Got invalid empty arg" >/dev/stderr
@@ -74,19 +96,16 @@ while [ $# -gt 0 ]; do
 				else
 					ROLES="$ROLES,$1"
 				fi
-			elif [[ "$1" == --* ]]; then
-				EXTRA_ARGS+=("$1")
 			else
-				echo "Unrecognized argument(s): $*" >/dev/stderr
-				usage
-				exit 1
+				EXTRA_ARGS+=("$1")
 			fi
 		;;
 	esac
 	shift
 done
 
-if [[ "$VERBOSE" ]]; then
+DEV_NULL=/dev/null
+if [[ "$VERBOSE" != 0 ]]; then
 	DEV_NULL=/dev/stdout
 	if [ "$VERBOSE" -ge 4 ]; then
 		echo 'Enabling extremely verbose output'
@@ -94,7 +113,10 @@ if [[ "$VERBOSE" ]]; then
 	fi
 else
 	trap 'echo "Exiting: run with -v/--verbose for more info"' EXIT
-	DEV_NULL=/dev/null
+	
+	# VERBOSE must be unset because of how we use it later to create the verbose
+	# options for Ansible…
+	unset VERBOSE
 fi
 
 # Python3 dependency check
@@ -125,7 +147,7 @@ if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
 	exit 1
 fi
 
-if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$FORCE" ]]; then
+if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$FORCE" != 0 ]]; then
 	"$VIRTUALENV_SETUP" -p python3 "$VIRTUALENV_TARGET_DIR" >"$DEV_NULL"
 elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
 	echo "Skipping virtualenv install (already exists); use --force to override" >"$DEV_NULL"
@@ -134,13 +156,13 @@ fi
 source "$VIRTUALENV_ACTIVATE"
 
 # Install needed pip dependencies
-if [[ -z "$(pip show paramiko pycrypto PyYAML Jinja2 httplib2)" || "$FORCE" ]]; then
-	if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 >"$DEV_NULL"; then
+if [[ -z "$(pip show paramiko pycrypto PyYAML Jinja2 httplib2 cryptography)" || "$FORCE" != 0 ]]; then
+	if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 cryptography >"$DEV_NULL"; then
 		echo "Failed: pip install" >/dev/stderr
 		echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
 		exit 1
 	fi
-elif [[ ! "$FORCE" ]]; then
+elif [[ "$FORCE" == 0 ]]; then
 	echo "Skipping pip installs (already exists); use --force to override" >"$DEV_NULL"
 fi
 
@@ -149,6 +171,17 @@ fi
 # of the script).
 python ./inventory.py --update-cache-only >"$DEV_NULL"
 
+# Ask for the vault id if needed.
+if [ ! -f "$VAULT_ID_PATH" ]; then
+	if [ -e "$VAULT_ID_PATH" ]; then
+		echo "Something exists at path “$VAULT_ID_PATH” but it’s not a regular file. Aborting Ansible run." >/dev/stderr
+		exit 1
+	fi
+	read -sp "Please input the Ansible Vault password: " vault_id
+	echo
+	echo -n "$vault_id" >"$VAULT_ID_PATH"
+fi
+
 # I don’t really like hidding all output from a program, but this one prints a
 # useless warning on macOS on stderr, so I silence it!
 source "$DEPENDENCIES_DIR/ansible/hacking/env-setup" &>"$DEV_NULL"
@@ -156,11 +189,15 @@ source "$DEPENDENCIES_DIR/ansible/hacking/env-setup" &>"$DEV_NULL"
 readonly HOST_OS="$(uname)"
 readonly ANSIBLE_VERBOSE_OPTION="${VERBOSE+-$(printf 'v%.0s' $(seq $VERBOSE))}"
 
+if [ "$ANSIBLE_MODULE" = "playbook" ]; then
+	case "$HOST_OS" in
+		Darwin) EXTRA_ARGS+=("playbooks/darwin.yml");;
+		Linux)  EXTRA_ARGS+=("playbooks/linux.yml");;
+		*) echo "Unknown host OS: $HOST_OS" >/dev/stderr; exit 1;;
+	esac
+fi
 # Note: If we need sudo in a playbook: pass “--ask-become-pass” to ansible-playbook
-case "$HOST_OS" in
-	Darwin) ansible-playbook $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}" playbooks/darwin.yml;;
-	Linux)  ansible-playbook $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}" playbooks/linux.yml;;
-	*) echo "Unknown host OS: $HOST_OS" >/dev/stderr; exit 1;;
-esac
+#       (The option can be added to EXTRA_ARGS.)
+ansible-$ANSIBLE_MODULE --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
 
 trap - EXIT
