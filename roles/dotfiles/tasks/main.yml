@@ -1,6 +1,6 @@
 ---
 - name: dotfiles | create backup directory
-  file: path="{{ backup_dir }}" state=directory
+  file: path="{{ backup_dir }}" state=directory mode=0700
 
 # Provide an extension point for .bash_profile
 - name: dotfiles | make ~/.bash_profile.d
