@@ -5,3 +5,8 @@
 # /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 
 export HOMEBREW_GITHUB_API_TOKEN="{{ homebrew_github_token }}"
+{% if dark_mode %}
+
+# Dark mode support for ls
+export LSCOLORS=GxFxCxDxBxegedabagaced
+{%- endif %}

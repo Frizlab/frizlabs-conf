@@ -36,9 +36,6 @@ export PS1='\[\033[01;36m\]\#\[\033[0m\] \\ \[\033[00;32m\]\t\[\033[0m\] / \[\03
 
 export EDITOR='vi'
 
-# Dark mode support for ls
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
 # Aliases for ls
 alias ls='ls -FG'
 alias l='ls -C'

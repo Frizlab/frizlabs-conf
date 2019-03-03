@@ -5,6 +5,6 @@ dotfile_files:
   - .bash_profile
 
 dotfile_templates:
-  - .bash_profile.d/homebrew.sh
+  - .bash_profile.d/dotfiles_conf.sh
 
 # vim: ts=2 sw=2 et
