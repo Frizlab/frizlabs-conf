@@ -39,11 +39,6 @@ export EDITOR='vi'
 # Dark mode support for ls
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Old method of separating Terminal histories. Now built-in to Terminal.
-#if [ -n "$(tty)" ]; then
-#	export HISTFILE="$HOME/.bash_history_d/history_$(basename $(tty))"
-#fi
-
 # Aliases for ls
 alias ls='ls -FG'
 alias l='ls -C'
@@ -135,11 +130,14 @@ shopt -s cdspell
 export PATH="${PATH}:/usr/local/sbin"
 export PATH="${PATH}:${HOME}/usr/bin"
 export PATH="${PATH}:${HOME}/usr/homebrew/bin"
+export PATH="${PATH}:${HOME}/usr/cappuccino/bin"
 #export PATH="${PATH}:${HOME}/Library/Python/*/bin"; # For system Python when installing in user path
 export PATH="${PATH}:${HOME}/usr/ruby/bin"
 export PATH="${PATH}:${HOME}/usr/npm/bin"
+export PATH="${PATH}:${HOME}/usr/go/bin"
 export PATH="${PATH}:."
 
+# Compilation options management for custom install brew
 export LDFLAGS="${LDFLAGS} -L${HOME}/usr/homebrew/lib"
 export CFLAGS="${CFLAGS} -I${HOME}/usr/homebrew/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${HOME}/usr/homebrew/lib/pkgconfig"
@@ -160,6 +158,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 # HOMEBREW_GITHUB_API_TOKEN is set in a separate file
+export HOMEBREW_CASK_OPTS="--no-quarantine"
 # This should probably be in .bashrc rather than in the .bash_profile
 for f in "${HOME}/usr/homebrew/etc/bash_completion.d"/*; do test -f "$f" && source "$f"; done
 
@@ -177,6 +176,11 @@ alias pip3-upgrade-all='pip3 list --outdated --format=freeze | grep -v -e wheel 
 
 # Ruby
 export GEM_HOME="${HOME}/usr/ruby"
+
+
+# Cappuccino
+export NARWHAL_ENGINE=jsc
+export CAPP_BUILD="${HOME}/Library/Caches/Cappuccino/DerivedData"
 
 
 # NPM
