@@ -1,5 +1,6 @@
 ---
-backup_dir: "{{ ansible_env.HOME }}/.conf_backups"
+# The colon is so the file is sorted at the top…
+backup_dir: "{{ ansible_env.HOME }}/.:dotfiles_backups"
 
 homebrew_github_token: !vault |
   $ANSIBLE_VAULT;1.1;AES256

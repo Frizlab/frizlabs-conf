@@ -3,8 +3,10 @@
 # dotfile_files: []
 dotfile_files:
   - .bash_profile
+  - .vimrc
 
 dotfile_templates:
-  - .bash_profile.d/dotfiles_conf.sh
+  - .bash_profile:dyn
+  - .vimrc:dyn
 
 # vim: ts=2 sw=2 et

@@ -189,7 +189,7 @@ export GOPATH="${HOME}/usr/go"
 
 
 
-### Let’s import .bash_profile.d/*.sh files
-for f in "${HOME}/.bash_profile.d"/*.sh; do
+### Let’s import .bash_profile:dyn and .bash_profile.d/*.sh files
+for f in "${HOME}/.bash_profile:dyn" "${HOME}/.bash_profile.d"/*.sh; do
 	test -f "$f" && source "$f"
 done
