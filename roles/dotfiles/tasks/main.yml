@@ -4,7 +4,7 @@
 
 # Provide an extension point for .bash_profile
 - name: dotfiles | make ~/.bash_profile.d
-  file: path="{{ ansible_env.HOME }}/.bash_profile.d" state=directory
+  file: path="{{ ansible_env.HOME }}/.bash_profile.d" state=directory mode=0700
 
 - name: dotfiles | check for non-symlink originals
   stat: path="{{ ansible_env.HOME }}/{{ item }}"
@@ -33,12 +33,14 @@
         path="{{ ansible_env.HOME }}/{{ item }}"
         state=link
         force=yes
+        mode=0600
+        follow=false
   loop: "{{ dotfile_files }}"
 
 - name: dotfiles | create templates
   template: src="{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}"
             dest="{{ ansible_env.HOME }}/{{ item }}"
-            mode="{{ '0755' if item.endswith('.sh') else '0644' }}"
+            mode="{{ '0700' if item.endswith('.sh') else '0600' }}"
   loop: "{{ dotfile_templates }}"
 
 # vim: ts=2 sw=2 et
