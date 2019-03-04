@@ -3,6 +3,7 @@
   roles:
     - { role: dotfiles, tags: dotfiles }
   vars:
-    example_key: example_value
+  vars_files:
+    - ../vars/global.yml
 
 # vim: ts=2 sw=2 et

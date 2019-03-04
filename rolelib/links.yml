@@ -1,0 +1,45 @@
+---
+# Backup and replace files with links to files in this repo if necessary.
+# Variables:
+#   - lnk__backup_dir:      The path to the backup dir (will be created if needed)
+#   - lnk__backup_dir_mode: The mode of the backup directory (0755 by default)
+#   - lnk__dest_dir:        The path to the destination directory in which the files will be searched.
+#   - lnk__files:           The list of files to link. If any file name in the path starts with “.”,
+#                           the destination of the link have these dots replace by “_.”
+#   - lnk__link_mode:       The mode of the created link (0644 by default)
+
+- name: create backup directory
+  file: path="{{ lnk__backup_dir }}" state=directory mode={{ lnk__backup_dir_mode | default('0755') }}
+
+- name: "check for non-symlink originals"
+  stat: path="{{ lnk__dest_dir }}/{{ item }}"
+  register: original_check
+  loop: "{{ lnk__files }}"
+  changed_when: original_check.stat.exists and not original_check.stat.islnk
+
+- name: "show original_check"
+  debug:
+    var: original_check
+    verbosity: 2
+
+- name: "backup originals"
+  command:
+    mv "{{ lnk__dest_dir }}/{{ item.0 }}" "{{ lnk__backup_dir }}"
+    creates="{{ lnk__backup_dir }}/{{ item.0 }}"
+    removes="{{ lnk__dest_dir }}/{{ item.0 }}"
+  loop:
+    "{{ lnk__files | zip(original_check.results) | list }}"
+  when: item.1.stat.exists and not item.1.stat.islnk
+  loop_control:
+    label: "{{ item.0 }}"
+
+- name: "create symlinks"
+  file: src="{{ role_path }}/files/{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}"
+        path="{{ lnk__dest_dir }}/{{ item }}"
+        state=link
+        force=yes
+        mode={{ lnk__link_mode | default('0644') }}
+        follow=false
+  loop: "{{ lnk__files }}"
+
+# vim: ts=2 sw=2 et

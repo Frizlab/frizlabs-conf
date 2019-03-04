@@ -1,0 +1,8 @@
+---
+lnk__backup_dir: "{{ backup_dir }}"
+lnk__backup_dir_mode: "{{ backup_dir_mode }}"
+lnk__dest_dir: "{{ ansible_env.HOME }}"
+lnk__link_mode: "0600"
+lnk__files: "{{ dotfile_files }}"
+
+# vim: ts=2 sw=2 et

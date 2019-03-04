@@ -1,43 +1,12 @@
 ---
-- name: dotfiles | create backup directory
-  file: path="{{ backup_dir }}" state=directory mode=0700
-
 # Provide an extension point for .bash_profile
-- name: dotfiles | make ~/.bash_profile.d
+- name: "make ~/.bash_profile.d"
   file: path="{{ ansible_env.HOME }}/.bash_profile.d" state=directory mode=0700
 
-- name: dotfiles | check for non-symlink originals
-  stat: path="{{ ansible_env.HOME }}/{{ item }}"
-  register: original_check
-  loop: "{{ dotfile_files }}"
-  changed_when: original_check.stat.exists and not original_check.stat.islnk
+- include_vars: links.yml
+- import_tasks: "{{ lib_folder }}/links.yml"
 
-- name: dotfiles | show original_check
-  debug:
-    var: original_check
-    verbosity: 2
-
-- name: dotfiles | backup originals
-  command:
-    mv "{{ ansible_env.HOME }}/{{ item.0 }}" "{{ backup_dir }}"
-    creates="{{ backup_dir }}/{{ item.0 }}"
-    removes="{{ ansible_env.HOME }}/{{ item.0 }}"
-  loop:
-    "{{ dotfile_files | zip(original_check.results) | list }}"
-  when: item.1.stat.exists and not item.1.stat.islnk
-  loop_control:
-    label: "{{ item.0 }}"
-
-- name: dotfiles | create symlinks
-  file: src="{{ role_path }}/files/{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}"
-        path="{{ ansible_env.HOME }}/{{ item }}"
-        state=link
-        force=yes
-        mode=0600
-        follow=false
-  loop: "{{ dotfile_files }}"
-
-- name: dotfiles | create templates
+- name: "create templates"
   template: src="{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}.jinja"
             dest="{{ ansible_env.HOME }}/{{ item }}"
             mode="{{ '0700' if item.endswith('.sh') else '0600' }}"

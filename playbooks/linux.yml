@@ -2,5 +2,7 @@
 - hosts: localhost
   roles:
   vars:
+  vars_files:
+    - ../vars/global.yml
 
 # vim: ts=2 sw=2 et
