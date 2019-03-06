@@ -1,1 +1,6 @@
-lib_folder: "{{ playbook_dir }}/../rolelib"
+# The folder in this repo that contains utilities for roles
+_lib_folder: "{{ playbook_dir }}/../rolelib"
+
+# Global that can be used by other roles
+user_usr_dir: "{{ ansible_env.HOME }}/usr"
+user_bin_dir: "{{ user_usr_dir }}/bin"

@@ -4,7 +4,7 @@
   file: path="{{ ansible_env.HOME }}/.bash_profile.d" state=directory mode=0700
 
 - include_vars: links.yml
-- import_tasks: "{{ lib_folder }}/links.yml"
+- import_tasks: "{{ _lib_folder }}/links.yml"
 
 - name: "create templates"
   template: src="{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}.jinja"
