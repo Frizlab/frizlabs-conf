@@ -7,10 +7,14 @@
 # 3. Hands off to Ansible to complete actual installation of dotfiles etc.
 
 
-set -e
+set -euo pipefail
 shopt -s nullglob
 cd "$(dirname "$0")"
 
+
+readonly HOMEBREW_TARGET_DIR=".homebrew"
+readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
+readonly LOCAL_BREW_INSTALL_SCRIPT="roles/bin/files/local_brew_install.sh"
 
 readonly VAULT_ID_PATH=".vault-id"
 
@@ -20,6 +24,8 @@ readonly VIRTUALENV_SETUP="$DEPENDENCIES_DIR/virtualenv/virtualenv.py"
 
 readonly VIRTUALENV_TARGET_DIR=".virtualenv"
 readonly VIRTUALENV_ACTIVATE="$VIRTUALENV_TARGET_DIR/bin/activate"
+
+export PATH="${PATH}:${HOMEBREW_TARGET_DIR}/bin"
 
 
 usage() {
@@ -119,6 +125,16 @@ else
 	unset VERBOSE
 fi
 
+if [ ! -f "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
+	echo "The local_brew_install script is mandatory! Expected to find it in “$LOCAL_BREW_INSTALL_SCRIPT”" >/dev/stderr
+	exit 1
+fi
+
+# We don’t really care if the script fails. All we care about is that Python3 is
+# installed, which is verified just after that anyway.
+bash "$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
+if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
+
 # Python3 dependency check
 if ! which -s python3; then
 	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
@@ -169,7 +185,7 @@ fi
 # Per-run the inventory script to update the ansible group cache and avoid
 # having user input required during the Ansible run (Ansible catches the output
 # of the script).
-python ./inventory.py --update-cache-only >"$DEV_NULL"
+python3 ./inventory.py --update-cache-only >"$DEV_NULL"
 
 # Ask for the vault id if needed.
 if [ ! -f "$VAULT_ID_PATH" ]; then
