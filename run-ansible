@@ -125,14 +125,14 @@ else
 	unset VERBOSE
 fi
 
-if [ ! -f "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
+if [ ! -x "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
 	echo "The local_brew_install script is mandatory! Expected to find it in “$LOCAL_BREW_INSTALL_SCRIPT”" >/dev/stderr
 	exit 1
 fi
 
 # We don’t really care if the script fails. All we care about is that Python3 is
 # installed, which is verified just after that anyway.
-bash "$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
+"$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
 if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
 
 # Python3 dependency check
