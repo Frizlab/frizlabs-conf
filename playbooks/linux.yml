@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   roles:
+    - { role: dotfiles, tags: dotfiles }
   vars:
   vars_files:
     - ../vars/global.yml
