@@ -1,6 +1,7 @@
 ---
 bins:
   - local_brew_install.sh
+  - set_sound_volume.sh
 
 links:
 # When compopt is not available (e.g. w/ Bash 3), at least we won’t get an error…
