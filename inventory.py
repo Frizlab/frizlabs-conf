@@ -39,11 +39,11 @@ def input_stderr(*args):
 
 
 def get_group_no_cache():
-	# To get the hostname if we want to do some “smart” group detection…
+	# To get the hostname if we want to do some "smart" group detection…
 	#host = socket.gethostname()
 	
 	group_input_str  = "What group is your computer in?\n\n"
-	group_input_str += "Choose a number (group will be “unknown” if any other value is given):\n"
+	group_input_str += "Choose a number (group will be \"unknown\" if any other value is given):\n"
 	for k in sorted(groups.keys(), key=int):
 		group_input_str += "   %s) %s\n" % (k, groups[k])
 	group_input_str += "\n"
@@ -64,7 +64,7 @@ def get_cached_group():
 
 # Returns True on success, False on failure
 def update_cached_group(group):
-	print("Updating cached Ansible group with new value: “%s”" % group)
+	print("Updating cached Ansible group with new value: \"%s\"" % group)
 	try:
 		with open(cached_group_path, "w") as text_file:
 			text_file.write(group)
@@ -91,7 +91,7 @@ else:
 	# Printing to stderr will print an error in Ansible; printing on stdout will
 	# make Ansible fail (will try to parse this as part of the expected JSON).
 	if update_cache_only:
-		print("Using cached group: “%s”" % group)
+		print("Using cached group: \"%s\"" % group)
 		sys.exit(0)
 
 

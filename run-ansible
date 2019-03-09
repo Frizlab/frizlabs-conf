@@ -37,7 +37,7 @@ usage() {
 	echo "   -v/--verbose (repeat up to four times for more verbosity)"
 	echo
 	echo "Choosing the Ansible module to run:"
-	echo "   -m/--module ansible_module   which Ansible module to run (default “playbook”)"
+	echo "   -m/--module ansible_module   which Ansible module to run (default \"playbook\")"
 	echo "      This is useful to encrypt a string for instance:"
 	echo "         ./run-ansible -m vault encrypt_string \"secret\""
 	echo
@@ -126,7 +126,7 @@ else
 fi
 
 if [ ! -x "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
-	echo "The local_brew_install script is mandatory! Expected to find it in “$LOCAL_BREW_INSTALL_SCRIPT”" >/dev/stderr
+	echo "The local_brew_install script is mandatory! Expected to find it in \"$LOCAL_BREW_INSTALL_SCRIPT\"" >/dev/stderr
 	exit 1
 fi
 
@@ -190,7 +190,7 @@ python3 ./inventory.py --update-cache-only >"$DEV_NULL"
 # Ask for the vault id if needed.
 if [ ! -f "$VAULT_ID_PATH" ]; then
 	if [ -e "$VAULT_ID_PATH" ]; then
-		echo "Something exists at path “$VAULT_ID_PATH” but it’s not a regular file. Aborting Ansible run." >/dev/stderr
+		echo "Something exists at path \"$VAULT_ID_PATH\" but it’s not a regular file. Aborting Ansible run." >/dev/stderr
 		exit 1
 	fi
 	read -sp "Please input the Ansible Vault password: " vault_id
@@ -212,7 +212,7 @@ if [ "$ANSIBLE_MODULE" = "playbook" ]; then
 		*) echo "Unknown host OS: $HOST_OS" >/dev/stderr; exit 1;;
 	esac
 fi
-# Note: If we need sudo in a playbook: pass “--ask-become-pass” to ansible-playbook
+# Note: If we need sudo in a playbook: pass "--ask-become-pass" to ansible-playbook
 #       (The option can be added to EXTRA_ARGS.)
 ansible-$ANSIBLE_MODULE --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
 
