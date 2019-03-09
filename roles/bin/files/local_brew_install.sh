@@ -34,7 +34,7 @@ export BREW="${LOCAL_HOMEBREW_INSTALL}/bin/brew"
 
 do_install=0
 for p in "$@"; do
-	if ! which -s "$p"; then
+	if ! command -v "$p" >/dev/null; then
 		do_install=1
 		break
 	fi

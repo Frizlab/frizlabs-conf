@@ -136,7 +136,7 @@ fi
 if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
 
 # Python3 dependency check
-if ! which -s python3; then
+if ! command -v python3 >/dev/null; then
 	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
 	echo >/dev/stderr
 	echo "Ansible works fine with Python 2, and Python 2 is the only Python" >/dev/stderr
