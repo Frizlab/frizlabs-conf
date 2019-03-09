@@ -1,6 +1,6 @@
 [submodule "dependencies/ansible"]
 	path = dependencies/ansible
-	url = git@github.com:ansible/ansible.git
+	url = https://github.com/ansible/ansible.git
 [submodule "dependencies/virtualenv"]
 	path = dependencies/virtualenv
-	url = git@github.com:pypa/virtualenv.git
+	url = http://github.com/pypa/virtualenv.git
