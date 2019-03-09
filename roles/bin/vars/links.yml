@@ -6,9 +6,15 @@ lnk__link_mode: "0644"
 # Contains an array of tuples (link_base_name, link_target_base_name)
 # Base name here is name of the bin, without extension
 lnk__files: "{{
-  bins | map('regex_replace', '\\.[^.]*$', '') |
-  zip(bins) |
-  list
+  (
+    bins | map('regex_replace', '\\.[^.]*$', '') |
+    zip(bins) |
+    list
+  ) + (
+    links | map(attribute='name') |
+    zip(links | map(attribute='dest')) |
+    list
+  )
 }}"
 
 # vim: ts=2 sw=2 et

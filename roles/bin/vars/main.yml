@@ -2,4 +2,9 @@
 bins:
   - local_brew_install.sh
 
+links:
+# When compopt is not available (e.g. w/ Bash 3), at least we won’t get an error…
+  - name: compopt
+    dest: /usr/bin/true
+
 # vim: ts=2 sw=2 et
