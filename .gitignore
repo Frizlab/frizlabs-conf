@@ -1,5 +1,6 @@
-# macOS files
+# macOS & Xcode files
 .DS_Store
+xcuserdata/
 
 # The path to the password file for encrypted strings and files
 /.vault-id
