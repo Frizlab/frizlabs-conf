@@ -124,6 +124,10 @@ shopt -s cdspell
 
 
 # PATH Management
+export PATH="${HOME}/usr/homebrew/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
+export PATH="${HOME}/usr/homebrew/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
+export PATH="${HOME}/usr/homebrew/opt/python@3/bin:${PATH}"; # And Python3…
+export PATH="${HOME}/usr/homebrew/opt/python/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
 export PATH="${PATH}:/usr/local/sbin"
 export PATH="${PATH}:${HOME}/usr/bin"
 export PATH="${PATH}:${HOME}/usr/homebrew/bin"
@@ -138,11 +142,6 @@ export PATH="${PATH}:."
 export LDFLAGS="${LDFLAGS} -L${HOME}/usr/homebrew/lib"
 export CFLAGS="${CFLAGS} -I${HOME}/usr/homebrew/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${HOME}/usr/homebrew/lib/pkgconfig"
-
-alias gem="${HOME}/usr/homebrew/bin/gem"
-alias ruby="${HOME}/usr/homebrew/bin/ruby"
-alias pip="${HOME}/usr/homebrew/bin/pip3"
-alias python="${HOME}/usr/homebrew/bin/python3"
 
 
 # /usr/local bash completion
