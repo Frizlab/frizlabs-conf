@@ -47,10 +47,12 @@ alias lt='ls -lrt'
 # Dev. aliases
 alias gt="git tag | xargs -I@ git log --format=format:\"%ai @%n\" -1 @ | sort | awk '{print \$4}'"; # Outputs git tags in reverse chronological order
 alias xcsymbolicate='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/ /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash'
-alias upgrade_packages="brew update; brew upgrade --build-from-source; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+alias docker-run-swift='docker run --security-opt=seccomp:unconfined -v "$(pwd):/mnt/output" -it --rm --entrypoint bash happn/swift-builder'
 
 # Other aliases
 #alias cat='bat'
+alias upgrade_packages="brew update; brew upgrade; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
 
 # Dev. Functions
 function find_lib_with() {
