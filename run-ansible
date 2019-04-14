@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 
 readonly HOMEBREW_TARGET_DIR=".homebrew"
 readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
-readonly LOCAL_BREW_INSTALL_SCRIPT="roles/bin/files/local_brew_install.sh"
+readonly LOCAL_BREW_INSTALL_SCRIPT="roles/bin/files/bash/local_brew_install.sh"
 
 readonly VAULT_ID_PATH=".vault-id"
 

@@ -13,7 +13,7 @@ set -euo pipefail
 #       Indeed if the package name is the same as the executable name, there
 #       would be no need to specify both.
 usage() {
-	echo "$0 homebrew_instance_folder package1 ..."
+	echo "usage: $0 homebrew_instance_folder package1 ..."
 	echo ""
 	echo "The script will check if all packages can be found in the path. If at"
 	echo "least one package is not found, will try and install all the packages"

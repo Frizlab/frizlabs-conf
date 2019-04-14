@@ -7,7 +7,7 @@ lnk__link_mode: "0644"
 # Base name here is name of the bin, without extension
 lnk__files: "{{
   (
-    bins | map('regex_replace', '\\.[^.]*$', '') |
+    bins | map('regex_replace', '(\\.[^.]*)?$', '') | map('regex_replace', '^.*/([^/]*)$', '\\1') |
     zip(bins) |
     list
   ) + (
