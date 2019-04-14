@@ -2,6 +2,7 @@
 bins:
   - bash/local_brew_install.sh
   - bash/set_sound_volume.sh
+  - swift/brew_find_poured_from_bottle.swift
 
 links:
 # When compopt is not available (e.g. w/ Bash 3), at least we won’t get an error…
