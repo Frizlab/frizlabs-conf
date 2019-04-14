@@ -6,7 +6,7 @@ set -euo pipefail
 # ############################################### #
 
 
-if [ "$1" = "--help" -o "$1" = "help" -o -z "$1" -o "$1" -lt 0 -o "$1" -gt 100 ]; then
+if [ "$1" = "--help" ] || [ "$1" = "help" ] || [ -z "$1" ] || [ "$1" -lt 0 ] || [ "$1" -gt 100 ]; then
 	echo "Usage: $0 new_volume" >/dev/stderr
 	echo "   new_volume must be between 0 and 100" >/dev/stderr
 	exit 1

@@ -4,25 +4,23 @@
 # Most of the instructions here should be in the .bashrc file...
 
 function show_branch1() {
-	git branch >/dev/null 2>&1
-	if [ $? -eq 0 ]; then printf "["; fi
+	if git branch >/dev/null 2>&1; then printf "["; fi
 }
 
 function show_branch2() {
 	# No need for more than 2 lines of status in theory as untracked are shown at the end
 	status="$(git status -b --porcelain 2>/dev/null | head -n 3)"
 	status_ret=${PIPESTATUS[0]}
-	if [ $status_ret -ne 0 ]; then return; fi
+	if [ "$status_ret" -ne 0 ]; then return; fi
 	
-	printf "`echo "$status" | sed -En '/^## /s///p'`"
+	printf "%s" "$(echo "$status" | sed -En '/^## /s///p')"
 	if   echo "$status" | grep -Eq '^[^#?]'; then printf '*'
 	elif echo "$status" | grep -Eq '^\?';    then printf '~'
 	fi
 }
 
 function show_branch3() {
-	git branch >/dev/null 2>&1
-	if [ $? -eq 0 ]; then printf "]"; fi
+	if git branch >/dev/null 2>&1; then printf "]"; fi
 }
 
 # \W: last path component
@@ -45,6 +43,7 @@ alias lla='ls -la'
 alias lt='ls -lrt'
 
 # Dev. aliases
+# shellcheck disable=SC2142
 alias gt="git tag | xargs -I@ git log --format=format:\"%ai @%n\" -1 @ | sort | awk '{print \$4}'"; # Outputs git tags in reverse chronological order
 alias xcsymbolicate='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/ /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash'
 alias docker-run-swift='docker run --security-opt=seccomp:unconfined -v "$(pwd):/mnt/output" -it --rm --entrypoint bash happn/swift-builder'
@@ -57,17 +56,17 @@ alias upgrade_packages_force_build="brew update; brew upgrade --build-from-sourc
 # Dev. Functions
 function find_lib_with() {
 	if [ -z "$1" ]; then echo "Usage: find_lib_with object_name" >/dev/stderr; return 1; fi
-	mdfind -name .dylib | while read f; do if [ `nm -U "$f" 2>/dev/null | grep -Ec "$1\$"` -gt 0 ]; then echo $f; fi; done
+	mdfind -name .dylib | while read -r f; do if [ "$(nm -U "$f" 2>/dev/null | grep -Ec "$1\$")" -gt 0 ]; then echo "$f"; fi; done
 }
 
 function find_brew_deps() {
 	if [ -z "$1" ]; then echo "Usage: find_brew_deps path_to_cellar (eg. \"find_brew_deps /usr/local/Cellar/gegl/0.1.8/\")" >/dev/stderr; return 1; fi
-	otool -L "$1"/*/* 2>/dev/null | cut -f 1 -d ' ' | while read f; do ls -lFG "$f" 2>/dev/null; done
+	otool -L "$1"/*/* 2>/dev/null | cut -f 1 -d ' ' | while read -r f; do ls -lFG "$f" 2>/dev/null; done
 }
 
 function rec_grep() {
-	if [ -z "$1" -o -z "$2" ]; then echo "Usage: rec_grep files_pattern grepped_expr" >/dev/stderr; return 1; fi
-	find . -name "$1" -type f -exec grep -E "`echo $2 | sed -E 's/"/\\"/g'`" {} \; -exec echo {} \;
+	if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: rec_grep files_pattern grepped_expr" >/dev/stderr; return 1; fi
+	find . -name "$1" -type f -exec grep -E "$(echo "$2" | sed -E 's/"/\\"/g')" {} \; -exec echo {} \;
 }
 
 function ssha() {
@@ -89,14 +88,14 @@ function kill_dock() {
 
 function del_stores() {
 	# Note: Cannot give "/" in input!
-	dir="`echo "$1" | sed -E 's:/*$::'`"
+	dir="$(echo "$1" | sed -E 's:/*$::')"
 	if [ -z "$dir" ]; then echo "Usage: del_stores dir" >/dev/stderr; return 1; fi
 	if [ ! -d "$dir" ]; then echo "dir does not exist or is not a directory" >/dev/stderr; return 2; fi
 	find "$dir" -name ".DS_Store" -print -delete
 }
 
 function add_subtitle() {
-	if [ $# -ne 1 -a $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >/dev/stderr; return 1; fi
+	if [ $# -ne 1 ] && [ $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >/dev/stderr; return 1; fi
 	if [ $# -eq 1 ]; then
 		srt="${1}srt"
 		mp4="${1}mp4"
@@ -104,7 +103,7 @@ function add_subtitle() {
 		srt="$1"
 		mp4="$2"
 	fi
-	MP4Box -add "$srt":lang=eng:layout=0x60x0x-1:group=2:hdlr="sbtl:tx3g" "$mp4" && rm "$srt"
+	MP4Box -add "${srt}:lang=eng:layout=0x60x0x-1:group=2:hdlr=sbtl:tx3g" "$mp4" && rm "$srt"
 }
 
 # Locale fix env
@@ -146,6 +145,7 @@ export CFLAGS="${CFLAGS} -I${HOME}/usr/homebrew/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${HOME}/usr/homebrew/lib/pkgconfig"
 
 
+# shellcheck source=/dev/null
 # /usr/local bash completion
 # This should probably be in .bashrc rather than in the .bash_profile
 for f in "/usr/local/etc/bash_completion.d"/*; do test -f "$f" && source "$f"; done
@@ -157,11 +157,13 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 # HOMEBREW_GITHUB_API_TOKEN is set in a separate file
 export HOMEBREW_CASK_OPTS="--no-quarantine"
+# shellcheck source=/dev/null
 # This should probably be in .bashrc rather than in the .bash_profile
 for f in "${HOME}/usr/homebrew/etc/bash_completion.d"/*; do test -f "$f" && source "$f"; done
 
 
 # GPG
+# shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 
 
@@ -192,5 +194,6 @@ export GOPATH="${HOME}/usr/go"
 
 ### Let’s import .bash_profile:dyn and .bash_profile.d/*.sh files
 for f in "${HOME}/.bash_profile.d"/*.sh "${HOME}/.bash_profile:dyn"; do
+	# shellcheck source=/dev/null
 	test -f "$f" && source "$f"
 done

@@ -17,7 +17,7 @@ usage() {
 	echo ""
 	echo "The script will check if all packages can be found in the path. If at"
 	echo "least one package is not found, will try and install all the packages"
-	echo "from a “local” homebrew install, which will be done in the given"
+	echo "from a \"local\" homebrew install, which will be done in the given"
 	echo "folder."
 }
 
