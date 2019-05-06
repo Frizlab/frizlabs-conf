@@ -1,0 +1,44 @@
+# Dockerfile
+# vim: ts=3 sw=3 noet
+
+ARG BASE_IMAGE=debian:stretch-slim
+
+FROM ${BASE_IMAGE}
+LABEL maintainer="François Lamboley <fload@me.com>"
+# Wanted to use ${BASE_IMAGE} but it does not work…
+LABEL description="A base image, with Frizlab’s conf."
+
+WORKDIR /root
+
+# We copy the inputs in tmp, we’ll retrieve them later
+COPY inputs /tmp/inputs
+
+# Note: openssl is a dependency of ca-certificates and could be removed from the list
+# Note: python (2) is needed only to activate the Python3 virtualenv (AFAICT)
+# Note: gcc is for some pip installs. And it MUST be gcc, not clang *facepalm*
+# Note: python3-dev is for some pip installs (obviously)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	ca-certificates \
+	gcc \
+	git \
+	openssl \
+	python \
+	python3 \
+	python3-dev \
+&& rm -rf /var/lib/apt/lists/*
+
+# In theory the first line of the run should be enough to checkout the repo, but
+# it turns out git fails fetching the tags for submodules and thus fails the
+# checkout of the submodules (might be a GitHub issue).
+RUN \
+	( \
+		git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" || \
+		( cd frizlabs-conf && git submodule foreach --recursive 'git fetch --tags' && git submodule update --recursive ) \
+	) && \
+	cd frizlabs-conf && \
+	mkdir -p .cache && \
+	mv /tmp/inputs/.vault-id .cache/.vault-id && \
+	mv /tmp/inputs/ansible_group .cache/ansible_group && \
+	./run-ansible -vvvv
+
+# TODO: Create and install test-frizlabs-conf.sh

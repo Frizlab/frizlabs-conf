@@ -175,6 +175,7 @@ fi
 source "$VIRTUALENV_ACTIVATE"
 
 # Install needed pip dependencies
+# TODO: Use the requirements.txt in the ansible repo
 if [[ -z "$(pip show paramiko pycrypto PyYAML Jinja2 httplib2 cryptography)" || "$FORCE" != 0 ]]; then
 	if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 cryptography >"$DEV_NULL"; then
 		echo "Failed: pip install" >/dev/stderr

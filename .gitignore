@@ -5,6 +5,9 @@ xcuserdata/
 # The cache (virtualenv instance, homebrew instance, saved vault id, etc.)
 /.cache/
 
+# Tests inputs
+/tests/assets/inputs/
+
 # Python and Ansible files
 *.pyc
 *.retry

@@ -14,17 +14,12 @@
          location = "group:ansible-setup">
       </FileRef>
    </Group>
-   <Group
-      location = "container:"
-      name = "tests">
-   </Group>
-   <Group
-      location = "container:utils"
-      name = "utils">
-      <FileRef
-         location = "group:validate-yaml.sh">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:tests">
+   </FileRef>
+   <FileRef
+      location = "group:utils">
+   </FileRef>
    <Group
       location = "container:"
       name = "supporting-files">
