@@ -42,3 +42,5 @@ RUN \
 	./run-ansible -vvvv
 
 # TODO: Create and install test-frizlabs-conf.sh
+
+CMD ["bash"]
