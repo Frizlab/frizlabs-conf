@@ -1,5 +1,8 @@
 ---
-- name: "make bin folder"
+- name: "make 3rd party bin folder"
+  file: path="{{ third_party_bin_dir }}" state=directory mode=0755
+
+- name: "make user’s bin folder"
   file: path="{{ user_bin_dir }}" state=directory mode=0755
 
 - include_vars: links.yml

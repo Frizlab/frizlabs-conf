@@ -1,0 +1,18 @@
+---
+bins:
+  - path: bash/local_brew_install.sh
+    author: frizlab
+    compat: [MacOSX]
+  - path: bash/set_sound_volume.sh
+    author: frizlab
+    compat: [MacOSX]
+  - path: swift/brew_find_poured_from_bottle.swift
+    author: frizlab
+    compat: [MacOSX, Debian]
+
+links:
+  # When compopt is not available (e.g. w/ Bash 3), at least we won’t get an error…
+  - name: compopt
+    dest: /usr/bin/true
+
+# vim: ts=2 sw=2 et

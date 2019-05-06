@@ -1,6 +1,0 @@
----
-# TODO: ACLs
-- name: "make usr folder"
-  file: path="{{ user_usr_dir }}" state=directory mode=0700
-
-# vim: ts=2 sw=2 et

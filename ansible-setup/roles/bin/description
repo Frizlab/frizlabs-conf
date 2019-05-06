@@ -1,0 +1,1 @@
+Creates and fill the ~/cli/3rdparty_bin (third party bins) and ~/cli/bin (bins whose author matches ansible_user_id) folders.

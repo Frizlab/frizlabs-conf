@@ -12,17 +12,20 @@ shopt -s nullglob
 cd "$(dirname "$0")"
 
 
-readonly HOMEBREW_TARGET_DIR=".homebrew"
-readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
-readonly LOCAL_BREW_INSTALL_SCRIPT="roles/bin/files/bash/local_brew_install.sh"
+readonly ANSIBLE_SETUP_PATH="ansible-setup"
 
-readonly VAULT_ID_PATH=".vault-id"
+readonly HOMEBREW_TARGET_DIR=".cache/homebrew"
+readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
+readonly LOCAL_BREW_INSTALL_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/local_brew_install.sh"
+
+# ¡¡¡RELATIVE TO ANSIBLE_SETUP_PATH!!! #
+readonly VAULT_ID_PATH="../.cache/.vault-id"
 
 readonly DEPENDENCIES_DIR="dependencies"
 readonly ANSIBLE_ENV_SETUP="$DEPENDENCIES_DIR/ansible/hacking/env-setup"
 readonly VIRTUALENV_SETUP="$DEPENDENCIES_DIR/virtualenv/virtualenv.py"
 
-readonly VIRTUALENV_TARGET_DIR=".virtualenv"
+readonly VIRTUALENV_TARGET_DIR=".cache/virtualenv"
 readonly VIRTUALENV_ACTIVATE="$VIRTUALENV_TARGET_DIR/bin/activate"
 
 export PATH="${PATH}:${HOMEBREW_TARGET_DIR}/bin"
@@ -55,9 +58,9 @@ usage() {
 	echo "      without Python3 installed for a rationale."
 	echo
 	echo "Supported roles:"
-	pushd roles >/dev/null 2>&1
-	for ROLE in *; do
-		echo "   $ROLE: $(cat $ROLE/description 2>/dev/null || echo "<no description>")"
+	pushd "$ANSIBLE_SETUP_PATH/roles" >/dev/null 2>&1
+	for role in *; do
+		echo "   $ROLE: $(cat "$role/description" 2>/dev/null || echo "<no description>")"
 	done
 	popd >/dev/null 2>&1
 }
@@ -96,7 +99,7 @@ while [ $# -gt 0 ]; do
 			exit 1
 		;;
 		*)
-			if [ -d "roles/$1" ]; then
+			if [ -d "$ANSIBLE_SETUP_PATH/roles/$1" ]; then
 				if [ -z "$ROLES" ]; then
 					ROLES="--tags $1"
 				else
@@ -114,7 +117,7 @@ DEV_NULL=/dev/null
 if [[ "$VERBOSE" != 0 ]]; then
 	DEV_NULL=/dev/stdout
 	if [ "$VERBOSE" -ge 4 ]; then
-		echo 'Enabling extremely verbose output'
+		echo "Enabling extremely verbose output"
 		set -x
 	fi
 else
@@ -185,7 +188,8 @@ fi
 # Per-run the inventory script to update the ansible group cache and avoid
 # having user input required during the Ansible run (Ansible catches the output
 # of the script).
-python3 ./inventory.py --update-cache-only >"$DEV_NULL"
+pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
+python3 "./inventory.py" --update-cache-only >"$DEV_NULL"
 
 # Ask for the vault id if needed.
 if [ ! -f "$VAULT_ID_PATH" ]; then
@@ -197,6 +201,7 @@ if [ ! -f "$VAULT_ID_PATH" ]; then
 	echo
 	echo -n "$vault_id" >"$VAULT_ID_PATH"
 fi
+popd >/dev/null 2>&1
 
 # I don’t really like hidding all output from a program, but this one prints a
 # useless warning on macOS on stderr, so I silence it!
@@ -212,8 +217,13 @@ if [ "$ANSIBLE_MODULE" = "playbook" ]; then
 		*) echo "Unknown host OS: $HOST_OS" >/dev/stderr; exit 1;;
 	esac
 fi
-# Note: If we need sudo in a playbook: pass "--ask-become-pass" to ansible-playbook
-#       (The option can be added to EXTRA_ARGS.)
-ansible-$ANSIBLE_MODULE --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
+
+pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
+# Note: If we need sudo in a playbook: pass "--ask-become-pass" to
+#       ansible-playbook. (The option can be added to EXTRA_ARGS.)
+"ansible-$ANSIBLE_MODULE" --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
+# To list the facts on the machine
+#ansible -m setup localhost
+popd >/dev/null 2>&1
 
 trap - EXIT

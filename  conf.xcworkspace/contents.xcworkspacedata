@@ -2,6 +2,37 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:">
+      location = "group:Readme.md">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "code">
+      <FileRef
+         location = "group:run-ansible">
+      </FileRef>
+      <FileRef
+         location = "group:ansible-setup">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "tests">
+   </Group>
+   <Group
+      location = "container:utils"
+      name = "utils">
+      <FileRef
+         location = "group:validate-yaml.sh">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "supporting-files">
+      <FileRef
+         location = "group:.cache">
+      </FileRef>
+      <FileRef
+         location = "group:dependencies">
+      </FileRef>
+   </Group>
 </Workspace>

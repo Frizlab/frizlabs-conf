@@ -1,0 +1,42 @@
+---
+# The folder in this repo that contains utilities that roles can use.
+_lib_folder: "{{ playbook_dir }}/../rolelib"
+
+
+
+######################################################
+# ##### Global that can be used by other roles ##### #
+######################################################
+
+# The CLI directory, containing anything managed and CLI-related.
+cli_dir: "{{ ansible_env.HOME }}/cli"
+
+# The user’s bin directory. All unmanaged binaries whose author is the same as
+# the current user will go there.
+user_bin_dir: "{{ cli_dir }}/bin"
+
+# Other unmanaged binaries
+third_party_bin_dir: "{{ cli_dir }}/3rdparty_bin"
+
+# Main Homebrew instance directory
+homebrew_dir: "{{ cli_dir }}/homebrew"
+# Python3 Homebrew instance. This instance should only have Python 3 installed,
+# and Python3 eggs installed with pip. This directory is not in the path. There
+# will only be the python3 (and related such as pip3) available as aliases. As
+# Python3 is the current Python, python by itself will also point to this.
+homebrew_python3_dir: "{{ cli_dir }}/homebrew_python3"
+# Python2 Homebrew instance. This instance should only have Python 2 installed,
+# and Python2 eggs installed with pip. This directory is not in the path. There
+# will only be the python2 (and related such as pip2) available as aliases.
+homebrew_python2_dir: "{{ cli_dir }}/homebrew_python2"
+
+# Ruby (gem) Packages
+ruby_dir: "{{ cli_dir }}/ruby"
+
+# NPM Packages
+npm_dir: "{{ cli_dir }}/npm"
+
+# Go Packages
+go_dir: "{{ cli_dir }}/go"
+
+# vim: ts=2 sw=2 et

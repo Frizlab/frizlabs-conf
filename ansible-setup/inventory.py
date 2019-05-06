@@ -14,7 +14,7 @@ import sys
 ##     Conf     ##
 ##################
 
-cached_group_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".ansible_group")
+cached_group_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../.cache/ansible_group")
 groups = {
 	"1": "home",
 	"2": "work"
