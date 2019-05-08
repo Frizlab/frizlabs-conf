@@ -9,6 +9,7 @@ LABEL maintainer="François Lamboley <fload@me.com>"
 # Wanted to use ${BASE_IMAGE_*} but it does not work…
 LABEL description="A base image to install Frizlab’s conf."
 
+
 # Note: openssl is a dependency of ca-certificates and could be removed from the list
 # Note: python (2) is needed only to activate the Python3 virtualenv (AFAICT)
 # Note: gcc is for some pip installs. And it MUST be gcc, not clang *facepalm*
@@ -23,4 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	python3-dev \
 && rm -rf /var/lib/apt/lists/*
 
-# TODO: Create and install test-frizlabs-conf.sh
+# We copy the inputs in tmp, they’ll be retrieved later
+COPY inputs /tmp/inputs
+
+COPY test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh

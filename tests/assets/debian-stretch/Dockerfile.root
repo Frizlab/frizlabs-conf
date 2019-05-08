@@ -7,25 +7,7 @@ ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 LABEL maintainer="François Lamboley <fload@me.com>"
 # Wanted to use ${BASE_IMAGE} but it does not work…
-LABEL description="A base image, with Frizlab’s conf."
+LABEL description="A base image to install Frizlab’s conf as root."
 
-# We copy the inputs in tmp, we’ll retrieve them later
-COPY inputs /tmp/inputs
 
 WORKDIR /root
-
-# In theory the first line of the run should be enough to checkout the repo, but
-# it turns out git fails fetching the tags for submodules and thus fails the
-# checkout of the submodules (might be a GitHub issue).
-RUN \
-	( \
-		git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" || \
-		( cd frizlabs-conf && git submodule foreach --recursive 'git fetch --tags' && git submodule update --recursive ) \
-	) && \
-	cd frizlabs-conf && \
-	mkdir -p .cache && \
-	cp /tmp/inputs/.vault-id .cache/.vault-id && \
-	cp /tmp/inputs/ansible_group .cache/ansible_group && \
-	./run-ansible -vvvv
-
-CMD ["bash"]
