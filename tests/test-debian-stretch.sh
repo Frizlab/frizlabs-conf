@@ -21,6 +21,8 @@ cp -f "$VAULT_ID_PATH" "$ASSETS_INPUTS_FOLDER/.vault-id"
 image_builder_step1_name="frizlab-conf-builder-step1-$LINUX_DISTRIBUTION:$LINUX_DISTRIBUTION_RELEASE"
 docker build . -f "debian-stretch/Dockerfile.base" --build-arg BASE_IMAGE_NAME="$LINUX_DISTRIBUTION" --build-arg BASE_IMAGE_TAG="$LINUX_DISTRIBUTION_RELEASE" -t "$image_builder_step1_name"
 
+# TODO: Currently, only home is built, and work is built from home’s cache
+# because Docker does not detect the modification of the ansible_group file!
 for env in home work; do
 	# Setting up the ansible group
 	echo "$env" >"$ASSETS_INPUTS_FOLDER/ansible_group"
