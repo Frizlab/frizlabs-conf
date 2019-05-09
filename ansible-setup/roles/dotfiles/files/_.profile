@@ -14,7 +14,13 @@ export EDITOR="vi"
 
 # Overridden in bash_profile w/ git support
 export PS1='\[\033[01;36m\]\#\[\033[0m\] \\ \[\033[00;32m\]\t\[\033[0m\] / \[\033[00;33m\]\u@\h\[\033[0m\][\[\033[00;31m\]$?\[\033[0m\]] \[\033[01;38m\]\w\[\033[0m\]) '
-# We may want to set PS2 too. It sets the prompt shown after a return when the command line is not finished.
+# - We may want to set PS2 too. It sets the prompt shown after a return when the
+#   command line is not finished.
+# - If we ever wanted to set PROMPT_COMMAND (we don’t need it now but why not),
+#   we should be careful and keep the previous PROMPT_COMMAND value:
+#      PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }new_code_here"
+#   See /etc/bashrc_Apple_Terminal for some additional info.
+#   Some light info on this var: https://stackoverflow.com/a/3058366
 
 # Locale fix env
 export LANG=en_US.UTF-8
