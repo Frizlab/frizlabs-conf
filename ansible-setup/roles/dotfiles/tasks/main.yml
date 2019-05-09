@@ -1,7 +1,12 @@
 ---
-# Provide an extension point for .bash_profile
-- name: "make ~/.bash_profile.d"
-  file: path="{{ ansible_env.HOME }}/.bash_profile.d" state=directory mode=0700
+# Provide an extension point for some dot-files
+- name: "make ~/{{ item }}"
+  file: path="{{ ansible_env.HOME }}/{{ item }}" state=directory mode=0700
+  loop:
+  - .bash_profile.d
+  - .bashrc.d
+  - .profile.d
+  - .shrc.d
 
 - include_vars: links.yml
 - import_tasks: "{{ _lib_folder }}/links.yml"

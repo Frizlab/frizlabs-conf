@@ -1,0 +1,79 @@
+#!/bin/sh
+# vim: ts=3 sw=3 noet
+# The shebang is not necessarily needed, but shellcheck wants it.
+echo "ENTER: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+
+# Init file for non-login interactive POSIX shells
+# See https://github.com/Frizlab/frizlabs-conf for more info.
+
+################################################################################
+echo "START: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+
+
+# Python aliases
+alias pip2-upgrade-all='pip2 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip2 install --upgrade'
+alias pip3-upgrade-all='pip3 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3 install --upgrade'
+
+# Other aliases
+#alias cat='bat'
+alias upgrade_packages="brew update; brew upgrade; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+
+# The functions below are POSIX-compatible, so we want them in a POSIX shell as
+# well as bash. Ideally the functions would be defined in the profile, however,
+# exporting a function with a POSIX shell is not possible… so we have to put the
+# function in the shrc!
+
+# Dev. Functions
+find_lib_with() {
+	if [ -z "$1" ]; then echo "Usage: find_lib_with object_name" >/dev/stderr; return 1; fi
+	mdfind -name .dylib | while read -r f; do if [ "$(nm -U "$f" 2>/dev/null | grep -Ec "$1\$")" -gt 0 ]; then echo "$f"; fi; done
+}
+
+find_brew_deps() {
+	if [ -z "$1" ]; then echo "Usage: find_brew_deps path_to_cellar (eg. \"find_brew_deps /usr/local/Cellar/gegl/0.1.8/\")" >/dev/stderr; return 1; fi
+	otool -L "$1"/*/* 2>/dev/null | cut -f 1 -d ' ' | while read -r f; do ls -lFG "$f" 2>/dev/null; done
+}
+
+rec_grep() {
+	if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: rec_grep files_pattern grepped_expr" >/dev/stderr; return 1; fi
+	find . -name "$1" -type f -exec grep -E "$(echo "$2" | sed -E 's/"/\\"/g')" {} \; -exec echo {} \;
+}
+
+ssha() {
+	while true; do ssh "$@"; sleep 1; done
+	true
+}
+
+# Misc. functions
+del_stores() {
+	# Note: Cannot give "/" in input!
+	dir="$(echo "${1:-.}" | sed -E 's:/*$::')"
+	if [ -z "$dir" ]; then echo "Usage: del_stores [dir]" >/dev/stderr; return 1; fi
+	if [ ! -d "$dir" ]; then echo "dir does not exist or is not a directory" >/dev/stderr; return 2; fi
+	find "$dir" -name ".DS_Store" -print -delete
+}
+
+add_subtitle() {
+	if [ $# -ne 1 ] && [ $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >/dev/stderr; return 1; fi
+	if [ $# -eq 1 ]; then
+		srt="${1}srt"
+		mp4="${1}mp4"
+	else
+		srt="$1"
+		mp4="$2"
+	fi
+	MP4Box -add "${srt}:lang=eng:layout=0x60x0x-1:group=2:hdlr=sbtl:tx3g" "$mp4" && rm "$srt"
+}
+
+
+### Let’s import .shrc:dyn and .shrc.d/*.sh files
+for f in "${HOME}/.shrc.d"/*.sh "${HOME}/.shrc:dyn"; do
+	# shellcheck source=/dev/null
+	{ test -r "$f" && . "$f"; } || true
+done
+
+
+################################################################################
+
+echo "EXIT: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

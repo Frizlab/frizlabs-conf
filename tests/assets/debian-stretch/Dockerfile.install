@@ -24,4 +24,7 @@ RUN \
 	cp /tmp/inputs/ansible_group .cache/ansible_group && \
 	./run-ansible -vvvv
 
+# We launch bash in non-login interactive mode by default. The caller can add -l
+# when starting the docker to get a login shell and have the .bash_profile and
+# .profile loaded (otherwise only the .bashrc and .shrc will be loaded).
 CMD ["bash"]
