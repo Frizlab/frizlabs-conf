@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-echo "ENTER: .bash_profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "ENTER: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # Init file for login bash shell
 # See https://github.com/Frizlab/frizlabs-conf for more info.
@@ -12,7 +12,7 @@ echo "ENTER: .bash_profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.profile" && source "${HOME}/.profile"; } || true
 
 ################################################################################
-echo "START: .bash_profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "START: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 __show_branch1() {
@@ -76,4 +76,4 @@ done
 # bash does not import automatically in a login shell
 { test -r "${HOME}/.bashrc" && source "${HOME}/.bashrc"; } || true
 
-echo "EXIT: .bash_profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "EXIT: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

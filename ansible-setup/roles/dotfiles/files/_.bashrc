@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-echo "ENTER: .bashrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "ENTER: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # Init file for non-login interactive bash shell
 # See https://github.com/Frizlab/frizlabs-conf for more info.
@@ -12,7 +12,7 @@ echo "ENTER: .bashrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.shrc" && source "${HOME}/.shrc"; } || true
 
 ################################################################################
-echo "START: .bashrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "START: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 # Aliases for ls
@@ -55,4 +55,4 @@ done
 
 ################################################################################
 
-echo "EXIT: .bashrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "EXIT: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

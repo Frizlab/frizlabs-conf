@@ -1,13 +1,13 @@
 #!/bin/sh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-echo "ENTER: .profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "ENTER: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # Init file for login POSIX shells
 # See https://github.com/Frizlab/frizlabs-conf for more info.
 
 ################################################################################
-echo "START: .profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 export EDITOR="vi"
@@ -106,4 +106,4 @@ done
 #        NULL and leave it as-is.
 export ENV="${ENV-${HOME}/.shrc}"
 
-echo "EXIT: .profile" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "EXIT: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

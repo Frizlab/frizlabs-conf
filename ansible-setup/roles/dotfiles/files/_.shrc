@@ -1,13 +1,13 @@
 #!/bin/sh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-echo "ENTER: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "ENTER: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # Init file for non-login interactive POSIX shells
 # See https://github.com/Frizlab/frizlabs-conf for more info.
 
 ################################################################################
-echo "START: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "START: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 # Python aliases
@@ -76,4 +76,4 @@ done
 
 ################################################################################
 
-echo "EXIT: .shrc" >"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
+echo "EXIT: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
