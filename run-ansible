@@ -22,6 +22,7 @@ readonly LOCAL_BREW_INSTALL_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/loc
 readonly VAULT_ID_PATH="../.cache/.vault-id"
 
 readonly DEPENDENCIES_DIR="dependencies"
+readonly ANSIBLE_REQUIREMENTS_PATH="$DEPENDENCIES_DIR/ansible/requirements.txt"
 readonly ANSIBLE_ENV_SETUP="$DEPENDENCIES_DIR/ansible/hacking/env-setup"
 readonly VIRTUALENV_SETUP="$DEPENDENCIES_DIR/virtualenv/virtualenv.py"
 
@@ -35,7 +36,7 @@ usage() {
 	echo "usage: run-ansible [options] [roles...]"
 	echo
 	echo "Supported options:"
-	echo "   -f/--force   force the reinstallation of the virtualenv and the pip dependencies"
+	echo "   -f/--force   force the reinstallation of the virtualenv"
 	echo "   -h/--help    show the help and exit"
 	echo "   -v/--verbose (repeat up to four times for more verbosity)"
 	echo
@@ -175,15 +176,10 @@ fi
 source "$VIRTUALENV_ACTIVATE"
 
 # Install needed pip dependencies
-# TODO: Use the requirements.txt in the ansible repo
-if [[ -z "$(pip show paramiko pycrypto PyYAML Jinja2 httplib2 cryptography)" || "$FORCE" != 0 ]]; then
-	if ! pip install paramiko pycrypto PyYAML Jinja2 httplib2 cryptography >"$DEV_NULL"; then
-		echo "Failed: pip install" >/dev/stderr
-		echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
-		exit 1
-	fi
-elif [[ "$FORCE" == 0 ]]; then
-	echo "Skipping pip installs (already exists); use --force to override" >"$DEV_NULL"
+if ! pip install -r "$ANSIBLE_REQUIREMENTS_PATH" >"$DEV_NULL"; then
+	echo "Failed: pip install" >/dev/stderr
+	echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
+	exit 1
 fi
 
 # Per-run the inventory script to update the ansible group cache and avoid
