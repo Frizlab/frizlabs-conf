@@ -1,12 +1,11 @@
 # Dockerfile
 # vim: ts=3 sw=3 noet
 
-ARG BASE_IMAGE_NAME=debian
-ARG BASE_IMAGE_TAG=stretch-slim
+ARG BASE_IMAGE=debian
 
-FROM ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
+FROM ${BASE_IMAGE}
 LABEL maintainer="François Lamboley <fload@me.com>"
-# Wanted to use ${BASE_IMAGE_*} but it does not work…
+# Wanted to use ${BASE_IMAGE} but it does not work…
 LABEL description="A base image to install Frizlab’s conf."
 
 
@@ -24,7 +23,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	python3-dev \
 && rm -rf /var/lib/apt/lists/*
 
-# We copy the inputs in tmp, they’ll be retrieved later
-COPY inputs /tmp/inputs
-
+# TODO: I don’t really like having this here
 COPY test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
