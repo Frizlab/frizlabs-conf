@@ -8,7 +8,7 @@ ifdef(`M4_USER', `', `errprint(`M4_USER is not defined; exiting.
 
 FROM M4_BASE_IMAGE
 LABEL maintainer="François Lamboley <fload@me.com>"
-LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifdef(`M4_USER_INSTALL', `, w/ a user install', `, w/ a root install')."
+LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `root', `, installed for root', `, installed for a user named “M4_USER”')."
 
 
 # Note: openssl is a dependency of ca-certificates and could be removed from the list
