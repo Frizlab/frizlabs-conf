@@ -6,7 +6,11 @@ shopt -s nullglob
 cd "$(dirname "$0")/assets"
 
 
-readonly LINUX_BASE_IMAGES=("debian:stretch-slim" "debian:buster-slim")
+# Too old: "debian:jessie-slim"
+readonly LINUX_BASE_IMAGES=(
+	"debian:stable-slim" "debian:buster-slim" "debian:stretch-slim"
+	"ubuntu:latest" "ubuntu:bionic" "ubuntu:xenial"
+)
 
 readonly ASSETS_INPUTS_FOLDER="inputs"
 readonly VAULT_ID_PATH="../../.cache/.vault-id"
@@ -21,6 +25,8 @@ cp -f "$VAULT_ID_PATH" "$ASSETS_INPUTS_FOLDER/.vault-id"
 
 #set -vx
 for linux_base_image in "${LINUX_BASE_IMAGES[@]}"; do
+	docker pull "$linux_base_image"
+	
 	linux_base_image_os="${linux_base_image%:*}"
 	linux_base_image_no_colon="${linux_base_image//:/_}"
 	
