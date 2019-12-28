@@ -58,6 +58,7 @@ RUN \
 
 # We run ansible here in a separate step to avoid re-cloning the whole repo if
 # Ansible fails.
+# TODO: Re-fetch git because it might have changed since previous test was launched
 RUN cd frizlabs-conf && ./run-ansible -vvvv
 
 

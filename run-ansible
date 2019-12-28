@@ -148,6 +148,7 @@ if ! command -v python3 >/dev/null; then
 	echo "instead of Python 3? Yes. However I consider Python 2 as obsolete" >/dev/stderr
 	echo "(and so does Python: https://www.python.org/dev/peps/pep-0373/)." >/dev/stderr
 	echo "Thus, I force the usage of Python 3 whenever I can…" >/dev/stderr
+	echo "(Moreover, Python 3 is installed in the system on macOS.)" >/dev/stderr
 	echo >/dev/stderr
 	echo "AFAIK, there should only be the inventory.py script (in this repo) and" >/dev/stderr
 	echo "the virtualenv setup (in this script) that should have to be modified" >/dev/stderr
