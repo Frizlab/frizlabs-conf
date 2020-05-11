@@ -27,7 +27,7 @@ alias lt='ls -lrt'
 # shellcheck disable=SC2142
 alias gt="git tag | xargs -I@ git log --format=format:\"%ai @%n\" -1 @ | sort | awk '{print \$4}'"; # Outputs git tags in reverse chronological order
 alias xcsymbolicate='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/ /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash'
-alias docker-run-swift='docker run --security-opt=seccomp:unconfined -v "$(pwd):/mnt/output" -it --rm --entrypoint bash happn/swift-builder'
+alias docker-run-swift='docker run --security-opt=seccomp:unconfined -v "$(pwd):/mnt/output" -it --rm --entrypoint bash happn/swift'
 
 # Misc. aliases
 alias x='chmod ug+x'
