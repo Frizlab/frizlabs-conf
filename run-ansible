@@ -60,7 +60,7 @@ usage() {
 	echo "Supported roles:"
 	pushd "$ANSIBLE_SETUP_PATH/roles" >/dev/null 2>&1
 	for role in *; do
-		echo "   $ROLE: $(cat "$role/description" 2>/dev/null || echo "<no description>")"
+		echo "   $role: $(cat "$role/description" 2>/dev/null || echo "<no description>")"
 	done
 	popd >/dev/null 2>&1
 }
@@ -168,6 +168,7 @@ elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
 fi
 
 # Activate virtualenv
+# shellcheck disable=SC1090
 source "$VIRTUALENV_ACTIVATE"
 
 # ############################################################################ #
@@ -193,7 +194,7 @@ if [ ! -f "$VAULT_ID_PATH" ]; then
 		echo "Something exists at path \"$VAULT_ID_PATH\" but it’s not a regular file. Aborting Ansible run." >/dev/stderr
 		exit 1
 	fi
-	read -sp "Please input the Ansible Vault password: " vault_id
+	read -rsp "Please input the Ansible Vault password: " vault_id
 	echo
 	echo -n "$vault_id" >"$VAULT_ID_PATH"
 fi
@@ -201,6 +202,7 @@ popd >/dev/null 2>&1
 
 # I don’t really like hidding all output from a program, but this one prints a
 # useless warning on macOS on stderr, so I silence it!
+# shellcheck disable=SC1090
 source "$DEPENDENCIES_DIR/ansible/hacking/env-setup" &>"$DEV_NULL"
 
 readonly HOST_OS="$(uname)"
@@ -217,6 +219,7 @@ fi
 pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
 # Note: If we need sudo in a playbook: pass "--ask-become-pass" to
 #       ansible-playbook. (The option can be added to EXTRA_ARGS.)
+# shellcheck disable=SC2086
 "ansible-$ANSIBLE_MODULE" --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
 # To list the facts on the machine
 #ansible -m setup localhost
