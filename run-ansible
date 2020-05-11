@@ -51,12 +51,11 @@ usage() {
 	echo "   --start-at-task='role | task'"
 	echo
 	echo "The script will:"
-	echo "   1. Sets up a local Python 3 environment via virtualenv"
-	echo "   2. Installs Ansible prerequisites in the virtualenv"
-	echo "   3. Hands off to Ansible to complete actual installation of dotfiles etc."
+	echo "   1. Set up a local Python 3 environment via virtualenv"
+	echo "   2. Install Ansible prerequisites in the virtualenv"
+	echo "   3. Hand off to Ansible to complete the actual installation of dotfiles etc."
 	echo
-	echo "Note: Python3 is required for the script to launch. Try to launch the script"
-	echo "      without Python3 installed for a rationale."
+	echo "Important: Python3 is required for the script to launch."
 	echo
 	echo "Supported roles:"
 	pushd "$ANSIBLE_SETUP_PATH/roles" >/dev/null 2>&1
@@ -129,30 +128,11 @@ else
 	unset VERBOSE
 fi
 
+
+# Checking repo has all of the files it needs before doing some potentially long
+# actions (python3 installation in a local Homebrew instance)
 if [ ! -x "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
 	echo "The local_brew_install script is mandatory! Expected to find it in \"$LOCAL_BREW_INSTALL_SCRIPT\"" >/dev/stderr
-	exit 1
-fi
-
-# We don’t really care if the script fails. All we care about is that Python3 is
-# installed, which is verified just after that anyway.
-"$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
-if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
-
-# Python3 dependency check
-if ! command -v python3 >/dev/null; then
-	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
-	echo >/dev/stderr
-	echo "Ansible works fine with Python 2, and Python 2 is the only Python" >/dev/stderr
-	echo "installed on macOS by default. Would it make sense to use Python2" >/dev/stderr
-	echo "instead of Python 3? Yes. However I consider Python 2 as obsolete" >/dev/stderr
-	echo "(and so does Python: https://www.python.org/dev/peps/pep-0373/)." >/dev/stderr
-	echo "Thus, I force the usage of Python 3 whenever I can…" >/dev/stderr
-	echo "(Moreover, Python 3 is installed in the system on macOS.)" >/dev/stderr
-	echo >/dev/stderr
-	echo "AFAIK, there should only be the inventory.py script (in this repo) and" >/dev/stderr
-	echo "the virtualenv setup (in this script) that should have to be modified" >/dev/stderr
-	echo "to have everything working with Python2, if need be." >/dev/stderr
 	exit 1
 fi
 
@@ -168,24 +148,42 @@ if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
 	exit 1
 fi
 
+# We need python3. If it is installed in the system, the local brew install
+# script shouldn’t do anything, otherwise it will install a local brew instance
+# and install python3 in this instance (macOS only).
+"$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
+if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
+
+# Python3 dependency check
+if ! command -v python3 >/dev/null; then
+	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
+	exit 1
+fi
+
+# Virtualenv installation
 if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$FORCE" != 0 ]]; then
 	"$VIRTUALENV_SETUP" -p python3 "$VIRTUALENV_TARGET_DIR" >"$DEV_NULL"
 elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
 	echo "Skipping virtualenv install (already exists); use --force to override" >"$DEV_NULL"
 fi
 
+# Activate virtualenv
 source "$VIRTUALENV_ACTIVATE"
 
-# Install needed pip dependencies
+# ############################################################################ #
+#  Virtualenv activated; from now on, all Python stuff are done in virtualenv  #
+# ############################################################################ #
+
+# Install needed pip dependencies (in virtualenv)
 if ! pip install -r "$ANSIBLE_REQUIREMENTS_PATH" >"$DEV_NULL"; then
 	echo "Failed: pip install" >/dev/stderr
 	echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
 	exit 1
 fi
 
-# Per-run the inventory script to update the ansible group cache and avoid
-# having user input required during the Ansible run (Ansible catches the output
-# of the script).
+# Pre-run the inventory script to update the ansible group cache and avoid
+# having a user input required during the Ansible run (Ansible catches the
+# output of the script).
 pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
 python3 "./inventory.py" --update-cache-only >"$DEV_NULL"
 
