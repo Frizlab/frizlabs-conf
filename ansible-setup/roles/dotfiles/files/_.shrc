@@ -16,8 +16,8 @@ alias pip3-upgrade-all='pip3 list --outdated --format=freeze | grep -v -e wheel 
 
 # Other aliases
 #alias cat='bat'
-alias upgrade_packages="brew update; brew upgrade; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
-alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; brew cask upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+alias upgrade_packages="brew update; brew upgrade; gem update; pip2-upgrade-all; pip3-upgrade-all"
+alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; gem update; pip2-upgrade-all; pip3-upgrade-all"
 
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
