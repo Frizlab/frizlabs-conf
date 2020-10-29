@@ -39,6 +39,7 @@ export PATH="${PATH}:${HOME}/usr/cappuccino/bin"
 export PATH="${PATH}:${HOME}/usr/ruby/bin"
 export PATH="${PATH}:${HOME}/usr/npm/bin"
 export PATH="${PATH}:${HOME}/usr/go/bin"
+export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="${PATH}:."
 
 # Compilation options management for custom install brew
