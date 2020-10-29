@@ -29,8 +29,8 @@ export LC_ALL=en_US.UTF-8
 # PATH Management
 export PATH="${HOME}/usr/homebrew/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
 export PATH="${HOME}/usr/homebrew/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
-export PATH="${HOME}/usr/homebrew/opt/python/bin:${PATH}"; # And Python3…
-export PATH="${HOME}/usr/homebrew/opt/python/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
+export PATH="${HOME}/usr/homebrew/opt/python@3.8/bin:${PATH}"; # And Python3…
+export PATH="${HOME}/usr/homebrew/opt/python@3.8/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
 export PATH="${PATH}:/usr/local/sbin"
 export PATH="${PATH}:${HOME}/usr/bin"
 export PATH="${PATH}:${HOME}/usr/homebrew/bin"
