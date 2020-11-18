@@ -20,14 +20,4 @@
    <FileRef
       location = "group:utils">
    </FileRef>
-   <Group
-      location = "container:"
-      name = "supporting-files">
-      <FileRef
-         location = "group:.cache">
-      </FileRef>
-      <FileRef
-         location = "group:dependencies">
-      </FileRef>
-   </Group>
 </Workspace>
