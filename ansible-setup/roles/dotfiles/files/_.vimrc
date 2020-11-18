@@ -1,3 +1,8 @@
+let $dynVimRC = expand("~/.vimrc:dyn")
+if filereadable($dynVimRC)
+	source $dynVimRC
+endif
+
 syntax on
 set number
 set cindent
@@ -11,8 +16,3 @@ set modelines=5
 
 " For Objective-J files
 au BufNewFile,BufRead *.j setf objj
-
-let $dynVimRC = expand("~/.vimrc:dyn")
-if filereadable($dynVimRC)
-	source $dynVimRC
-endif

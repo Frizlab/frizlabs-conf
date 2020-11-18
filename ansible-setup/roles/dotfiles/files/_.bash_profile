@@ -14,6 +14,10 @@ echo "ENTER: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 ################################################################################
 echo "START: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
+# shellcheck source=/dev/null
+# We import the .bash_profile:dyn first because of the variables we could reuse
+{ test -r "${HOME}/.bash_profile:dyn" && source "${HOME}/.bash_profile:dyn"; } || true
+
 
 __show_branch1() {
 	if git branch >/dev/null 2>&1; then printf "["; fi
@@ -62,12 +66,11 @@ shopt -s cdspell
 
 
 
-### Let’s import .bash_profile:dyn and .bash_profile.d/*.sh files
-for f in "${HOME}/.bash_profile.d"/*.sh "${HOME}/.bash_profile:dyn"; do
+### Let’s import .bash_profile.d/*.sh files
+for f in "${HOME}/.bash_profile.d"/*.sh; do
 	# shellcheck source=/dev/null
 	{ test -r "$f" && source "$f"; } || true
 done
-
 
 ################################################################################
 

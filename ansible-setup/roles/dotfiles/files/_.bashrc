@@ -14,6 +14,10 @@ echo "ENTER: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 ################################################################################
 echo "START: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
+# shellcheck source=/dev/null
+# We import the .bashrc:dyn first because of the variables we could reuse
+{ test -r "${HOME}/.bashrc:dyn" && source "${HOME}/.bashrc:dyn"; } || true
+
 
 # Aliases for ls
 alias ls='ls -FG'
@@ -46,12 +50,12 @@ for f in "/usr/local/etc/bash_completion.d"/*; do ( test -f "$f" && source "$f" 
 for f in "${HOME}/usr/homebrew/etc/bash_completion.d"/*; do ( test -f "$f" && source "$f" ) || true; done
 
 
-### Let’s import .bashrc:dyn and .bashrc.d/*.sh files
-for f in "${HOME}/.bashrc.d"/*.sh "${HOME}/.bashrc:dyn"; do
+
+### Let’s import .bashrc.d/*.sh files
+for f in "${HOME}/.bashrc.d"/*.sh; do
 	# shellcheck source=/dev/null
 	{ test -r "$f" && source "$f"; } || true
 done
-
 
 ################################################################################
 

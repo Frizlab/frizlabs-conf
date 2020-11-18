@@ -7,6 +7,11 @@
 #
 # /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 
+# The Homebrew prefix. Mostly used by the conf scripts.
+export FRZ_HOMEBREW_PREFIX="{{ homebrew_prefix }}"
+
+# Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving
+# it a token will allow for more requests to GitHub.
 export HOMEBREW_GITHUB_API_TOKEN="{{ homebrew_github_token }}"
 {% if dark_mode %}
 

@@ -9,6 +9,10 @@ echo "ENTER: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 ################################################################################
 echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
+# shellcheck source=/dev/null
+# We import the .profile:dyn first because of the variables we could reuse
+{ test -r "${HOME}/.profile:dyn" && . "${HOME}/.profile:dyn"; } || true
+
 
 export EDITOR="vi"
 
@@ -27,13 +31,13 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # PATH Management
-export PATH="${HOME}/usr/homebrew/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
-export PATH="${HOME}/usr/homebrew/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
-export PATH="${HOME}/usr/homebrew/opt/python@3.8/bin:${PATH}"; # And Python3…
-export PATH="${HOME}/usr/homebrew/opt/python@3.8/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
+export PATH="${FRZ_HOMEBREW_PREFIX}/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
+export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
+export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@3/bin:${PATH}"; # And Python3…
+export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@3/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
 export PATH="${PATH}:/usr/local/sbin"
 export PATH="${PATH}:${HOME}/usr/bin"
-export PATH="${PATH}:${HOME}/usr/homebrew/bin"
+export PATH="${PATH}:${FRZ_HOMEBREW_PREFIX}/bin"
 export PATH="${PATH}:${HOME}/usr/cappuccino/bin"
 #export PATH="${PATH}:${HOME}/Library/Python/*/bin"; # For system Python when installing in user path
 export PATH="${PATH}:${HOME}/usr/ruby/bin"
@@ -43,9 +47,9 @@ export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="${PATH}:."
 
 # Compilation options management for custom install brew
-export LDFLAGS="${LDFLAGS} -L${HOME}/usr/homebrew/lib"
-export CFLAGS="${CFLAGS} -I${HOME}/usr/homebrew/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${HOME}/usr/homebrew/lib/pkgconfig"
+export LDFLAGS="${LDFLAGS} -L${FRZ_HOMEBREW_PREFIX}/lib"
+export CFLAGS="${CFLAGS} -I${FRZ_HOMEBREW_PREFIX}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${FRZ_HOMEBREW_PREFIX}/lib/pkgconfig"
 
 
 # Homebrew
@@ -84,12 +88,12 @@ export NPM_CONFIG_PREFIX="${HOME}/usr/npm"
 export GOPATH="${HOME}/usr/go"
 
 
-### Let’s import .profile:dyn and .profile.d/*.sh files
-for f in "${HOME}/.profile.d"/*.sh "${HOME}/.profile:dyn"; do
+
+### Let’s import .profile.d/*.sh files
+for f in "${HOME}/.profile.d"/*.sh; do
 	# shellcheck source=/dev/null
 	{ test -r "$f" && . "$f"; } || true
 done
-
 
 ################################################################################
 

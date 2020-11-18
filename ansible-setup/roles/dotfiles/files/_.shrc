@@ -9,6 +9,10 @@ echo "ENTER: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 ################################################################################
 echo "START: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
+# shellcheck source=/dev/null
+# We import the .shrc:dyn first because of the variables we could reuse
+{ test -r "${HOME}/.shrc:dyn" && . "${HOME}/.shrc:dyn"; } || true
+
 
 # Python aliases
 alias pip2-upgrade-all='pip2 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip2 install --upgrade'
@@ -70,12 +74,12 @@ add_subtitle() {
 }
 
 
-### Let’s import .shrc:dyn and .shrc.d/*.sh files
-for f in "${HOME}/.shrc.d"/*.sh "${HOME}/.shrc:dyn"; do
+
+### Let’s import .shrc.d/*.sh files
+for f in "${HOME}/.shrc.d"/*.sh; do
 	# shellcheck source=/dev/null
 	{ test -r "$f" && . "$f"; } || true
 done
-
 
 ################################################################################
 
