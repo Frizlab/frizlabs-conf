@@ -2,11 +2,7 @@
 # Provide an extension point for some dot-files
 - name: "make ~/{{ item }}"
   file: path="{{ ansible_env.HOME }}/{{ item }}" state=directory mode=0700
-  loop:
-  - .bash_profile.d
-  - .bashrc.d
-  - .profile.d
-  - .shrc.d
+  loop: "{{ dotfile_folders }}"
 
 - include_vars: links.yml
 - import_tasks: "{{ _lib_folder }}/links.yml"

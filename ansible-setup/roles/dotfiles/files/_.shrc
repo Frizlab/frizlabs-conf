@@ -14,6 +14,7 @@ echo "START: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.shrc:dyn" && . "${HOME}/.shrc:dyn"; } || true
 
 
+
 # Python aliases
 alias pip2-upgrade-all='pip2 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip2 install --upgrade'
 alias pip3-upgrade-all='pip3 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3 install --upgrade'

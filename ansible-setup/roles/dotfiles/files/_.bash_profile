@@ -19,6 +19,7 @@ echo "START: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.bash_profile:dyn" && source "${HOME}/.bash_profile:dyn"; } || true
 
 
+
 __show_branch1() {
 	if git branch >/dev/null 2>&1; then printf "["; fi
 }

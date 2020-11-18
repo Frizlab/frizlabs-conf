@@ -2,12 +2,26 @@
 # Note: If dotfile_files is empty, declare it like so (yaml syntax for empty list):
 # dotfile_files: []
 dotfile_files:
+  - .zshenv
+  - .zprofile
+  - .zshrc
+  - .zlogin
   - .bash_profile
   - .bashrc
   - .profile
   - .shrc
   - .vimrc
   - .inputrc
+
+dotfile_folders:
+  - .zshenv.d
+  - .zprofile.d
+  - .zshrc.d
+  - .zlogin.d
+  - .bash_profile.d
+  - .bashrc.d
+  - .profile.d
+  - .shrc.d
 
 dotfile_templates:
   - .profile:dyn

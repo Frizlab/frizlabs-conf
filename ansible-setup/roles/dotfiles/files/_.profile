@@ -14,6 +14,7 @@ echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.profile:dyn" && . "${HOME}/.profile:dyn"; } || true
 
 
+
 export EDITOR="vi"
 
 # Overridden in bash_profile w/ git support

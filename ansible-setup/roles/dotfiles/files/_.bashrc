@@ -19,6 +19,7 @@ echo "START: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.bashrc:dyn" && source "${HOME}/.bashrc:dyn"; } || true
 
 
+
 # Aliases for ls
 alias ls='ls -FG'
 alias l='ls -C'
