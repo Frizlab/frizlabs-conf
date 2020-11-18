@@ -1,10 +1,11 @@
 #!/bin/zsh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-echo "ENTER: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
-# Init file for login zsh shell
+# Init file for login zsh shell.
 # See https://github.com/Frizlab/frizlabs-conf for more info.
+
+echo "ENTER: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 # shellcheck source=_.profile
@@ -13,6 +14,7 @@ echo "ENTER: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 # as (ba)sh, and fails when the glob does not match anything. There might me
 # more options to disable later.
 { test -r "${HOME}/.profile" && (){ setopt localoptions; unsetopt nomatch; source "${HOME}/.profile"; }; } || true
+
 
 ################################################################################
 echo "START: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
@@ -35,7 +37,9 @@ done
 
 ################################################################################
 
+
 # Note: zsh does load the zshrc even in a login shell (w/ bash we had to force
 #       the import of the bashrc file)
+
 
 echo "EXIT: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

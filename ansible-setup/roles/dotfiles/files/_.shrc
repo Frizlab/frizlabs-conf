@@ -1,10 +1,13 @@
 #!/bin/sh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
+
+# Init file for non-login interactive POSIX shells.
+# See https://github.com/Frizlab/frizlabs-conf for more info.
+
 echo "ENTER: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
-# Init file for non-login interactive POSIX shells
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+
 
 ################################################################################
 echo "START: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
@@ -83,5 +86,6 @@ for f in "${HOME}/.shrc.d"/*.sh; do
 done
 
 ################################################################################
+
 
 echo "EXIT: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"

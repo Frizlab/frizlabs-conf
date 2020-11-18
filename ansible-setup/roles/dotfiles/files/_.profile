@@ -1,10 +1,13 @@
 #!/bin/sh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
+
+# Init file for login POSIX shells.
+# See https://github.com/Frizlab/frizlabs-conf for more info.
+
 echo "ENTER: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
-# Init file for login POSIX shells
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+
 
 ################################################################################
 echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
@@ -98,6 +101,7 @@ done
 
 ################################################################################
 
+
 # Now we’ve done everything login-specific, we import the non-standard non-login
 # rc file, which sh does not import automatically in a login shell. The import
 # is done using the ENV var so children inherit it, and bash does not do the
@@ -111,5 +115,6 @@ done
 #        value; we assume there as been a good reason for the ENV to be set to
 #        NULL and leave it as-is.
 export ENV="${ENV-${HOME}/.shrc}"
+
 
 echo "EXIT: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
