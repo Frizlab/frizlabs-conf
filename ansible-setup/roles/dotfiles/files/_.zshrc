@@ -13,7 +13,7 @@ echo "ENTER: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 # nomatch option for the time of the import because zsh does not behave the same
 # as (ba)sh, and fails when the glob does not match anything. There might me
 # more options to disable later.
-{ test -r "${HOME}/.shrc" && { unsetopt localoptions nomatch; source "${HOME}/.shrc"; }; } || true
+{ test -r "${HOME}/.shrc" && (){ setopt localoptions; unsetopt nomatch; source "${HOME}/.shrc"; }; } || true
 
 
 ################################################################################
