@@ -48,7 +48,7 @@ setopt promptsubst transientrprompt
 # did not find the same colors I was used to fast enough, and found the %{%}
 # solution to have the RPS1 correctly placed, so I did not search any further.
 PS1=$'%{\e[01;36m%}%i%{\e[0m%} \\ %{\e[00;32m%}%*%{\e[0m%} / %{\e[00;33m%}%n@%m%{\e[0m%}[%{\e[00;31m%}%?%{\e[0m%}] %{\e[01;38m%}%~%{\e[0m%}`__show_git_branch`) '
-RPS1='🤠🙃😃'; # Just to remember we’re using zsh
+RPS1='%(0?.🤠🙃😃.😱😭😡)'; # Just to remember we’re using zsh
 
 # We set EDITOR to vi in the profile, which changes the key bindings to vi
 # instead of emacs. Let’s revert this. Also we want to have a more bash-style
