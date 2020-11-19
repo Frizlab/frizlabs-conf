@@ -50,6 +50,14 @@ setopt promptsubst transientrprompt
 PS1=$'%{\e[01;36m%}%i%{\e[0m%} \\ %{\e[00;32m%}%*%{\e[0m%} / %{\e[00;33m%}%n@%m%{\e[0m%}[%{\e[00;31m%}%?%{\e[0m%}] %{\e[01;38m%}%~%{\e[0m%}`__show_git_branch`) '
 RPS1='🤠🙃😃'; # Just to remember we’re using zsh
 
+# We set EDITOR to vi in the profile, which changes the key bindings to vi
+# instead of emacs. Let’s revert this. Also we want to have a more bash-style
+# navigation (word nvigation goes through words, not ’till the next space).
+bindkey -e
+bindkey '\ef' emacs-forward-word
+autoload -U select-word-style
+select-word-style bash
+
 
 
 ### Let’s import .zshrc.d/*.sh files
