@@ -61,13 +61,9 @@ PS1='\[\033[01;36m\]\#\[\033[0m\] \\ \[\033[00;32m\]\t\[\033[0m\] / \[\033[00;33
 # Bash specific alias
 alias h='cat ~/.bash_sessions/*.history*'
 
-# /usr/local bash completion
+# Homebrew - TODO: Verify FRZ_HOMEBREW_PREFIX is set in all cases
 # shellcheck source=/dev/null
-for f in "/usr/local/etc/bash_completion.d"/*; do ( test -f "$f" && source "$f" ) || true; done
-
-# Homebrew
-# shellcheck source=/dev/null
-for f in "${HOME}/usr/homebrew/etc/bash_completion.d"/*; do ( test -f "$f" && source "$f" ) || true; done
+for f in "${FRZ_HOMEBREW_PREFIX}/etc/bash_completion.d"/*; do { test -f "$f" && source "$f"; } || true; done
 
 
 
