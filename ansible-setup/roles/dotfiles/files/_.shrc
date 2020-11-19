@@ -2,7 +2,7 @@
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
 
-# Init file for non-login interactive POSIX shells.
+# Init file for interactive POSIX shells.
 # See https://github.com/Frizlab/frizlabs-conf for more info.
 
 echo "ENTER: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
@@ -17,6 +17,9 @@ echo "START: .shrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 { test -r "${HOME}/.shrc:dyn" && . "${HOME}/.shrc:dyn"; } || true
 
 
+
+# A very basic PS1 that should be compatible w/ all shells
+PS1='prompt) '
 
 # Python aliases
 alias pip2-upgrade-all='pip2 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip2 install --upgrade'

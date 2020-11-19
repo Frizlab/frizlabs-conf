@@ -29,6 +29,10 @@ to have everything working with Python2, if need be.
 
 ### Roles
 
+_Lexicographic note_: When I say “conf that is propagated to its children,” I mean
+for instance `export var=`, or `export -f function_name` in bash. That is everything
+that is exported to children of the shell.
+
 #### `.bash_profile`
 Should contain only bash-specific conf that is propagated to its children.
 For instance, exported env variables, exported functions (this is possible with
