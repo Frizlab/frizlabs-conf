@@ -47,7 +47,7 @@ setopt promptsubst transientrprompt
 # \e is the same as \033. We could probably use %F and %B and co instead, but I
 # did not find the same colors I was used to fast enough, and found the %{%}
 # solution to have the RPS1 correctly placed, so I did not search any further.
-PS1=$'%{\e[01;36m%}%i%{\e[0m%} \\ %{\e[00;32m%}%*%{\e[0m%} / %{\e[00;33m%}%n@%m%{\e[0m%}[%{\e[00;31m%}%?%{\e[0m%}] %{\e[01;38m%}%~%{\e[0m%}`__show_git_branch`) '
+PS1=$'%{\e[01;36m%}%i%{\e[0m%} \\ %{\e[00;32m%}%*%{\e[0m%} / %{\e[00;33m%}%n@%m%{\e[0m%}[%{\e[00;31m%}%?%{\e[0m%}] %{\e[01;38m%}%~%{\e[0m%}`__show_git_branch`%) '
 RPS1='%(0?.🤠🙃😃.😱😭😡)'; # Just to remember we’re using zsh
 
 # We set EDITOR to vi in the profile, which changes the key bindings to vi
