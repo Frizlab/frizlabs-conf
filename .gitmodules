@@ -1,4 +1,0 @@
-[submodule "dependencies/ansible"]
-	path = dependencies/ansible
-	url = https://github.com/ansible/ansible.git
-	shallow = true
