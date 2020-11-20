@@ -1,2 +1,2 @@
-# Ignore case while completing
+# Ignore case while completing (bash)
 set completion-ignore-case on
