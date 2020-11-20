@@ -72,6 +72,10 @@ setopt hist_ignore_space; # Do not store commands starting with space (after nex
 setopt hist_no_store; # Do not store history and fc commands in history
 setopt correct correct_all; # Propose correction for incorrect commands in Terminal
 
+# Search through history when something is typed
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+
 
 
 ### Let’s import .zshrc.d/*.sh files
