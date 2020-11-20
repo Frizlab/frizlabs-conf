@@ -1,6 +1,7 @@
 ---
 # The colon is so the file is sorted at the top…
-backup_dir: "{{ user_bin_dir }}/.:bin_backups"
+backup_user_bin_dir: "{{ user_bin_dir }}/.:bin_backups"
+backup_3rdparty_bin_dir: "{{ third_party_bin_dir }}/.:bin_backups"
 backup_dir_mode: "0755"
 
 # vim: ts=2 sw=2 et

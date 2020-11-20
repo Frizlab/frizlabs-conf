@@ -5,7 +5,10 @@
 - name: "make user’s bin folder"
   file: path="{{ user_bin_dir }}" state=directory mode=0755
 
-- include_vars: links.yml
+- include_vars: links_user.yml
+- import_tasks: "{{ _lib_folder }}/links.yml"
+
+- include_vars: links_3rdparty.yml
 - import_tasks: "{{ _lib_folder }}/links.yml"
 
 # vim: ts=2 sw=2 et
