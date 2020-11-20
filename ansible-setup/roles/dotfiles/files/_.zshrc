@@ -31,7 +31,8 @@ __show_git_branch() {
 	# No need for more than 2 lines of status in theory as untracked are shown at the end
 	git_status="$(git status -b --porcelain 2>/dev/null | head -n 3)"
 	git_status_ret=$?
-	if [ "$git_status_ret" -ne 0 ]; then return; fi
+	# Status 141 is 128 + 13 (13: SIGPIPE, 128: killed (IIUC))
+	if [ "$git_status_ret" -ne 0 -a "$git_status_ret" -ne 141 ]; then return; fi
 	
 	printf "[%%{\e[00;31m%%}"
 	printf "%s" "$(sed -En '/^## /s///p' <<<"$git_status")"
