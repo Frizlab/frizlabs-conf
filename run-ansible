@@ -148,7 +148,7 @@ if [ ! -e "$ANSIBLE_ENV_SETUP" -o "$INSTALL" != 0 ]; then
 		git checkout "$ANSIBLE_TAG"
 	)
 	if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
-		echo "Ansible not found in cache even after instllation; something is wrong…" >/dev/stderr
+		echo "Ansible not found in cache even after installation; something is wrong…" >/dev/stderr
 		exit 1
 	fi
 fi
