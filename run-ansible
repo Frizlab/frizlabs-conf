@@ -157,7 +157,7 @@ fi
 # script shouldn’t do anything, otherwise it will install a local brew instance
 # and install python3 in this instance (macOS only).
 "$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
-if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
+if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
 
 # Python3 dependency check
 if ! command -v python3 >/dev/null; then
