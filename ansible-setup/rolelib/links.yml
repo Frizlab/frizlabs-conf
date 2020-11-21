@@ -8,10 +8,14 @@
 #   - lnk__link_mode:       The mode of the created link (0644 by default)
 
 - name: create backup directory
-  file: path="{{ lnk__backup_dir | mandatory }}" state=directory mode={{ lnk__backup_dir_mode | default('0755') }}
+  file:
+    path: "{{ lnk__backup_dir | mandatory }}"
+    state: directory
+    mode: "{{ lnk__backup_dir_mode | default('0755') }}"
 
 - name: "check for non-symlink originals"
-  stat: path="{{ lnk__dest_dir | mandatory }}/{{ item.0 }}"
+  stat:
+    path: "{{ lnk__dest_dir | mandatory }}/{{ item.0 }}"
   register: original_check
   loop: "{{ lnk__files | mandatory }}"
   changed_when: original_check.stat.exists and not original_check.stat.islnk
@@ -23,9 +27,10 @@
 
 - name: "backup originals"
   command:
-    mv "{{ lnk__dest_dir | mandatory }}/{{ item.0.0 }}" "{{ lnk__backup_dir | mandatory }}"
-    creates="{{ lnk__backup_dir | mandatory }}/{{ item.0.0 }}"
-    removes="{{ lnk__dest_dir | mandatory }}/{{ item.0.0 }}"
+    mv {{ lnk__dest_dir | mandatory | quote }}/{{ item.0.0 | quote }} {{ lnk__backup_dir | mandatory | quote }}
+  args:
+    creates: "{{ lnk__backup_dir | mandatory }}/{{ item.0.0 }}"
+    removes: "{{ lnk__dest_dir | mandatory }}/{{ item.0.0 }}"
   loop:
     "{{ lnk__files | mandatory | zip(original_check.results) | list }}"
   when: item.1.stat.exists and not item.1.stat.islnk
@@ -33,12 +38,13 @@
     label: "{{ item.0.0 }}"
 
 - name: "create symlinks"
-  file: src="{% if not item.1.startswith('/') %}{{ role_path }}/files/{% endif %}{{ item.1 }}"
-        path="{{ lnk__dest_dir | mandatory }}/{{ item.0 }}"
-        state=link
-        force=yes
-        mode={{ lnk__link_mode | default('0644') }}
-        follow=false
+  file:
+    src: "{% if not item.1.startswith('/') %}{{ role_path }}/files/{% endif %}{{ item.1 }}"
+    path: "{{ lnk__dest_dir | mandatory }}/{{ item.0 }}"
+    state: link
+    force: yes
+    mode: "{{ lnk__link_mode | default('0644') }}"
+    follow: false
   loop: "{{ lnk__files | mandatory }}"
 
 # vim: ts=2 sw=2 et

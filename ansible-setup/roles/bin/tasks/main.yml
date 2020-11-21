@@ -1,14 +1,22 @@
 ---
+- name: "make user’s bin folder"
+  file: path="{{ first_party_bin_dir }}" state=directory mode=0755
+- name: "make user’s man folder"
+  file: path="{{ first_party_man_dir }}" state=directory mode=0755
+
 - name: "make 3rd party bin folder"
   file: path="{{ third_party_bin_dir }}" state=directory mode=0755
+- name: "make 3rd party man folder"
+  file: path="{{ third_party_man_dir }}" state=directory mode=0755
 
-- name: "make user’s bin folder"
-  file: path="{{ user_bin_dir }}" state=directory mode=0755
-
-- include_vars: links_user.yml
+- include_vars: derived/bin_links_1stparty.yml
 - import_tasks: "{{ _lib_folder }}/links.yml"
+#- include_vars: derived/man_links_1stparty.yml
+#- import_tasks: "{{ _lib_folder }}/links.yml"
 
-- include_vars: links_3rdparty.yml
+- include_vars: derived/bin_links_3rdparty.yml
 - import_tasks: "{{ _lib_folder }}/links.yml"
+#- include_vars: derived/man_links_3rdparty.yml
+#- import_tasks: "{{ _lib_folder }}/links.yml"
 
 # vim: ts=2 sw=2 et

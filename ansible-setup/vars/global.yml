@@ -8,35 +8,39 @@ _lib_folder: "{{ playbook_dir }}/../rolelib"
 # ##### Global that can be used by other roles ##### #
 ######################################################
 
-# The CLI directory, containing anything managed and CLI-related.
-cli_dir: "{{ ansible_env.HOME }}/cli"
+# The CLT (Command-Line Tools) directory.
+clt_dir: "{{ ansible_env.HOME }}/clt"
 
-# The user’s bin directory. All unmanaged binaries whose author is the same as
-# the current user will go there.
-user_bin_dir: "{{ cli_dir }}/bin"
+# The user’s CLT directory. All binaries/scripts whose author is the same as the
+# current user will go there.
+first_party_clt_dir: "{{ clt_dir }}/1st-party-ad-hoc"
+first_party_bin_dir: "{{ first_party_clt_dir }}/bin"
+first_party_man_dir: "{{ first_party_clt_dir }}/man"
 
-# Other unmanaged binaries
-third_party_bin_dir: "{{ cli_dir }}/3rdparty_bin"
+# Other binaries and scripts
+third_party_clt_dir: "{{ clt_dir }}/3rd-party-ad-hoc"
+third_party_bin_dir: "{{ third_party_clt_dir }}/bin"
+third_party_man_dir: "{{ third_party_clt_dir }}/man"
 
 # Main Homebrew instance directory
-homebrew_dir: "{{ cli_dir }}/homebrew"
+homebrew_dir: "{{ clt_dir }}/homebrew"
 # Python3 Homebrew instance. This instance should only have Python 3 installed,
 # and Python3 eggs installed with pip. This directory is not in the path. There
 # will only be the python3 (and related such as pip3) available as aliases. As
 # Python3 is the current Python, python by itself will also point to this.
-homebrew_python3_dir: "{{ cli_dir }}/homebrew_python3"
+#homebrew_python3_dir: "{{ clt_dir }}/homebrew-python3"
 # Python2 Homebrew instance. This instance should only have Python 2 installed,
 # and Python2 eggs installed with pip. This directory is not in the path. There
 # will only be the python2 (and related such as pip2) available as aliases.
-homebrew_python2_dir: "{{ cli_dir }}/homebrew_python2"
+#homebrew_python2_dir: "{{ clt_dir }}/homebrew-python2"
 
 # Ruby (gem) Packages
-ruby_dir: "{{ cli_dir }}/ruby"
+ruby_dir: "{{ clt_dir }}/ruby"
 
 # NPM Packages
-npm_dir: "{{ cli_dir }}/npm"
+npm_dir: "{{ clt_dir }}/npm"
 
 # Go Packages
-go_dir: "{{ cli_dir }}/go"
+go_dir: "{{ clt_dir }}/go"
 
 # vim: ts=2 sw=2 et

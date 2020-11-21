@@ -21,8 +21,8 @@ echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 export EDITOR="vi"
 
 # Locale fix env
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 # PATH Management
 export PATH="${FRZ_HOMEBREW_PREFIX}/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
