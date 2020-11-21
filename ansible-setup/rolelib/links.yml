@@ -6,6 +6,10 @@
 #   - lnk__dest_dir:        The path to the destination directory in which the files will be searched
 #   - lnk__files:           The list of (link_base_name, link_target_base_name_or_absolute_path) tuples
 #   - lnk__link_mode:       The mode of the created link (0644 by default)
+#
+# IMPORTANT: If the link_base_name contains a slash, the parent folder _will_ be
+#            created w/ the **default permissions** if it did not exist.
+
 
 - name: create backup directory
   file:
@@ -36,6 +40,12 @@
   when: item.1.stat.exists and not item.1.stat.islnk
   loop_control:
     label: "{{ item.0.0 }}"
+
+- name: "create parent folders for symlinks if needed"
+  file:
+    path: "{{ lnk__dest_dir | mandatory }}/{{ item.0 | dirname }}"
+    state: directory
+  loop: "{{ lnk__files | mandatory }}"
 
 - name: "create symlinks"
   file:

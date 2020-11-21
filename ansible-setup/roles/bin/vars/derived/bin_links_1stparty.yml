@@ -7,7 +7,8 @@ lnk__link_mode: "0644"
 filtered_packages: "{{ packages | selectattr('author', 'equalto', ansible_user_id) | list }}"
 filtered_flattened_paths: "{{ filtered_packages | sum(attribute='bin_paths', start=[]) }}"
 # Contains an array of tuples (link_base_name, link_target_base_name)
-# Base name here is name of the bin, without extension
+# Base name here is name of the bin, without extension (double map at the
+# beginning removes the extension and takes the basename).
 lnk__files: "{{
   (
     filtered_flattened_paths | map('regex_replace', '(\\.[^.]*)?$', '') | map('regex_replace', '^.*/([^/]*)$', '\\1') |
