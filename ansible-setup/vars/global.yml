@@ -15,12 +15,12 @@ clt_dir: "{{ ansible_env.HOME }}/clt"
 # current user will go there.
 first_party_clt_dir: "{{ clt_dir }}/1st-party-ad-hoc"
 first_party_bin_dir: "{{ first_party_clt_dir }}/bin"
-first_party_man_dir: "{{ first_party_clt_dir }}/share/man"
+first_party_share_dir: "{{ first_party_clt_dir }}/share"
 
 # Other binaries and scripts
 third_party_clt_dir: "{{ clt_dir }}/3rd-party-ad-hoc"
 third_party_bin_dir: "{{ third_party_clt_dir }}/bin"
-third_party_man_dir: "{{ third_party_clt_dir }}/share/man"
+third_party_share_dir: "{{ third_party_clt_dir }}/share"
 
 # Main Homebrew instance directory
 homebrew_dir: "{{ clt_dir }}/homebrew"

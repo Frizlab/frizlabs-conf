@@ -4,6 +4,7 @@
     - { role: dotfiles, tags: dotfiles }
   vars:
   vars_files:
+    - ../vars/utils.yml
     - ../vars/global.yml
 
 # vim: ts=2 sw=2 et

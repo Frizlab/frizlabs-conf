@@ -1,0 +1,19 @@
+---
+- import_tasks: "{{ _lib_folder }}/links.yml"
+  vars:
+    lnk__dest_dir: "{{ dest }}"
+    lnk__link_mode: "{{ mode }}"
+    lnk__backup_dir: "{{ dest }}/{{ backup_dir_basename }}"
+    lnk__backup_dir_mode: "{{ backup_dir_mode }}"
+    # Contains an array of tuples (link_base_name, link_target_base_name)
+    # Base name here is name of the bin, without extension (double map at the
+    # beginning removes the extension and takes the basename).
+    lnk__files: "{{
+      (
+        paths | map('regex_replace', extension_regex, '') | map('regex_replace', '^.*/([^/]*)$', '\\1') |
+        zip(paths) |
+        list
+      )
+    }}"
+
+# vim: ts=2 sw=2 et

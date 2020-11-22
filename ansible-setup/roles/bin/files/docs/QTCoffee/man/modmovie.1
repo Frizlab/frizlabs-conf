@@ -1,0 +1,176 @@
+.Dd January 21, 2007
+.Os Mac\ OS\ X
+.Dt modmovie 1 ""
+.Sh NAME
+.Nm modmovie
+.Nd modify QuickTime movies
+.
+.Sh SYNOPSIS
+.Nm 
+.Op OPTIONS 
+.Ar file Op Fl save-in-place | o Ar outputFile
+.
+.Sh DESCRIPTION
+Modifies a QuickTime movie (or any QuickTime readable file format)
+and either saves the resulting file in place (works only for QuickTime
+movies), or creates a new file. Can also be used to flatten (make self-contained) a movie that contains references to other movies.
+.
+.Sh USAGE
+.Nm Op OPTIONS
+.Ar file.mov Fl save-in-place .
+Performs the modifications specified by the OPTIONS and then saves the file in place, replacing its previous contents.
+.Pp
+.Nm Op OPTIONS 
+.Ar file Fl o Ar outputFile .
+Performs the modifications specified by the OPTIONS and then saves the result
+to
+.Ar outputFile . 
+.Ar outputFile
+will be a pointer movie: it will not contain the actual movie data, but will refer to
+the original file. Use the 
+.Fl self-contained
+option to include all necessary data in a single file.
+.Pp
+The settings of the output movie (such as scaling, auto-play, annotations, time scale, and other movie specific properties)
+are the same as those of the input movie
+Tracks and the movie can be scaled, rotated, and translated; the movie can be edited; playback rates can be changed; chapters markers can be added. There are also options that control which tracks and chapters of the movie to process.  If the movie has iTunes tags (such as AAC and protected AAC files), 
+.Nm
+does its best to convert those tags into a format suitable for QuickTime movies. See the section
+.Sx ITUNES TAGS
+for more information.
+.Pp
+Any QuickTime readable format, including MPEG and AVI movies,
+and many audio and still image formats will work. With third party plug-ins many other formats (such as WMV and Ogg) can be manipulated. All such files will be referred to as
+.Dq movies
+below.
+.
+.Sh OPTIONS
+For detailed information on the options, please look at the Read Me file. If you have a default install, you can access the Read Me by typing
+.Pp
+.Dl open /usr/local/share/doc/QTCoffee/"Read Me.rtf"
+It is also available online at
+.Lk http://www.3am.pair.com/QTCoffee%201.2.5%20Read%20Me.rtf .
+.
+.Fl o, mp4, self-contained, no-fast-start, no-compressed-header, add-no-save, q,
+.Fl set-auto-play, unset-auto-play, set-looping, unset-looping,
+.Fl save-in-place
+.Fl name-from-stdin, 
+.Fl , 
+.Fl chapter-track, add-chapter, chapter-tool-xml
+.Fl remove-output-edit-list
+.Fl noresolve, remove-no-save, chaplist, nochaplist, chapter, 
+.Fl nochapter, sscale, vscale, hscale, vtranslate, htranslate, rotate,
+.Fl resetmatrix, msscale, mvscale, mhscale, mrotate, resetmmatrix, 
+.Fl rate, trimToShortestTrack, 
+.Fl scaleToShortestTrack, scaleToLongestTrack, trimToLengthOf, 
+.Fl scaleToLengthOf, trimToLengthOfMovie, scaleToLengthOfMovie, 
+.Fl scaleMovieToLengthOfMovie, startAt, trimTo, duration, trimBy, 
+.Fl scaleTo, scaleMovieTo, no-convert-tags, list, nolist, track, notrack, 
+.Fl enable, disable, timescale, fix-roundoff-error, remove-edit-list
+.
+.Sh ITUNES TAGS
+QuickTime files can contain tags, but these tags are somewhat limited. 
+For that reason, iTunes uses a special format for the tags in AAC and protected AAC files. However neither QuickTime Player nor iTunes recognizes those tags when present in an ordinary QuickTime movie (which is what
+.Nm
+produces).
+When QuickTime opens an MP3 file (which uses its own tag format), it converts, to best of its ability, the tags into QuickTime format, but it does not do the same for AAC files. 
+By default, when 
+.Nm
+encounters such tags, it does its best to convert the tags into standard QuickTime tags. Both QuickTime Player and iTunes will recognize the QuickTime tags. But there are numerous bugs in both QuickTime Player and iTunes for tags with non-Roman characters (this applies both to MP3 tags as well as the special conversion applied by these tools). Moreover,
+several iTunes fields, such as BPM, cover art, and disk number, cannot be represented by QuickTime tags and will not be carried over.
+Because of these limitations,
+.Nm
+leaves the original tags in place (in case Apple someday decides to support them in QuickTime movies).
+It is possible that the tag conversion will cause problems or that you don't want the old tags to remain in the file. 
+.Nm
+offers options to control the conversion of tags. 
+.Pp
+Tag conversion is not available with the
+.Fl mp4
+option because Apple has not made available to others the method by which iTunes includes tags in AAC files.
+.Pp
+QuickTime 7 has a new tag format and supports iTunes tags. A future version of
+.Nm
+will take advantage of this.
+.
+.Sh EXAMPLES
+.D1 modmovie in.mov -self-contained
+Flattens all necessary data for in.mov into out.mov on the Desktop.
+.Pp
+.D1 modmovie in.mov -mp4
+Tries to convert the file in.mov into an MPEG-4 file called out.mp4 on the Desktop.
+.Pp
+.D1 modmovie file.mov -notrack Do Sound Track Dc -save-in-place
+Removes the sound track from a movie and saves it in place.
+.Pp
+.Dl modmovie file.mov -hscale 10/11 -save-in-place
+This scales a DV movie so it plays with a 4x3 aspect ratio. See
+.Xr QTCoffee 1
+for more information on DV movies.
+.Pp
+A brief compilation of additional examples is available at /usr/local/share/doc/QTCoffee/How To.rtf or online at
+.Lk http://www.3am.pair.com/QTCoffee%201.2.5%20How%20To.rtf
+.
+.Sh VERSION
+1.2.5
+.
+.Sh BUGS
+.Bl -dash
+.It
+.Nm
+overwrites its output file without warning
+.It
+.Nm
+cannot distinguish tracks or chapters with the same name.
+.It
+.Nm
+only works if the user is logged-in to the console. This appears to be a 
+limitation of QuickTime itself.
+.It
+.Nm
+has really bad error messages.
+.It
+.Nm
+does not do well converting non-Roman tags. We believe this to be because of bugs in QuickTime and iTunes. This will probably be corrected when we move to the use of QuickTime 7's new tag support.
+.It
+.Nm
+does not convert certain iTunes tags, such as BPM, cover art, and disc number. As far as we know, QuickTime does not have a way to represent such tags, so conversion is impossible.
+.It
+We never thought about what should happen if you mix 
+.Fl track
+and 
+.Fl notrack
+options or 
+.Fl chapter
+and 
+.Fl nochapter
+options on the same command line, hence we don't really know what will happen. It might do what you expect, it might not. (It certainly won't hurt anything, though.)
+.El
+.
+.Sh FUTURE IMPROVEMENTS
+The following are possible improvements we are considering. We will invest resources according to the feedback we receive.
+.Bl -dash
+.It
+Fix bugs listed above.
+.It
+Add new options for scaling the size of a movie, such as
+.Fl sscaleTo
+to scale to a specific number of pixels.
+.It
+Add more modification options, such as playback volume, sheering and other complex matrix modifications, modification of annotation (tag) data, auto-play attributes, etc.
+.It
+Allow addition of QuickTime transition effects and audio fading between movies.
+.El
+.
+.Sh SEE ALSO
+.Xr QTCoffee 1 ,
+.Xr catmovie 1 ,
+.Xr muxmovie 1 ,
+.Xr chapcutmovie 1 ,
+.Xr splitmovie 1
+.
+.Sh AUTHOR
+3AM Coffee Software 
+.Mt QTCoffee@3amcoffee.com ,
+.Lk http://www.3am.pair.com/QTCoffee.html .
+.
