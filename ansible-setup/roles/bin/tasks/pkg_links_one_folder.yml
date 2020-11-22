@@ -10,7 +10,7 @@
     # beginning removes the extension and takes the basename).
     lnk__files: "{{
       (
-        paths | map('regex_replace', extension_regex, '') | map('regex_replace', '^.*/([^/]*)$', '\\1') |
+        paths | map('regex_replace', extension_regex | mandatory, '') | map('regex_replace', '^.*/([^/]*)$', '\\1') |
         zip(paths) |
         list
       )
