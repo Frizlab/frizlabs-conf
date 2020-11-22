@@ -1,6 +1,6 @@
 ---
 # Provide an extension point for some dot-files
-- name: "make ~/{{ item }}"
+- name: "make dotfiles folders"
   file: path="{{ ansible_env.HOME }}/{{ item }}" state=directory mode=0700
   loop: "{{ dotfile_folders }}"
 
