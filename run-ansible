@@ -168,6 +168,7 @@ fi
 # Virtualenv installation
 if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$INSTALL" != 0 ]]; then
 	echo "Installing virtualenv" >"$DEV_NULL"
+	rm -fr "$VIRTUALENV_TARGET_DIR"
 	python3 -m venv "$VIRTUALENV_TARGET_DIR" >"$DEV_NULL"
 elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
 	echo "Skipping virtualenv install (already exists); use --install to override" >"$DEV_NULL"
