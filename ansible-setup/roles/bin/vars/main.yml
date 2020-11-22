@@ -10,6 +10,11 @@ packages:
     compat: [MacOSX]
     bin_paths: [bash/set_sound_volume.sh]
     share_paths: []
+  - name: "Get Text Encoding"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: [bin/GetTextEncoding]
+    share_paths: []
   - name: "Find Poured from Bottle Kegs in Homebrew"
     author: "frizlab"
     compat: [MacOSX, Debian]
