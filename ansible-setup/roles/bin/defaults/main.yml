@@ -1,6 +1,6 @@
 ---
 # The colon is so the file is sorted at the top…
-backup_dir_basename: ".:bin_backups"
+backup_dir_basename: ".:files_backups"
 backup_dir_mode: "0755"
 
 # vim: ts=2 sw=2 et
