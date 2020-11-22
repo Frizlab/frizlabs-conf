@@ -1,0 +1,13 @@
+---
+- include_tasks: "pkg_links_one_folder.yml"
+  vars:
+    # Mode is totally useless as it will be applied to the links…
+    mode: "0644"
+    extension_regex: ""
+    dest: "{{ base_dest }}/{{ cur_dest }}"
+    paths: "{{ packages_to_install | sum(attribute='share_paths', start=[]) | selectattr('dest_folder', 'equalto', cur_dest) | sum(attribute='files', start=[]) }}"
+  loop: "{{ packages_to_install | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | list }}"
+  loop_control:
+    loop_var: "cur_dest"
+
+# vim: ts=2 sw=2 et

@@ -13,44 +13,26 @@
 - include_vars: "derived.yml"
 
 # Install 1st party binaries
-- import_tasks: "pkg_links_one_folder.yml"
+- import_tasks: "pkg_links_bins.yml"
   vars:
-    # Mode is totally useless as it will be applied to the links…
-    mode: "0755"
-    dest: "{{ first_party_bin_dir }}"
-    extension_regex: "{{ file_extension_regex }}"
-    paths: "{{ first_party_packages | sum(attribute='bin_paths', start=[]) }}"
+    install_dest: "{{ first_party_bin_dir }}"
+    packages_to_install: "{{ first_party_packages }}"
 # Install 1st party share files
-- include_tasks: "pkg_links_one_folder.yml"
+- import_tasks: "pkg_links_docs.yml"
   vars:
-    # Mode is totally useless as it will be applied to the links…
-    mode: "0644"
-    extension_regex: ""
-    dest: "{{ first_party_share_dir }}/{{ cur_dest }}"
-    paths: "{{ first_party_packages | sum(attribute='share_paths', start=[]) | selectattr('dest_folder', 'equalto', cur_dest) | sum(attribute='files', start=[]) }}"
-  loop: "{{ first_party_packages | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | list }}"
-  loop_control:
-    loop_var: "cur_dest"
+    packages_to_install: "{{ first_party_packages }}"
+    base_dest: "{{ first_party_share_dir }}"
 
 # Install 3rd party binaries
-- import_tasks: "pkg_links_one_folder.yml"
+- import_tasks: "pkg_links_bins.yml"
   vars:
-    # Mode is totally useless as it will be applied to the links…
-    mode: "0755"
-    dest: "{{ third_party_bin_dir }}"
-    extension_regex: "{{ file_extension_regex }}"
-    paths: "{{ third_party_packages | sum(attribute='bin_paths', start=[]) }}"
+    install_dest: "{{ third_party_bin_dir }}"
+    packages_to_install: "{{ third_party_packages }}"
 # Install 3rd party share files
-- include_tasks: "pkg_links_one_folder.yml"
+- import_tasks: "pkg_links_docs.yml"
   vars:
-    # Mode is totally useless as it will be applied to the links…
-    mode: "0644"
-    extension_regex: ""
-    dest: "{{ third_party_share_dir }}/{{ cur_dest }}"
-    paths: "{{ third_party_packages | sum(attribute='share_paths', start=[]) | selectattr('dest_folder', 'equalto', cur_dest) | sum(attribute='files', start=[]) }}"
-  loop: "{{ third_party_packages | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | list }}"
-  loop_control:
-    loop_var: "cur_dest"
+    packages_to_install: "{{ third_party_packages }}"
+    base_dest: "{{ third_party_share_dir }}"
 
 # Install links
 - import_tasks: "{{ _lib_folder }}/links.yml"

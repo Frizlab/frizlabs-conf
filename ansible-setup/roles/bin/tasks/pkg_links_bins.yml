@@ -1,0 +1,10 @@
+---
+- import_tasks: "pkg_links_one_folder.yml"
+  vars:
+    # Mode is totally useless as it will be applied to the links…
+    mode: "0755"
+    dest: "{{ install_dest }}"
+    extension_regex: "{{ file_extension_regex }}"
+    paths: "{{ packages_to_install | sum(attribute='bin_paths', start=[]) }}"
+
+# vim: ts=2 sw=2 et
