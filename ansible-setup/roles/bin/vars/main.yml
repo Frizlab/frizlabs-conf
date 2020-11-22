@@ -20,11 +20,17 @@ packages:
     compat: [MacOSX, Debian]
     bin_paths: [swift/brew_find_poured_from_bottle.swift]
     share_paths: []
+  - name: "Print ANSI Colors"
+    author: "ian.abbott"
+    # Debian compatibility is untested, but very likely
+    compat: [MacOSX, Debian]
+    bin_paths: [sh/ansi_colors.sh]
+    share_paths: []
   - name: "Finale PS Print Crack"
     author: "bbsteam"
     # Might be Debian compatible but not sure (sed is used…)
     compat: [MacOSX]
-    bin_paths: [bash/finale_ps_prints_crack.sh]
+    bin_paths: [sh/finale_ps_prints_crack.sh]
     share_paths: []
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
