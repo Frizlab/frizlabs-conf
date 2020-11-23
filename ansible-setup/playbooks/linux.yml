@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   roles:
+    - { role: core, tags: core }
     - { role: dotfiles, tags: dotfiles }
   vars:
   vars_files:

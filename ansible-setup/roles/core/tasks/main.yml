@@ -1,6 +1,19 @@
 ---
-# TODO: ACLs & flags
+# TODO: flags
 - name: "make clt folder"
   file: {path: "{{ clt_dir }}", state: "directory", mode: "0700"}
+
+# Set the ACL on the clt and app folders. We cannot use Ansible’s acl module on macOS.
+- name: "set acl of the clt and app folders"
+  shell: |
+    test "`ls -led "{{ item }}" | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g'`" = "0: {{ clt_and_app_dir_acl }}" || { echo "change"; chmod -E "{{ item }}"; }
+  args:
+    stdin: "{{ clt_and_app_dir_acl }}"
+    # Ansible warns we should use file instead of chmod directly, but we can’t
+    warn: false
+  register: result
+  changed_when: "result.stdout != ''"
+  when: ansible_distribution == "MacOSX"
+  loop: ["{{ clt_dir }}", "{{ app_dir }}"]
 
 # vim: ts=2 sw=2 et

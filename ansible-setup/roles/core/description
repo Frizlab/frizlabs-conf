@@ -1,1 +1,1 @@
-Creates the base fs hierarchy (~/clt/*).
+Creates the missing folder in $HOME (~/Applications, ~/clt, etc.).

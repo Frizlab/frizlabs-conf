@@ -8,6 +8,9 @@ _lib_folder: "{{ playbook_dir }}/../rolelib"
 # ##### Global that can be used by other roles ##### #
 ######################################################
 
+# The Applications directory.
+app_dir: "{{ ansible_env.HOME }}/Applications"
+
 # The CLT (Command-Line Tools) directory.
 clt_dir: "{{ ansible_env.HOME }}/clt"
 

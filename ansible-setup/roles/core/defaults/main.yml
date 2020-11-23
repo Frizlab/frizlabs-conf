@@ -1,0 +1,4 @@
+---
+clt_and_app_dir_acl: "group:everyone deny delete"
+
+# vim: ts=2 sw=2 et
