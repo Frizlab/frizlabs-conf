@@ -1,5 +1,4 @@
 ---
-# TODO: flags
 - name: "make clt folder"
   file: {path: "{{ clt_dir }}", state: "directory", mode: "0700"}
 
