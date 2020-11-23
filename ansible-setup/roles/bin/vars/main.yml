@@ -26,12 +26,6 @@ packages:
     compat: [MacOSX, Debian]
     bin_paths: [sh/ansi_colors.sh]
     share_paths: []
-  - name: "Finale PS Print Crack"
-    author: "bbsteam"
-    # Might be Debian compatible but not sure (sed is used…)
-    compat: [MacOSX]
-    bin_paths: [sh/finale_ps_prints_crack.sh]
-    share_paths: []
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
