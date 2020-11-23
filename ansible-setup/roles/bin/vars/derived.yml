@@ -1,6 +1,6 @@
 ---
-# TODO: Filter on compat
-first_party_packages: "{{ packages | selectattr('author', 'equalto', ansible_user_id) | list }}"
-third_party_packages: "{{ packages | rejectattr('author', 'equalto', ansible_user_id) | list }}"
+compatible_packages: "{{ packages | selectattr('compat', 'contains', ansible_distribution) | list }}"
+first_party_packages: "{{ compatible_packages | selectattr('author', 'equalto', ansible_user_id) | list }}"
+third_party_packages: "{{ compatible_packages | rejectattr('author', 'equalto', ansible_user_id) | list }}"
 
 # vim: ts=2 sw=2 et
