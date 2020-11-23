@@ -1,7 +1,7 @@
 ---
 # Provide an extension point for some dot-files
 - name: "make dotfiles folders"
-  file: path="{{ ansible_env.HOME }}/{{ item }}" state=directory mode=0700
+  file: {path: "{{ ansible_env.HOME }}/{{ item }}", state: "directory", mode: "0700"}
   loop: "{{ dotfile_folders }}"
 
 - import_tasks: "{{ _lib_folder }}/links.yml"
@@ -22,9 +22,10 @@
     }}"
 
 - name: "create templates"
-  template: src="{{ item | regex_replace('^\.', '_.') | regex_replace('/\.', '/_.') }}.jinja"
-            dest="{{ ansible_env.HOME }}/{{ item }}"
-            mode="{{ '0700' if item.endswith('.sh') else '0600' }}"
+  template:
+    src: "{{ item | regex_replace('^\\.', '_.') | regex_replace('/\\.', '/_.') }}.jinja"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    mode: "{{ '0700' if item.endswith('.sh') else '0600' }}"
   loop: "{{ dotfile_templates }}"
 
 # vim: ts=2 sw=2 et

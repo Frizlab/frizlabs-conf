@@ -1,6 +1,6 @@
 ---
 # TODO: ACLs & flags
 - name: "make clt folder"
-  file: path="{{ clt_dir }}" state=directory mode=0700
+  file: {path: "{{ clt_dir }}", state: "directory", mode: "0700"}
 
 # vim: ts=2 sw=2 et

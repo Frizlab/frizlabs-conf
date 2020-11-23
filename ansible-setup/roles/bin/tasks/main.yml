@@ -1,13 +1,13 @@
 ---
 - name: "make user’s bin folder"
-  file: path="{{ first_party_bin_dir }}" state=directory mode=0755
+  file: {path: "{{ first_party_bin_dir }}", state: "directory", mode: "0755"}
 - name: "make user’s share folder"
-  file: path="{{ first_party_share_dir }}" state=directory mode=0755
+  file: {path: "{{ first_party_share_dir }}", state: "directory", mode: "0755"}
 
 - name: "make 3rd party bin folder"
-  file: path="{{ third_party_bin_dir }}" state=directory mode=0755
+  file: {path: "{{ third_party_bin_dir }}", state: "directory", mode: "0755"}
 - name: "make 3rd party share folder"
-  file: path="{{ third_party_share_dir }}" state=directory mode=0755
+  file: {path: "{{ third_party_share_dir }}", state: "directory", mode: "0755"}
 
 # Add some helper variables that derive from main
 - include_vars: "derived.yml"
