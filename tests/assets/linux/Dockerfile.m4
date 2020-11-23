@@ -57,6 +57,7 @@ COPY inputs /tmp/inputs
 
 # Config
 RUN \
+	cd frizlabs-conf && \
 	cp /tmp/inputs/.vault-id .cache/.vault-id && \
 	cp /tmp/inputs/ansible_group .cache/ansible_group && \
 	rm -fr /tmp/inputs
