@@ -15,6 +15,7 @@ LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `
 # Note: python (2) is needed only to activate the Python3 virtualenv (AFAICT)
 # Note: gcc is for some pip installs. And it MUST be gcc, not clang *facepalm*
 # Note: python3-dev is for some pip installs (obviously)
+# Note: python3-venv is required to get the virtual env support in python3
 # Note: man is apparently needed to setup Ansible
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	ca-certificates \
@@ -25,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	python \
 	python3 \
 	python3-dev \
+	python3-venv \
 && rm -rf /var/lib/apt/lists/*
 
 
