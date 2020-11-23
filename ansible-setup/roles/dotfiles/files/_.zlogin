@@ -18,7 +18,7 @@ echo "START: .zlogin" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 
-# TODO
+# Nothing to do
 
 
 
