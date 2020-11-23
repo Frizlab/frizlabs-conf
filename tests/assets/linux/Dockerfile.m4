@@ -57,12 +57,15 @@ RUN \
 	cp /tmp/inputs/.vault-id .cache/.vault-id && \
 	cp /tmp/inputs/ansible_group .cache/ansible_group
 
+# This is set to an arbitrary, always different, value in the docker build
+# invocation to force re-building after this line.
+ARG CACHEBUST=1
+
 # We run ansible here in a separate step to avoid re-cloning the whole repo if
 # Ansible fails.
 # We run the script with the -i option to be sure the ansible version we get is
 # the one we expect in the run-ansible script.
-# TODO: Re-fetch git because it might have changed since previous test was launched
-RUN cd frizlabs-conf && ./run-ansible -i -vvvv
+RUN cd frizlabs-conf && git fetch && git merge && ./run-ansible -i -vvvv
 
 
 # We launch bash in non-login interactive mode by default. The caller can add -l

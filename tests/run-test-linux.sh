@@ -42,7 +42,7 @@ for linux_base_image in "${LINUX_BASE_IMAGES[@]}"; do
 			# Building the image
 			image_name="frizlab-conf-test-$env-$user:$linux_base_image_no_colon"
 			docker rmi "$image_name" 2>/dev/null || true; # First remove the previous test image if present
-			docker build . -f "$dockerfilepath" -t "$image_name"
+			docker build --build-arg CACHEBUST="$(date +%s)" . -f "$dockerfilepath" -t "$image_name"
 			rm -f "$dockerfilepath"
 			
 			# Running the test script inside the image
