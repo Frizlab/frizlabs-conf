@@ -16,4 +16,12 @@
   when: ansible_distribution == "MacOSX"
   loop: ["{{ clt_dir }}", "{{ app_dir }}"]
 
+# Set the hidden flag on the clt folder
+- name: "set the hidden flag on the clt folder"
+  shell: |
+    grep -q hidden <<<"`stat -f %Sf {{ clt_dir }}`" || { echo "change"; chflags hidden "{{ clt_dir }}"; }
+  register: result
+  changed_when: "result.stdout != ''"
+  when: ansible_distribution == "MacOSX"
+
 # vim: ts=2 sw=2 et
