@@ -44,18 +44,22 @@ WORKDIR "/home/M4_USER"
 )dnl
 
 
-# We copy the inputs in tmp, they’ll be retrieved in the next step
-COPY inputs /tmp/inputs
-
-# Clone of the repository and config
+# Clone of the repositories
 RUN \
 	git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" && \
 	cd frizlabs-conf && \
 	mkdir -p .cache && \
 	git clone --depth 1 --recursive "https://github.com/ansible/ansible.git" .cache/ansible && \
-	git -C .cache/ansible fetch -t && \
+	git -C .cache/ansible fetch -t
+
+# We copy the inputs in tmp, they’ll be retrieved in the next step
+COPY inputs /tmp/inputs
+
+# Config
+RUN \
 	cp /tmp/inputs/.vault-id .cache/.vault-id && \
-	cp /tmp/inputs/ansible_group .cache/ansible_group
+	cp /tmp/inputs/ansible_group .cache/ansible_group && \
+	rm -fr /tmp/inputs
 
 # This is set to an arbitrary, always different, value in the docker build
 # invocation to force re-building after this line.
