@@ -47,23 +47,22 @@ WORKDIR "/home/M4_USER"
 # We copy the inputs in tmp, they’ll be retrieved in the next step
 COPY inputs /tmp/inputs
 
-# In theory the first line of the run should be enough to checkout the repo, but
-# it turns out git fails fetching the tags for submodules and thus fails the
-# checkout of the submodules (might be a GitHub issue).
+# Clone of the repository and config
 RUN \
-	( \
-		git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" || \
-		( cd frizlabs-conf && git submodule foreach --recursive 'git fetch --tags' && git submodule update --recursive ) \
-	) && \
+	git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" && \
 	cd frizlabs-conf && \
 	mkdir -p .cache && \
+	git clone --depth 1 --recursive "https://github.com/ansible/ansible.git" .cache/ansible && \
+	git -C .cache/ansible fetch -t && \
 	cp /tmp/inputs/.vault-id .cache/.vault-id && \
 	cp /tmp/inputs/ansible_group .cache/ansible_group
 
 # We run ansible here in a separate step to avoid re-cloning the whole repo if
 # Ansible fails.
+# We run the script with the -i option to be sure the ansible version we get is
+# the one we expect in the run-ansible script.
 # TODO: Re-fetch git because it might have changed since previous test was launched
-RUN cd frizlabs-conf && ./run-ansible -vvvv
+RUN cd frizlabs-conf && ./run-ansible -i -vvvv
 
 
 # We launch bash in non-login interactive mode by default. The caller can add -l
