@@ -1,4 +1,7 @@
 ---
+# AFAICT to remove the code duplication we have between paths and loop, we would
+# have to create a new task and import this other task (because AFAIK we cannot
+# define (actual, I’m aware of set_fact but don’t like it) variables in a task).
 - include_tasks: "pkg_links_one_folder.yml"
   vars:
     # Mode is totally useless as it will be applied to the links…
