@@ -76,4 +76,4 @@ RUN cd frizlabs-conf && git fetch && git merge && ./run-ansible -i -vvvv
 # We launch bash in non-login interactive mode by default. The caller can add -l
 # when starting the docker to get a login shell and have the .bash_profile and
 # .profile loaded (otherwise only the .bashrc and .shrc will be loaded).
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/bin/bash"]
