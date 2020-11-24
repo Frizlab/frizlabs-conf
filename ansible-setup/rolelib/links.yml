@@ -9,6 +9,9 @@
 #
 # IMPORTANT: The link_base_name must not contain a / (it’s only a filename, not
 #            a path). This is verified at the beginning of this lib.
+#
+# Note: The “|mandatory” we have set in some places is not really useful as we
+#       did not configure ansible to ignore undefined variables.
 
 
 - name: check input sanity

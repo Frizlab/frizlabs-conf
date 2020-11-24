@@ -3,34 +3,27 @@ packages:
   - name: "Local Homebrew Install"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: [bash/local_brew_install.sh]
-    share_paths: []
+    bin_paths: ["bash/local_brew_install.sh"]
   - name: "Set Sound Volume"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: [bash/set_sound_volume.sh]
-    share_paths: []
+    bin_paths: ["bash/set_sound_volume.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: [bin/abc2.sh]
-    share_paths: []
+    bin_paths: ["bin/abc2.sh"]
   - name: "Get Text Encoding"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: [bin/GetTextEncoding]
-    share_paths: []
+    bin_paths: ["bin/GetTextEncoding"]
   - name: "Find Poured from Bottle Kegs in Homebrew"
     author: "frizlab"
     compat: [MacOSX, Debian]
-    bin_paths: [swift/brew_find_poured_from_bottle.swift]
-    share_paths: []
+    bin_paths: ["swift/brew_find_poured_from_bottle.swift"]
   - name: "Print ANSI Colors"
     author: "ian.abbott"
-    # Debian compatibility is untested, but very likely
     compat: [MacOSX, Debian]
-    bin_paths: [sh/ansi_colors.sh]
-    share_paths: []
+    bin_paths: ["sh/ansi_colors.sh"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
