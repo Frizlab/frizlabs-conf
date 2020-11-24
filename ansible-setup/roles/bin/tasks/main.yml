@@ -16,22 +16,22 @@
 - import_tasks: "pkg_links_bins.yml"
   vars:
     install_dest: "{{ first_party_bin_dir }}"
-    packages_to_install: "{{ first_party_packages }}"
+    packages_to_install: "{{ first_party_packages_to_link }}"
 # Install 1st party share files
 - import_tasks: "pkg_links_docs.yml"
   vars:
-    packages_to_install: "{{ first_party_packages }}"
+    packages_to_install: "{{ first_party_packages_to_link }}"
     base_dest: "{{ first_party_share_dir }}"
 
 # Install 3rd party binaries
 - import_tasks: "pkg_links_bins.yml"
   vars:
     install_dest: "{{ third_party_bin_dir }}"
-    packages_to_install: "{{ third_party_packages }}"
+    packages_to_install: "{{ third_party_packages_to_link }}"
 # Install 3rd party share files
 - import_tasks: "pkg_links_docs.yml"
   vars:
-    packages_to_install: "{{ third_party_packages }}"
+    packages_to_install: "{{ third_party_packages_to_link }}"
     base_dest: "{{ third_party_share_dir }}"
 
 # Install links
