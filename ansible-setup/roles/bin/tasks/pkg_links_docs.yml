@@ -9,7 +9,8 @@
     extension_regex: ""
     dest: "{{ base_dest }}/{{ cur_dest }}"
     paths: "{{ packages_to_install | subelements('share_paths', skip_missing=True) | map(attribute='1') | selectattr('dest_folder', 'equalto', cur_dest) | sum(attribute='files', start=[]) }}"
-  loop: "{{ packages_to_install | subelements('share_paths', skip_missing=True) | map(attribute='1.dest_folder') | unique | list }}"
+  loop: "{{ packages_to_install | selectattr('share_paths', 'defined') | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | unique | list }}"
+  # Or: "{{ packages_to_install | subelements('share_paths', skip_missing=True) | map(attribute='1.dest_folder') | unique | list }}"
   loop_control:
     loop_var: "cur_dest"
 
