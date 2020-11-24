@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 && rm -rf /var/lib/apt/lists/*
 
 
-COPY test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
+COPY --chown=root:root test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
 
 
 ifelse(M4_USER, `root'dnl
@@ -53,7 +53,7 @@ RUN \
 	git -C .cache/ansible fetch -t
 
 # We copy the inputs in tmp, they’ll be retrieved in the next step
-COPY inputs /tmp/inputs
+COPY --chown=M4_USER:users inputs /tmp/inputs
 
 # Config
 RUN \
