@@ -10,6 +10,11 @@ packages:
     compat: [MacOSX]
     bin_paths: [bash/set_sound_volume.sh]
     share_paths: []
+  - name: "abc to anything"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: [bin/abc2.sh]
+    share_paths: []
   - name: "Get Text Encoding"
     author: "frizlab"
     compat: [MacOSX]
