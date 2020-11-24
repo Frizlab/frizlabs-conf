@@ -14,14 +14,19 @@
 #       did not configure ansible to ignore undefined variables.
 
 
-- name: check input sanity
+- name: "check input sanity"
   fail:
     msg: "Invalid lnk__files var: got an item whose link base name is not a basename {{ item.0 }}"
   when: "item.0 | basename != item.0"
   loop:
     "{{ lnk__files | mandatory }}"
 
-- name: create backup directory
+- name: "verify destination directory exists"
+  fail:
+    msg: "Invalid destination dir “{{ lnk__dest_dir }}” (does not exist)"
+  when: "lnk__dest_dir.stat.isdir is defined and lnk__dest_dir.stat.isdir"
+
+- name: "create backup directory"
   file:
     path: "{{ lnk__backup_dir | mandatory }}"
     state: directory

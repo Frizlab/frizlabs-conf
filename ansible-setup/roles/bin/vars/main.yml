@@ -48,6 +48,13 @@ packages:
           - docs/QTCoffee/man/muxmovie.1
           - docs/QTCoffee/man/QTCoffee.1
           - docs/QTCoffee/man/splitmovie.1
+  - name: D
+    author: "frizlab"
+    compat: [MacOSX]
+    copy_instead_of_link: true
+    bin_paths:
+      - bash/d.sh
+      - bash/ed.sh
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:

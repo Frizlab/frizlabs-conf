@@ -1,34 +1,68 @@
 ---
-- name: "make user’s bin folder"
-  file: {path: "{{ first_party_bin_dir }}", state: "directory", mode: "0755"}
-- name: "make user’s share folder"
-  file: {path: "{{ first_party_share_dir }}", state: "directory", mode: "0755"}
-
-- name: "make 3rd party bin folder"
-  file: {path: "{{ third_party_bin_dir }}", state: "directory", mode: "0755"}
-- name: "make 3rd party share folder"
-  file: {path: "{{ third_party_share_dir }}", state: "directory", mode: "0755"}
-
 # Add some helper variables that derive from main
 - include_vars: "derived.yml"
 
-# Install 1st party binaries
+# Create all required directories
+- name: "make 1st party bin folder"
+  file: {path: "{{ first_party_bin_dir }}", state: "directory", mode: "0755"}
+- name: "make 3rd party bin folder"
+  file: {path: "{{ third_party_bin_dir }}", state: "directory", mode: "0755"}
+
+- name: "make 1st party share folder"
+  file: {path: "{{ first_party_share_dir }}", state: "directory", mode: "0755"}
+- name: "make 3rd party share folder"
+  file: {path: "{{ third_party_share_dir }}", state: "directory", mode: "0755"}
+
+- name: "make 1st party share sub-folders"
+  file: {path: "{{ first_party_share_dir }}/{{ item }}", state: "directory", mode: "0755"}
+  loop: "{{ first_party_packages | selectattr('share_paths', 'defined') | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | unique | list }}"
+- name: "make 3rd party share sub-folders"
+  file: {path: "{{ third_party_share_dir }}/{{ item }}", state: "directory", mode: "0755"}
+  loop: "{{ third_party_packages | selectattr('share_paths', 'defined') | sum(attribute='share_paths', start=[]) | map(attribute='dest_folder') | unique | list }}"
+
+# Install 1st party packages
+# Copy bins
+- copy:
+    src: "{{ item }}"
+    dest: "{{ first_party_bin_dir }}/{{ item | regex_replace(file_extension_regex, '') | regex_replace('^.*/([^/]*)$', '\\1') }}"
+    mode: "0755"
+  loop: "{{ first_party_packages_to_copy | sum(attribute='bin_paths', start=[]) | list }}"
+# Copy docs
+- copy:
+    src: "{{ item.1 }}"
+    dest: "{{ first_party_share_dir }}/{{ item.0.dest_folder }}/{{ item.1 | regex_replace('^.*/([^/]*)$', '\\1') }}"
+    mode: "0644"
+  loop: "{{ first_party_packages_to_copy | subelements('share_paths', skip_missing=True) | map(attribute='1') | list | subelements('files') | list }}"
+# Link bins
 - import_tasks: "pkg_links_bins.yml"
   vars:
     install_dest: "{{ first_party_bin_dir }}"
     packages_to_install: "{{ first_party_packages_to_link }}"
-# Install 1st party share files
+# Link docs
 - import_tasks: "pkg_links_docs.yml"
   vars:
     packages_to_install: "{{ first_party_packages_to_link }}"
     base_dest: "{{ first_party_share_dir }}"
 
-# Install 3rd party binaries
+# Install 3rd party packages
+# Copy bins
+- copy:
+    src: "{{ item }}"
+    dest: "{{ third_party_bin_dir }}/{{ item | regex_replace(file_extension_regex, '') | regex_replace('^.*/([^/]*)$', '\\1') }}"
+    mode: "0755"
+  loop: "{{ third_party_packages_to_copy | sum(attribute='bin_paths', start=[]) | list }}"
+# Copy docs
+- copy:
+    src: "{{ item.1 }}"
+    dest: "{{ third_party_share_dir }}/{{ item.0.dest_folder }}/{{ item.1 | regex_replace('^.*/([^/]*)$', '\\1') }}"
+    mode: "0644"
+  loop: "{{ third_party_packages_to_copy | subelements('share_paths', skip_missing=True) | map(attribute='1') | list | subelements('files') | list }}"
+# Link bins
 - import_tasks: "pkg_links_bins.yml"
   vars:
     install_dest: "{{ third_party_bin_dir }}"
     packages_to_install: "{{ third_party_packages_to_link }}"
-# Install 3rd party share files
+# Link docs
 - import_tasks: "pkg_links_docs.yml"
   vars:
     packages_to_install: "{{ third_party_packages_to_link }}"
