@@ -8,8 +8,8 @@ cd "$(dirname "$0")/assets"
 
 # Too old: "debian:jessie-slim"
 readonly LINUX_BASE_IMAGES=(
-	"debian:stable-slim" "debian:buster-slim" "debian:stretch-slim"
-	"ubuntu:latest" "ubuntu:bionic" "ubuntu:xenial"
+	"debian:stable-slim" "debian:10-slim" "debian:9-slim"
+	"ubuntu:latest" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04"
 )
 
 readonly ASSETS_INPUTS_FOLDER="inputs"
