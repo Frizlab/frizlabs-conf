@@ -17,17 +17,21 @@ LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `
 # Note: python3-dev is for some pip installs (obviously)
 # Note: python3-venv is required to get the virtual env support in python3
 # Note: man is apparently needed to setup Ansible
+# Note: locales is installed and the locale-gen command is run to get rid of the
+#       “cannot change locale” warning when setup is done (we set LC_ALL to en_US.UTF-8)
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	ca-certificates \
 	gcc \
 	git \
+	locales \
 	man \
 	openssl \
 	python \
 	python3 \
 	python3-dev \
 	python3-venv \
-&& rm -rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/* && \
+	locale-gen en_US.UTF-8
 
 
 COPY --chown=root:root test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
