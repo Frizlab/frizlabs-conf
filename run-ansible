@@ -175,8 +175,12 @@ elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
 fi
 
 # Activate virtualenv
+# On Debian 9, the virtualenv implementation is old and script activation fails
+# w/ unbound variable error if set -u is set.
+set +u
 # shellcheck disable=SC1090
 source "$VIRTUALENV_ACTIVATE"
+set -u
 
 # ############################################################################ #
 #  Virtualenv activated; from now on, all Python stuff are done in virtualenv  #
