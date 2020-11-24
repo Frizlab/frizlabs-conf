@@ -45,12 +45,12 @@ WORKDIR "/home/M4_USER"
 
 
 # Clone of the repositories
+# TODO: Maybe find a way to automate update of branch for ansible clone when updated in run-ansible
 RUN \
 	git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" && \
 	cd frizlabs-conf && \
 	mkdir -p .cache && \
-	git clone --depth 1 --recursive "https://github.com/ansible/ansible.git" .cache/ansible && \
-	git -C .cache/ansible fetch -t
+	git clone --depth=1 --branch="v2.9.15" "https://github.com/ansible/ansible.git" ".cache/ansible"
 
 # We copy the inputs in tmp, they’ll be retrieved in the next step
 COPY --chown=M4_USER:users inputs /tmp/inputs

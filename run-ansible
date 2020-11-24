@@ -141,10 +141,10 @@ fi
 # Ansible installation
 if [ ! -e "$ANSIBLE_ENV_SETUP" -o "$INSTALL" != 0 ]; then
 	echo "Ansible not found in cache, or installation forced: cloning it" >"$DEV_NULL"
-	test -d "$ANSIBLE_TARGET_DIR" || git clone --depth=1 "$ANSIBLE_REPO_URL" "$ANSIBLE_TARGET_DIR"
+	test -d "$ANSIBLE_TARGET_DIR" || git clone --depth=1 --branch="$ANSIBLE_TAG" "$ANSIBLE_REPO_URL" "$ANSIBLE_TARGET_DIR"
 	(
 		cd "$ANSIBLE_TARGET_DIR"
-		git fetch -t
+		git fetch --depth=1 --no-tags origin tag "$ANSIBLE_TAG"
 		git checkout "$ANSIBLE_TAG"
 	)
 	if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
