@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	python3-dev \
 	python3-venv \
 && rm -rf /var/lib/apt/lists/* && \
-	locale-gen en_US.UTF-8
+	sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
 
 COPY --chown=root:root test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
