@@ -20,6 +20,11 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/is-valid-jpeg.sh"]
+  - name: "Backup My Cloud"
+    author: "frizlab"
+    compat: [MacOSX]
+    copy_instead_of_link: yes
+    bin_paths: ["bash/backup_cloud.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
