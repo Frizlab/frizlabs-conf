@@ -35,6 +35,10 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["bin/abcppc"]
+  - name: "abcm2pdf + runabc"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["sh/abcm2pdf_runabc.sh"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
