@@ -96,10 +96,6 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["bin/my-split"]
-  - name: "Find “Unreferenced” Files in an Xcode Project"
-    author: "frizlab"
-    compat: [MacOSX]
-    bin_paths: ["bin/find-unreferenced-xcode-files"]
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
@@ -114,6 +110,10 @@ deleted_packages:
     note: "Original author: Joachim Bondo"
     reason: "Far better solutions exist on the Internet"
     bin_paths: ["xcode-project-version-manager"]
+  - name: "Find “Unreferenced” Files in an Xcode Project"
+    author: "frizlab"
+    reason: "This tool can now be installed via Homebrew"
+    bin_paths: ["find-unreferenced-xcode-files"]
   - name: "Merge Xcode strings Files"
     author: "frizlab"
     note: "Original author was João Moreno but I rewrote pretty much everything."
