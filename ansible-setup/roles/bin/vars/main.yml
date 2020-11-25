@@ -16,6 +16,10 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/is_desktop_picture.sh"]
+  - name: "Is Valid JPEG"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["sh/is_valid_jpeg.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
