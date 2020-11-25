@@ -109,7 +109,7 @@ packages:
     author: "<unknown>"
     note: "I don’t have the source of the bin, but I think this came from an article on the web that explained how to create a hard link of a folder. Source should be basically “call link”."
     compat: [MacOSX]
-    bin_paths: ["bin/make_link"]
+    bin_paths: ["bin/make-link"]
   - name: "My Split"
     author: "frizlab"
     compat: [MacOSX]
