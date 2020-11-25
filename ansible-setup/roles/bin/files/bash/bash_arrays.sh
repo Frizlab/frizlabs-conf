@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # either one should suffice to enter POSIX mode,
 # but... there are no arrays in POSIX mode, and
