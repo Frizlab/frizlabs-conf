@@ -92,6 +92,10 @@ packages:
     share_paths:
       - dest_folder: "man/man1"
         files: ["docs/check-itunes-artworks.1"]
+  - name: "Remove xattr"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bin/remove_xattr"]
   - name: "My Split"
     author: "frizlab"
     compat: [MacOSX]
