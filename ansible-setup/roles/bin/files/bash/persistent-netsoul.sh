@@ -14,7 +14,11 @@ kill_subprocesses() {
 	kill $pid
 }
 
-cd "`dirname "$0"`"
+connect_netsoul="$(which "connect-netsoul")"
+if [ ! -x "$connect_netsoul" ]; then
+	echo "could not find the connect-netsoul script" >/dev/stderr
+	exit 2
+fi
 
 cur_pid=
 while true; do
@@ -23,7 +27,7 @@ while true; do
 	else
 		echo "Server does not have an Internet connection. Trying to re-connect NetSoul." >/dev/stderr
 		if [ -n "$cur_pid" ]; then kill_subprocesses "$cur_pid"; fi
-		./connect_netsoul.sh &
+		"$connect_netsoul" &
 		cur_pid="$!"
 		echo "Child's PID: $cur_pid"
 	fi

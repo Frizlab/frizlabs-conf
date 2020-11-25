@@ -10,9 +10,9 @@ if [ -z "$searched_folder" -o -z "$desktop_width" -o -z "$desktop_height" -o -z 
 	exit 1
 fi
 
-is_desktop_pic="$(dirname "$0")/is_desktop_picture.sh"
+is_desktop_pic="$(which "is-desktop-picture")"
 if [ ! -x "$is_desktop_pic" ]; then
-	echo "could not find the is_desktop_picture script" >/dev/stderr
+	echo "could not find the is-desktop-picture script" >/dev/stderr
 	exit 2
 fi
 

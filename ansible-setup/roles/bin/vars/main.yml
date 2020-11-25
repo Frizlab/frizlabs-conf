@@ -112,11 +112,11 @@ packages:
   - name: "Find Desktop Pictures"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/find_desktop_pictures.sh"]
+    bin_paths: ["bash/find-desktop-pictures.sh"]
   - name: "Launch Alarm Clock"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/launch_alarm_clock.sh"]
+    bin_paths: ["bash/launch-alarm-clock.sh"]
   - name: "Markdown Render Opener"
     author: "frizlab"
     compat: [MacOSX]
@@ -126,21 +126,21 @@ packages:
     note: "This script was originally from someone else than frizlab, but so heavily modified that frizlab can take ownership."
     # Debian compat untested
     compat: [MacOSX, Debian]
-    bin_paths: ["bash/connect_netsoul.sh"]
+    bin_paths: ["bash/connect-netsoul.sh"]
   - name: "Persistent NetSoul"
     author: "frizlab"
     # Debian compat untested
     compat: [MacOSX, Debian]
-    bin_paths: ["bash/persistent_netsoul.sh"]
+    bin_paths: ["bash/persistent-netsoul.sh"]
   - name: "Fill Empty Directories"
     author: "frizlab"
     # Debian compat untested
     compat: [MacOSX, Debian]
-    bin_paths: ["sh/fill_empty_dirs.sh"]
+    bin_paths: ["sh/fill-empty-dirs.sh"]
   - name: "Remove Quarantine"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["sh/remove_quarantine.sh"]
+    bin_paths: ["sh/remove-quarantine.sh"]
   - name: "ts to mov"
     author: "<unknown>"
     compat: [MacOSX]
