@@ -98,6 +98,10 @@ packages:
     share_paths:
       - dest_folder: "man/man1"
         files: ["docs/check-itunes-artworks.1"]
+  - name: "srt to srt"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bin/srt2srt"]
   - name: "Remove xattr"
     author: "frizlab"
     compat: [MacOSX]
@@ -105,6 +109,42 @@ packages:
     share_paths:
       - dest_folder: "man/man1"
         files: ["docs/remove-xattr.1"]
+  - name: "Find Desktop Pictures"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/find_desktop_pictures.sh"]
+  - name: "Launch Alarm Clock"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/launch_alarm_clock.sh"]
+  - name: "Markdown Render Opener"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/markdown.sh"]
+  - name: "Connect NetSoul"
+    author: "frizlab"
+    note: "This script was originally from someone else than frizlab, but so heavily modified that frizlab can take ownership."
+    # Debian compat untested
+    compat: [MacOSX, Debian]
+    bin_paths: ["bash/connect_netsoul.sh"]
+  - name: "Persistent NetSoul"
+    author: "frizlab"
+    # Debian compat untested
+    compat: [MacOSX, Debian]
+    bin_paths: ["bash/persistent_netsoul.sh"]
+  - name: "Fill Empty Directories"
+    author: "frizlab"
+    # Debian compat untested
+    compat: [MacOSX, Debian]
+    bin_paths: ["sh/fill_empty_dirs.sh"]
+  - name: "Remove Quarantine"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["sh/remove_quarantine.sh"]
+  - name: "ts to mov"
+    author: "<unknown>"
+    compat: [MacOSX]
+    bin_paths: ["sh/ts2mov.sh"]
   - name: "Make Link"
     author: "<unknown>"
     note: "I don’t have the source of the bin, but I think this came from an article on the web that explained how to create a hard link of a folder. Source should be basically “call link”."
