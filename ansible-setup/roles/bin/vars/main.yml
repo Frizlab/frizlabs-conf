@@ -11,7 +11,7 @@ packages:
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bin/abc2.sh"]
+    bin_paths: ["bash/abc2.sh"]
   - name: "Get Text Encoding"
     author: "frizlab"
     compat: [MacOSX]

@@ -61,9 +61,9 @@
     src: "{% if not item.1.startswith('/') %}{{ role_path }}/files/{% endif %}{{ item.1 }}"
     path: "{{ lnk__dest_dir | mandatory }}/{{ item.0 }}"
     state: link
-    force: yes
+    force: no
     mode: "{{ lnk__link_mode | default('0644') }}"
-    follow: false
+    follow: no
   loop: "{{ lnk__files | mandatory }}"
 
 # vim: ts=2 sw=2 et
