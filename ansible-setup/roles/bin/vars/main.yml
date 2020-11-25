@@ -51,7 +51,7 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/abcm2pdf_runabc.sh"]
-  - name: "Chronometer in TCL/TK"
+  - name: "Chronometer and Timer in TCL/TK"
     author: "frizlab"
     # Debian compat is untested, but there’s not reason why it wouldn’t work!
     compat: [MacOSX, Debian]
