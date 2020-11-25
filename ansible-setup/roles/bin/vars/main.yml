@@ -71,11 +71,6 @@ packages:
     author: "bbsteam"
     compat: [MacOSX]
     bin_paths: ["bash/bash-arrays.sh"]
-  - name: "Code Beautifier for C++"
-    version: "1.2"
-    author: "lingxiaofeng"
-    compat: [MacOSX]
-    bin_paths: ["bin/codebt"]
   - name: "iOS Backup to Files"
     author: "frizlab"
     note: "Original author is unclear; see script for more info."
@@ -98,11 +93,16 @@ deleted_packages:
   - name: "Xcode Project Version Manager"
     author: "frizlab"
     note: "Original author: Joachim Bondo"
-    reason: "Obsolete (far better solutions exist on the Internet)"
+    reason: "Far better solutions exist on the Internet"
     bin_paths: ["xcode-project-version-manager"]
+  - name: "Code Beautifier for C++"
+    version: "1.2"
+    author: "lingxiaofeng"
+    reason: "32-bits only; upstream could not be found"
+    bin_paths: ["codebt"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
-    reason: "Obsolete (uses QuickTime; 32-bits only)"
+    reason: "Uses QuickTime; 32-bits only"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
     bin_paths:
       - catmovie
