@@ -43,6 +43,11 @@ packages:
     author: "bbsteam"
     compat: [MacOSX]
     bin_paths: ["bash/bash_arrays.sh"]
+  - name: "Code Beautifier for C++"
+    version: "1.2"
+    author: "lingxiaofeng"
+    compat: [MacOSX]
+    bin_paths: ["bin/codebt"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
