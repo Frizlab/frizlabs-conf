@@ -8,4 +8,7 @@ third_party_packages_to_link: "{{ third_party_packages | selectattr('copy_instea
 first_party_packages_to_copy: "{{ first_party_packages | selectattr('copy_instead_of_link', 'defined') | selectattr('copy_instead_of_link') | list }}"
 third_party_packages_to_copy: "{{ third_party_packages | selectattr('copy_instead_of_link', 'defined') | selectattr('copy_instead_of_link') | list }}"
 
+first_party_deleted_packages: "{{ deleted_packages | selectattr('author', 'equalto', ansible_user_id) | list }}"
+third_party_deleted_packages: "{{ deleted_packages | rejectattr('author', 'equalto', ansible_user_id) | list }}"
+
 # vim: ts=2 sw=2 et

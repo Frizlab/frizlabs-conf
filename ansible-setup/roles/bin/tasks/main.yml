@@ -83,4 +83,16 @@
       )
     }}"
 
+# Ensure deleted packages do not exist anymore
+- name: "remove deleted first party binaries"
+  file:
+    path: "{{ first_party_bin_dir }}/{{ item }}"
+    state: absent
+  loop: "{{ first_party_deleted_packages | sum(attribute='bin_paths', start=[]) }}"
+- name: "remove deleted third party binaries"
+  file:
+    path: "{{ third_party_bin_dir }}/{{ item }}"
+    state: absent
+  loop: "{{ third_party_deleted_packages | sum(attribute='bin_paths', start=[]) }}"
+
 # vim: ts=2 sw=2 et

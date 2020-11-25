@@ -75,11 +75,6 @@ packages:
     note: "Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153."
     compat: [MacOSX]
     bin_paths: ["python2/ls_mbdb.py"]
-  - name: "Xcode Project Version Manager"
-    author: "frizlab"
-    note: "Original author: Joachim Bondo"
-    compat: [MacOSX]
-    bin_paths: ["bash/xcode-project-version-manager.sh"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
@@ -118,5 +113,12 @@ bin_links:
   # from some completion scripts that use compopt.
   - name: compopt
     dest: /usr/bin/true
+
+deleted_packages:
+  - name: "Xcode Project Version Manager"
+    author: "frizlab"
+    note: "Original author: Joachim Bondo"
+    reason: "Obsolete (far better solutions exist on the Internet)"
+    bin_paths: ["xcode-project-version-manager"]
 
 # vim: ts=2 sw=2 et
