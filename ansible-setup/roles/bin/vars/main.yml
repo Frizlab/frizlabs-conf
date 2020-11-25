@@ -24,7 +24,7 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     copy_instead_of_link: yes
-    bin_paths: ["bash/backup_cloud.sh"]
+    bin_paths: ["bash/backup-cloud.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
