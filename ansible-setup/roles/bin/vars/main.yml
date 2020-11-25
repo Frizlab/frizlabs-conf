@@ -86,37 +86,6 @@ packages:
     note: "Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153."
     compat: [MacOSX]
     bin_paths: ["python2/ls-mbdb.py"]
-  - name: "QTCoffee 1.2.5"
-    author: "3amcoffee"
-    url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
-    compat: [MacOSX]
-    bin_paths:
-      - bin/QTCoffee/catmovie
-      - bin/QTCoffee/chapcutmovie
-      - bin/QTCoffee/modmovie
-      - bin/QTCoffee/muxmovie
-      - bin/QTCoffee/splitmovie
-    share_paths:
-      - dest_folder: doc/QTCoffee
-        files:
-          - docs/QTCoffee/doc/How To.rtf
-          - docs/QTCoffee/doc/License.rtf
-          - docs/QTCoffee/doc/Read Me.rtf
-      - dest_folder: man/man1
-        files:
-          - docs/QTCoffee/man/catmovie.1
-          - docs/QTCoffee/man/chapcutmovie.1
-          - docs/QTCoffee/man/modmovie.1
-          - docs/QTCoffee/man/muxmovie.1
-          - docs/QTCoffee/man/QTCoffee.1
-          - docs/QTCoffee/man/splitmovie.1
-  - name: D
-    author: "frizlab"
-    compat: [MacOSX]
-    copy_instead_of_link: true
-    bin_paths:
-      - bash/d.sh
-      - bash/ed.sh
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
@@ -131,5 +100,29 @@ deleted_packages:
     note: "Original author: Joachim Bondo"
     reason: "Obsolete (far better solutions exist on the Internet)"
     bin_paths: ["xcode-project-version-manager"]
+  - name: D
+    author: "frizlab"
+    reason: "Not needed anymore"
+    bin_paths: ["d", "ed"]
+  - name: "QTCoffee 1.2.5"
+    author: "3amcoffee"
+    reason: "Obsolete (uses QuickTime; 32-bits only)"
+    url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
+    bin_paths:
+      - catmovie
+      - chapcutmovie
+      - modmovie
+      - muxmovie
+      - splitmovie
+    share_paths:
+      - doc/QTCoffee/How To.rtf
+      - doc/QTCoffee/License.rtf
+      - doc/QTCoffee/Read Me.rtf
+      - man/man1/catmovie.1
+      - man/man1/chapcutmovie.1
+      - man/man1/modmovie.1
+      - man/man1/muxmovie.1
+      - man/man1/QTCoffee.1
+      - man/man1/splitmovie.1
 
 # vim: ts=2 sw=2 et
