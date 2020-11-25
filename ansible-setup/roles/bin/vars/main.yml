@@ -3,23 +3,23 @@ packages:
   - name: "Local Homebrew Install"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/local_brew_install.sh"]
+    bin_paths: ["bash/local-brew-install.sh"]
   - name: "Set Sound Volume"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/set_sound_volume.sh"]
+    bin_paths: ["bash/set-sound-volume.sh"]
   - name: "Get Mount Points"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/get_mount_points.sh"]
+    bin_paths: ["bash/get-mount-points.sh"]
   - name: "Is Desktop Picture"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["sh/is_desktop_picture.sh"]
+    bin_paths: ["sh/is-desktop-picture.sh"]
   - name: "Is Valid JPEG"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["sh/is_valid_jpeg.sh"]
+    bin_paths: ["sh/is-valid-jpeg.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
@@ -27,15 +27,15 @@ packages:
   - name: "Get Text Encoding"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bin/GetTextEncoding"]
+    bin_paths: ["bin/get-text-encoding"]
   - name: "Find Poured from Bottle Kegs in Homebrew"
     author: "frizlab"
     compat: [MacOSX, Debian]
-    bin_paths: ["swift/brew_find_poured_from_bottle.swift"]
+    bin_paths: ["swift/brew-find-poured-from-bottle.swift"]
   - name: "Print ANSI Colors"
     author: "ian.abbott"
     compat: [MacOSX, Debian]
-    bin_paths: ["sh/ansi_colors.sh"]
+    bin_paths: ["sh/ansi-colors.sh"]
   - name: "abc2ps"
     author: "michael.methfessel"
     urls:
@@ -50,7 +50,7 @@ packages:
   - name: "abcm2pdf + runabc"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["sh/abcm2pdf_runabc.sh"]
+    bin_paths: ["sh/abcm2pdf-runabc.sh"]
   - name: "Chronometer and Timer in TCL/TK"
     author: "frizlab"
     # Debian compat is untested, but there’s not reason why it wouldn’t work!
@@ -59,18 +59,18 @@ packages:
   - name: "Find Invalid Images"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/find_invalid_images.sh"]
+    bin_paths: ["bash/find-invalid-images.sh"]
   - name: "Import to Photos"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bash/import_to_photos.sh"]
+    bin_paths: ["bash/import-to-photos.sh"]
     share_paths:
-      - dest_folder: "import_to_photos"
-        files: ["docs/import_to_photos.scpt"]
+      - dest_folder: "import-to-photos"
+        files: ["docs/import-to-photos.scpt"]
   - name: "Learning bash arrays"
     author: "bbsteam"
     compat: [MacOSX]
-    bin_paths: ["bash/bash_arrays.sh"]
+    bin_paths: ["bash/bash-arrays.sh"]
   - name: "Code Beautifier for C++"
     version: "1.2"
     author: "lingxiaofeng"
@@ -80,12 +80,12 @@ packages:
     author: "frizlab"
     note: "Original author is unclear; see script for more info."
     compat: [MacOSX]
-    bin_paths: ["python2/ios_backup_to_files.py"]
+    bin_paths: ["python2/ios-backup-to-files.py"]
   - name: "ls mbdb"
     author: "galloglass"
     note: "Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153."
     compat: [MacOSX]
-    bin_paths: ["python2/ls_mbdb.py"]
+    bin_paths: ["python2/ls-mbdb.py"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"

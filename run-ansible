@@ -19,7 +19,7 @@ readonly ANSIBLE_SETUP_PATH="ansible-setup"
 
 readonly HOMEBREW_TARGET_DIR=".cache/homebrew"
 readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
-readonly LOCAL_BREW_INSTALL_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/local_brew_install.sh"
+readonly LOCAL_BREW_INSTALL_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/local-brew-install.sh"
 
 # ¡¡¡RELATIVE TO ANSIBLE_SETUP_PATH!!! #
 readonly VAULT_ID_PATH="../.cache/.vault-id"
