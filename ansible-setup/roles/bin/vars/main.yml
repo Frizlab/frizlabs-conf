@@ -84,7 +84,10 @@ packages:
   - name: "Check iTunes Artworks"
     author: "frizlab"
     compat: [MacOSX]
-    bin_paths: ["bin/check_itunes_artworks"]
+    bin_paths: ["bin/check-itunes-artworks"]
+    share_paths:
+      - dest_folder: "man/man1"
+        files: ["docs/check-itunes-artworks.1"]
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
