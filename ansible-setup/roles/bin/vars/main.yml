@@ -51,6 +51,11 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/abcm2pdf_runabc.sh"]
+  - name: "Chronometer in TCL/TK"
+    author: "frizlab"
+    # Debian compat is untested, but there’s not reason why it wouldn’t work!
+    compat: [MacOSX, Debian]
+    bin_paths: ["tcl/chronodec.tk"]
   - name: "Learning bash arrays"
     author: "bbsteam"
     compat: [MacOSX]

@@ -1,0 +1,250 @@
+#!/bin/sh
+# the next line starts with wish, don't remove the slash --> \
+exec wish "$0" -- ${1+"$@"}
+
+# console show
+
+# Cette procédure permet d'avoir les bons accents dans l'applis
+proc Roman {t} {
+	encoding convertfrom macRoman $t
+}
+
+#
+proc ReprendreChron {debutdecal} {
+	global all inter
+	set all(decalage) [expr [clock seconds] - $debutdecal + $all(decalage)]
+	$inter(pausechron) conf -command PauseChron -text Pause
+	AvanceChron
+}
+
+#
+proc PauseChron {} {
+	global all inter
+	after cancel $all(idchron)
+	set debutdecal [clock seconds]
+	$inter(pausechron) conf -command "ReprendreChron $debutdecal" -text Reprendre
+	puts [Roman "Une pause à été demandée au chronomètre à $all(chronvalue)"]
+}
+
+#
+proc StopChron {} {
+	global all inter
+	after cancel $all(idchron)
+	$inter(startchron) conf -state normal
+	$inter(stopchron)  conf -state disabled
+	$inter(pausechron) conf -state disabled -text Pause -command PauseChron
+	puts [Roman "Le chronomètre a été arrêté à $all(chronvalue)"]
+}
+
+#
+proc AvanceChron {} {
+	global all
+	set chronsecs [expr [clock seconds] - $all(debutchron) - $all(decalage)]
+	set all(chronvalue) [SToHMS $chronsecs]
+	set all(idchron) [after 200 AvanceChron]
+}
+
+#
+proc StartChron  {} {
+	global all inter
+	$inter(startchron) conf -state disabled
+	$inter(stopchron)  conf -state normal
+	$inter(pausechron) conf -state normal
+	set all(decalage) 0
+	set all(debutchron) [clock seconds]
+	AvanceChron
+}
+
+#
+proc SToHMS {s} {
+	set m [expr $s / 60]
+	set s [expr $s - $m*60]
+	set h [expr $m / 60]
+	set m [expr $m - $h*60]
+	return [format "%02d:%02d:%02d" $h $m $s]
+}
+
+#
+proc IChrono {base} {
+	global inter
+	set bc [frame $base.bc]
+	lappend bcc [label $bc.l -text [Roman Chronomètre]]
+	lappend bcc [label $bc.v -textvariable all(chronvalue)]
+	eval pack $bcc -side left
+	pack $bc -anchor w
+	set bs [frame $base.bs]
+	lappend b [set inter(startchron) [button $bs.g -text Go    -command StartChron]]
+	lappend b [set inter(stopchron)  [button $bs.s -text Stop  -command StopChron  -state disabled]]
+	lappend b [set inter(pausechron) [button $bs.p -text Pause -command PauseChron -state disabled]]
+	eval pack $b -side left
+	pack $bs -anchor w
+}
+
+#
+proc VerifEntier {n} {
+	if {$n == ""} {
+		return 0
+	} elseif {[string index $n 0] == "0" && [string length $n] != 1} {
+		return [string replace $n 0 0]
+	} else {
+		return $n
+	}
+}
+
+#
+proc HMSToS {h m s} {
+	set h [VerifEntier $h]
+	set m [VerifEntier $m]
+	set s [VerifEntier $s]
+	set s [expr $m*60    + $s]
+	set s [expr $h*60*60 + $s]
+	return $s
+}
+
+#
+proc ReprendreDec {debutdecal} {
+	global all inter
+	set all(decalagedec) [expr [clock seconds] - $debutdecal + $all(decalagedec)]
+	$inter(pausedec) conf -command PauseDec -text Pause
+	AvanceDec
+}
+
+#
+proc PauseDec {} {
+	global all inter
+	after cancel $all(iddec)
+	set debutdecal [clock seconds]
+	$inter(pausedec) conf -command "ReprendreDec $debutdecal" -text Reprendre
+}
+
+#
+proc Sonne {} {
+	global all
+	bell
+	incr all(compteursonne)
+	if {$all(compteursonne) <= 5} {
+		after 50 {Sonne}
+	}
+}
+
+#
+proc StopDec {} {
+	global all inter
+	after cancel $all(iddec)
+	$inter(startdec) conf -state normal
+	$inter(stopdec)  conf -state disabled
+	$inter(pausedec) conf -state disabled -text Pause -command PauseDec
+	$inter(dec:h) conf -state normal
+	$inter(dec:m) conf -state normal
+	$inter(dec:s) conf -state normal
+}
+
+#
+proc AvanceDec {} {
+	global all
+	set decsecs [expr $all(findec) - [clock seconds] + $all(decalagedec)]
+	foreach hmsv [split [SToHMS $decsecs] :] hms "h m s" {
+		set all(decvalue:$hms) $hmsv
+	}
+	if {$decsecs <= 0} {
+		Sonne
+		StopDec
+	} else {
+		set all(iddec) [after 200 AvanceDec]
+	}
+}
+
+#
+proc StartDec  {} {
+	global all inter
+	$inter(startdec) conf -state disabled
+	$inter(stopdec)  conf -state normal
+	$inter(pausedec) conf -state normal
+	$inter(dec:h) conf -state disabled
+	$inter(dec:m) conf -state disabled
+	$inter(dec:s) conf -state disabled
+	set all(decalagedec) 0
+	set all(findec) [expr [clock seconds] + [HMSToS $all(decvalue:h) $all(decvalue:m) $all(decvalue:s)]]
+	set all(compteursonne) 1
+	AvanceDec
+}
+
+#
+proc IsValidInteger {n} {
+	return [regexp {^[0-9]{0,2}$} $n]
+}
+
+#
+proc IDec {base} {
+	global inter
+	set bc [frame $base.bc]
+	lappend bcc [label $bc.l1 -text [Roman Décompte]]
+	lappend bcc [set inter(dec:h) [entry $bc.eh -textvariable all(decvalue:h) -validate key\
+	-validatecommand {IsValidInteger %P} -invalidcommand bell -width -1]]
+	lappend bcc [label $bc.l2 -text :]
+	lappend bcc [set inter(dec:m) [entry $bc.em -textvariable all(decvalue:m) -validate key\
+	-validatecommand {IsValidInteger %P} -invalidcommand bell -width 2]]
+	lappend bcc [label $bc.l3 -text :]
+	lappend bcc [set inter(dec:s) [entry $bc.es -textvariable all(decvalue:s) -validate key\
+	-validatecommand {IsValidInteger %P} -invalidcommand bell -width 2]]
+	eval pack $bcc -side left
+	pack $bc -anchor w
+	set bs [frame $base.bs]
+	lappend b [set inter(startdec) [button $bs.g -text Go    -command StartDec]]
+	lappend b [set inter(stopdec)  [button $bs.s -text Stop  -command StopDec  -state disabled]]
+	lappend b [set inter(pausedec) [button $bs.p -text Pause -command PauseDec -state disabled]]
+	eval pack $b -side left
+	pack $bs -anchor w
+}
+
+#
+proc Interface {} {
+	global inter all
+	wm title . [Roman "Chrono & Décompte"]
+#	set bg [tk_chooseColor]
+#	puts $bg
+	tk_setPalette #56829f
+#	console hide
+#	if {$all(firstrun)} {
+#		tk_messageBox -icon info -message [Roman "Si ce freeware vous plait, vous \
+pouvez donner du petit fricou à François LAMBOLEY"] -type ok
+#	}
+	set chrono [frame .c]
+	IChrono .c
+	pack $chrono -anchor w
+	set dec [frame .d]
+	IDec .d
+	pack $dec -anchor w
+	pack [button .q -text Quitter -command {WritePrefs ; exit}] -anchor e
+	bind all <Mod1-Key-q> {WritePrefs ; exit}
+}
+
+#
+proc WritePrefs {} {
+	global all env
+	set fp [open [file join $env(HOME) Library Preferences chronodec_prefs.tcl] w]
+	puts $fp "set all(firstrun) 0"
+	puts $fp "set all(decvalue:h) $all(decvalue:h)"
+	puts $fp "set all(decvalue:m) $all(decvalue:m)"
+	puts $fp "set all(decvalue:s) $all(decvalue:s)"
+	close $fp
+}
+
+#
+proc ReadPrefs {} {
+	global all env
+	if {[file exists [file join $env(HOME) Library Preferences chronodec_prefs.tcl]]} {
+		source [file join $env(HOME) Library Preferences chronodec_prefs.tcl]
+	}
+}
+
+set all(idchron) ""
+set all(iddec) ""
+set all(firstrun) 1
+set all(decalage) 0
+set all(chronvalue) [SToHMS 0]
+set all(decvalue:h) 00
+set all(decvalue:m) 30
+set all(decvalue:s) 00
+ReadPrefs
+Interface
