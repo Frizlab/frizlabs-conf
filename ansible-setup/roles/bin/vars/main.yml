@@ -8,6 +8,10 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["bash/set_sound_volume.sh"]
+  - name: "Get Mount Points"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/get_mount_points.sh"]
   - name: "abc to anything"
     author: "frizlab"
     compat: [MacOSX]
