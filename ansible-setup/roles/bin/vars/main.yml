@@ -52,6 +52,10 @@ packages:
     author: "lingxiaofeng"
     compat: [MacOSX]
     bin_paths: ["bin/codebt"]
+  - name: "iOS Backup to Files"
+    author: "galloglass"
+    compat: [MacOSX]
+    bin_paths: ["python2/ios_backup_to_files.py"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     url: "http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html"
