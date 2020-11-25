@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# merge_strings.py - Merge of Mac OS/iOS localization files
+# merge-strings.py - Merge of Mac OS/iOS localization files
 # François Lamboley, 2014 http://www.frostland.fr/
 
 # Originally based on Localize.py, by João Moreno (in 2009)
