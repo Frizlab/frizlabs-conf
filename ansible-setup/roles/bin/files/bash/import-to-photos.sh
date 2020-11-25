@@ -17,8 +17,8 @@ if [ $# -eq 2 ]; then
 	shift
 fi
 
-osa="$(dirname "$(type -p "$(basename "$0")")")/import_to_photos.scpt"
-fii="$(dirname "$(type -p "$(basename "$0")")")/find_invalid_images.sh"
+osa="$(dirname "$0")/../share/import-to-photos/import-to-photos.scpt"
+fii="$(which "find-invalid-images")"
 
 if [ ! -f "$osa" ]; then echo "Cannot find applescript to import photos. Exiting." >/dev/stderr; exit 21; fi
 if [ ! -x "$fii" ]; then echo "Cannot find script to detect invalid images. Exiting." >/dev/stderr; exit 21; fi
