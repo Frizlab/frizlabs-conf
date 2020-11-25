@@ -53,7 +53,8 @@ packages:
     compat: [MacOSX]
     bin_paths: ["bin/codebt"]
   - name: "iOS Backup to Files"
-    author: "galloglass"
+    author: "frizlab"
+    note: "Original author is unclear; see script for more info."
     compat: [MacOSX]
     bin_paths: ["python2/ios_backup_to_files.py"]
   - name: "QTCoffee 1.2.5"

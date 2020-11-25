@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-# Original script is from http://stackoverflow.com/questions/3085153
+# Original script is probably from https://stackoverflow.com/a/8101937 or
+# http://www.iki.fi/fingon/iphonebackupdb.py (from the same stackoverflow)
+# A python3 version could be found here: https://stackoverflow.com/a/32142655
 
 import os
 import sys
