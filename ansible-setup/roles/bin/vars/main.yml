@@ -141,10 +141,6 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/remove-quarantine.sh"]
-  - name: "ts to mov"
-    author: "<unknown>"
-    compat: [MacOSX]
-    bin_paths: ["sh/ts2mov.sh"]
   - name: "Make Link"
     author: "<unknown>"
     note: "I don’t have the source of the bin, but I think this came from an article on the web that explained how to create a hard link of a folder. Source should be basically “call link”."
@@ -186,6 +182,10 @@ deleted_packages:
     author: "<unknown>"
     reason: "32-bits only; upstream could not be found; can most likely be replaced by ffmpeg"
     bin_paths: ["mo3enc", "unmo3"]
+  - name: "ts to mov"
+    author: "<unknown>"
+    reason: "Converts to mov files that only QuickTime Player (32-bits) can read IIRC"
+    bin_paths: ["ts2mov"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     reason: "Uses QuickTime; 32-bits only"
