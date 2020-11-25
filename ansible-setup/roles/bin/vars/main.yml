@@ -55,10 +55,6 @@ packages:
     author: "<unknown>"
     compat: [MacOSX]
     bin_paths: ["bin/midi2abc"]
-  - name: "mo3 encoder and decoder"
-    author: "<unknown>"
-    compat: [MacOSX]
-    bin_paths: ["bin/mo3enc", "bin/unmo3"]
   - name: "Chronometer and Timer in TCL/TK"
     author: "frizlab"
     # Debian compat is untested, but there’s not reason why it wouldn’t work!
@@ -124,6 +120,10 @@ deleted_packages:
     author: "lingxiaofeng"
     reason: "32-bits only; upstream could not be found"
     bin_paths: ["codebt"]
+  - name: "mo3 encoder and decoder"
+    author: "<unknown>"
+    reason: "32-bits only; upstream could not be found; can most likely be replaced by ffmpeg"
+    bin_paths: ["mo3enc", "unmo3"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     reason: "Uses QuickTime; 32-bits only"
