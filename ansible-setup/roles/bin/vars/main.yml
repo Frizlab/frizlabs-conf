@@ -96,6 +96,10 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["bin/my-split"]
+  - name: "Find “Unreferenced” Files in an Xcode Project"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bin/find_unreferenced_xcode_files"]
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
