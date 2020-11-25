@@ -56,6 +56,17 @@ packages:
     # Debian compat is untested, but there’s not reason why it wouldn’t work!
     compat: [MacOSX, Debian]
     bin_paths: ["tcl/chronodec.tk"]
+  - name: "Find Invalid Images"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/find_invalid_images.sh"]
+  - name: "Import to Photos"
+    author: "frizlab"
+    compat: [MacOSX]
+    bin_paths: ["bash/import_to_photos.sh"]
+    share_paths:
+      - dest_folder: "import_to_photos"
+        files: ["docs/import_to_photos.scpt"]
   - name: "Learning bash arrays"
     author: "bbsteam"
     compat: [MacOSX]
