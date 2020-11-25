@@ -81,6 +81,12 @@ packages:
     note: "Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153."
     compat: [MacOSX]
     bin_paths: ["python2/ls-mbdb.py"]
+  - name: "Merge Xcode strings Files"
+    author: "frizlab"
+    note: "Original author was João Moreno but I rewrote pretty much everything."
+    # Debian compatibility is untested, but it should work
+    compat: [MacOSX, Debian]
+    bin_paths: ["python2/merge_strings.py"]
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
