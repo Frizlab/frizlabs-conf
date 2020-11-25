@@ -1,15 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# merge-strings.py - Merge of Mac OS/iOS localization files
-# François Lamboley, 2014 http://www.frostland.fr/
+# merge-strings.py - Merge of macOS/iOS localization files
+# François Lamboley, 2014 https://www.frostland.fr/
 
 # Originally based on Localize.py, by João Moreno (in 2009)
 # http://joaomoreno.com/
 
 # Almost everything (even the parser) has been re-written
 
-
+# This script has been migrated to Python 3. More or less. That is, I ran the
+# script on Python 3 once, fixed the bugs, and it seems to be ok. Now is it
+# fully? I don’t know for sure…
 
 from sys import argv
 from copy import copy
@@ -135,11 +137,11 @@ class LocalizedFile():
 		
 		return False
 	
-	def read_from_file(self, fname):
+	def read_from_file(self, fname, encoding="utf_16"):
 		try:
-			f = open(fname, encoding="utf_16", mode="r")
+			f = open(fname, encoding=encoding, mode="r")
 		except:
-			print "Couldn't open file %s for reading." % fname
+			print("Couldn't open file %s for reading." % fname)
 			return False
 		
 		self.strings = []
@@ -159,11 +161,11 @@ class LocalizedFile():
 		f.close()
 		return True
 	
-	def save_to_file(self, fname):
+	def save_to_file(self, fname, encoding="utf_16"):
 		try:
-			f = open(fname, encoding="utf_16", mode="w")
+			f = open(fname, encoding=encoding, mode="w")
 		except:
-			print "Couldn't open file %s for writing." % fname
+			print("Couldn't open file %s for writing." % fname)
 			return False
 		
 		for string in self.strings:
@@ -177,8 +179,8 @@ class LocalizedFile():
 		
 		seen = []
 		for string in self.strings:
-			if not new.strings_d.has_key(string.key):
-				print "*** Warning: Got unused key (consider removing): \"" + string.key + "\""
+			if not string.key in new.strings_d:
+				print("*** Warning: Got unused key (consider removing): \"" + string.key + "\"")
 			
 			seen.append(string.key)
 			merged.strings.append(string)
@@ -200,19 +202,30 @@ class LocalizedFile():
 		
 		return merged
 
-def merge(merged_fname, old_fname, new_fname):
+def merge(merged_fname, old_fname, new_fname, encoding="utf_16"):
 	old = LocalizedFile()
 	new = LocalizedFile()
-	if not old.read_from_file(old_fname): return 1
-	if not new.read_from_file(new_fname): return 1
+	if not old.read_from_file(old_fname, encoding=encoding): return 1
+	if not new.read_from_file(new_fname, encoding=encoding): return 1
 	merged = old.merge_with(new)
-	if not merged.save_to_file(merged_fname): return 2
+	if not merged.save_to_file(merged_fname, encoding=encoding): return 2
 
 
 if __name__ == "__main__":
-	if (len(sys.argv) != 4):
-		print "Usage: " + sys.argv[0] + " old_filename new_filename merged_filename"
-		print "       merged_filename can be equal to old_filename or new_filename"
+	if ((len(sys.argv) != 4 and len(sys.argv) != 5) or (len(sys.argv) == 5 and sys.argv[1] != "-utf8")):
+		print("Usage: " + sys.argv[0] + " [-utf8] old_filename new_filename merged_filename")
+		print("       merged_filename can be equal to old_filename or new_filename")
 		quit(42)
 	
-	quit(merge(sys.argv[3], sys.argv[1], sys.argv[2]))
+	delta = len(sys.argv) - 4
+	encoding = "utf_16" if len(sys.argv) == 4 else "utf_8"
+	ret = merge(sys.argv[3 + delta], sys.argv[1 + delta], sys.argv[2 + delta], encoding=encoding)
+	try:    sys.stdout.flush()
+	except: pass
+	try:    sys.stderr.flush()
+	except: pass
+	try:    sys.stdout.close()
+	except: pass
+	try:    sys.stderr.close()
+	except: pass
+	quit(ret)

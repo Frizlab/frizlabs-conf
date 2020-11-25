@@ -86,7 +86,7 @@ packages:
     note: "Original author was João Moreno but I rewrote pretty much everything."
     # Debian compatibility is untested, but it should work
     compat: [MacOSX, Debian]
-    bin_paths: ["python2/merge-strings.py"]
+    bin_paths: ["python3/merge-strings.py"]
 
 # No author for the links! All will be in the 3rd party bin folder.
 bin_links:
