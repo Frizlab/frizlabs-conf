@@ -100,10 +100,6 @@ deleted_packages:
     note: "Original author: Joachim Bondo"
     reason: "Obsolete (far better solutions exist on the Internet)"
     bin_paths: ["xcode-project-version-manager"]
-  - name: D
-    author: "frizlab"
-    reason: "Not needed anymore"
-    bin_paths: ["d", "ed"]
   - name: "QTCoffee 1.2.5"
     author: "3amcoffee"
     reason: "Obsolete (uses QuickTime; 32-bits only)"
