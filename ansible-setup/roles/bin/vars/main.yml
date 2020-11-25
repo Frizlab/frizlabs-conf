@@ -105,6 +105,11 @@ packages:
     share_paths:
       - dest_folder: "man/man1"
         files: ["docs/remove-xattr.1"]
+  - name: "Make Link"
+    author: "<unknown>"
+    note: "I don’t have the source of the bin, but I think this came from an article on the web that explained how to create a hard link of a folder. Source should be basically “call link”."
+    compat: [MacOSX]
+    bin_paths: ["bin/make_link"]
   - name: "My Split"
     author: "frizlab"
     compat: [MacOSX]
