@@ -85,6 +85,12 @@ packages:
     note: "Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153."
     compat: [MacOSX]
     bin_paths: ["python2/ls-mbdb.py"]
+  - name: "gem list leaves"
+    author: "astyagun"
+    url: "https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa"
+    # Debian compat untested
+    compat: [MacOSX, Debian]
+    bin_paths: ["sh/gem-list-leaves.sh"]
   - name: "Check iTunes Artworks"
     author: "frizlab"
     compat: [MacOSX]
