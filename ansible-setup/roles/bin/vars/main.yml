@@ -51,6 +51,10 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["sh/abcm2pdf-runabc.sh"]
+  - name: "midi to abc"
+    author: "<unknown>"
+    compat: [MacOSX]
+    bin_paths: ["bin/midi2abc"]
   - name: "Chronometer and Timer in TCL/TK"
     author: "frizlab"
     # Debian compat is untested, but there’s not reason why it wouldn’t work!
