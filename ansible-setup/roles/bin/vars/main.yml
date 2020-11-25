@@ -117,10 +117,6 @@ packages:
     author: "frizlab"
     compat: [MacOSX]
     bin_paths: ["bash/launch-alarm-clock.sh"]
-  - name: "Markdown Render Opener"
-    author: "frizlab"
-    compat: [MacOSX]
-    bin_paths: ["bash/markdown.sh"]
   - name: "Connect NetSoul"
     author: "frizlab"
     note: "This script was originally from someone else than frizlab, but so heavily modified that frizlab can take ownership."
@@ -173,6 +169,10 @@ deleted_packages:
     note: "Original author was João Moreno but I rewrote pretty much everything."
     reason: "Obsoleted by LocMapper"
     bin_paths: ["merge-strings"]
+  - name: "Markdown Render Opener"
+    author: "frizlab"
+    reason: "Not useful anymore; might re-create later if needed"
+    bin_paths: ["markdown"]
   - name: "Code Beautifier for C++"
     version: "1.2"
     author: "lingxiaofeng"
