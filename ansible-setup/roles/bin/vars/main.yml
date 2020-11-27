@@ -143,10 +143,13 @@ packages:
     compat: [MacOSX]
     bin_paths: ["sh/remove-quarantine.sh"]
   - name: "Make Link"
-    author: "<unknown>"
-    note: "I don’t have the source of the bin, but I think this came from an article on the web that explained how to create a hard link of a folder. Source should be basically “call link”."
+    author: "frizlab"
+    note: "This binary allows hard-linking directories. It’s dangerous, don’t do it! See https://stackoverflow.com/a/4707231 for more info."
     compat: [MacOSX]
     bin_paths: ["bin/make-link"]
+    share_paths:
+      - dest_folder: "man/man1"
+        files: ["docs/make-link.1"]
   - name: "My Split"
     author: "frizlab"
     compat: [MacOSX]
