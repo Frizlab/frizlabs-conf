@@ -4,6 +4,7 @@
     - { role: core, tags: core }
     - { role: dotfiles, tags: dotfiles }
     - { role: bin, tags: bin }
+    - { role: defaults, tags: defaults }
   vars:
   vars_files:
     - ../vars/utils.yml
