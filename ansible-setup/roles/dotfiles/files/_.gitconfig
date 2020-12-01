@@ -1,0 +1,16 @@
+[user]
+	name = Frizlab
+	email = fload@me.com
+[push]
+	default = current
+[diff]
+	tool = opendiff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = true
+[core]
+	excludesfile = /Users/frizlab/.gitignore_global

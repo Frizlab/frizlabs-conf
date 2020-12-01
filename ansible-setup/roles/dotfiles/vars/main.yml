@@ -12,6 +12,8 @@ dotfile_files:
   - .shrc
   - .vimrc
   - .inputrc
+  - .gitconfig
+  - .gitignore_global
 
 dotfile_folders:
   - .zshenv.d
