@@ -2,6 +2,10 @@
 - name: "make clt folder"
   file: {path: "{{ clt_dir }}", state: "directory", mode: "0700"}
 
+- name: "make app folder"
+  file: {path: "{{ app_dir }}", state: "directory", mode: "0700"}
+  when: ansible_distribution == "MacOSX"
+
 # Set the ACL on the clt and app folders. We cannot use Ansible’s acl module on macOS.
 - name: "set acl of the clt and app folders"
   shell: |
