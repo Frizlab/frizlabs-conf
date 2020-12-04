@@ -1,9 +1,9 @@
 ---
 packages:
-  - name: "Local Homebrew Install"
+  - name: "Install Homebrew"
     author: "frizlab"
-    compat: [MacOSX]
-    bin_paths: ["bash/local-brew-install.sh"]
+    compat: [MacOSX, Debian]
+    bin_paths: ["bash/install-brew.sh"]
   - name: "Set Sound Volume"
     author: "frizlab"
     compat: [MacOSX]
@@ -163,6 +163,10 @@ bin_links:
     dest: /usr/bin/true
 
 deleted_packages:
+  - name: "Local Homebrew Install"
+    author: "frizlab"
+    reason: "Replaced by a script to install homebrew unconditionally"
+    bin_paths: ["local-brew-install"]
   - name: "Xcode Project Version Manager"
     author: "frizlab"
     note: "Original author: Joachim Bondo"

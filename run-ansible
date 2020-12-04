@@ -1,44 +1,43 @@
 #!/bin/bash
 # vim: ts=3 sw=3 noet
-# Adapted from https://github.com/wincent/wincent
-
-# 1. Sets up a local Python environment via virtualenv
-# 2. Installs Ansible prerequisites in the virtualenv
-# 3. Hands off to Ansible to complete actual installation of dotfiles etc.
-
+# Adapted from https://github.com/wincent/wincent (when it was using Ansible)
 
 set -euo pipefail
 shopt -s nullglob
 cd "$(dirname "$0")"
 
 
-readonly ANSIBLE_TAG="v2.9.15"
-readonly ANSIBLE_REPO_URL="https://github.com/ansible/ansible.git"
+### Paths ###
 
 readonly ANSIBLE_SETUP_PATH="ansible-setup"
 
-readonly HOMEBREW_TARGET_DIR=".cache/homebrew"
+readonly HOMEBREW_TARGET_DIR="$(pwd)/.cache/homebrew"
 readonly HOMEBREW_BIN="${HOMEBREW_TARGET_DIR}/bin/brew"
-readonly LOCAL_BREW_INSTALL_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/local-brew-install.sh"
+readonly PYTHON_BIN="${HOMEBREW_TARGET_DIR}/bin/python3"
+readonly ANSIBLE_BIN="${HOMEBREW_TARGET_DIR}/bin/ansible"
+readonly INSTALL_BREW_SCRIPT="$ANSIBLE_SETUP_PATH/roles/bin/files/bash/install-brew.sh"
 
-# ¡¡¡RELATIVE TO ANSIBLE_SETUP_PATH!!! #
+# Relative to ANSIBLE_SETUP_PATH
 readonly VAULT_ID_PATH="../.cache/.vault-id"
 
-readonly ANSIBLE_TARGET_DIR=".cache/ansible"
-readonly ANSIBLE_REQUIREMENTS_PATH="$ANSIBLE_TARGET_DIR/requirements.txt"
-readonly ANSIBLE_ENV_SETUP="$ANSIBLE_TARGET_DIR/hacking/env-setup"
 
-readonly VIRTUALENV_TARGET_DIR=".cache/virtualenv"
-readonly VIRTUALENV_ACTIVATE="$VIRTUALENV_TARGET_DIR/bin/activate"
+### Hardware Constants ###
 
-export PATH="${PATH}:${HOMEBREW_TARGET_DIR}/bin"
+#readonly ARCH="$(uname -m)"
+readonly HOST_OS="$(uname -s)"
+
+
+### PATH ###
+
+# We set our local Homebrew’s bin path first
+PATH="${HOMEBREW_TARGET_DIR}/bin:${PATH}"
+
 
 
 usage() {
 	echo "usage: run-ansible [options] [roles...]"
 	echo
 	echo "Supported options:"
-	echo "   -i/--install   force the reinstallation/update of ansible and the virtualenv"
 	echo "   -h/--help      show the help and exit"
 	echo "   -v/--verbose   (repeat up to four times for more verbosity)"
 	echo
@@ -53,11 +52,9 @@ usage() {
 	echo "   --start-at-task='role | task'"
 	echo
 	echo "The script will:"
-	echo "   1. Set up a local Python 3 environment via virtualenv"
-	echo "   2. Install Ansible prerequisites in the virtualenv"
+	echo "   1. Install a local Homebrew instance (in .cache)"
+	echo "   2. Install Python3 and Ansible in this Homebrew instance"
 	echo "   3. Hand off to Ansible to complete the actual installation of dotfiles etc."
-	echo
-	echo "Important: Python3 is required for the script to launch."
 	echo
 	echo "Supported roles:"
 	pushd "$ANSIBLE_SETUP_PATH/roles" >/dev/null 2>&1
@@ -69,13 +66,11 @@ usage() {
 
 
 ROLES=
-INSTALL=0
 VERBOSE=0
 EXTRA_ARGS=()
 ANSIBLE_MODULE="playbook"
 while [ $# -gt 0 ]; do
 	case "$1" in
-		--install | -i) INSTALL=1;;
 		--verbose | -v) VERBOSE=$((VERBOSE + 1));;
 		-vv)            VERBOSE=$((VERBOSE + 2));;
 		-vvv)           VERBOSE=$((VERBOSE + 3));;
@@ -131,73 +126,41 @@ else
 fi
 
 
-# Checking repo has all of the files it needs before doing some potentially long
-# actions (python3 installation in a local Homebrew instance)
-if [ ! -x "$LOCAL_BREW_INSTALL_SCRIPT" ]; then
-	echo "The local_brew_install script is mandatory! Expected to find it in \"$LOCAL_BREW_INSTALL_SCRIPT\"" >/dev/stderr
+# Checking dependencies are installed
+if [ ! -x "$INSTALL_BREW_SCRIPT" ]; then
+	echo "The install-brew script is mandatory! Expected to find it in \"$INSTALL_BREW_SCRIPT\"" >/dev/stderr
 	exit 1
 fi
 
-# Ansible installation
-if [ ! -e "$ANSIBLE_ENV_SETUP" -o "$INSTALL" != 0 ]; then
-	echo "Ansible not found in cache, or installation forced: cloning it" >"$DEV_NULL"
-	test -d "$ANSIBLE_TARGET_DIR" || git clone --depth=1 --branch="$ANSIBLE_TAG" "$ANSIBLE_REPO_URL" "$ANSIBLE_TARGET_DIR"
-	(
-		cd "$ANSIBLE_TARGET_DIR"
-		git fetch --depth=1 --no-tags origin tag "$ANSIBLE_TAG"
-		git checkout "$ANSIBLE_TAG"
-	)
-	if [ ! -e "$ANSIBLE_ENV_SETUP" ]; then
-		echo "Ansible not found in cache even after installation; something is wrong…" >/dev/stderr
+case "$HOST_OS" in
+	Darwin)
+		xcode-select -p >/dev/null 2>&1 || { echo "The Xcode Command Line Tools (or Xcode) is required for this script to work. Run 'xcode-select --install' to get the CLT." >/dev/stderr; exit 1; }
+	;;
+	Linux)
+		# For Debian; see https://docs.brew.sh/Homebrew-on-Linux#requirements
+		readonly DEPS="gcc make curl file git"
+		for dep in $DEPS; do
+			command -v "$dep" >/dev/null 2>&1 || { echo "The following binaries are required dependencies for Homebrew, and thus for this script: $DEPS. Please them with 'apt-get install -y --no-install-recommends build-essential curl file git'"; exit 1; }
+		done
+	;;
+	*)
+		echo "Unknown host OS: $HOST_OS" >/dev/stderr
 		exit 1
-	fi
-fi
+	;;
+esac
 
-# We need python3. If it is installed in the system, the local brew install
-# script shouldn’t do anything, otherwise it will install a local brew instance
-# and install python3 in this instance (macOS only).
-"$LOCAL_BREW_INSTALL_SCRIPT" "$HOMEBREW_TARGET_DIR" python3 || true
-if [ -x "${HOMEBREW_BIN}" ]; then HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade || true; fi
+# Install a local Homebrew instance
+"$INSTALL_BREW_SCRIPT" "$HOMEBREW_TARGET_DIR"
+HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "${HOMEBREW_BIN}" upgrade
 
-# Python3 dependency check
-if ! command -v python3 >/dev/null; then
-	echo "ERROR: Python 3 is required for this conf management repo." >/dev/stderr
-	exit 1
-fi
-
-# Virtualenv installation
-if [[ ! -e "$VIRTUALENV_ACTIVATE" || "$INSTALL" != 0 ]]; then
-	echo "Installing virtualenv" >"$DEV_NULL"
-	rm -fr "$VIRTUALENV_TARGET_DIR"
-	python3 -m venv "$VIRTUALENV_TARGET_DIR" >"$DEV_NULL"
-elif [ -e "$VIRTUALENV_ACTIVATE" ]; then
-	echo "Skipping virtualenv install (already exists); use --install to override" >"$DEV_NULL"
-fi
-
-# Activate virtualenv
-# On Debian 9, the virtualenv implementation is old and script activation fails
-# w/ unbound variable error if set -u is set.
-set +u
-# shellcheck disable=SC1090
-source "$VIRTUALENV_ACTIVATE"
-set -u
-
-# ############################################################################ #
-#  Virtualenv activated; from now on, all Python stuff are done in virtualenv  #
-# ############################################################################ #
-
-# Install needed pip dependencies (in virtualenv)
-if ! pip install -r "$ANSIBLE_REQUIREMENTS_PATH" >"$DEV_NULL"; then
-	echo "Failed: pip install" >/dev/stderr
-	echo "Did you forget to 'export https_proxy=fwdproxy:8080' or similar?" >/dev/stderr
-	exit 1
-fi
+test -x "$PYTHON_BIN"  || HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=1 "${HOMEBREW_BIN}" install python3
+test -x "$ANSIBLE_BIN" || HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=1 "${HOMEBREW_BIN}" install ansible
 
 # Pre-run the inventory script to update the ansible group cache and avoid
 # having a user input required during the Ansible run (Ansible catches the
 # output of the script).
 pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
-python3 "./inventory.py" --update-cache-only >"$DEV_NULL"
+"$PYTHON_BIN" "./inventory.py" --update-cache-only >"$DEV_NULL"
 
 # Ask for the vault id if needed.
 if [ ! -f "$VAULT_ID_PATH" ]; then
@@ -211,12 +174,6 @@ if [ ! -f "$VAULT_ID_PATH" ]; then
 fi
 popd >/dev/null 2>&1
 
-# I don’t really like hidding all output from a program, but this one prints a
-# useless warning on macOS on stderr, so I silence it!
-# shellcheck disable=SC1090
-source "$ANSIBLE_ENV_SETUP" &>"$DEV_NULL"
-
-readonly HOST_OS="$(uname)"
 readonly ANSIBLE_VERBOSE_OPTION="${VERBOSE+-$(printf 'v%.0s' $(seq $VERBOSE))}"
 
 if [ "$ANSIBLE_MODULE" = "playbook" ]; then
@@ -231,7 +188,7 @@ pushd "$ANSIBLE_SETUP_PATH" >/dev/null 2>&1
 # Note: If we need sudo in a playbook: pass "--ask-become-pass" to
 #       ansible-playbook. (The option can be added to EXTRA_ARGS.)
 # shellcheck disable=SC2086
-"ansible-$ANSIBLE_MODULE" --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
+"$ANSIBLE_BIN-$ANSIBLE_MODULE" --vault-id="$VAULT_ID_PATH" $ANSIBLE_VERBOSE_OPTION ${ROLES} "${EXTRA_ARGS[@]}"
 # To list the facts on the machine
 #ansible -m setup localhost
 popd >/dev/null 2>&1
