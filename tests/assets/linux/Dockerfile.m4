@@ -65,9 +65,7 @@ ARG CACHEBUST=1
 
 # We run ansible here in a separate step to avoid re-cloning the whole repo if
 # Ansible fails.
-# We run the script with the -i option to be sure the ansible version we get is
-# the one we expect in the run-ansible script.
-RUN cd frizlabs-conf && git fetch && git merge && ./run-ansible -i -vvvv
+RUN cd frizlabs-conf && git fetch && git merge && ./run-ansible -vvvv
 
 
 # We launch bash in non-login interactive mode by default. The caller can add -l
