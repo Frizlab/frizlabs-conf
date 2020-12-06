@@ -8,6 +8,9 @@
       location = "container:"
       name = "code">
       <FileRef
+         location = "group:install">
+      </FileRef>
+      <FileRef
          location = "group:run-ansible">
       </FileRef>
       <FileRef
