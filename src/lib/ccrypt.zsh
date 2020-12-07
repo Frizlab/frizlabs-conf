@@ -14,7 +14,7 @@
 	}
 	tar xf "$CCRYPT_TAR_NAME"
 	pushd "$CCRYPT_BASENAME"
-	./configure --prefix "$(pwd)/.."
+	./configure --prefix "$CACHE_FOLDER"
 	make install
 	popd
 	rm -fr "$CCRYPT_BASENAME"
