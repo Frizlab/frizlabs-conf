@@ -27,9 +27,9 @@ readonly CCRYPT_KEY2_PATH="$CACHE_FOLDER/.pass2"
 readonly CCRYPT_KEY3_PATH="$CACHE_FOLDER/.pass3"
 
 
-test -f "$CCRYPT_KEY1_PATH" || { read -rsp "Please pass1: " pass; echo; echo -n "$pass" >"$CCRYPT_KEY1_PATH" }
-test -f "$CCRYPT_KEY2_PATH" || { read -rsp "Please pass2: " pass; echo; echo -n "$pass" >"$CCRYPT_KEY2_PATH" }
-test -f "$CCRYPT_KEY3_PATH" || { read -rsp "Please pass3: " pass; echo; echo -n "$pass" >"$CCRYPT_KEY3_PATH" }
+test -f "$CCRYPT_KEY1_PATH" || { read -rs 'pass?Please enter pass 1: '; echo; echo -n "$pass" >"$CCRYPT_KEY1_PATH" }
+test -f "$CCRYPT_KEY2_PATH" || { read -rs 'pass?Please enter pass 2: '; echo; echo -n "$pass" >"$CCRYPT_KEY2_PATH" }
+test -f "$CCRYPT_KEY3_PATH" || { read -rs 'pass?Please enter pass 3: '; echo; echo -n "$pass" >"$CCRYPT_KEY3_PATH" }
 
 
 func encrypt() {
