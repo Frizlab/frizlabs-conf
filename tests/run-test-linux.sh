@@ -35,7 +35,7 @@ for linux_base_image in "${LINUX_BASE_IMAGES[@]}"; do
 	for user in root normaluser; do
 		for env in home work; do
 			# Setting up the ansible group
-			echo "$env" >"$ASSETS_INPUTS_FOLDER/ansible_group"
+			echo "$env" >"$ASSETS_INPUTS_FOLDER/computer_group"
 			
 			# Creating the Dockerfile for our configuration
 			dockerfilepath="$(mktemp)"

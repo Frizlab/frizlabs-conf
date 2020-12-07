@@ -48,7 +48,7 @@ RUN \
 	cp /tmp/inputs/.pass1 .cache/.pass1 && \
 	cp /tmp/inputs/.pass2 .cache/.pass2 && \
 	cp /tmp/inputs/.pass3 .cache/.pass3 && \
-	cp /tmp/inputs/ansible_group .cache/ansible_group && \
+	cp /tmp/inputs/computer_group .cache/computer_group && \
 	rm -fr /tmp/inputs
 
 # This is set to an arbitrary, always different, value in the docker build
