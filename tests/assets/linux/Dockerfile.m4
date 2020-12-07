@@ -11,20 +11,12 @@ LABEL maintainer="François Lamboley <fload@me.com>"
 LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `root', `, installed for root', `, installed for a user named “M4_USER”')."
 
 
-# - First 4 deps are for Homebrew;
-# - locales is installed and the locale-gen command is run to get rid of the
-#   “cannot change locale” warning when setup is done (we set LC_ALL to
-#   en_US.UTF-8);
-# - ca-certificates is installed to be able to clone https repos.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	build-essential \
-	curl \
-	file \
+	ccdecrypt \
 	git \
-	ca-certificates \
 	locales \
-&& rm -rf /var/lib/apt/lists/* && \
-	sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+	zsh \
+&& rm -rf /var/lib/apt/lists/*
 
 
 COPY --chown=root:root test-frizlabs-conf.sh /usr/local/bin/test-frizlabs-conf.sh
@@ -41,13 +33,8 @@ WORKDIR "/home/M4_USER"
 )dnl
 
 
-# Clone of the repositories
-# TODO: Maybe find a way to automate update of branch for ansible clone when updated in run-ansible
-RUN \
-	git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git" && \
-	cd frizlabs-conf && \
-	mkdir -p .cache && \
-	git clone --depth=1 --branch="v2.9.15" "https://github.com/ansible/ansible.git" ".cache/ansible"
+# Clone of the repository
+RUN git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git"
 
 # We copy the inputs in tmp, they’ll be retrieved in the next step
 COPY --chown=M4_USER:users inputs /tmp/inputs
@@ -55,7 +42,10 @@ COPY --chown=M4_USER:users inputs /tmp/inputs
 # Config
 RUN \
 	cd frizlabs-conf && \
-	cp /tmp/inputs/.vault-id .cache/.vault-id && \
+	mkdir -p .cache \
+	cp /tmp/inputs/.pass1 .cache/.pass1 && \
+	cp /tmp/inputs/.pass2 .cache/.pass2 && \
+	cp /tmp/inputs/.pass3 .cache/.pass3 && \
 	cp /tmp/inputs/ansible_group .cache/ansible_group && \
 	rm -fr /tmp/inputs
 
@@ -65,7 +55,7 @@ ARG CACHEBUST=1
 
 # We run ansible here in a separate step to avoid re-cloning the whole repo if
 # Ansible fails.
-RUN cd frizlabs-conf && git fetch && git merge && ./run-ansible -vvvv
+RUN cd frizlabs-conf && git fetch && git merge && ./install
 
 
 # We launch bash in non-login interactive mode by default. The caller can add -l
