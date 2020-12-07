@@ -13,4 +13,7 @@
    <FileRef
       location = "group:utils">
    </FileRef>
+   <FileRef
+      location = "group:ansible-setup">
+   </FileRef>
 </Workspace>
