@@ -1,5 +1,5 @@
 = Frizlab’s Conf
-François Lamboley <francois.lamboley@frostland.fr>
+François Lamboley <fload@me.com>
 
 Use at your own risks.
 

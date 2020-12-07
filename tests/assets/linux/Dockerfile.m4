@@ -11,8 +11,10 @@ LABEL maintainer="François Lamboley <fload@me.com>"
 LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `root', `, installed for root', `, installed for a user named “M4_USER”')."
 
 
+# ca-certificates is needed to be able to clone the conf repo
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	ccdecrypt \
+	ca-certificates \
+	ccrypt \
 	git \
 	locales \
 	zsh \

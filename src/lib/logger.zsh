@@ -1,3 +1,1 @@
-func hello() {
-	echo hello
-}
+
