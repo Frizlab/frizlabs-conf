@@ -13,14 +13,16 @@ readonly LINUX_BASE_IMAGES=(
 )
 
 readonly ASSETS_INPUTS_FOLDER="inputs"
-readonly VAULT_ID_PATH="../../.cache/.vault-id"
+readonly PASS1_PATH="../../.cache/.pass1"
+readonly PASS2_PATH="../../.cache/.pass2"
+readonly PASS3_PATH="../../.cache/.pass3"
 
 
 mkdir -p "$ASSETS_INPUTS_FOLDER"
 
-# Setting up the vault id
-test -f "$VAULT_ID_PATH" || { echo "vault-id is not setup; aborting" >/dev/stderr; exit 1; }
-cp -f "$VAULT_ID_PATH" "$ASSETS_INPUTS_FOLDER/.vault-id"
+# Setting up the passwords
+{ test -f "$PASS1_PATH" && test -f "$PASS2_PATH" && test -f "$PASS3_PATH"; } || { echo "One of the pass is not setup; aborting" >/dev/stderr; exit 1; }
+cp -f "$PASS1_PATH" "$PASS2_PATH" "$PASS3_PATH" "$ASSETS_INPUTS_FOLDER"
 
 
 #set -vx
