@@ -44,7 +44,7 @@ COPY --chown=M4_USER:users inputs /tmp/inputs
 # Config
 RUN \
 	cd frizlabs-conf && \
-	mkdir -p .cache \
+	mkdir -p .cache && \
 	cp /tmp/inputs/.pass1 .cache/.pass1 && \
 	cp /tmp/inputs/.pass2 .cache/.pass2 && \
 	cp /tmp/inputs/.pass3 .cache/.pass3 && \
