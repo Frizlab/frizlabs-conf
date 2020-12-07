@@ -4,19 +4,9 @@
    <FileRef
       location = "group:Readme.md">
    </FileRef>
-   <Group
-      location = "container:"
-      name = "code">
-      <FileRef
-         location = "group:install">
-      </FileRef>
-      <FileRef
-         location = "group:run-ansible">
-      </FileRef>
-      <FileRef
-         location = "group:ansible-setup">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:src">
+   </FileRef>
    <FileRef
       location = "group:tests">
    </FileRef>
