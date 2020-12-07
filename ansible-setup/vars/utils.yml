@@ -1,4 +1,0 @@
----
-file_extension_regex: '(\.[^.]*)?$'
-
-# vim: ts=2 sw=2 et
