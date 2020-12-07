@@ -1,5 +1,9 @@
 #!/bin/zsh -euopipefail
 
+# Install Frizlab’s conf
+# Tested on macOS and Debian
+# Usage: ./install [component ...]
+
 
 ################################
 # Paths Setup and Verification #
@@ -32,29 +36,9 @@ mkdir -p "$CACHE_FOLDER" && chmod 700 "$CACHE_FOLDER"
 # Import libs #
 ###############
 
-source "$LIB_FOLDER/logger.zsh"
+source "$LIB_FOLDER/facts.zsh"
+source "$LIB_FOLDER/check-deps.zsh"
 source "$LIB_FOLDER/ccrypt.zsh"
+source "$LIB_FOLDER/logger.zsh"
 
-
-# Install ccrypt if needed
-command -v ccdecrypt >/dev/null 2>&1 || {
-	echo "*** Downloading and compiling ccrypt in the .cache folder..."
-	pushd .cache
-	readonly CCRYPT_SHASUM="6d20a4db9ef7caeea6ce432f3cffadf10172e420"
-	readonly CCRYPT_VERSION="1.11"
-	readonly CCRYPT_BASENAME="ccrypt-$CCRYPT_VERSION"
-	readonly CCRYPT_TAR_NAME="$CCRYPT_BASENAME.tar.gz"
-	readonly CCRYPT_URL="http://ccrypt.sourceforge.net/download/$CCRYPT_VERSION/$CCRYPT_TAR_NAME"
-	test -e "$CCRYPT_TAR_NAME" || curl "$CCRYPT_URL" >"$CCRYPT_TAR_NAME"
-	test "$(shasum "$CCRYPT_TAR_NAME" | cut -d' ' -f1)" = "$CCRYPT_SHASUM" || {
-		echo "***** ERROR: ccrypt sha does not match expected sha. Bailing out."
-		exit 1
-	}
-	tar xf "$CCRYPT_TAR_NAME"
-	pushd "$CCRYPT_BASENAME"
-	./configure --prefix "$(pwd)/.."
-	make install
-	popd
-	rm -fr "$CCRYPT_BASENAME"
-	popd
-}
+source "$SRC_FOLDER/vars.zsh"
