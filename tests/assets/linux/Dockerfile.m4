@@ -29,6 +29,8 @@ ifelse(M4_USER, `root'dnl
 WORKDIR /root
 , `#' User install`,' we create an arbitrary user named "M4_USER"
 RUN useradd "M4_USER" && mkdir "/home/M4_USER" && chown "M4_USER:users" "/home/M4_USER"
+# Before changing user; we generate the locale for UTF-8
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 USER "M4_USER:users"
 
 WORKDIR "/home/M4_USER"
