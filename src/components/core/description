@@ -1,1 +1,1 @@
-Creates the missing folder in $HOME (~/Applications, ~/clt, etc.).
+Creates the missing folder in $HOME (~/Applications, ~/clt, etc.) and generate UTF-8 locale if needed.

@@ -43,3 +43,13 @@ source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
+
+
+##################
+# Run components #
+##################
+
+# TODO: Select components from arguments
+pushd "$COMPONENTS_FOLDER/core"
+source "./main.zsh"
+popd
