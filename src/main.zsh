@@ -42,6 +42,8 @@ source "$LIB_FOLDER/ccrypt.zsh"
 source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
 
+source "$LIB_FOLDER/files.zsh"
+
 source "$SRC_FOLDER/vars.zsh"
 
 
