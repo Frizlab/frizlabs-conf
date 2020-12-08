@@ -10,3 +10,16 @@ function folder() {
 	{ chmod "$permission" "$folder_name" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
+
+## Make sure the given file or folder has the correct ACLs
+## Usage: acl file_or_folder acl
+## Example: acl /var/log "group:everyone deny delete"
+function acl() {
+	file_name="$1"; acl="$2"
+	
+	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $folder_name: file not found"; echo "failed"; return }
+	test "$(ls -led "$file_name" | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" != "0: $acl" || { echo "ok"; return }
+	
+	chmod -E "$file_name" >/dev/null 2>&1 <<<"$acl" || { log_task_failure "cannot set ACL for file at path $folder_name"; echo "failed"; return }
+	echo "changed"
+}
