@@ -10,7 +10,7 @@ end='-exec echo \;'
 if [ "$2" = "0" ]; then
 	tmp=$(mktemp -t $$)
 	echo "AA==" >$tmp
-	end='-exec base64 -D -i $tmp \;'
+	end='-exec base64 -d -i $tmp \;'
 fi
 eval find "\"$1\"" -type f ! -exec "is-valid-jpeg" {} \\\; -exec echo -n {} \\\; $end
 if [ "$2" = "0" ]; then rm $tmp; fi
