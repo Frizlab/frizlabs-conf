@@ -10,7 +10,7 @@
 ################################
 
 test "$(basename "$0")" = "install" || {
-	echo "This script must be run from the install alias." >/dev/stderr
+	echo "This script must be run from the install alias." >&2
 	exit 1
 }
 cd "$(dirname "$0")"

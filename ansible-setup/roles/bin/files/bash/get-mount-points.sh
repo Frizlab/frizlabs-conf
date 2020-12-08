@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-	echo "Usage: $0 image_disk" >/dev/stderr
+	echo "Usage: $0 image_disk" >&2
 	exit 42
 fi
 
 if [ ! -e "$1" ]; then
-	echo "$0: $1: No such file or directory" >/dev/stderr
+	echo "$0: $1: No such file or directory" >&2
 	exit 21
 fi
 

@@ -14,7 +14,7 @@ usage() {
 }
 
 if [ "$#" -ne 1 ]; then
-	usage >/dev/stderr
+	usage >&2
 	exit 1
 fi
 
@@ -23,7 +23,7 @@ readonly BREW="${LOCAL_HOMEBREW_INSTALL}/bin/brew"
 
 if [ ! -x "$BREW" ]; then
 	if [ -e "$LOCAL_HOMEBREW_INSTALL" ]; then
-		echo "brew binary does not exist at path '$BREW', but '$LOCAL_HOMEBREW_INSTALL' exists." >/dev/stderr
+		echo "brew binary does not exist at path '$BREW', but '$LOCAL_HOMEBREW_INSTALL' exists." >&2
 		exit 3
 	fi
 	mkdir -p "$LOCAL_HOMEBREW_INSTALL"
@@ -31,6 +31,6 @@ if [ ! -x "$BREW" ]; then
 	HOMEBREW_NO_ANALYTICS=1 "$BREW" update
 fi
 if [ ! -x "$BREW" ]; then
-	echo "There was an issue installing a local Homebrew instance!" >/dev/stderr
+	echo "There was an issue installing a local Homebrew instance!" >&2
 	exit 2
 fi

@@ -21,7 +21,7 @@ readonly PASS3_PATH="../../.cache/.pass3"
 mkdir -p "$ASSETS_INPUTS_FOLDER"
 
 # Setting up the passwords
-{ test -f "$PASS1_PATH" && test -f "$PASS2_PATH" && test -f "$PASS3_PATH"; } || { echo "One of the pass is not setup; aborting" >/dev/stderr; exit 1; }
+{ test -f "$PASS1_PATH" && test -f "$PASS2_PATH" && test -f "$PASS3_PATH"; } || { echo "One of the pass is not setup; aborting" >&2; exit 1; }
 cp -f "$PASS1_PATH" "$PASS2_PATH" "$PASS3_PATH" "$ASSETS_INPUTS_FOLDER"
 
 

@@ -100,7 +100,7 @@ while [ $# -ne 0 ] ; do
 			whatisit=ppc
 			mode="$1"
 			if [ $(isValidMode "$mode") -eq 0 ] ; then
-				echo "invalid mode \"$mode\"" >/dev/stderr
+				echo "invalid mode \"$mode\"" >&2
 				exit 1
 			fi
 			;;
@@ -109,7 +109,7 @@ while [ $# -ne 0 ] ; do
 			whatisit=abc
 			mode="$1"
 			if [ $(isValidMode "$mode") -eq 0 ] ; then
-				echo "invalid mode \"$mode\"" >/dev/stderr
+				echo "invalid mode \"$mode\"" >&2
 				exit 1
 			fi
 			;;
@@ -118,7 +118,7 @@ while [ $# -ne 0 ] ; do
 			whatisit=pst
 			mode="$1"
 			if [ $(isValidMode "$mode") -eq 0 ] ; then
-				echo "invalid mode \"$mode\"" >/dev/stderr
+				echo "invalid mode \"$mode\"" >&2
 				exit 1
 			fi
 			;;
@@ -127,7 +127,7 @@ while [ $# -ne 0 ] ; do
 			whatisit=pdf
 			mode="$1"
 			if [ $(isValidMode "$mode") -eq 0 ] ; then
-				echo "invalid mode \"$mode\"" >/dev/stderr
+				echo "invalid mode \"$mode\"" >&2
 				exit 1
 			fi
 			;;
@@ -193,7 +193,7 @@ while [ $# -ne 0 ] ; do
 done
 
 if [ ! "$1" ] ; then
-	echo "Vous devez mettre un nom de ficher apres les options" >/dev/stderr
+	echo "Vous devez mettre un nom de ficher apres les options" >&2
 	exit 1
 fi
 
@@ -216,13 +216,13 @@ if [ $usedfopts -eq 1 ] ; then
 					abcoptions="-o -O = -maxv 20 -k 1 -N $abcoptions"
 					;;
 				*)
-					echo "Bug interne dans l'ajout des options du main (le mode choisi n'existe pas)" >/dev/stderr
+					echo "Bug interne dans l'ajout des options du main (le mode choisi n'existe pas)" >&2
 					exit 2
 					;;
 			esac
 			;;
 		*)
-			echo "Bug interne dans l'ajout des options du main (la sortie choisi n'existe pas)" >/dev/stderr
+			echo "Bug interne dans l'ajout des options du main (la sortie choisi n'existe pas)" >&2
 			exit 2
 			;;
 	esac
@@ -247,7 +247,7 @@ ppc() {
 			abcppc '&$@' "$filetoconvertppc" "$namenewfile"
 			;;
 		*)
-			echo "Bug interne dans la fonction ppc (le mode choisi n'existe pas)" >/dev/stderr
+			echo "Bug interne dans la fonction ppc (le mode choisi n'existe pas)" >&2
 			exit 2
 			;;
 	esac
@@ -317,7 +317,7 @@ pst () {
 			echo "************************* end of abc2ps messages *************************"
 			;;
 		*)
-			echo "Bug interne dans la fonction pst (le mode choisi n'existe pas)" >/dev/stderr
+			echo "Bug interne dans la fonction pst (le mode choisi n'existe pas)" >&2
 			exit 2
 			;;
 	esac
@@ -374,7 +374,7 @@ midi () {
 		namenewfile="$(echo $line | sed -e 's/writing MIDI file //g')"
 #		if [ "$namenewfile" == "" ] ; then
 		if [ "$namenewfile" == "$line" ] ; then
-			echo $line >/dev/stderr
+			echo $line >&2
 #			ok=0
 		else
 #			echo $line
@@ -408,12 +408,12 @@ while [ $# -ne 0 ] ; do
 	cd -- "$dir" >/dev/null 2>&1
 	ok=$?
 	if [ $ok -ne 0 ] ; then
-		echo "No such directory named $dir" >/dev/stderr
+		echo "No such directory named $dir" >&2
 		continue
 	fi
 	currentfile="$(pwd)/$(basename -- "$curfile")"
 	if [ ! -f "$currentfile" ] ; then
-		echo "No such file $currentfile" >/dev/stderr
+		echo "No such file $currentfile" >&2
 	else
 		$whatisit "$currentfile" "$outdir"
 	fi

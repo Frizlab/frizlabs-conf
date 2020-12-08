@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -z "$1" -o \( -n "$2" -a \( "$1" != "-c" -a "$1" != "--caffeinate" \) \) ]; then
-	echo "Usage: $0 [-c|--caffeinate] hours_to_wait_before_music_launch" >/dev/stderr
-	echo "   If hours_to_wait_before_music_launch is not numeric, won't wait." >/dev/stderr
+	echo "Usage: $0 [-c|--caffeinate] hours_to_wait_before_music_launch" >&2
+	echo "   If hours_to_wait_before_music_launch is not numeric, won't wait." >&2
 	exit 1
 fi
 

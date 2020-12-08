@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "This script should work, but is not tested... Please debug before using." >/dev/stderr
+echo "This script should work, but is not tested... Please debug before using." >&2
 exit 42
 
 usage() {
-	echo "Usage: $0 [-f] dir" >/dev/stderr
+	echo "Usage: $0 [-f] dir" >&2
 	exit 42
 }
 
@@ -20,8 +20,8 @@ fi
 osa="$(dirname "$0")/../share/import-to-photos/import-to-photos.scpt"
 fii="$(which "find-invalid-images")"
 
-if [ ! -f "$osa" ]; then echo "Cannot find applescript to import photos. Exiting." >/dev/stderr; exit 21; fi
-if [ ! -x "$fii" ]; then echo "Cannot find script to detect invalid images. Exiting." >/dev/stderr; exit 21; fi
+if [ ! -f "$osa" ]; then echo "Cannot find applescript to import photos. Exiting." >&2; exit 21; fi
+if [ ! -x "$fii" ]; then echo "Cannot find script to detect invalid images. Exiting." >&2; exit 21; fi
 
 function warn_to_continue() {
 	read -p "${1}Is it ok? (y for yes, anything else for no) " -n 2 f
@@ -57,7 +57,7 @@ for d in *; do
 		sleep $sleeptime
 	fi
 	if [ $should_delete -ne 1 ]; then
-		echo "Did NOT delete files in \"$d\"" >/dev/stderr
+		echo "Did NOT delete files in \"$d\"" >&2
 	else
 		find "$d" -type f -print0 | xargs -0 trash
 	fi

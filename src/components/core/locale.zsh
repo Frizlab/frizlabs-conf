@@ -15,6 +15,6 @@ case "$HOST_OS" in
 		rm -f "$TEMP_LOCALE"
 	;;
 	*)
-		log_task_warning "Unknown host OS: $HOST_OS" >/dev/stderr
+		log_task_warning "Unknown host OS: $HOST_OS" >&2
 	;;
 esac

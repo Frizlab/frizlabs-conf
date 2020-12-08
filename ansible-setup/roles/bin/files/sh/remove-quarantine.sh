@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -z "$1" ]; then
-	echo "Usage: $0 dir_or_file" >/dev/stderr
+	echo "Usage: $0 dir_or_file" >&2
 	exit 42
 fi
 

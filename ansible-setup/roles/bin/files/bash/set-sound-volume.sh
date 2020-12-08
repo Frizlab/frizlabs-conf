@@ -7,8 +7,8 @@ set -euo pipefail
 
 
 function usage() {
-	echo "usage: $0 new_volume" >/dev/stderr
-	echo "   new_volume must be an integer between 0 and 100" >/dev/stderr
+	echo "usage: $0 new_volume" >&2
+	echo "   new_volume must be an integer between 0 and 100" >&2
 	exit 1
 }
 

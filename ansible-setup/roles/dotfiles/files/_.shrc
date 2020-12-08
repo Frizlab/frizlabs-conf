@@ -61,17 +61,17 @@ alias tit="open https://madamevoyeur.com; git"
 
 # Dev. Functions
 find_lib_with() {
-	if [ -z "$1" ]; then echo "Usage: find_lib_with object_name" >/dev/stderr; return 1; fi
+	if [ -z "$1" ]; then echo "Usage: find_lib_with object_name" >&2; return 1; fi
 	mdfind -name .dylib | while read -r f; do if [ "$(nm -U "$f" 2>/dev/null | grep -Ec "$1\$")" -gt 0 ]; then echo "$f"; fi; done
 }
 
 find_brew_deps() {
-	if [ -z "$1" ]; then echo "Usage: find_brew_deps path_to_cellar (eg. \"find_brew_deps /usr/local/Cellar/gegl/0.1.8/\")" >/dev/stderr; return 1; fi
+	if [ -z "$1" ]; then echo "Usage: find_brew_deps path_to_cellar (eg. \"find_brew_deps /usr/local/Cellar/gegl/0.1.8/\")" >&2; return 1; fi
 	otool -L "$1"/*/* 2>/dev/null | cut -f 1 -d ' ' | while read -r f; do ls -lFG "$f" 2>/dev/null; done
 }
 
 rec_grep() {
-	if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: rec_grep files_pattern grepped_expr" >/dev/stderr; return 1; fi
+	if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: rec_grep files_pattern grepped_expr" >&2; return 1; fi
 	find . -name "$1" -type f -exec grep -E "$(echo "$2" | sed -E 's/"/\\"/g')" {} \; -exec echo {} \;
 }
 
@@ -84,13 +84,13 @@ ssha() {
 del_stores() {
 	# Note: Cannot give "/" in input!
 	dir="$(echo "${1:-.}" | sed -E 's:/*$::')"
-	if [ -z "$dir" ]; then echo "Usage: del_stores [dir]" >/dev/stderr; return 1; fi
-	if [ ! -d "$dir" ]; then echo "dir does not exist or is not a directory" >/dev/stderr; return 2; fi
+	if [ -z "$dir" ]; then echo "Usage: del_stores [dir]" >&2; return 1; fi
+	if [ ! -d "$dir" ]; then echo "dir does not exist or is not a directory" >&2; return 2; fi
 	find "$dir" -name ".DS_Store" -print -delete
 }
 
 add_subtitle() {
-	if [ $# -ne 1 ] && [ $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >/dev/stderr; return 1; fi
+	if [ $# -ne 1 ] && [ $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >&2; return 1; fi
 	if [ $# -eq 1 ]; then
 		srt="${1}srt"
 		mp4="${1}mp4"

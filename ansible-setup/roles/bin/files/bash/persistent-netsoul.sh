@@ -16,7 +16,7 @@ kill_subprocesses() {
 
 connect_netsoul="$(which "connect-netsoul")"
 if [ ! -x "$connect_netsoul" ]; then
-	echo "could not find the connect-netsoul script" >/dev/stderr
+	echo "could not find the connect-netsoul script" >&2
 	exit 2
 fi
 
@@ -25,7 +25,7 @@ while true; do
 	if check_connection; then
 		sleep 5
 	else
-		echo "Server does not have an Internet connection. Trying to re-connect NetSoul." >/dev/stderr
+		echo "Server does not have an Internet connection. Trying to re-connect NetSoul." >&2
 		if [ -n "$cur_pid" ]; then kill_subprocesses "$cur_pid"; fi
 		"$connect_netsoul" &
 		cur_pid="$!"
