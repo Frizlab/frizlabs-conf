@@ -35,6 +35,6 @@ function flags() {
 	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
 	grep -q "$flag" <<<"$(stat -f %Sf "$file_name" 2>/dev/null)" && { echo "ok"; return }
 	
-	chflags "$flag" "$file_name" || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
+	chflags "$flag" "$file_name" 2>/dev/null || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
