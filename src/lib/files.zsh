@@ -5,7 +5,8 @@
 ## Example: folder /var/log 755
 function folder() {
 	folder_name="$1"; permission="$2"
-	test -d "$folder_name" && test "$(stat -f %Lp "$folder_name")" = "$permission" && { echo "ok"; return }
+	# %Lp format is for Darwin, %a is for Linux
+	test -d "$folder_name" && test "$(stat -f %Lp "$folder_name" 2>&1 || stat -c %a "$folder_name" 2>&1)" = "$permission" && { echo "ok"; return }
 	{ mkdir -p            "$folder_name" >/dev/null 2>&1 } || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
 	{ chmod "$permission" "$folder_name" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
