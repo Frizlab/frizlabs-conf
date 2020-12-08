@@ -9,7 +9,7 @@ case "$HOST_OS" in
 		sed '/en_US.UTF-8/s/^# //g' "$LOCALE_FILE" >"$TEMP_LOCALE"
 		# We run locale-gen if the locale file has been modified
 		diff "$TEMP_LOCALE" "$LOCALE_FILE" >/dev/null 2>&1 || {
-			{ cat "$TEMP_LOCALE" >"$LOCALE_FILE" && locale-gen && { log_task_success || true } } ||
+			{ cat "$TEMP_LOCALE" >"$LOCALE_FILE" && locale-gen && log_task_success } ||
 				log_task_failure "Cannot write to $LOCALE_FILE. Do you have the permissions to do it?"
 		}
 		rm -f "$TEMP_LOCALE"

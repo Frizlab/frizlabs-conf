@@ -62,4 +62,43 @@ log_component_end
 # Recap #
 #########
 
-source "$LIB_FOLDER/recap.zsh"
+log_line "Installations recap" ""
+
+typeset -g total_errors=0
+typeset -g total_warnings=0
+typeset -g total_successes=0
+for component in ${(k)COMPONENTS_STATS_SUCCESSES}; do
+	print -Pn "%B$component%b: "
+	# Successes
+	total_successes=$((total_successes + COMPONENTS_STATS_SUCCESSES[$component]))
+	if test $COMPONENTS_STATS_SUCCESSES[$component] -gt 0; then print -Pn "%F{green}"; fi
+	print -n "ok=$COMPONENTS_STATS_SUCCESSES[$component]"
+	print -Pn "%f   "
+	# Warnings
+	total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[$component]))
+	if test $COMPONENTS_STATS_WARNINGS[$component] -gt 0; then print -Pn "%F{yellow}"; fi
+	print -n "warnings=$COMPONENTS_STATS_WARNINGS[$component]"
+	print -Pn "%f   "
+	# Errors
+	total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[$component]))
+	if test $COMPONENTS_STATS_ERRORS[$component] -gt 0; then print -Pn "%F{red}"; fi
+	print -n "errors=$COMPONENTS_STATS_ERRORS[$component]"
+	print -P "%f"
+done
+
+print
+print -Pn "%F{magenta}%BTotals%b%f: "
+# Successes
+if test $total_successes -gt 0; then print -Pn "%F{green}"; fi
+print -n "ok=$total_successes"
+print -Pn "%f   "
+# Warnings
+total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[component]))
+if test $total_warnings -gt 0; then print -Pn "%F{yellow}"; fi
+print -n "warnings=$total_warnings"
+print -Pn "%f   "
+# Errors
+total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[component]))
+if test $total_errors -gt 0; then print -Pn "%F{red}"; fi
+print -n "errors=$total_errors"
+print -P "%f"
