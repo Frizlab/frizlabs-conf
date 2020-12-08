@@ -1,5 +1,5 @@
 #!/bin/zsh -euopipefail
-cd "$(dirname "$0")/.."
+pushd "$(dirname "$0")/.."
 
 
 # We export PATH in case the variable is not exported yet
@@ -12,9 +12,12 @@ path+="$(pwd)/.cache/bin"
 readonly CACHE_FOLDER="$(pwd)/.cache"
 source "./src/lib/ccrypt.zsh"
 
+popd
 case "${${0:t}:r}" in
-	"decrypt") decrypt "$@";;
-	"encrypt") encrypt "$@";;
+	"decrypt_file") decrypt "$@";;
+	"encrypt_file") encrypt "$@";;
+	"decrypt_string") base64 -D <<<"$*" | decrypt;;
+	"encrypt_string") encrypt <<<"$*" | base64;;
 	*)
 		echo "You must call this script from the encrypt or decrypt scripts"
 		exit 1

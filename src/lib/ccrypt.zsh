@@ -33,13 +33,25 @@ test -f "$CCRYPT_KEY3_PATH" || { read -rs 'pass?Please enter pass 3: '; echo; ec
 
 
 func encrypt() {
-	ccencrypt --suffix "" --keyfile "$CCRYPT_KEY1_PATH" "$@"
-	ccencrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
-	ccencrypt             --keyfile "$CCRYPT_KEY3_PATH" "$@"
+	if test $# -gt 0; then {
+		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY1_PATH" "$@"
+		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
+		ccencrypt             --keyfile "$CCRYPT_KEY3_PATH" "$@"
+	} else {
+		ccencrypt --keyfile "$CCRYPT_KEY1_PATH" | \
+		ccencrypt --keyfile "$CCRYPT_KEY2_PATH" | \
+		ccencrypt --keyfile "$CCRYPT_KEY3_PATH"
+	} fi
 }
 
 func decrypt() {
-	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@"
-	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
-	ccdecrypt             --keyfile "$CCRYPT_KEY1_PATH" "$@"
+	if test $# -gt 0; then {
+		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@"
+		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
+		ccdecrypt             --keyfile "$CCRYPT_KEY1_PATH" "$@"
+	} else {
+		ccdecrypt --keyfile "$CCRYPT_KEY3_PATH" | \
+		ccdecrypt --keyfile "$CCRYPT_KEY2_PATH" | \
+		ccdecrypt --keyfile "$CCRYPT_KEY1_PATH"
+	} fi
 }
