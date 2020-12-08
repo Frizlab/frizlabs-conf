@@ -64,15 +64,21 @@ log_component_end
 
 log_line "Installations recap" ""
 
+typeset -g total_oks=0
 typeset -g total_errors=0
+typeset -g total_changes=0
 typeset -g total_warnings=0
-typeset -g total_successes=0
-for component in ${(k)COMPONENTS_STATS_SUCCESSES}; do
+for component in ${(k)COMPONENTS_STATS_OKS}; do
 	print -Pn "%B$component%b: "
-	# Successes
-	total_successes=$((total_successes + COMPONENTS_STATS_SUCCESSES[$component]))
-	if test $COMPONENTS_STATS_SUCCESSES[$component] -gt 0; then print -Pn "%F{green}"; fi
-	print -n "ok=$COMPONENTS_STATS_SUCCESSES[$component]"
+	# OKs
+	total_oks=$((total_oks + COMPONENTS_STATS_OKS[$component]))
+	if test $COMPONENTS_STATS_OKS[$component] -gt 0; then print -Pn "%F{green}"; fi
+	print -n "ok=$COMPONENTS_STATS_OKS[$component]"
+	print -Pn "%f   "
+	# Changes
+	total_changes=$((total_changes + COMPONENTS_STATS_CHANGES[$component]))
+	if test $COMPONENTS_STATS_CHANGES[$component] -gt 0; then print -Pn "%F{cyan}"; fi
+	print -n "changes=$COMPONENTS_STATS_CHANGES[$component]"
 	print -Pn "%f   "
 	# Warnings
 	total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[$component]))
@@ -88,9 +94,13 @@ done
 
 print
 print -Pn "%F{magenta}%BTotals%b%f: "
-# Successes
-if test $total_successes -gt 0; then print -Pn "%F{green}"; fi
-print -n "ok=$total_successes"
+# OKs
+if test $total_oks -gt 0; then print -Pn "%F{green}"; fi
+print -n "ok=$total_oks"
+print -Pn "%f   "
+# Changes
+if test $total_changes -gt 0; then print -Pn "%F{cyan}"; fi
+print -n "changes=$total_changes"
 print -Pn "%f   "
 # Warnings
 total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[component]))
