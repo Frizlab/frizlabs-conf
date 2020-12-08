@@ -73,11 +73,12 @@ function log_task_from_res_list() {
 function log_line() {
 	prefix="$1"
 	bold="$2"
+	line_char="${3:-*}"
 	str="$prefix$bold"
 	w=$#str
 	n=$((TERM_WIDTH - w - 1))
-	print -Pn "$prefix%B$bold%b " >&2
-	test $n -gt 0 && printf %"$n"s | tr " " "*" >&2
+	print -Pn -- "$prefix%B$bold%b " >&2
+	test $n -gt 0 && printf %"$n"s | tr " " "$line_char" >&2
 	print >&2
 }
 

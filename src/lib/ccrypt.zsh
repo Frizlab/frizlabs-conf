@@ -32,7 +32,7 @@ test -f "$CCRYPT_KEY2_PATH" || { read -rs 'pass?Please enter pass 2: '; echo; ec
 test -f "$CCRYPT_KEY3_PATH" || { read -rs 'pass?Please enter pass 3: '; echo; echo -n "$pass" >"$CCRYPT_KEY3_PATH" }
 
 
-func encrypt() {
+function encrypt() {
 	if test $# -gt 0; then {
 		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY1_PATH" "$@"
 		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
@@ -44,7 +44,7 @@ func encrypt() {
 	} fi
 }
 
-func decrypt() {
+function decrypt() {
 	if test $# -gt 0; then {
 		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@"
 		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
@@ -54,4 +54,8 @@ func decrypt() {
 		ccdecrypt --keyfile "$CCRYPT_KEY2_PATH" | \
 		ccdecrypt --keyfile "$CCRYPT_KEY1_PATH"
 	} fi
+}
+
+function decrypt_string() {
+	base64 -D <<<"$*" | decrypt
 }

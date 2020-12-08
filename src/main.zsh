@@ -52,65 +52,71 @@ source "$SRC_FOLDER/vars.zsh"
 ##################
 
 # TODO: Select components from arguments
+max_component_width=0
 typeset -g CURRENT_TASK_NAME
-log_component_start core
-pushd "$COMPONENTS_FOLDER/core"
-source "./main.zsh"
-popd
-log_component_end
+for component in core dotfiles; do
+	test $max_component_width -lt $#component && max_component_width=$#component
+	log_component_start "$component"
+	pushd "$COMPONENTS_FOLDER/$component"
+	source "./main.zsh"
+	popd
+	log_component_end
+done
 
 
 #########
 # Recap #
 #########
 
-log_line "Installations recap" ""
+print >&2
+log_line "$(printf %"$((max_component_width - 6))"s | tr " " "-") " "RECAP" "-"
 
 typeset -g total_oks=0
 typeset -g total_errors=0
 typeset -g total_changes=0
 typeset -g total_warnings=0
-for component in ${(k)COMPONENTS_STATS_OKS}; do
-	print -Pn "%B$component%b: "
+for component in ${(ok)COMPONENTS_STATS_OKS}; do
+	print -Pn "%B$component%b: " >&2
+	printf %"$((max_component_width - $#component))"s >&2
 	# OKs
 	total_oks=$((total_oks + COMPONENTS_STATS_OKS[$component]))
-	if test $COMPONENTS_STATS_OKS[$component] -gt 0; then print -Pn "%F{green}"; fi
-	print -n "ok=$COMPONENTS_STATS_OKS[$component]"
-	print -Pn "%f   "
+	if test $COMPONENTS_STATS_OKS[$component] -gt 0; then print -Pn "%F{green}" >&2; fi
+	print -n "ok=$COMPONENTS_STATS_OKS[$component]" >&2
+	print -Pn "%f   " >&2
 	# Changes
 	total_changes=$((total_changes + COMPONENTS_STATS_CHANGES[$component]))
-	if test $COMPONENTS_STATS_CHANGES[$component] -gt 0; then print -Pn "%F{cyan}"; fi
-	print -n "changes=$COMPONENTS_STATS_CHANGES[$component]"
-	print -Pn "%f   "
+	if test $COMPONENTS_STATS_CHANGES[$component] -gt 0; then print -Pn "%F{cyan}" >&2; fi
+	print -n "changes=$COMPONENTS_STATS_CHANGES[$component]" >&2
+	print -Pn "%f   " >&2
 	# Warnings
 	total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[$component]))
-	if test $COMPONENTS_STATS_WARNINGS[$component] -gt 0; then print -Pn "%F{yellow}"; fi
-	print -n "warnings=$COMPONENTS_STATS_WARNINGS[$component]"
-	print -Pn "%f   "
+	if test $COMPONENTS_STATS_WARNINGS[$component] -gt 0; then print -Pn "%F{yellow}" >&2; fi
+	print -n "warnings=$COMPONENTS_STATS_WARNINGS[$component]" >&2
+	print -Pn "%f   " >&2
 	# Errors
 	total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[$component]))
-	if test $COMPONENTS_STATS_ERRORS[$component] -gt 0; then print -Pn "%F{red}"; fi
-	print -n "errors=$COMPONENTS_STATS_ERRORS[$component]"
-	print -P "%f"
+	if test $COMPONENTS_STATS_ERRORS[$component] -gt 0; then print -Pn "%F{red}" >&2; fi
+	print -n "errors=$COMPONENTS_STATS_ERRORS[$component]" >&2
+	print -P "%f" >&2
 done
 
-print
-print -Pn "%F{magenta}%BTotals%b%f: "
+print >&2
+print -Pn "%F{magenta}%BTotals%b%f: " >&2
 # OKs
-if test $total_oks -gt 0; then print -Pn "%F{green}"; fi
-print -n "ok=$total_oks"
-print -Pn "%f   "
+if test $total_oks -gt 0; then print -Pn "%F{green}" >&2; fi
+print -n "ok=$total_oks" >&2
+print -Pn "%f   " >&2
 # Changes
-if test $total_changes -gt 0; then print -Pn "%F{cyan}"; fi
-print -n "changes=$total_changes"
-print -Pn "%f   "
+if test $total_changes -gt 0; then print -Pn "%F{cyan}" >&2; fi
+print -n "changes=$total_changes" >&2
+print -Pn "%f   " >&2
 # Warnings
 total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[component]))
-if test $total_warnings -gt 0; then print -Pn "%F{yellow}"; fi
-print -n "warnings=$total_warnings"
-print -Pn "%f   "
+if test $total_warnings -gt 0; then print -Pn "%F{yellow}" >&2; fi
+print -n "warnings=$total_warnings" >&2
+print -Pn "%f   " >&2
 # Errors
 total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[component]))
-if test $total_errors -gt 0; then print -Pn "%F{red}"; fi
-print -n "errors=$total_errors"
-print -P "%f"
+if test $total_errors -gt 0; then print -Pn "%F{red}" >&2; fi
+print -n "errors=$total_errors" >&2
+print -P "%f" >&2
