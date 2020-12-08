@@ -31,7 +31,7 @@ function log_task_ok() {
 
 function log_task_change() {
 	COMPONENTS_STATS_CHANGES[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_CHANGES[CURRENT_COMPONENT_NAME] + 1))
-	print -P "%F{cyan}%Bchange%b: $CURRENT_TASK_NAME%f"
+	print -P "%F{cyan}%Bchanged%b: $CURRENT_TASK_NAME%f"
 }
 
 function log_task_warning() {
