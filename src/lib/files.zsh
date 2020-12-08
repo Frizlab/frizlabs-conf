@@ -18,7 +18,7 @@ function acl() {
 	file_name="$1"; acl="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
-	test "$(ls -led "$file_name" | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
+	test "$(ls -led "$file_name" 2>/dev/null | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
 	
 	chmod -E "$file_name" >/dev/null 2>&1 <<<"$acl" || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
 	echo "changed"
