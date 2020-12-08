@@ -1,4 +1,6 @@
 # Generate locale for UTF-8 if needed
+CURRENT_TASK_NAME="utf8-locale"
+
 case "$HOST_OS" in
 	"Darwin") ;; # Nothing to do for Darwin
 	"Linux")
@@ -7,13 +9,12 @@ case "$HOST_OS" in
 		sed '/en_US.UTF-8/s/^# //g' "$LOCALE_FILE" >"$TEMP_LOCALE"
 		# We run locale-gen if the locale file has been modified
 		diff "$TEMP_LOCALE" "$LOCALE_FILE" >/dev/null 2>&1 || {
-			cat "$TEMP_LOCALE" >"$LOCALE_FILE"
-			locale-gen
+			{ cat "$TEMP_LOCALE" >"$LOCALE_FILE" && locale-gen && { log_task_success || true } } ||
+				log_task_failure "Cannot write to $LOCALE_FILE. Do you have the permissions to do it?"
 		}
 		rm -f "$TEMP_LOCALE"
 	;;
 	*)
-		echo_warning "Unknown host OS: $HOST_OS" >/dev/stderr
-		exit 1
+		log_task_warning "Unknown host OS: $HOST_OS" >/dev/stderr
 	;;
 esac

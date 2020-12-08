@@ -50,6 +50,16 @@ source "$SRC_FOLDER/vars.zsh"
 ##################
 
 # TODO: Select components from arguments
+typeset -g CURRENT_TASK_NAME
+log_component_start core
 pushd "$COMPONENTS_FOLDER/core"
 source "./main.zsh"
 popd
+log_component_end
+
+
+#########
+# Recap #
+#########
+
+source "$LIB_FOLDER/recap.zsh"
