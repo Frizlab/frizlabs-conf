@@ -3,7 +3,8 @@ readonly HOMEBREW_GITHUB_TOKEN_ENCRYPTED='
 	jPf2eWoOaSczcvJQ/SMlXLxxrEx5nR5xOTctBwP+DNnvSP172HU/WdW6aKzBDBbmXMJoYsNHyr2Q6
 	UK0fDMJ+LAdx2xfKSpgsQT7eVCbekWCGJ6jUpPIs+ORluzhiSZXCWqJ/oPMn6dsyF1kFOZmediu86
 	e2h8Cu9vPUjo2jpQSGdRJyEehWmw=='
-readonly HOMEBREW_GITHUB_TOKEN="$(decrypt_string "$HOMEBREW_GITHUB_TOKEN_ENCRYPTED")"
+tmpvar="$(decrypt_string "$HOMEBREW_GITHUB_TOKEN_ENCRYPTED")"
+readonly HOMEBREW_GITHUB_TOKEN="$tmpvar"; # If we don’t use tmpvar, the error from decrypt_string is ignored
 
 readonly DOTFILES_BACKUP_DIR="$HOME/.:dotfiles_backups"
 readonly DOTFILES_BACKUP_DIR_MODE="700"

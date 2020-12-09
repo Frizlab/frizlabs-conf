@@ -16,4 +16,6 @@ test -f "$COMPUTER_GROUP_PATH" || {
 	read -r "group?$message"
 	echo -n "${COMPUTER_GROUPS[$group]}" >"$COMPUTER_GROUP_PATH"
 }
-readonly COMPUTER_GROUP="$(cat "$COMPUTER_GROUP_PATH")"
+# Note: We use tmpvar to actually fail on cat error
+tmpvar="$(cat "$COMPUTER_GROUP_PATH")"
+readonly COMPUTER_GROUP="$tmpvar"
