@@ -112,12 +112,10 @@ if test $total_changes -gt 0; then print -Pn "%F{cyan}" >&2; fi
 print -n "changes=$total_changes" >&2
 print -Pn "%f   " >&2
 # Warnings
-total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[component]))
 if test $total_warnings -gt 0; then print -Pn "%F{yellow}" >&2; fi
 print -n "warnings=$total_warnings" >&2
 print -Pn "%f   " >&2
 # Errors
-total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[component]))
 if test $total_errors -gt 0; then print -Pn "%F{red}" >&2; fi
 print -n "errors=$total_errors" >&2
 print -P "%f" >&2
