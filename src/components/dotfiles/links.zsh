@@ -13,4 +13,4 @@ res_check "$res_folder" && {
 		res="$(linknbk "$repo_file" "$dest_file" "$DOTFILES_BACKUP_DIR")"
 		log_task_from_res "$res"
 	done
-}
+} || true
