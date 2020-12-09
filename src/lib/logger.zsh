@@ -63,7 +63,12 @@ function log_task_from_res_list() {
 			*)              highest_res="ok";;
 		esac
 	done
-	case "$highest_res" in
+	log_task_from_res "$highest_res"
+}
+
+function log_task_from_res() {
+	res="$1"
+	case "$res" in
 		"ok")      log_task_ok;;
 		"changed") log_task_change;;
 		"failed")  ;; # Must have been logged before

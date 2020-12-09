@@ -43,6 +43,7 @@ source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
 
 source "$LIB_FOLDER/files.zsh"
+source "$LIB_FOLDER/link.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
 

@@ -1,9 +1,4 @@
 ---
-# Provide an extension point for some dot-files
-- name: "make dotfiles folders"
-  file: {path: "{{ ansible_env.HOME }}/{{ item }}", state: "directory", mode: "0700"}
-  loop: "{{ dotfile_folders }}"
-
 - import_tasks: "{{ _lib_folder }}/links.yml"
   vars:
     lnk__backup_dir: "{{ backup_dir }}"
