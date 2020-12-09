@@ -10,7 +10,7 @@ res_check "$res_folder" && {
 		dest_file="$HOME/$file"
 		repo_file="$(pwd)/files/_$file"
 		CURRENT_TASK_NAME="link $file"
-		catchout res   linknbk "$repo_file" "$dest_file" "$DOTFILES_BACKUP_DIR"
+		catchout res   linknbk "$repo_file" "$dest_file" "600" "$DOTFILES_BACKUP_DIR"
 		log_task_from_res "$res"
 	done
 } || true

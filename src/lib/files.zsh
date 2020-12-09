@@ -8,8 +8,8 @@ function folder() {
 	# %Lp format is for Darwin, %a is for Linux. Linux version must be first
 	# because -f option is known by Linux stat but does not mean the same thing.
 	test -d "$folder_name" && test "$(stat -c %a "$folder_name" 2>/dev/null || stat -f %Lp "$folder_name" 2>/dev/null)" = "$permission" && { echo "ok"; return }
-	{ mkdir -p            "$folder_name" >/dev/null 2>&1 } || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
-	{ chmod "$permission" "$folder_name" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
+	mkdir -p            "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
+	chmod "$permission" "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
 
