@@ -38,6 +38,7 @@ mkdir -p "$CACHE_FOLDER" && chmod 700 "$CACHE_FOLDER"
 
 source "$LIB_FOLDER/facts.zsh"
 source "$LIB_FOLDER/check-deps.zsh"
+source "$LIB_FOLDER/catchout.zsh"
 source "$LIB_FOLDER/ccrypt.zsh"
 source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"

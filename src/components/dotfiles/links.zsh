@@ -2,7 +2,7 @@
 
 # First create the backup folder
 CURRENT_TASK_NAME="create backup folder for dotfiles at $DOTFILES_BACKUP_DIR"
-res_folder="$(folder "$DOTFILES_BACKUP_DIR" "$DOTFILES_BACKUP_DIR_MODE")"
+catchout res_folder folder "$DOTFILES_BACKUP_DIR" "$DOTFILES_BACKUP_DIR_MODE"
 log_task_from_res "$res_folder"
 
 res_check "$res_folder" && {
