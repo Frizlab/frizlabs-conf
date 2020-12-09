@@ -57,5 +57,5 @@ function decrypt() {
 }
 
 function decrypt_string() {
-	base64 -d <<<"$*" | decrypt
+	tr -d '\r\n\t ' <<<"$*" | base64 -d | decrypt
 }
