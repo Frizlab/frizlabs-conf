@@ -1,21 +1,4 @@
 ---
-- import_tasks: "{{ _lib_folder }}/links.yml"
-  vars:
-    lnk__backup_dir: "{{ backup_dir }}"
-    lnk__backup_dir_mode: "{{ backup_dir_mode }}"
-    lnk__dest_dir: "{{ ansible_env.HOME }}"
-    lnk__link_mode: "0600"
-    # Contains an array of tuples (link_base_name, link_target_base_name)
-    lnk__files: "{{
-      dotfile_files |
-      zip(
-        dotfile_files |
-        map('regex_replace', '^\\.', '_.') |
-        map('regex_replace', '/\\.', '/_.')
-      ) |
-      list
-    }}"
-
 - name: "create templates"
   template:
     src: "{{ item | regex_replace('^\\.', '_.') | regex_replace('/\\.', '/_.') }}.jinja"

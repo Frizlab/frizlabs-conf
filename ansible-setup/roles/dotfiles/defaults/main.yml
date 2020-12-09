@@ -1,6 +1,0 @@
----
-# The colon is so the file is sorted at the top…
-backup_dir: "{{ ansible_env.HOME }}/.:dotfiles_backups"
-backup_dir_mode: "0700"
-
-# vim: ts=2 sw=2 et
