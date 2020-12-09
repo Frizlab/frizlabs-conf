@@ -57,7 +57,7 @@ source "$SRC_FOLDER/vars.zsh"
 # TODO: Select components from arguments
 max_component_width=0
 typeset -g CURRENT_TASK_NAME
-for component in core dotfiles; do
+for component in core dotfiles bin; do
 	test $max_component_width -lt $#component && max_component_width=$#component
 	log_component_start "$component"
 	pushd "$COMPONENTS_FOLDER/$component"
