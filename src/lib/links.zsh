@@ -6,7 +6,7 @@
 ## Linux as it is not possible to change the perm of a link w/ chmod on it (says
 ## the man).
 ## Usage: linknbk src dest link_mode backup_folder
-## Example: linknbk ./_.bashrc ~/.bashrc ~/.dotfiles_backup
+## Example: linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
 function linknbk() {
 	src="$1"
 	dest="$2"

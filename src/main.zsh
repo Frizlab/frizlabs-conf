@@ -44,7 +44,8 @@ source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
 
 source "$LIB_FOLDER/files.zsh"
-source "$LIB_FOLDER/link.zsh"
+source "$LIB_FOLDER/links.zsh"
+source "$LIB_FOLDER/templates.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
 
