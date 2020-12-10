@@ -3,10 +3,11 @@ readonly HOMEBREW_GITHUB_TOKEN_ENCRYPTED='
 	jPf2eWoOaSczcvJQ/SMlXLxxrEx5nR5xOTctBwP+DNnvSP172HU/WdW6aKzBDBbmXMJoYsNHyr2Q6
 	UK0fDMJ+LAdx2xfKSpgsQT7eVCbekWCGJ6jUpPIs+ORluzhiSZXCWqJ/oPMn6dsyF1kFOZmediu86
 	e2h8Cu9vPUjo2jpQSGdRJyEehWmw=='
-# decrypt_string does not fail, otherwise we’d have to use a temp variable to
-# get the error.
+
 CURRENT_TASK_NAME="decrypt HOMEBREW_GITHUB_TOKEN"
-readonly HOMEBREW_GITHUB_TOKEN="$(decrypt_string "$HOMEBREW_GITHUB_TOKEN_ENCRYPTED")"
+catchout decrypted_string  decrypt_string "$HOMEBREW_GITHUB_TOKEN_ENCRYPTED"
+readonly HOMEBREW_GITHUB_TOKEN="$decrypted_string"
+
 
 readonly DOTFILES_BACKUP_DIR="$HOME/.:dotfiles_backups"
 readonly DOTFILES_BACKUP_DIR_MODE="700"

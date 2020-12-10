@@ -64,10 +64,10 @@ function util_decrypt_string() {
 }
 
 function decrypt() {
-	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
-	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
-	ccdecrypt             --keyfile "$CCRYPT_KEY1_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
-	return "ok"
+	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@" >/dev/null 2>/dev/null || { return 1 }
+	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@" >/dev/null 2>/dev/null || { return 1 }
+	ccdecrypt             --keyfile "$CCRYPT_KEY1_PATH" "$@" >/dev/null 2>/dev/null || { return 1 }
+	return 0
 }
 
 function decrypt_string() {
@@ -77,5 +77,6 @@ function decrypt_string() {
 		ccdecrypt --keyfile "$CCRYPT_KEY1_PATH" 2>/dev/null   \
 	|| {
 		log_task_warning "Cannot decrypt string. Returning string “<FRZ_DECRYPTION_FAILED>”."
+		echo "<FRZ_DECRYPTION_FAILED>"
 	}
 }
