@@ -1,11 +1,4 @@
 ---
-# No author for the links! All will be in the 3rd party bin folder.
-bin_links:
-  # When compopt is not available (e.g. w/ Bash 3), this hides the error we get
-  # from some completion scripts that use compopt.
-  - name: compopt
-    dest: /usr/bin/true
-
 deleted_packages:
   - name: "Local Homebrew Install"
     author: "frizlab"
