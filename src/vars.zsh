@@ -35,3 +35,5 @@ readonly NPM_DIR="$CLT_DIR/npm"
 
 # Go Packages
 readonly GO_DIR="$CLT_DIR/go"
+
+source "$SRC_FOLDER/vars-$COMPUTER_GROUP.zsh"

@@ -1,5 +1,0 @@
----
-dark_mode: true
-homebrew_prefix: "${HOME}/usr/homebrew"
-
-# vim: ts=2 sw=2 et
