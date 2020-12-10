@@ -14,6 +14,6 @@ function install_brew_package() {
 	path_to_check="$3"
 	
 	test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }
-	"$brew_prefix/bin/brew" install -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install $package_name in brew at path $brew_prefix"; echo "failed"; return }
+	HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 "$brew_prefix/bin/brew" install -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install $package_name in brew at path $brew_prefix"; echo "failed"; return }
 	echo "changed"
 }
