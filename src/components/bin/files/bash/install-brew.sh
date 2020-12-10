@@ -13,7 +13,7 @@ usage() {
 	echo "brew will be available at “destination/bin/brew”."
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 1 -o "$1" = "-h" -o "$1" = "--help" -o "$1" = "help" ]; then
 	usage >&2
 	exit 1
 fi
