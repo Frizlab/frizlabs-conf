@@ -42,14 +42,13 @@ function encrypted_bin() {
 	script_basename_no_ext="${script_basename%.*.cpt}"
 	script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
-	res=
 	CURRENT_TASK_NAME="decrypt and install ${script_dest_path/#$HOME/\~}"
 	catchout res   decrypt_and_copy "$local_script_path" "$script_dest_path" "755"
 	log_task_from_res "$res"
 }
 
 function delete_bin() {
-	author="$2"
+	author="$1"
 	script_name="$2"
 	
 	me="$(whoami)"
