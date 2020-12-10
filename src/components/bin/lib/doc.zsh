@@ -29,15 +29,13 @@ function doc() {
 
 function delete_doc() {
 	author="$1"
-	relative_path_to_folder="$2"
-	doc_name="$3"
+	doc_name="$2"
 	
 	me="$(whoami)"
 	dest_share_dir=""
 	if test "$author" = "$me"; then dest_share_dir="$FIRST_PARTY_SHARE_DIR";
 	else                            dest_share_dir="$THIRD_PARTY_SHARE_DIR"; fi
-	dest_doc_dir="$dest_share_dir/$relative_path_to_folder"
-	deleted_path="$dest_doc_dir/$doc_name"
+	deleted_path="$dest_share_dir/$doc_name"
 	
 	CURRENT_TASK_NAME="delete doc ${deleted_path/#$HOME/\~}"
 	catchout res   delete "$deleted_path"
