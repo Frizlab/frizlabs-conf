@@ -137,3 +137,14 @@ doc "frizlab" ":Darwin:" "man/man1" "docs/make-link.1"
 ### My Split ###
 delete_bin "frizlab" "my_split"
 bin "frizlab" ":Darwin:" "bin/my-split"
+
+### compopt ###
+# When compopt is not available (e.g. w/ Bash 3), this hides the error we get
+# from some completion scripts that use compopt.
+res=; res_list=()
+dest="$THIRD_PARTY_BIN_DIR/compopt"
+backup_dir="$THIRD_PARTY_BIN_DIR/$BIN_BACKUP_DIR_BASENAME"
+CURRENT_TASK_NAME="link fake compopt -> ${dest/#$HOME/\~}"
+{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"           && res_list+=("$res") } || true
+{ res_check "$res" &&   catchout res  linknbk "/usr/bin/true" "$dest" "755" "$backup_dir"   && res_list+=("$res") } || true
+log_task_from_res_list res_list
