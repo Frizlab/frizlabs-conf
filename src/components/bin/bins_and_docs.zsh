@@ -1,3 +1,6 @@
+### Backup My Cloud ###
+encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
+
 ### Install Homebrew ###
 bin "frizlab" ":Darwin:Linux:" "bash/install-brew.sh"
 
@@ -12,9 +15,6 @@ bin "frizlab" ":Darwin:" "sh/is-desktop-picture.sh"
 
 ### Is Valid JPEG ###
 bin "frizlab" ":Darwin:" "sh/is-valid-jpeg.sh"
-
-### Backup My Cloud ###
-encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 
 ### abc to anything ###
 bin "frizlab" ":Darwin:" "bash/abc2.sh"
