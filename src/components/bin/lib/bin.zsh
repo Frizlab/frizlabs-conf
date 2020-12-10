@@ -24,3 +24,18 @@ function bin() {
 	{ res_check "$res" &&   catchout res  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && res_list+=("$res") } || true
 	log_task_from_res_list res_list
 }
+
+function delete_bin() {
+	author="$2"
+	script_name="$2"
+	
+	me="$(whoami)"
+	dest_bin_dir=""
+	if test "$author" = "$me"; then dest_bin_dir="$FIRST_PARTY_BIN_DIR";
+	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
+	deleted_path="$dest_bin_dir/$script_name"
+	
+	CURRENT_TASK_NAME="delete ${deleted_path/#$HOME/\~}"
+	catchout res   delete "$deleted_path"
+	log_task_from_res "$res"
+}

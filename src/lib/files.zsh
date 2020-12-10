@@ -38,3 +38,16 @@ function flags() {
 	chflags "$flag" "$file_name" 2>/dev/null || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
+
+## Make sure the given file does not exist. Fails if the given path is a folder
+## Usage: delete file
+## Example: delete "$HOME/.obsolete"
+function delete() {
+	file_name="$1"
+	
+	test -e "$file_name" || { echo "ok"; return }
+	test ! -d "$file_name" || { log_task_failure "not deleting folder $file_name"; echo "failed"; return }
+	
+	rm -f "$file_name" >/dev/null 2>&1 || { log_task_failure "rm failed for $file_name"; echo "failed"; return }
+	echo "changed"
+}

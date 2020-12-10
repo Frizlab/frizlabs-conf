@@ -77,6 +77,7 @@ bin "galloglass" ":Darwin:Linux" "python2/ls-mbdb.py"
 bin "astyagun" ":Darwin:Linux:" "sh/gem-list-leaves.sh"
 
 ### Check iTunes Artworks ###
+delete_bin "frizlab" "check_itunes_artworks"
 bin "frizlab" ":Darwin:" "bin/check-itunes-artworks"
 doc "frizlab" ":Darwin:" "man/man1" "docs/check-itunes-artworks.1"
 
