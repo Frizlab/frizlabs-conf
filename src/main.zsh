@@ -46,6 +46,7 @@ source "$LIB_FOLDER/logger.zsh"
 source "$LIB_FOLDER/files.zsh"
 source "$LIB_FOLDER/links.zsh"
 source "$LIB_FOLDER/templates.zsh"
+source "$LIB_FOLDER/defaults.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
 
@@ -54,10 +55,15 @@ source "$SRC_FOLDER/vars.zsh"
 # Run components #
 ##################
 
-# TODO: Select components from arguments
+# Note: We do **not** handle dependencies…
+components_to_run=("$@")
+if test ${#components_to_run[@]} -eq 0; then
+	components_to_run=("core" "dotfiles" "bin" "defaults")
+fi
+
 max_component_width=0
 typeset -g CURRENT_TASK_NAME
-for component in core dotfiles bin defaults; do
+for component in $components_to_run; do
 	test $max_component_width -lt $#component && max_component_width=$#component
 	log_component_start "$component"
 	pushd "$COMPONENTS_FOLDER/$component"
