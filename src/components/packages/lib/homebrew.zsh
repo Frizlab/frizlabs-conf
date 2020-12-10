@@ -7,13 +7,13 @@ function install_homebrew() {
 	echo "changed"
 }
 
-## Usage: install_brew_package brew_prefix package_name bin_to_check
+## Usage: install_brew_package brew_prefix package_name path_to_check
 function install_brew_package() {
 	brew_prefix="$1"
 	package_name="$2"
-	bin_to_check="$3"
+	path_to_check="$3"
 	
-	test ! -x "$brew_prefix/$bin_to_check" || { echo "ok"; return }
+	test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }
 	"$brew_prefix/bin/brew" install -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install $package_name in brew at path $brew_prefix"; echo "failed"; return }
 	echo "changed"
 }
