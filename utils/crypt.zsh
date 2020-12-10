@@ -14,12 +14,12 @@ source "./src/lib/ccrypt.zsh"
 
 popd
 case "${${0:t}:r}" in
-	"decrypt_file") decrypt "$@";;
-	"encrypt_file") encrypt "$@";;
-	"decrypt_string") decrypt_string "$*";;
-	"encrypt_string") printf "$*" | encrypt | base64;;
+	"decrypt_file") util_decrypt "$@";;
+	"encrypt_file") util_encrypt "$@";;
+	"decrypt_string") util_decrypt_string "$*";;
+	"encrypt_string") printf "$*" | util_encrypt | base64;;
 	*)
-		echo "You must call this script from the encrypt or decrypt scripts"
+		echo "You must call this script from the encrypt_* or decrypt_* scripts"
 		exit 1
 	;;
 esac

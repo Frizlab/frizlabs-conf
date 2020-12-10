@@ -145,6 +145,6 @@ res=; res_list=()
 dest="$THIRD_PARTY_BIN_DIR/compopt"
 backup_dir="$THIRD_PARTY_BIN_DIR/$BIN_BACKUP_DIR_BASENAME"
 CURRENT_TASK_NAME="link fake compopt -> ${dest/#$HOME/\~}"
-{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"           && res_list+=("$res") } || true
-{ res_check "$res" &&   catchout res  linknbk "/usr/bin/true" "$dest" "755" "$backup_dir"   && res_list+=("$res") } || true
+{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"           && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  linknbk "/usr/bin/true" "$dest" "755" "$backup_dir"   && res_list+=("$res") }
 log_task_from_res_list res_list

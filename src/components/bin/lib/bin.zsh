@@ -20,8 +20,8 @@ function bin() {
 	
 	res=; res_list=()
 	CURRENT_TASK_NAME="install $local_relative_script_path -> ${script_dest_path/#$HOME/\~}"
-	{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"                            && res_list+=("$res") } || true
-	{ res_check "$res" &&   catchout res  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && res_list+=("$res") } || true
+	{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"                            && res_list+=("$res") }
+	{ res_check "$res" &&   catchout res  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && res_list+=("$res") }
 	log_task_from_res_list res_list
 }
 
@@ -30,7 +30,7 @@ function encrypted_bin() {
 	compatibility="$2"
 	local_relative_script_path="$3"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return
+	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
 	
 	me="$(whoami)"
 	dest_bin_dir=""

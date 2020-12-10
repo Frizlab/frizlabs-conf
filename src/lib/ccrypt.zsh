@@ -32,7 +32,8 @@ test -f "$CCRYPT_KEY2_PATH" || { read -rs 'pass?Please enter pass 2: '; echo; ec
 test -f "$CCRYPT_KEY3_PATH" || { read -rs 'pass?Please enter pass 3: '; echo; echo -n "$pass" >"$CCRYPT_KEY3_PATH" }
 
 
-function encrypt() {
+## Should NOT be used in the install script; meant to be used by an util script.
+function util_encrypt() {
 	if test $# -gt 0; then {
 		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY1_PATH" "$@"
 		ccencrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
@@ -44,7 +45,8 @@ function encrypt() {
 	} fi
 }
 
-function decrypt() {
+## Should NOT be used in the install script; meant to be used by an util script.
+function util_decrypt() {
 	if test $# -gt 0; then {
 		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@"
 		ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@"
@@ -56,6 +58,24 @@ function decrypt() {
 	} fi
 }
 
-function decrypt_string() {
+## Should NOT be used in the install script; meant to be used by an util script.
+function util_decrypt_string() {
 	tr -d '\r\n\t ' <<<"$*" | base64 -d | decrypt
+}
+
+function decrypt() {
+	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY3_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
+	ccdecrypt --suffix "" --keyfile "$CCRYPT_KEY2_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
+	ccdecrypt             --keyfile "$CCRYPT_KEY1_PATH" "$@" >/dev/null 2>/dev/null || { log_task_failure "ccdecrypt failed"; echo "failed"; return }
+	return "ok"
+}
+
+function decrypt_string() {
+	tr -d '\r\n\t ' <<<"$*" | base64 -d 2>/dev/null |        \
+		ccdecrypt --keyfile "$CCRYPT_KEY3_PATH" 2>/dev/null | \
+		ccdecrypt --keyfile "$CCRYPT_KEY2_PATH" 2>/dev/null | \
+		ccdecrypt --keyfile "$CCRYPT_KEY1_PATH" 2>/dev/null   \
+	|| {
+		log_task_warning "Cannot decrypt string. Returning string “<FRZ_DECRYPTION_FAILED>”."
+	}
 }
