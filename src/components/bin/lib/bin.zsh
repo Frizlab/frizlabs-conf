@@ -44,7 +44,7 @@ function encrypted_bin() {
 	
 	res=
 	CURRENT_TASK_NAME="decrypt and install ${script_dest_path/#$HOME/\~}"
-	catchout res   decrypt_and_copy "$local_script_path" "$script_dest_path" "700"
+	catchout res   decrypt_and_copy "$local_script_path" "$script_dest_path" "755"
 	log_task_from_res "$res"
 }
 
