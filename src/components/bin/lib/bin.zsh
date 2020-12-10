@@ -4,7 +4,7 @@ function bin() {
 	compatibility="$2"
 	local_relative_script_path="$3"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return
+	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
 	
 	me="$(whoami)"
 	dest_bin_dir=""

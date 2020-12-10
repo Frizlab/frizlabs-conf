@@ -5,7 +5,7 @@ function doc() {
 	relative_path_to_folder="$3"
 	local_relative_doc_path="$4"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return
+	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
 	
 	me="$(whoami)"
 	dest_share_dir=""
