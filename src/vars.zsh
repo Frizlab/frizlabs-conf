@@ -53,6 +53,7 @@ typeset -A MAIN_HOMEBREW_FORMULAE=(
 	"speedtest-cli"       "bin/speedtest-cli"
 	"the_silver_searcher" "bin/ag"
 	"tmux"                "bin/tmux"
+	"tree"                "bin/tree"
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
 	"youtube-dl"          "bin/youtube-dl"
@@ -67,7 +68,10 @@ typeset -A MAIN_HOMEBREW_FORMULAE=(
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_HOMEBREW_CASKS=(
 	"frizlab/perso/my-web-quirks" "$HOME/Applications/My Web Quirks.app"
-	"happn-tech/public/base64"    "$HOME/Applications/base64.app"
+	
+	"happn-tech/public/base64"           "$HOME/Applications/base64.app"
+	"happn-tech/public/locmapper-app"    "$HOME/Applications/LocMapper.app"
+	"happn-tech/public/locmapper-linter" "$HOME/Applications/LocMapper Linter.app"
 )
 
 
