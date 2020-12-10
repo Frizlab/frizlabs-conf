@@ -51,8 +51,10 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 # HOMEBREW_GITHUB_API_TOKEN is set in a separate file
+# The fontdir we set here is the default one, but we explicitly want that
+export HOMEBREW_CASK_OPTS="'--appdir=$HOME/Applications' '--fontdir=$HOME/Library/Fonts'"
 # After further thinking, disabling quarantine might not be the best idea…
-#export HOMEBREW_CASK_OPTS="--no-quarantine"
+#export HOMEBREW_CASK_OPTS+="--no-quarantine"
 
 
 # GPG
