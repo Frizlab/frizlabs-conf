@@ -1,14 +1,9 @@
-CURRENT_TASK_NAME="TODO"
-log_task_warning "The defaults component has not been migrated yet."
-log_task_from_res "warning"
+# Setup some macOS defaults
 
-#- name: "set key repeat"
-#  osx_defaults:
-#    # The NSGlobalDomain is the default one, but let’s be explicit
-#    domain: NSGlobalDomain
-#    key: KeyRepeat
-#    type: integer
-#    value: 2
-#
-#- name: "set initial key repeat"
-#  osx_defaults: {key: InitialKeyRepeat, type: integer, value: 15}
+CURRENT_TASK_NAME="set key repeat"
+catchout res  defaults_set_int NSGlobalDomain KeyRepeat 2
+log_task_from_res "$res"
+
+CURRENT_TASK_NAME="set initial key repeat"
+catchout res  defaults_set_int NSGlobalDomain InitialKeyRepeat 15
+log_task_from_res "$res"

@@ -1,9 +1,7 @@
-# Setup some macOS defaults
-
-# Nothing to be done if not on macOS! We still print ok for a dummy task for
-# the aesthetic of the output
-if test "$HOST_OS" != "Darwin"; then
-	CURRENT_TASK_NAME="dummy (not on macOS)"
+# Nothing to be done if the defaults command is not available. We still print ok
+# in a dummy task to have a more beautiful output.
+if ! command -v defaults >/dev/null 2>&1; then
+	CURRENT_TASK_NAME="defaults is not available (probably not on macOS); skipping this component…"
 	log_task_from_res "ok"
 else
 	source "./defaults.zsh"
