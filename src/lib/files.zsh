@@ -64,13 +64,13 @@ function decrypt_and_copy() {
 	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
 	# Then we decrypt the source file at a temporary location
-	tmpfile=$(mktemp) || { log_task_failure "cannot create temporary file"; echo "failed"; return }
-	cp -f -- "$local_script_path" "$tmpfile" >/dev/null 2>&1 || { rm -f "$tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
-	decrypt --suffix "" -- "$tmpfile" || { rm -f "$tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	decrcpy_tmpfile=$(mktemp) || { log_task_failure "cannot create temporary file"; echo "failed"; return }
+	cp -f -- "$local_script_path" "$decrcpy_tmpfile" >/dev/null 2>&1 || { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
+	decrypt --suffix "" -- "$decrcpy_tmpfile" || { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
-	diff -- "$tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a "$dest" 2>/dev/null || stat -f %Lp "$dest" 2>/dev/null)" = "$mode" && { rm -f "$tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	diff -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a "$dest" 2>/dev/null || stat -f %Lp "$dest" 2>/dev/null)" = "$mode" && { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
 	
-	mv -f -- "$tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
+	mv -f -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
 	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
