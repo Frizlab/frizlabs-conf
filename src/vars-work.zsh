@@ -24,7 +24,7 @@ typeset -rA MAIN_HOMEBREW_PACKAGES=(
 	
 	"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
 	
-	"mxcl/made/swift-sh" "swift-sh"
+	"mxcl/made/swift-sh" "bin/swift-sh"
 	
-	"happn-tech/public/locmapper" "bin/locmapper"
+	"happn-tech/public/locmapper" "Cellar/locmapper"
 )
