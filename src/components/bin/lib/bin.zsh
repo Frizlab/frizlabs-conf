@@ -25,6 +25,29 @@ function bin() {
 	log_task_from_res_list res_list
 }
 
+function encrypted_bin() {
+	author="$1"
+	compatibility="$2"
+	local_relative_script_path="$3"
+	
+	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return
+	
+	me="$(whoami)"
+	dest_bin_dir=""
+	if test "$author" = "$me"; then dest_bin_dir="$FIRST_PARTY_BIN_DIR";
+	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
+	
+	local_script_path="$(pwd)/files/$local_relative_script_path"
+	script_basename="${local_relative_script_path##*/}"
+	script_basename_no_ext="${script_basename%.*.cpt}"
+	script_dest_path="$dest_bin_dir/$script_basename_no_ext"
+	
+	res=
+	CURRENT_TASK_NAME="decrypt and install ${script_dest_path/#$HOME/\~}"
+	catchout res   decrypt_and_copy "$local_script_path" "$script_dest_path" "700"
+	log_task_from_res "$res"
+}
+
 function delete_bin() {
 	author="$2"
 	script_name="$2"

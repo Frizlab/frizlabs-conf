@@ -51,3 +51,26 @@ function delete() {
 	rm -f "$file_name" >/dev/null 2>&1 || { log_task_failure "rm failed for $file_name"; echo "failed"; return }
 	echo "changed"
 }
+
+##
+## Usage: decrypt_and_copy src dest mode
+## Example: decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
+function decrypt_and_copy() {
+	src="$1"
+	dest="$2"
+	mode="$3"
+	
+	# First we check the destination file is not a folder
+	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	
+	# Then we decrypt the source file at a temporary location
+	tmpfile=$(mktemp) || { log_task_failure "cannot create temporary file"; echo "failed"; return }
+	cp -f -- "$local_script_path" "$tmpfile" >/dev/null 2>&1 || { rm -f "$tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
+	decrypt --suffix "" -- "$tmpfile" || { rm -f "$tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	
+	diff -- "$tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a "$dest" 2>/dev/null || stat -f %Lp "$dest" 2>/dev/null)" = "$mode" && { rm -f "$tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	
+	mv -f -- "$tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
+	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	echo "changed"
+}

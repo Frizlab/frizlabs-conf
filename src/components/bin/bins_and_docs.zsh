@@ -19,11 +19,7 @@ bin "frizlab" ":Darwin:" "sh/is-valid-jpeg.sh"
 
 ### Backup My Cloud ###
 delete_bin "frizlab" "backup_cloud"
-#  - name: "Backup My Cloud"
-#    author: "frizlab"
-#    compat: [MacOSX]
-#    copy_instead_of_link: yes
-#    bin_paths: ["bash/backup-cloud.sh"]
+encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 
 ### abc to anything ###
 bin "frizlab" ":Darwin:" "bash/abc2.sh"

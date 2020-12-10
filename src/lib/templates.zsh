@@ -1,6 +1,6 @@
 # Template-related utilities
 
-## 
+##
 ## Usage: detemplate src dest mode
 ## Example: detemplate ./_.bashrc ~/.bashrc 600
 function detemplate() {

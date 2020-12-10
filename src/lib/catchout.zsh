@@ -7,10 +7,10 @@
 
 # catchout stdoutvar command args...
 function catchout() {
-	tmpfile="$(mktemp)"
-	"${@:2}" >"$tmpfile"
+	catchout_tmpfile="$(mktemp)"
+	"${@:2}" >"$catchout_tmpfile"
 	ret=$?
-	eval "$1=\$(cat \"$tmpfile\")"
-	rm -f "$tmpfile"
+	eval "$1=\$(cat \"$catchout_tmpfile\")"
+	rm -f "$catchout_tmpfile"
 	return $ret
 }
