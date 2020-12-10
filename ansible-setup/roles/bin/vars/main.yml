@@ -19,12 +19,12 @@ deleted_packages:
   - name: "Find “Unreferenced” Files in an Xcode Project"
     author: "frizlab"
     reason: "This tool can now be installed via Homebrew"
-    bin_paths: ["find-unreferenced-xcode-files"]
+    bin_paths: ["find-unreferenced-xcode-files", "find_unreferenced_xcode_files"]
   - name: "Merge Xcode strings Files"
     author: "frizlab"
     note: "Original author was João Moreno but I rewrote pretty much everything."
     reason: "Obsoleted by LocMapper"
-    bin_paths: ["merge-strings"]
+    bin_paths: ["merge-strings", "merge_strings"]
   - name: "Markdown Render Opener"
     author: "frizlab"
     reason: "Not useful anymore; might re-create later if needed"

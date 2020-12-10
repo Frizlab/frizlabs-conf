@@ -35,7 +35,7 @@ function delete_bin() {
 	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
 	deleted_path="$dest_bin_dir/$script_name"
 	
-	CURRENT_TASK_NAME="delete ${deleted_path/#$HOME/\~}"
+	CURRENT_TASK_NAME="delete bin ${deleted_path/#$HOME/\~}"
 	catchout res   delete "$deleted_path"
 	log_task_from_res "$res"
 }
