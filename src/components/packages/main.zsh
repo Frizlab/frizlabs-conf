@@ -7,7 +7,7 @@ source "./lib/homebrew.zsh"
 CURRENT_TASK_NAME="main homebrew"
 catchout res  install_homebrew "$HOMEBREW_DIR"
 log_task_from_res "$res"
-for formula_name path_to_check in $MAIN_HOMEBREW_PACKAGES; do
+for formula_name path_to_check in ${(kv)MAIN_HOMEBREW_PACKAGES}; do
 	CURRENT_TASK_NAME="install $formula_name";   catchout res  install_brew_package "$HOMEBREW_DIR" "$formula_name" "$path_to_check";   log_task_from_res "$res"
 done
 
