@@ -21,11 +21,11 @@ readonly HOMEBREW_DIR="$CLT_DIR/homebrew"
 # and Python3 eggs installed with pip. This directory is not in the path. There
 # will only be the python3 (and related such as pip3) available as aliases. As
 # Python3 is the current Python, python by itself will also point to this.
-#readonly HOMEBREW_PYTHON3_DIR="$CLT_DIR/homebrew-python3"
+readonly HOMEBREW_PYTHON3_DIR="$CLT_DIR/homebrew-python3"
 # Python2 Homebrew instance. This instance should only have Python 2 installed,
 # and Python2 eggs installed with pip. This directory is not in the path. There
 # will only be the python2 (and related such as pip2) available as aliases.
-#readonly HOMEBREW_PYTHON2_DIR="$CLT_DIR/homebrew-python2"
+readonly HOMEBREW_PYTHON2_DIR="$CLT_DIR/homebrew-python2"
 
 # Ruby (gem) Packages
 readonly RUBY_DIR="$CLT_DIR/ruby"

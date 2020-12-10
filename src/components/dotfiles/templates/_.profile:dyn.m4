@@ -10,6 +10,11 @@
 # The Homebrew prefix. Mostly used by the conf scripts.
 export FRZ_HOMEBREW_PREFIX="___M4___HOMEBREW_DIR___M4___"
 
+# The Homebrew for Python 3 prefix. Only Python 3 should be installed in this prefix.
+export FRZ_HOMEBREW_PYTHON3_PREFIX="___M4___HOMEBREW_PYTHON3_DIR___M4___"
+# The Homebrew for Python 2 prefix. Only Python 2 should be installed in this prefix.
+export FRZ_HOMEBREW_PYTHON2_PREFIX="___M4___HOMEBREW_PYTHON2_DIR___M4___"
+
 # Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving
 # it a token will allow for more requests to GitHub.
 export HOMEBREW_GITHUB_API_TOKEN="___M4___HOMEBREW_GITHUB_TOKEN___M4___"
