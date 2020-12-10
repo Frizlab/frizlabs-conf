@@ -37,9 +37,7 @@ readonly NPM_DIR="$CLT_DIR/npm"
 readonly GO_DIR="$CLT_DIR/go"
 
 # Not -r because we modify this variable in the env specific vars file
-typeset -A MAIN_HOMEBREW_PACKAGES
-### Formulae ###
-MAIN_HOMEBREW_PACKAGES+=(
+typeset -A MAIN_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsed"
 	"git-lfs"             "bin/git-lfs"
@@ -66,8 +64,8 @@ MAIN_HOMEBREW_PACKAGES+=(
 	
 	"happn-tech/public/locmapper" "Cellar/locmapper"
 )
-### Casks ###
-MAIN_HOMEBREW_PACKAGES+=(
+# Not -r because we modify this variable in the env specific vars file
+typeset -A MAIN_HOMEBREW_CASKS=(
 	"frizlab/perso/my-web-quirks" "$HOME/Applications/My Web Quirks.app"
 	"happn-tech/public/base64"    "$HOME/Applications/base64.app"
 )
