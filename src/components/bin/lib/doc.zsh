@@ -20,7 +20,7 @@ function doc() {
 	doc_dest_path="$dest_doc_dir/$doc_basename"
 	
 	res=; res_list=()
-	CURRENT_TASK_NAME="install $local_relative_doc_path -> ${doc_dest_path/#$HOME/\~}"
+	CURRENT_TASK_NAME="install ${doc_dest_path/#$HOME/\~} (from $local_relative_doc_path)"
 	{ res_check "$res" &&   catchout res  folder "$dest_doc_dir" "755"                                     && res_list+=("$res") }
 	{ res_check "$res" &&   catchout res  folder "$backup_dir"   "$BIN_BACKUP_DIR_MODE"                    && res_list+=("$res") }
 	{ res_check "$res" &&   catchout res  linknbk "$local_doc_path" "$doc_dest_path" "644" "$backup_dir"   && res_list+=("$res") }

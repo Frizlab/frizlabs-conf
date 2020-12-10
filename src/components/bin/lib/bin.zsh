@@ -19,7 +19,7 @@ function bin() {
 	script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
 	res=; res_list=()
-	CURRENT_TASK_NAME="install $local_relative_script_path -> ${script_dest_path/#$HOME/\~}"
+	CURRENT_TASK_NAME="install ${script_dest_path/#$HOME/\~} (from $local_relative_script_path)"
 	{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"                            && res_list+=("$res") }
 	{ res_check "$res" &&   catchout res  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && res_list+=("$res") }
 	log_task_from_res_list res_list
