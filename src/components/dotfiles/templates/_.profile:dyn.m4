@@ -1,19 +1,17 @@
 #!/bin/sh
 # vim: ts=3 sw=3 noet
 # The shebang is not necessarily needed, but shellcheck wants it.
-# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+# \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 #
 #    THIS FILE IS MANAGED, ALL LOCAL EDITS WILL BE OVERWRITTEN!
 #
-# /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+# \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 
 # The Homebrew prefix. Mostly used by the conf scripts.
 export FRZ_HOMEBREW_PREFIX="___M4___HOMEBREW_DIR___M4___"
 
-# The Homebrew for Python 3 prefix. Only Python 3 should be installed in this prefix.
-export FRZ_HOMEBREW_PYTHON3_PREFIX="___M4___HOMEBREW_PYTHON3_DIR___M4___"
-# The Homebrew for Python 2 prefix. Only Python 2 should be installed in this prefix.
-export FRZ_HOMEBREW_PYTHON2_PREFIX="___M4___HOMEBREW_PYTHON2_DIR___M4___"
+# The Homebrew for Python 3.9 prefix. Only Python 3.9 should be installed in this prefix.
+export FRZ_HOMEBREW_PYTHON39_PREFIX="___M4___HOMEBREW_PYTHON39_DIR___M4___"
 
 # Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving
 # it a token will allow for more requests to GitHub.

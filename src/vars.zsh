@@ -17,15 +17,12 @@ readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
 
 # Main Homebrew instance directory
 readonly HOMEBREW_DIR="$CLT_DIR/homebrew"
-# Python3 Homebrew instance. This instance should only have Python 3 installed,
-# and Python3 eggs installed with pip. This directory is not in the path. There
-# will only be the python3 (and related such as pip3) available as aliases. As
-# Python3 is the current Python, python by itself will also point to this.
-readonly HOMEBREW_PYTHON3_DIR="$CLT_DIR/homebrew-python3"
-# Python2 Homebrew instance. This instance should only have Python 2 installed,
-# and Python2 eggs installed with pip. This directory is not in the path. There
-# will only be the python2 (and related such as pip2) available as aliases.
-readonly HOMEBREW_PYTHON2_DIR="$CLT_DIR/homebrew-python2"
+# The x86 Homebrew instance directory; only installed on macOS ARM
+readonly HOMEBREW_X86_DIR="$CLT_DIR/homebrew-x86"
+# Python3.9 Homebrew instance. Should only have Python3.9 installed, and the eggs installed with pip.
+readonly HOMEBREW_PYTHON39_DIR="$CLT_DIR/homebrew-python3.9"
+# Python 3.8 does not compile (yet?) w/ Homebrew on macOS 11
+#readonly HOMEBREW_PYTHON38_DIR="$CLT_DIR/homebrew-python3.8"
 
 # Ruby (gem) Packages
 readonly RUBY_DIR="$CLT_DIR/ruby"
