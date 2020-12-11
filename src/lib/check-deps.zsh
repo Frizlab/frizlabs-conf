@@ -7,9 +7,9 @@ case "$HOST_OS" in
 		}
 	;;
 	"Linux")
-		# ccdecrypt and m4 are the only truly required dependencies. Other
+		# ccdecrypt, curl and m4 are the only truly required dependencies. Other
 		# binaries are needed _after_ the configuration is installed.
-		readonly DEPS=("ccdecrypt" "git" "locale-gen" "m4")
+		readonly DEPS=("ccdecrypt" "curl" "git" "locale-gen" "m4")
 		for dep in $DEPS; do
 			command -v "$dep" >/dev/null 2>&1 || {
 				echo "The following dependencies are required (at least one of them is missing): $DEPS" >&2
