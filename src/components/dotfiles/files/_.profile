@@ -24,7 +24,7 @@ export EDITOR="vi"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# PATH Management
+# PATH Management is done in .profile:dyn
 export PATH="${FRZ_HOMEBREW_PREFIX}/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
 export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
 export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@3/bin:${PATH}"; # And Python3…
