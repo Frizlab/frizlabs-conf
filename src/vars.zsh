@@ -37,16 +37,13 @@ readonly GO_DIR="$CLT_DIR/go"
 typeset -A MAIN_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsed"
-#	"git-lfs"             "bin/git-lfs"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
 	"jq"                  "bin/jq"
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
-#	"pass"                "bin/pass"
 	"recode"              "bin/recode"
 	"rsync"               "bin/rsync"
-#	"shellcheck"          "bin/shellcheck"
 	"speedtest-cli"       "bin/speedtest-cli"
 	"the_silver_searcher" "bin/ag"
 	"tmux"                "bin/tmux"
@@ -54,13 +51,21 @@ typeset -A MAIN_HOMEBREW_FORMULAE=(
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
 	"youtube-dl"          "bin/youtube-dl"
-#	"yq"                  "bin/yq"
 	
 	"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
 	
 	"mxcl/made/swift-sh" "bin/swift-sh"
 	
 	"happn-tech/public/locmapper" "Cellar/locmapper"
+)
+# The following formulae do not compile (et time of writing) on ARM macOS
+# They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this
+# variable as everything will work natively on ARM.
+typeset -A X86_HOMEBREW_FORMULAE=(
+	"git-lfs"             "bin/git-lfs"
+	"pass"                "bin/pass"
+	"shellcheck"          "bin/shellcheck"
+	"yq"                  "bin/yq"
 )
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_HOMEBREW_CASKS=(

@@ -9,6 +9,9 @@ function install_homebrew() {
 
 ## Usage: install_brew_package brew_prefix package_name path_to_check
 function install_brew_package() {
+	arch_launch=()
+	if test "$1" = "--force-x86"; then shift; arch_launch=("arch" "-x86_64"); fi
+	
 	brew_prefix="$1"
 	package_name="$2"
 	path_to_check="$3"
@@ -20,6 +23,6 @@ function install_brew_package() {
 	HOMEBREW_NO_ANALYTICS=1 \
 	HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 \
 	HOMEBREW_CASK_OPTS="'--appdir=$HOME/Applications' '--skip-cask-deps' '--no-binaries'" \
-	"$brew_prefix/bin/brew" install "$@" -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install using brew in prefix $brew_prefix"; echo "failed"; return }
+	"${arch_launch[@]}" "$brew_prefix/bin/brew" install "$@" -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install using brew in prefix $brew_prefix"; echo "failed"; return }
 	echo "changed"
 }
