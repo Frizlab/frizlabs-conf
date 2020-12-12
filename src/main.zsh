@@ -47,6 +47,7 @@ source "$LIB_FOLDER/files.zsh"
 source "$LIB_FOLDER/links.zsh"
 source "$LIB_FOLDER/templates.zsh"
 source "$LIB_FOLDER/defaults.zsh"
+source "$LIB_FOLDER/homebrew.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
 
@@ -58,7 +59,7 @@ source "$SRC_FOLDER/vars.zsh"
 # Note: We do **not** handle dependencies…
 components_to_run=("$@")
 if test ${#components_to_run[@]} -eq 0; then
-	components_to_run=("core" "dotfiles" "bin" "packages" "defaults")
+	components_to_run=("core" "dotfiles" "bin" "defaults")
 fi
 
 max_component_width=0

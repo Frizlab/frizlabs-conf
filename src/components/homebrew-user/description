@@ -1,0 +1,1 @@
+Installs Homebrew in ~/clt/homebrew, and an x86 Homebrew in ~/clt/homebrew-x86 if needed.

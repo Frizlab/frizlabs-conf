@@ -1,7 +1,5 @@
 # Install some package managers
 
-source "./lib/homebrew.zsh"
-
 
 # First a normal Homebrew install, in $HOMEBREW_DIR, w/ its formulae and casks.
 CURRENT_TASK_NAME="install main homebrew"; catchout res  install_homebrew "$HOMEBREW_DIR"; log_task_from_res "$res"

@@ -1,0 +1,1 @@
+(sudo) Installs Nix (multi-user, w/ an unencrypted /nix volume on macOS).
