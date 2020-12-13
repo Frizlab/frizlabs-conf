@@ -22,7 +22,7 @@ function detemplate() {
 		m4_args+=("-D___M4___${var}___M4___=$value")
 	done
 	IFS="$OLD_IFS"
-	eval m4 --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" || { log_task_failure "cannot run m4"; echo "failed"; return }
+	eval m4 --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" 2>/dev/null || { log_task_failure "cannot run m4"; echo "failed"; return }
 	grep -E '^[^#]' "$tmpl_tmpfile" | grep -qE '___M4___[A-Za-z0-9_]*___M4___' && { log_task_failure "it seems there are undefined variables in the file"; echo "failed"; return }
 	
 	# Next we move the temporary file if needed at the destination
