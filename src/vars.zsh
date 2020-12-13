@@ -65,6 +65,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"jq"                  "bin/jq"
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
+	"pass"                "bin/pass"
 	"recode"              "bin/recode"
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
@@ -87,7 +88,6 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 # variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 	"git-lfs"             "bin/git-lfs"
-	"pass"                "bin/pass"
 	"shellcheck"          "bin/shellcheck"
 	"yq"                  "bin/yq"
 )
