@@ -98,11 +98,11 @@ typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_USER_HOMEBREW_CASKS=(
-	"frizlab/perso/my-web-quirks" "$HOME/Applications/My Web Quirks.app"
+	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
 	
-	"happn-tech/public/base64"           "$HOME/Applications/base64.app"
-	"happn-tech/public/locmapper-app"    "$HOME/Applications/LocMapper.app"
-	"happn-tech/public/locmapper-linter" "$HOME/Applications/LocMapper Linter.app"
+	"happn-tech/public/base64"           "Caskroom/base64"
+	"happn-tech/public/locmapper-app"    "Caskroom/locmapper-app"
+	"happn-tech/public/locmapper-linter" "Caskroom/locmapper-linter"
 )
 
 
