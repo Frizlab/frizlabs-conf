@@ -9,6 +9,12 @@ CURRENT_TASK_NAME="clt dir"
 { test "$HOST_OS" = "Darwin" && res_check "$res" &&   catchout res flags  "$CLT_DIR" "hidden"          && res_list+=("$res") }
 log_task_from_res_list res_list
 
+CURRENT_TASK_NAME=".config dir"
+{                               res_check "$res" &&   catchout res folder "$HOME/.config" "700"             && res_list+=("$res") }
+{ test "$HOST_OS" = "Darwin" && res_check "$res" &&   catchout res acl    "$HOME/.config" "$expected_acl"   && res_list+=("$res") }
+{ test "$HOST_OS" = "Darwin" && res_check "$res" &&   catchout res flags  "$HOME/.config" "hidden"          && res_list+=("$res") }
+log_task_from_res_list res_list
+
 if test "$HOST_OS" = "Darwin"; then
 	res=; res_list=()
 	CURRENT_TASK_NAME="app dir"
