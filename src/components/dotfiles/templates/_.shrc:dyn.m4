@@ -8,12 +8,12 @@
 # \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 
 # brew aliases
-alias brew='___M4___HOMEBREW_DIR___M4___/bin/brew'
+alias brew='___M4___HOMEBREW_NATIVE_USER_DIR___M4___/bin/brew'
 m4_dnl # These are the brew aliases, for the different arches.
 m4_dnl # We only do this on macOS; for Linux we always use the “native” brew.
 m4_ifelse(___M4___HOST_OS___M4___, `Darwin',m4_dnl
 m4_ifelse(___M4___HOST_ARCH___M4___, `arm64',m4_dnl
-alias brew-x86='arch -x86_64 ___M4___HOMEBREW_X86_DIR___M4___/bin/brew'
+alias brew-x86='arch -x86_64 ___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew'
 alias brew-arm64='brew',
 m4_dnl
 alias brew-x86='brew'
@@ -32,10 +32,11 @@ $3alias python$2='$1/bin/python$2'
 $3alias python$2-config='$1/bin/python$2-config'
 )m4_dnl
 m4_dnl
-frzm4_python_def(___M4___HOMEBREW_PYTHON39_DIR___M4___, 3.9)
-m4_dnl # Python 3.8 and 3.7 disabled because do not compile on macOS Big Sur
-frzm4_python_def(___M4___HOMEBREW_PYTHON39_DIR___M4___, 3.8, `#')
-frzm4_python_def(___M4___HOMEBREW_PYTHON39_DIR___M4___, 3.7, `#')
+frzm4_python_def(___M4___HOMEBREW_PYTHON39_USER_DIR___M4___, 3.9)
+m4_dnl # Python 3.8, 3.7 and 2.7 disabled because do not compile on macOS Big Sur
+frzm4_python_def(___M4___HOMEBREW_PYTHON38_USER_DIR___M4___, 3.8, `#')
+frzm4_python_def(___M4___HOMEBREW_PYTHON37_USER_DIR___M4___, 3.7, `#')
+frzm4_python_def(___M4___HOMEBREW_PYTHON27_USER_DIR___M4___, 2.7, `#')
 m4_dnl
 # More Python aliases (upgrade all pip eggs)
 alias pip39-upgrade-all='pip3.9 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.9 install --upgrade'
