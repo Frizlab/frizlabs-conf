@@ -20,12 +20,18 @@ readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
 # The arm64 user Homebrew instance directory
 readonly HOMEBREW_ARM64_USER_DIR="$CLT_DIR/homebrew-arm64"
 
-# Will be a link to the native user Homebrew instance
+# We will link this path to the native user Homebrew instance
 readonly HOMEBREW_NATIVE_USER_DIR="$CLT_DIR/homebrew"
 
 # Main system Homebrew instance directories (official installation paths)
-readonly HOMEBREW_X86_SYSTEM_DIR="/usr/local"
-readonly HOMEBREW_ARM64_SYSTEM_DIR="/opt/homebrew"
+if test "$HOST_OS" = "Darwin"; then
+	readonly HOMEBREW_X86_SYSTEM_DIR="/usr/local"
+	readonly HOMEBREW_ARM64_SYSTEM_DIR="/opt/homebrew"
+else
+	readonly HOMEBREW_X86_SYSTEM_DIR="/home/linuxbrew/.linuxbrew"
+	# Official installation path does not exist (yet?)
+	readonly HOMEBREW_ARM64_SYSTEM_DIR="/home/linuxbrew/.linuxbrew-arm64"
+fi
 
 if test "$HOST_OS:$HOST_ARCH" != "Darwin:arm64"; then
 	readonly HOMEBREW_USER_DIR="$HOMEBREW_X86_USER_DIR"
@@ -60,6 +66,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
 	"recode"              "bin/recode"
+#	"ruby"                "bin/recode"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
 	"the_silver_searcher" "bin/ag"
