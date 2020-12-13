@@ -53,6 +53,25 @@ function delete() {
 }
 
 ##
+## Usage: copy src dest mode
+## In practice the linknbk function should be preferred over a copy.
+## Example: copy ./_.bashrc.scp ~/.bashrc 600
+function copy() {
+	src="$1"
+	dest="$2"
+	mode="$3"
+	
+	# First we check the destination file is not a folder
+	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	
+	diff -- "$src" "$dest" >/dev/null 2>&1 && test "$(stat -c %a "$dest" 2>/dev/null || stat -f %Lp "$dest" 2>/dev/null)" = "$mode" && { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	
+	cp -f -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
+	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	echo "changed"
+}
+
+##
 ## Usage: decrypt_and_copy src dest mode
 ## Example: decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
 function decrypt_and_copy() {
@@ -65,7 +84,7 @@ function decrypt_and_copy() {
 	
 	# Then we decrypt the source file at a temporary location
 	decrcpy_tmpfile=$(mktemp) || { log_task_failure "cannot create temporary file"; echo "failed"; return }
-	cp -f -- "$local_script_path" "$decrcpy_tmpfile" >/dev/null 2>&1 || { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
+	cp -f -- "$src" "$decrcpy_tmpfile" >/dev/null 2>&1 || { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
 	decrypt --suffix "" -- "$decrcpy_tmpfile" || { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
 	diff -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a "$dest" 2>/dev/null || stat -f %Lp "$dest" 2>/dev/null)" = "$mode" && { rm -f "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
