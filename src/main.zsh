@@ -64,9 +64,11 @@ if test ${#components_to_run[@]} -eq 0; then
 		"dotfiles"
 		"bin"
 		"defaults"
-		"homebrew-user" "homebrew-user-pythons"
-		"homebrew-system"
-		"pkgs-brew-user-base"
+		
+		"nix"             "pkgs-nix-base"
+		"homebrew-user"   "pkgs-brew-user-base"
+		"homebrew-system" "pkgs-brew-system-base"
+		"homebrew-user-pythons"
 	)
 fi
 
