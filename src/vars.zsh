@@ -57,6 +57,19 @@ readonly NPM_DIR="$CLT_DIR/npm"
 readonly GO_DIR="$CLT_DIR/go"
 
 # Not -r because we modify this variable in the env specific vars file
+typeset -a COMPONENTS=(
+	"core"
+	"dotfiles"
+	"bin"
+	"defaults"
+	
+#	"nix"             "pkgs-nix-base"
+	"homebrew-user"   "pkgs-brew-user-base"
+	"homebrew-system" "pkgs-brew-system-base"
+	"homebrew-user-pythons"
+)
+
+# Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsort"
