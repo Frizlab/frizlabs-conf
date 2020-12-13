@@ -6,43 +6,79 @@
 #    THIS FILE IS MANAGED, ALL LOCAL EDITS WILL BE OVERWRITTEN!
 #
 # \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
+m4_changecom(`m4_#')m4_dnl
 
-# PATH Management
-export PATH="___M4___HOMEBREW_PREFIX___M4___/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby because the system’s is old and some gems fail to install/update
-export PATH="___M4___HOMEBREW_PYTHON39_PREFIX___M4___/bin:${PATH}"; # We force using Homebrew’s Python3.9…
-export PATH="___M4___HOMEBREW_PYTHON39_PREFIX___M4___/opt/python@3.9/libexec/bin:${PATH}"; # And Python3 when using an unversioned “python”
-export PATH="${PATH}:/usr/local/sbin"
-export PATH="${PATH}:${HOME}/usr/bin"
-export PATH="${PATH}:${FRZ_HOMEBREW_PREFIX}/bin"
-export PATH="${PATH}:${HOME}/usr/cappuccino/bin"
-#export PATH="${PATH}:${HOME}/Library/Python/*/bin"; # For system Python when installing in user path
-export PATH="${PATH}:${HOME}/usr/ruby/bin"
-export PATH="${PATH}:${HOME}/usr/npm/bin"
-export PATH="${PATH}:${HOME}/usr/go/bin"
-export PATH="${PATH}:${HOME}/.krew/bin"
-export PATH="${PATH}:."
 
-# Compilation options management for custom install brew
-export LDFLAGS="${LDFLAGS} -L${FRZ_HOMEBREW_PREFIX}/lib"
-export CFLAGS="${CFLAGS} -I${FRZ_HOMEBREW_PREFIX}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${FRZ_HOMEBREW_PREFIX}/lib/pkgconfig"
+### PATH Management ###
+
+# Default PATH is (or was, when checked): /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+# We remove /usr/local/bin; we’ll add it later, _after_ /usr/bin & co
+PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
+
+# We force the brew installation of the following binaries:
+#    - ruby: system’s ruby is old and some gems fail to install/update;
+#    - rsync: system’s rsync is very old.
+#    - python*: because pip (don’t talk to me about pip, it makes me angry);
+#               note: we use a separate brew instance for Python.
+#               note: any binaries installed w/ pip will purposefully **not** be in the PATH
+# So the paths to the parent folder of these binaries will be first in the path.
+PATH="___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/bin:${PATH}"
+PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/ruby/bin:${PATH}"
+PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/rsync/bin:${PATH}"
+
+# Next we want to use the system binaries as much as possible. So we do not put
+# anything else than the override above in front of the PATH.
+# Above all, the 1st and 3rd party bin folders win
+PATH="${PATH}:___M4___FIRST_PARTY_BIN_DIR___M4___"
+PATH="${PATH}:___M4___THIRD_PARTY_BIN_DIR___M4___"
+# Then the user homebrew(s) – WHICH MEANS THE DEFAULT HOMEBREW IS THE USER ONE
+#                             (Note: This is enforced in .shrc:dyn)
+PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/bin"
+PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/sbin"
+m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',m4_dnl
+PATH="${PATH}:___M4___HOMEBREW_X86_USER_DIR___M4___/bin"
+PATH="${PATH}:___M4___HOMEBREW_X86_USER_DIR___M4___/sbin"
+)m4_dnl
+# Then the system homebrew(s)
+PATH="${PATH}:___M4___HOMEBREW_SYSTEM_DIR___M4___/bin"
+PATH="${PATH}:___M4___HOMEBREW_SYSTEM_DIR___M4___/sbin"
+m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',m4_dnl
+PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin"
+PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/sbin"
+)m4_dnl
+# After that we add /usr/local bin and sbin (note: they are probably already
+# added with the system homebrew)
+PATH="${PATH}:/usr/local/bin"
+PATH="${PATH}:/usr/local/sbin"
+PATH="${PATH}:___M4___CLT_DIR___M4___/cappuccino/bin"
+#PATH="${PATH}:___M4___CLT_DIR___M4___/ruby/bin"
+#PATH="${PATH}:___M4___CLT_DIR___M4___/npm/bin"
+#PATH="${PATH}:___M4___CLT_DIR___M4___/go/bin"
+#PATH="${PATH}:${HOME}/.krew/bin"
+PATH="${PATH}:."
+
+# Export PATH in case it was not exported.
+export PATH
+
+# We do _not_ set PKG_CONFIG_PATH & co by design to be closer to a pristine
+# macOS install by default.
 
 # Python
-# --> We use the brewed Python. Nothing fancy to do for Python!
+# --> We use the brewed Python
 #     Eggs are installed in homebrew prefix with pip2 or pip3.
 
 # Ruby
-export GEM_HOME="${HOME}/usr/ruby"
+export GEM_HOME="___M4___CLT_DIR___M4___/ruby"
 
 # Cappuccino
 export NARWHAL_ENGINE=jsc
 export CAPP_BUILD="${HOME}/Library/Caches/Cappuccino/DerivedData"
 
 # NPM
-export NPM_CONFIG_PREFIX="${HOME}/usr/npm"
+export NPM_CONFIG_PREFIX="___M4___CLT_DIR___M4___/npm"
 
 # Go
-export GOPATH="${HOME}/usr/go"
+export GOPATH="___M4___CLT_DIR___M4___/go"
 
 
 # Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving

@@ -18,7 +18,7 @@ echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 
-# PATH and compilation env management is done in .profile:dyn
+# PATH and other env var depending on conf variables is done in .profile:dyn
 
 # We use vi, the only real editor
 export EDITOR="vi"

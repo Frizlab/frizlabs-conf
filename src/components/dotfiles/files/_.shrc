@@ -43,7 +43,10 @@ alias cd..='cd ..'
 alias kill_dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
-# brew, ruby and python aliases are all defined in .shrc:dyn
+alias pip39-upgrade-all='pip3.9 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.9 install --upgrade'
+#alias pip38-upgrade-all='pip3.8 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.8 install --upgrade'
+#alias pip37-upgrade-all='pip3.7 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.7 install --upgrade'
+alias pip-upgrade-all='pip39-upgrade-all';# pip38-upgrade-all; pip37-upgrade-all'
 alias upgrade_packages="brew update; brew upgrade; gem update; pip-upgrade-all"
 alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; gem update; pip-upgrade-all"
 
