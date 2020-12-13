@@ -59,7 +59,7 @@ readonly GO_DIR="$CLT_DIR/go"
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
-	"coreutils"           "bin/gsed"
+	"coreutils"           "bin/gsort"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
 	"jq"                  "bin/jq"
