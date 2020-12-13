@@ -1,0 +1,17 @@
+# Install an admin-owned Homebrew
+
+case "$HOST_OS:$HOST_ARCH" in
+	"Darwin:arm64")
+		CURRENT_TASK_NAME="install system homebrew arm64"; catchout res  install_homebrew                         "$HOMEBREW_ARM64_SYSTEM_DIR"; log_task_from_res "$res"
+		CURRENT_TASK_NAME="install system homebrew x86";   catchout res  install_homebrew "--force-arch" "x86_64" "$HOMEBREW_X86_SYSTEM_DIR";   log_task_from_res "$res"
+	;;
+	
+	Darwin:x86_64|Linux:*)
+		CURRENT_TASK_NAME="install system homebrew x86";   catchout res  install_homebrew "$HOMEBREW_X86_SYSTEM_DIR"; log_task_from_res "$res"
+	;;
+	
+	*)
+		CURRENT_TASK_NAME="install system homebrew (unknown arch)"
+		log_task_failure "cannot install system homebrew on unknown arch"
+	;;
+esac

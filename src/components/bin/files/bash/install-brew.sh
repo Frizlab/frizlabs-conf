@@ -22,7 +22,7 @@ readonly LOCAL_HOMEBREW_INSTALL="$1"
 readonly BREW="${LOCAL_HOMEBREW_INSTALL}/bin/brew"
 
 if [ ! -x "$BREW" ]; then
-	if [ -e "$LOCAL_HOMEBREW_INSTALL" ]; then
+	if [ -e "$LOCAL_HOMEBREW_INSTALL" -a "$(ls $LOCAL_HOMEBREW_INSTALL | wc -l)" -gt 0 ]; then
 		echo "brew binary does not exist at path '$BREW', but '$LOCAL_HOMEBREW_INSTALL' exists." >&2
 		exit 3
 	fi

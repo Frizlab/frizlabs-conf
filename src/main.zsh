@@ -65,6 +65,7 @@ if test ${#components_to_run[@]} -eq 0; then
 		"bin"
 		"defaults"
 		"homebrew-user" "homebrew-user-pythons"
+		"homebrew-system"
 		"pkgs-brew-user-base"
 	)
 fi
