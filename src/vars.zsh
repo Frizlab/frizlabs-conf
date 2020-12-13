@@ -66,7 +66,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
 	"recode"              "bin/recode"
-#	"ruby"                "bin/recode"
+	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
 	"the_silver_searcher" "bin/ag"
