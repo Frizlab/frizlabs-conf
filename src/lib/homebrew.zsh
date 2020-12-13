@@ -1,16 +1,19 @@
 # Homebrew install
 function install_homebrew() {
+	local -a arch_launch
+	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
+	
 	dir="$1"
 	
 	test ! -x "$dir/bin/brew" || { echo "ok"; return }
-	"$SRC_FOLDER/components/bin/files/bash/install-brew.sh" "$dir" >/dev/null 2>&1 || { log_task_failure "cannot install homebrew at path $dir"; echo "failed"; return }
+	"${arch_launch[@]}" "$SRC_FOLDER/components/bin/files/bash/install-brew.sh" "$dir" >/dev/null 2>&1 || { log_task_failure "cannot install homebrew at path $dir"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Usage: install_brew_package brew_prefix package_name path_to_check
 function install_brew_package() {
-	arch_launch=()
-	if test "$1" = "--force-x86"; then shift; arch_launch=("arch" "-x86_64"); fi
+	local -a arch_launch
+	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
 	
 	brew_prefix="$1"
 	package_name="$2"

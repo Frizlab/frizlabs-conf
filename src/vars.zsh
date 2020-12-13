@@ -15,12 +15,28 @@ readonly THIRD_PARTY_CLT_DIR="$CLT_DIR/3rd-party-ad-hoc"
 readonly THIRD_PARTY_BIN_DIR="$THIRD_PARTY_CLT_DIR/bin"
 readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
 
-# Main Homebrew instance directory
-readonly HOMEBREW_DIR="$CLT_DIR/homebrew"
-# The x86 Homebrew instance directory; only installed on macOS ARM
-readonly HOMEBREW_X86_DIR="$CLT_DIR/homebrew-x86"
-# Python3.9 Homebrew instance. Should only have Python3.9 installed, and the eggs installed with pip.
-readonly HOMEBREW_PYTHON39_DIR="$CLT_DIR/homebrew-python3.9"
+# The x86 user Homebrew instance directory
+readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
+# The arm64 user Homebrew instance directory
+readonly HOMEBREW_ARM64_USER_DIR="$CLT_DIR/homebrew-arm64"
+
+# Will be a link to the native user Homebrew instance
+readonly HOMEBREW_NATIVE_USER_DIR="$CLT_DIR/homebrew"
+
+# Main system Homebrew instance directories (official installation paths)
+readonly HOMEBREW_X86_SYSTEM_DIR="/usr/local"
+readonly HOMEBREW_ARM64_SYSTEM_DIR="/opt/homebrew"
+
+if test "$HOST_OS:$HOST_ARCH" != "Darwin:arm64"; then
+	readonly HOMEBREW_USER_DIR="$HOMEBREW_X86_USER_DIR"
+	readonly HOMEBREW_SYSTEM_DIR="$HOMEBREW_X86_SYSTEM_DIR"
+else
+	readonly HOMEBREW_USER_DIR="$HOMEBREW_ARM64_USER_DIR"
+	readonly HOMEBREW_SYSTEM_DIR="$HOMEBREW_ARM64_SYSTEM_DIR"
+fi
+
+# Python3.9 (user) Homebrew instance. Should only have Python3.9 installed, and the eggs installed with pip.
+readonly HOMEBREW_PYTHON39_USER_DIR="$CLT_DIR/homebrew-python3.9"
 # Python 3.8 does not compile (yet?) w/ Homebrew on macOS 11
 #readonly HOMEBREW_PYTHON38_DIR="$CLT_DIR/homebrew-python3.8"
 
@@ -34,7 +50,7 @@ readonly NPM_DIR="$CLT_DIR/npm"
 readonly GO_DIR="$CLT_DIR/go"
 
 # Not -r because we modify this variable in the env specific vars file
-typeset -A MAIN_HOMEBREW_FORMULAE=(
+typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsed"
 	"gti"                 "bin/gti"
@@ -61,14 +77,19 @@ typeset -A MAIN_HOMEBREW_FORMULAE=(
 # The following formulae do not compile (et time of writing) on ARM macOS
 # They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this
 # variable as everything will work natively on ARM.
-typeset -A X86_HOMEBREW_FORMULAE=(
+typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 	"git-lfs"             "bin/git-lfs"
 	"pass"                "bin/pass"
 	"shellcheck"          "bin/shellcheck"
 	"yq"                  "bin/yq"
 )
+
 # Not -r because we modify this variable in the env specific vars file
-typeset -A MAIN_HOMEBREW_CASKS=(
+typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
+)
+
+# Not -r because we modify this variable in the env specific vars file
+typeset -A MAIN_USER_HOMEBREW_CASKS=(
 	"frizlab/perso/my-web-quirks" "$HOME/Applications/My Web Quirks.app"
 	
 	"happn-tech/public/base64"           "$HOME/Applications/base64.app"

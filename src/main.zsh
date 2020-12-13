@@ -59,7 +59,14 @@ source "$SRC_FOLDER/vars.zsh"
 # Note: We do **not** handle dependencies…
 components_to_run=("$@")
 if test ${#components_to_run[@]} -eq 0; then
-	components_to_run=("core" "dotfiles" "bin" "defaults")
+	components_to_run=(
+		"core"
+		"dotfiles"
+		"bin"
+		"defaults"
+		"homebrew-user" "homebrew-user-pythons"
+		"pkgs-brew-user-base"
+	)
 fi
 
 max_component_width=0
