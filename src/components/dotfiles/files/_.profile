@@ -18,33 +18,14 @@ echo "START: .profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 
+# PATH and compilation env management is done in .profile:dyn
+
+# We use vi, the only real editor
 export EDITOR="vi"
 
 # Locale fix env
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# PATH Management is done in .profile:dyn
-export PATH="${FRZ_HOMEBREW_PREFIX}/opt/ruby/bin:${PATH}"; # We force using Homebrew’s ruby
-export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@2/bin:${PATH}"; # We force using Homebrew’s Python2…
-export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@3/bin:${PATH}"; # And Python3…
-export PATH="${FRZ_HOMEBREW_PREFIX}/opt/python@3/libexec/bin:${PATH}"; # Using Python3 when using an unversioned “python”
-export PATH="${PATH}:/usr/local/sbin"
-export PATH="${PATH}:${HOME}/usr/bin"
-export PATH="${PATH}:${FRZ_HOMEBREW_PREFIX}/bin"
-export PATH="${PATH}:${HOME}/usr/cappuccino/bin"
-#export PATH="${PATH}:${HOME}/Library/Python/*/bin"; # For system Python when installing in user path
-export PATH="${PATH}:${HOME}/usr/ruby/bin"
-export PATH="${PATH}:${HOME}/usr/npm/bin"
-export PATH="${PATH}:${HOME}/usr/go/bin"
-export PATH="${PATH}:${HOME}/.krew/bin"
-export PATH="${PATH}:."
-
-# Compilation options management for custom install brew
-export LDFLAGS="${LDFLAGS} -L${FRZ_HOMEBREW_PREFIX}/lib"
-export CFLAGS="${CFLAGS} -I${FRZ_HOMEBREW_PREFIX}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${FRZ_HOMEBREW_PREFIX}/lib/pkgconfig"
-
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
@@ -61,28 +42,6 @@ export HOMEBREW_CASK_OPTS="'--appdir=$HOME/Applications' '--no-binaries' '--skip
 # GPG
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
-
-
-# Python
-# --> We use the brewed Python. Nothing fancy to do for Python!
-#     Eggs are installed in homebrew prefix with pip2 or pip3.
-
-
-# Ruby
-export GEM_HOME="${HOME}/usr/ruby"
-
-
-# Cappuccino
-export NARWHAL_ENGINE=jsc
-export CAPP_BUILD="${HOME}/Library/Caches/Cappuccino/DerivedData"
-
-
-# NPM
-export NPM_CONFIG_PREFIX="${HOME}/usr/npm"
-
-
-# Go
-export GOPATH="${HOME}/usr/go"
 
 
 
