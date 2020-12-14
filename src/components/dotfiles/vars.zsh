@@ -41,5 +41,7 @@ readonly DOTFILE_FILES=(
 readonly DOTFILE_TEMPLATES=(
 	".profile:dyn"
 	".shrc:dyn"
+	".zshrc:dyn"
+	".bashrc:dyn"
 	".vimrc:dyn"
 )

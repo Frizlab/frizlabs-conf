@@ -9,11 +9,15 @@ readonly CLT_DIR="$HOME/clt"
 readonly FIRST_PARTY_CLT_DIR="$CLT_DIR/1st-party-ad-hoc"
 readonly FIRST_PARTY_BIN_DIR="$FIRST_PARTY_CLT_DIR/bin"
 readonly FIRST_PARTY_SHARE_DIR="$FIRST_PARTY_CLT_DIR/share"
+readonly FIRST_PARTY_BASH_COMPLETIONS="$FIRST_PARTY_SHARE_DIR/bash/completions"
+readonly FIRST_PARTY_ZSH_SITE_FUNCTIONS="$FIRST_PARTY_SHARE_DIR/zsh/site-functions"
 
 # Other binaries and scripts
 readonly THIRD_PARTY_CLT_DIR="$CLT_DIR/3rd-party-ad-hoc"
 readonly THIRD_PARTY_BIN_DIR="$THIRD_PARTY_CLT_DIR/bin"
 readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
+readonly THIRD_PARTY_BASH_COMPLETIONS="$THIRD_PARTY_SHARE_DIR/bash/completions"
+readonly THIRD_PARTY_ZSH_SITE_FUNCTIONS="$THIRD_PARTY_SHARE_DIR/zsh/site-functions"
 
 # The x86 user Homebrew instance directory
 readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
