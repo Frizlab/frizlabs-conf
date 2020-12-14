@@ -20,9 +20,6 @@ readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
 # The arm64 user Homebrew instance directory
 readonly HOMEBREW_ARM64_USER_DIR="$CLT_DIR/homebrew-arm64"
 
-# We will link this path to the native user Homebrew instance – not really used…
-readonly HOMEBREW_NATIVE_USER_DIR="$CLT_DIR/homebrew"
-
 # Main system Homebrew instance directories (official installation paths)
 if test "$HOST_OS" = "Darwin"; then
 	readonly HOMEBREW_X86_SYSTEM_DIR="/usr/local"
