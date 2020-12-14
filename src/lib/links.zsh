@@ -14,7 +14,7 @@ function lnk() {
 	test "$(readlink "$dst" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$(stat -f %Lp "$dst" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
 	
 	ln -sf "$src" "$dst" >/dev/null 2>&1 || { log_task_failure "ln failed"; echo "failed"; return }
-	{ test "$HOST_OS" != "Darwin" || chmod -h "$lnkmode" "$dest" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $folder_name"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || chmod -h "$lnkmode" "$dst" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
 
