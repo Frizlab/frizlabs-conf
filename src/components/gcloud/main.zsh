@@ -22,7 +22,15 @@ if test -n "$tar_url"; then
 	log_task_from_res_list res_list
 	
 	CURRENT_TASK_NAME="add gcloud to PATH"
-	catchout res  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/090-gougle-cloud-sdk.sh" "644"
+	# We purposefully _not_ use path.zsh.inc (or path.bash.inc) because we want gougle’s path to be *last*.
+	catchout res  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
+	log_task_from_res "$res"
+	
+	CURRENT_TASK_NAME="install zsh completion"
+	catchout res  lnk "$GCLOUD_DIR/completion.zsh.inc"  "$HOME/.zshrc.d/590-gougle-cloud-sdk-completion.sh"  "600"
+	log_task_from_res "$res"
+	CURRENT_TASK_NAME="install bash completion"
+	catchout res  lnk "$GCLOUD_DIR/completion.bash.inc" "$HOME/.bashrc.d/590-gougle-cloud-sdk-completion.sh" "600"
 	log_task_from_res "$res"
 else
 	log_task_failure "cannot install gcloud (unable to infer gcloud URL from platform/arch)"
