@@ -24,6 +24,10 @@ CURRENT_TASK_NAME="do not switch to space w/ open window for app when app activa
 catchout res  defaults_set_bool NSGlobalDomain AppleSpacesSwitchOnActivate 0
 log_task_from_res "$res"
 
+CURRENT_TASK_NAME="cycle through all UI elements w/ tab"
+catchout res  defaults_set_int NSGlobalDomain AppleKeyboardUIMode 2
+log_task_from_res "$res"
+
 res=; res_list=()
 CURRENT_TASK_NAME="set top-left corner action"
 { res_check "$res" &&   catchout res  defaults_set_int com.apple.dock wvous-tl-corner   2 && res_list+=("$res") }
