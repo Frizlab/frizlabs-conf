@@ -1,28 +1,40 @@
 = Frizlab’s Conf
 François Lamboley <fload@me.com>
 
-Use at your own risks.
+Originally based on https://github.com/wincent/wincent[wincent’s conf], I then
+realized Ansible was too complex and had too many dependencies to continue using
+it for managing dotfiles and some defaults. (Funnily enough, wincent seems to
+have reached the same conclusion as me and switched away from Ansible in his
+conf repo too!)
 
-Heavily based on https://github.com/wincent/wincent[wincent’s conf] for the
-Ansible setup.
+The repo is now pure zsh. You can try and install it at home using `./install`.
+When prompted for the passphrase, just leave it empty; the actions requiring the
+password will simply fail. On macOS, the command-line tools are enough to use
+this repo; on Linux you should install `ccrypt`, `curl`, `git`, `locale-gen` and
+`m4`.
 
-Run `./run-ansible help` for info. Note that Python3 is required for all of this
-to work:
-```
-Ansible works fine with Python 2, and Python 2 is the only Python
-installed on macOS by default. Would it make sense to use Python2
-instead of Python 3? Yes. However I consider Python 2 as obsolete
-(and so does Python: https://www.python.org/dev/peps/pep-0373/).
-Thus, I force the usage of Python 3 whenever I can…
+⚠️ Use at your own risks! This repo installs defaults I’m confortable with, but
+is in no way intended to be used by anybody else than me.
 
-AFAIK, there should only be the inventory.py script (in this repo) and
-the virtualenv setup (in run-ansible) that should have to be modified
-to have everything working with Python2, if need be.
-```
+To simply see what I do, and steal whatever you like, go in the `src/components`
+folder. There is one folder per component I install.
 
-== .bash_profile, .bashrc & .profile
+== My `brew` Setup
+I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
+Additionally, on an M1 Mac, for both these brews, there will be an “x86” and an
+“arm64” install done.
 
-=== Docs
+This is done to be able to use brew on a multi-user machine properly: the admin
+manages the system brew, and “normal” users can use a “user” brew without
+issues (well, at least for formulae which do not fail compilation, but that’s
+another problem).
+
+_Future direction_: Fully switch to Nix, which manages a multi-user install
+properly, and is IMHO generally better, though more complex.
+
+== Some doc related to `.bash_profile`, `.bashrc` & others
+
+=== Random links
 - man bash, § INVOCATION
 - https://unix.stackexchange.com/a/119675
 - https://superuser.com/a/789705
