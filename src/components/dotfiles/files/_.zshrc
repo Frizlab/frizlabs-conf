@@ -65,13 +65,17 @@ select-word-style bash
 setopt auto_cd; # Auto cd to directories without the need to add cd
 setopt glob_complete; # Do not expand glob w/ tab (to be more bash-like)
 setopt append_history; # Append to history instead of overwrite
-setopt inc_append_history; # Add to history incrementally instead of when shell quits
 setopt hist_ignore_dups hist_ignore_all_dups; # Ignore duplicates in history
 setopt hist_reduce_blanks; # Remove blanks in history
 setopt extended_history; # Also store timestamp in history
 setopt hist_ignore_space; # Do not store commands starting with space (after next command)
 setopt hist_no_store; # Do not store history and fc commands in history
 setopt correct correct_all; # Propose correction for incorrect commands in Terminal
+if test "$(uname -s)" != "Darwin"; then
+	# Add to history incrementally instead of when shell quits
+	# Not enabled on macOS because it disables state restoration
+	setopt inc_append_history
+fi
 
 # Search through history when something is typed
 bindkey '^[[A' up-line-or-search
