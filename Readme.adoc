@@ -39,6 +39,7 @@ Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh,
 but simplified.
 [source,bash]
 ----
+cd /usr/local
 directories=(bin etc include lib sbin share var opt
              share/zsh share/zsh/site-functions
              var/homebrew var/homebrew/linked
