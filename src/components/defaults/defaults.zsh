@@ -29,7 +29,7 @@ catchout res  defaults_set_int NSGlobalDomain AppleKeyboardUIMode 2
 log_task_from_res "$res"
 
 CURRENT_TASK_NAME="ctrl-1 to go to first space"
-catchout res  ./helpers/activate-global-symbolic-hot-key.swift 118 2>/dev/null || true
+catchout res  ./helpers/activate-global-symbolic-hot-key.swift 118 2>/dev/null || log_task_failure "error while running activate-global-symbolic-hot-key (do you have Xcode installed?)"
 log_task_from_res "$res"
 
 res=; res_list=()
