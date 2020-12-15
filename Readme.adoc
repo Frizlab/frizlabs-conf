@@ -32,6 +32,24 @@ another problem).
 _Future direction_: Fully switch to Nix, which manages a multi-user install
 properly, and is IMHO generally better, though more complex.
 
+== Notes/TODOs
+
+=== `brew` installation in `/usr/local`
+Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh,
+but simplified.
+[source,bash]
+----
+directories=(bin etc include lib sbin share var opt
+             share/zsh share/zsh/site-functions
+             var/homebrew var/homebrew/linked
+             Cellar Caskroom Homebrew Frameworks)
+for d in $directories; do sudo mkdir "$d"; done
+for d in $directories; do sudo chown -h frizlab:staff "$d"; done
+curl -SL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /usr/local/Homebrew
+ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
+/usr/local/bin/brew update --force
+----
+
 == Some doc related to `.bash_profile`, `.bashrc` & others
 
 === Random links
