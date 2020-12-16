@@ -32,7 +32,7 @@ PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/rsync/bin:${PATH}"
 PATH="${PATH}:___M4___FIRST_PARTY_BIN_DIR___M4___"
 PATH="${PATH}:___M4___THIRD_PARTY_BIN_DIR___M4___"
 # Then the user homebrew(s) – WHICH MEANS THE DEFAULT HOMEBREW IS THE USER ONE
-#                             (Note: This is enforced in .shrc:dyn)
+# WHEN USING THE PATH RESOLUTION! There are aliases in the shrc to select brew.
 PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/bin"
 PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/sbin"
 m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',m4_dnl

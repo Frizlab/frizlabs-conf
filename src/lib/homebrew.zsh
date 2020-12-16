@@ -23,6 +23,7 @@ function install_brew_package() {
 	if test "${path_to_check:0:1}" = "/"; then test ! -e              "$path_to_check" || { echo "ok"; return }
 	else                                       test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }; fi
 	# Note: HOMEBREW_CASK_OPTS should be in sync w/ the .profile in this repo
+	# TODO: If using a system brew, we should change the Cask options.
 	HOMEBREW_NO_ANALYTICS=1 \
 	HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 \
 	HOMEBREW_CASK_OPTS="'--appdir=$HOME/Applications' '--skip-cask-deps' '--no-binaries'" \
