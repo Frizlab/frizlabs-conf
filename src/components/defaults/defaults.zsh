@@ -55,3 +55,14 @@ CURRENT_TASK_NAME="set bottom-left corner action"
 { res_check "$res" &&   catchout res  defaults_set_int com.apple.dock wvous-bl-corner   5 && res_list+=("$res") }
 { res_check "$res" &&   catchout res  defaults_set_int com.apple.dock wvous-bl-modifier 0 && res_list+=("$res") }
 log_task_from_res_list res_list
+
+
+######### Mail #########
+
+CURRENT_TASK_NAME="reverse conversations order in Mail"
+catchout res  defaults_set_bool com.apple.mail ConversationViewSortDescending 1
+log_task_from_res "$res"
+
+CURRENT_TASK_NAME="3 snippet lines in Mail"
+catchout res  defaults_set_int com.apple.mail NumberOfSnippetLines 3
+log_task_from_res "$res"
