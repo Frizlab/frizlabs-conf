@@ -70,7 +70,7 @@ setopt hist_reduce_blanks; # Remove blanks in history
 setopt extended_history; # Also store timestamp in history
 setopt hist_ignore_space; # Do not store commands starting with space (after next command)
 setopt hist_no_store; # Do not store history and fc commands in history
-setopt correct correct_all; # Propose correction for incorrect commands in Terminal
+#setopt correct correct_all; # Propose correction for incorrect commands in Terminal; disable because I don’t like it
 if test "$(uname -s)" != "Darwin"; then
 	# Add to history incrementally instead of when shell quits
 	# Not enabled on macOS because it disables state restoration
