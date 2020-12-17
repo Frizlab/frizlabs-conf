@@ -117,7 +117,8 @@ typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_USER_HOMEBREW_CASKS=(
-	"hex-fiend" "Caskroom/hex-fiend"
+	"hex-fiend"  "Caskroom/hex-fiend"
+	"imageoptim" "Caskroom/imageoptim"
 	
 	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
 	
