@@ -57,8 +57,8 @@ RUN \
 # invocation to force re-building after this line.
 ARG CACHEBUST=1
 
-# We run ansible here in a separate step to avoid re-cloning the whole repo if
-# Ansible fails.
+# We run the install here in a separate step to avoid re-cloning the whole repo
+# if that fails.
 RUN cd frizlabs-conf && git fetch && git merge && ./install
 
 

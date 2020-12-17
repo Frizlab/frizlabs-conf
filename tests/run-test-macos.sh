@@ -12,4 +12,4 @@ while ! ping -c 1 "$MACHINE_NAME" >/dev/null 2>&1; do sleep 0; done
 # Waiting 1 second more, to be safe
 sleep 1
 
-echo "TODO: Run ansible and the tests"
+echo "TODO: Run the install and the tests"
