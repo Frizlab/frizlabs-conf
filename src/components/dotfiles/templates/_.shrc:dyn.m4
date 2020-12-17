@@ -30,6 +30,7 @@ alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_H
 brew-all() {
 	# Nah… it’s safe!
 	for b in brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86; do
+		printf "\n\033[1;35m$b $@\033[0m\n"
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
 	done
@@ -44,6 +45,7 @@ alias brew-system-arm64='echo "error: arm64 brew not available on this platform+
 brew-all() {
 	# Nah… it’s safe!
 	for b in brew-user-x86 brew-system-x86; do
+		printf "\n\033[1;35m$b $@\033[0m\n"
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
 	done
