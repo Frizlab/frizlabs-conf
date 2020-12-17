@@ -47,8 +47,9 @@ alias pip39-upgrade-all='pip3.9 list --outdated --format=freeze | grep -v -e whe
 #alias pip38-upgrade-all='pip3.8 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.8 install --upgrade'
 #alias pip37-upgrade-all='pip3.7 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.7 install --upgrade'
 alias pip-upgrade-all='pip39-upgrade-all';# pip38-upgrade-all; pip37-upgrade-all'
-alias upgrade_packages="brew update; brew upgrade; gem update; pip-upgrade-all"
-alias upgrade_packages_force_build="brew update; brew upgrade --build-from-source; gem update; pip-upgrade-all"
+# The brew-all alias is in shrc:dyn
+alias upgrade-packages="brew-all update; brew-all upgrade; gem update; pip-upgrade-all"
+alias upgrade-packages-force-build="brew-all update; brew-all upgrade --build-from-source; gem update; pip-upgrade-all"
 
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
