@@ -102,6 +102,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 # variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 	"git-lfs"             "bin/git-lfs"
+	"just"                "bin/just"
 	"shellcheck"          "bin/shellcheck"
 	"yq"                  "bin/yq"
 )
