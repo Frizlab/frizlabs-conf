@@ -107,6 +107,11 @@ typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 )
 
 # Not -r because we modify this variable in the env specific vars file
+typeset -A MAIN_SYSTEM_HOMEBREW_CASKS=(
+	"firefox" "Caskroom/firefox"
+)
+
+# Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 )
 

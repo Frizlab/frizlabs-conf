@@ -15,3 +15,10 @@ else
 		CURRENT_TASK_NAME="install formula $formula_name";   catchout res  install_brew_package "--force-arch" "x86_64" "$HOMEBREW_X86_SYSTEM_DIR" "$formula_name" "$path_to_check" "--formula";   log_task_from_res "$res"
 	done
 fi
+
+# Install casks
+if test "$HOST_OS" = "Darwin"; then
+	for cask_name path_to_check in ${(kv)MAIN_SYSTEM_HOMEBREW_CASKS}; do
+		CURRENT_TASK_NAME="install cask $cask_name";   catchout res  install_brew_package "$HOMEBREW_SYSTEM_DIR" "$cask_name" "$path_to_check" "--cask";   log_task_from_res "$res"
+	done
+fi

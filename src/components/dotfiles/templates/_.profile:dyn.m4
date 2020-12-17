@@ -84,6 +84,8 @@ export GOPATH="___M4___CLT_DIR___M4___/go"
 # Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving
 # it a token will allow for more requests to GitHub.
 export HOMEBREW_GITHUB_API_TOKEN="___M4___HOMEBREW_GITHUB_TOKEN___M4___"
+# The appdir and other dirs are chosen through brew aliases. See shrc:dyn.
+export HOMEBREW_CASK_OPTS="___M4___FRZ_HOMEBREW_CASK_OPTS_BASE___M4___"
 m4_ifelse(___M4___DARK_MODE___M4___, `true',m4_dnl
 
 # Dark mode support for ls

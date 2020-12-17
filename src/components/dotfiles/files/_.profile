@@ -32,12 +32,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
-# HOMEBREW_GITHUB_API_TOKEN is set in a separate file
-# frizlabs-conf note: Modify these in lib/homebrew.zsh too
-# These options are added to selected brew forced HOMEBREW_CASK_OPTS. See shrc:dyn.
-export FRZ_HOMEBREW_CASK_OPTS="'--no-binaries' '--skip-cask-deps'"
-# After further thinking, disabling quarantine might not be the best idea…
-#export HOMEBREW_CASK_OPTS+=" '--no-quarantine'"
+# HOMEBREW_CASK_OPTS and HOMEBREW_GITHUB_API_TOKEN are set in profile:dyn
 
 
 # GPG
