@@ -1,4 +1,5 @@
 # Install Homebrew instances for Python
+# Do not forget to brew python in brew-all in .shrc:dyn when this is modified.
 
 # Python 3.9
 CURRENT_TASK_NAME="install homebrew for python3.9";   catchout res  install_homebrew "$HOMEBREW_PYTHON39_USER_DIR"; log_task_from_res "$res"
