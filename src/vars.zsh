@@ -104,7 +104,6 @@ typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 	"git-lfs"             "bin/git-lfs"
 	"just"                "bin/just"
 	"shellcheck"          "bin/shellcheck"
-	"yq"                  "bin/yq"
 )
 
 # Not -r because we modify this variable in the env specific vars file
