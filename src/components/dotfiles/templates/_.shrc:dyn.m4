@@ -32,7 +32,7 @@ brew-all() {
 	local first="true"
 	for b in brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
-		printf "\033[1;35m$b $@\033[0m\n"
+		printf "\033[1;35m$b $*\033[0m\n"
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
@@ -49,7 +49,7 @@ brew-all() {
 	local first="true"
 	for b in brew-user-x86 brew-system-x86 brew-python39; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
-		printf "\033[1;35m$b $@\033[0m\n"
+		printf "\033[1;35m$b $*\033[0m\n"
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
