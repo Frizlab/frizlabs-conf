@@ -50,6 +50,7 @@ alias pip-upgrade-all='printf "\n\033[1;35mpip39-upgrade-all\033[0m\n"; pip39-up
 # The brew-all alias is in shrc:dyn
 alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mgem update\033[0m\n"; gem update; pip-upgrade-all'
 alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mgem update\033[0m\n"; gem update; pip-upgrade-all'
+alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n"; gem cleanup'
 
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
