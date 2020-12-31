@@ -22,7 +22,7 @@ PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
 #               note: we use a separate brew instance for Python.
 #               note: any binaries installed w/ pip will purposefully **not** be in the PATH
 # So the paths to the parent folder of these binaries will be first in the path.
-PATH="___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/bin:${PATH}"
+PATH="___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/opt/python@3.9/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/ruby/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/rsync/bin:${PATH}"
 
