@@ -19,13 +19,14 @@ brew-all() {
 		# 3. And finally execute the alias with args given to brew-all.
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
-		local last_word=""; eval "for word in $(eval echo \$$(echo "$b" | sed -E 's/-/_/g')); do last_word="\$word"; done"
+		local last_word=""; eval "for word in $(eval echo "\$$(echo "$b" | sed -E 's/-/_/g')"); do last_word=\"\$word\"; done"
 		if [ -x "$last_word" ]; then
 			if test "$first" != "true"; then printf "\n"; fi; first="false"
-			printf "\033[1;35m$b ``$''*\033[0m\n"
-			eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\``$''@\\\""
+			printf "\033[1;35m%s %s\033[0m\n" "$b" "``$''*"
+			if ! eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\``$''@\\\""; then
+				exit_code=1
+			fi
 		fi
-		if [ $? -ne 0 ]; then exit_code=1; fi
 	done
 	return "$exit_code"
 })m4_dnl
