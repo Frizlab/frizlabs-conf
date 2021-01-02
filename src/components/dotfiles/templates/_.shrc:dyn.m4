@@ -37,13 +37,15 @@ brew-all() {
 	for b in brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
 		printf "\033[1;35m$b $*\033[0m\n"
-		# What the the two lines below do is:
-		#    - First declare a local variable whose name is the current brew ($b),
-		#      but with _ instead of -, and the value is the alias’ content.
-		#    - Second line execute the alias with args given to brew-all.
+		# What the three lines below do is:
+		# 1. First declare a local variable whose name is the current brew ($b),
+		#    but with _ instead of -, and the value is the alias’ content;
+		# 2. Then check the binary the alias calls exists;
+		# 3. And finally execute the alias with args given to brew-all.
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
-		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
+		local last_word=""; eval "for word in $(eval echo \$$(echo "$b" | sed -E 's/-/_/g')); do last_word="\$word"; done"
+		if [ -x "$last_word" ]; then eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""; fi
 		if [ $? -ne 0 ]; then exit_code=1; fi
 	done
 	return "$exit_code"
@@ -61,13 +63,15 @@ brew-all() {
 	for b in brew-user-x86 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
 		printf "\033[1;35m$b $*\033[0m\n"
-		# What the the two lines below do is:
-		#    - First declare a local variable whose name is the current brew ($b),
-		#      but with _ instead of -, and the value is the alias’ content.
-		#    - Second line execute the alias with args given to brew-all.
+		# What the three lines below do is:
+		# 1. First declare a local variable whose name is the current brew ($b),
+		#    but with _ instead of -, and the value is the alias’ content;
+		# 2. Then check the binary the alias calls exists;
+		# 3. And finally execute the alias with args given to brew-all.
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
-		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
+		local last_word=""; eval "for word in $(eval echo \$$(echo "$b" | sed -E 's/-/_/g')); do last_word="\$word"; done"
+		if [ -x "$last_word" ]; then eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""; fi
 		if [ $? -ne 0 ]; then exit_code=1; fi
 	done
 	return "$exit_code"
