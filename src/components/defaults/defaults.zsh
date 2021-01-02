@@ -66,3 +66,10 @@ log_task_from_res "$res"
 CURRENT_TASK_NAME="3 snippet lines in Mail"
 catchout res  defaults_set_int com.apple.mail NumberOfSnippetLines 3
 log_task_from_res "$res"
+
+
+######### Safari #########
+
+CURRENT_TASK_NAME="set Safari search engine"
+catchout res  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
+log_task_from_res "$res"
