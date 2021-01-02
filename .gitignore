@@ -2,12 +2,8 @@
 .DS_Store
 xcuserdata/
 
-# The cache (virtualenv instance, homebrew instance, saved vault id, etc.)
+# The cache (saved pass, compiled ccrypt, etc.)
 /.cache/
 
 # Tests inputs
 /tests/assets/inputs/
-
-# Python and Ansible files
-*.pyc
-*.retry
