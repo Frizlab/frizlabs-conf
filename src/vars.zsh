@@ -74,9 +74,11 @@ typeset -a COMPONENTS=(
 typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsort"
+	"git-lfs"             "bin/git-lfs"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
 	"jq"                  "bin/jq"
+	"just"                "bin/just"
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
 	"pass"                "bin/pass"
@@ -101,8 +103,6 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 # They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this
 # variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
-	"git-lfs"             "bin/git-lfs"
-	"just"                "bin/just"
 	"shellcheck"          "bin/shellcheck"
 )
 
