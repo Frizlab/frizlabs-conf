@@ -17,42 +17,59 @@ alias brew='brew-system'
 alias brew-arm64='brew-system-arm64'
 alias brew-x86='brew-system-x86'
 )m4_dnl
-alias brew-python39='___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/bin/brew'
+alias brew-python39='"___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/bin/brew"'
+alias brew-python38='"___M4___HOMEBREW_PYTHON38_USER_DIR___M4___/bin/brew"'
+alias brew-python37='"___M4___HOMEBREW_PYTHON37_USER_DIR___M4___/bin/brew"'
+alias brew-python27='"___M4___HOMEBREW_PYTHON37_USER_DIR___M4___/bin/brew"'
 m4_dnl # These are the brew aliases, for the different arches.
 m4_dnl # We only do this on macOS; for Linux we always use the “native” brew.
 m4_ifelse(___M4___HOST_OS___M4___, `Darwin',m4_dnl
 m4_ifelse(___M4___HOST_ARCH___M4___, `arm64',m4_dnl
 alias   brew-user='brew-user-arm64'
 alias brew-system='brew-system-arm64'
-alias brew-user-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'"              ___M4___HOMEBREW_ARM64_USER_DIR___M4___/bin/brew'
-alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'" arch -x86_64 ___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew'
-alias brew-system-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'"              ___M4___HOMEBREW_ARM64_SYSTEM_DIR___M4___/bin/brew'
-alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" arch -x86_64 ___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew'
+alias brew-user-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'"              "___M4___HOMEBREW_ARM64_USER_DIR___M4___/bin/brew"'
+alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'" arch -x86_64 "___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew"'
+alias brew-system-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'"              "___M4___HOMEBREW_ARM64_SYSTEM_DIR___M4___/bin/brew"'
+alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" arch -x86_64 "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
 brew-all() {
+	local exit_code=0
 	local first="true"
-	for b in brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39; do
+	for b in brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
 		printf "\033[1;35m$b $*\033[0m\n"
+		# What the the two lines below do is:
+		#    - First declare a local variable whose name is the current brew ($b),
+		#      but with _ instead of -, and the value is the alias’ content.
+		#    - Second line execute the alias with args given to brew-all.
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
+		if [ $? -ne 0 ]; then exit_code=1; fi
 	done
+	return "$exit_code"
 }
 ,m4_dnl
 alias   brew-user='brew-user-x86'
 alias brew-system='brew-system-x86'
-alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'" ___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew'
+alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'" "___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew"'
 alias brew-user-arm64='echo "error: arm64 brew not available on this platform+arch" >&2; false'
-alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" ___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew'
+alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
 alias brew-system-arm64='echo "error: arm64 brew not available on this platform+arch" >&2; false'
 brew-all() {
+	local exit_code=0
 	local first="true"
-	for b in brew-user-x86 brew-system-x86 brew-python39; do
+	for b in brew-user-x86 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27; do
 		if test "$first" != "true"; then printf "\n"; fi; first="false"
 		printf "\033[1;35m$b $*\033[0m\n"
+		# What the the two lines below do is:
+		#    - First declare a local variable whose name is the current brew ($b),
+		#      but with _ instead of -, and the value is the alias’ content.
+		#    - Second line execute the alias with args given to brew-all.
 		# Nah… it’s safe!
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		eval "eval \$$(echo "$b" | sed -E 's/-/_/g') \\\"\\\$@\\\""
+		if [ $? -ne 0 ]; then exit_code=1; fi
 	done
+	return "$exit_code"
 }
 ))m4_dnl
