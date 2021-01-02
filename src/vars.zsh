@@ -67,7 +67,6 @@ typeset -a COMPONENTS=(
 #	"nix"             "pkgs-nix-base"
 	"homebrew-user"   "pkgs-brew-user-base"
 	"homebrew-system" "pkgs-brew-system-base"
-	"homebrew-user-pythons"
 )
 
 # Not -r because we modify this variable in the env specific vars file
