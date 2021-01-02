@@ -13,4 +13,4 @@
 [pull]
 	rebase = true
 [core]
-	excludesfile = /Users/frizlab/.gitignore_global
+	excludesfile = ~/.gitignore_global
