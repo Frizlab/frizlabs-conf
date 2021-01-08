@@ -7,6 +7,10 @@
 #
 # \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 
+########
+# BREW #
+########
+
 m4_define(`m4_frz_brew_all',m4_dnl
 brew-all() {
 	local exit_code=0
@@ -31,7 +35,6 @@ brew-all() {
 	return "$exit_code"
 })m4_dnl
 m4_dnl
-# brew aliases
 m4_ifelse(___M4___DEFAULT_BREW_IS_SYSTEM___M4___, `false',
 alias brew='brew-user'
 alias brew-arm64='brew-user-arm64'
@@ -55,6 +58,7 @@ alias brew-user-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOM
 alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_USER___M4___"'" arch -x86_64 "___M4___HOMEBREW_X86_USER_DIR___M4___/bin/brew"'
 alias brew-system-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'"              "___M4___HOMEBREW_ARM64_SYSTEM_DIR___M4___/bin/brew"'
 alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" arch -x86_64 "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
+
 m4_frz_brew_all(brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27)
 ,m4_dnl
 alias   brew-user='brew-user-x86'
@@ -63,5 +67,63 @@ alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOM
 alias brew-user-arm64='echo "error: arm64 brew not available on this platform+arch" >&2; false'
 alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
 alias brew-system-arm64='echo "error: arm64 brew not available on this platform+arch" >&2; false'
+
 m4_frz_brew_all(brew-user-x86 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27)
 ))m4_dnl
+
+#######
+# PIP #
+#######
+
+alias pip3.9='___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/opt/python@3.9/bin/pip3.9'
+alias pip3.8='___M4___HOMEBREW_PYTHON38_USER_DIR___M4___/opt/python@3.8/bin/pip3.8'
+alias pip3.7='___M4___HOMEBREW_PYTHON37_USER_DIR___M4___/opt/python@3.7/bin/pip3.7'
+alias pip2.7='___M4___HOMEBREW_PYTHON27_USER_DIR___M4___/opt/python@2.7/bin/pip2.7'
+alias pip3='pip3.9'
+alias pip2='pip2.7'
+
+m4_define(`m4_frz_alias_pip_upgrade', alias $1-upgrade='$1 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs $1 install --upgrade')m4_dnl
+m4_frz_alias_pip_upgrade(pip3.9)
+m4_frz_alias_pip_upgrade(pip3.8)
+m4_frz_alias_pip_upgrade(pip3.7)
+m4_frz_alias_pip_upgrade(pip2.7)
+
+pip-upgrade-all() {
+	local exit_code=0
+	local first="${1:-true}"
+	for p in pip3.9 pip3.8 pip3.7 pip2.7; do
+		eval "local $(alias "$p" | sed -E -e ':a' -e 's/^([^=]*)\./\1_/' -e 'ta')"
+		local first_word=""; eval "for word in $(eval echo "\$$(echo "$p" | sed -E 's/\./_/g')"); do if test -z \"\$first_word\"; then first_word=\"\$word\"; fi; done"
+		if [ -x "$first_word" ]; then
+			if test "$first" != "true"; then printf "\n"; fi; first="false"
+			printf "\033[1;35m%s %s\033[0m\n" "$p-upgrade"
+			if ! eval $p-upgrade; then
+				exit_code=1
+			fi
+		fi
+	done
+	return "$exit_code"
+}
+
+pip-all() {
+	local exit_code=0
+	local first="true"
+	for p in pip3.9 pip3.8 pip3.7 pip2.7; do
+		# What the lines below do is:
+		# 1. First declare a local variable whose name is the current pip ($p),
+		#    but with _ instead of ., and the value is the alias’ content;
+		# 2. Then check the binary the alias calls exists;
+		# 3. And finally execute the alias with args given to pip-all.
+		# Nah… it’s safe!
+		eval "local $(alias "$p" | sed -E -e ':a' -e 's/^([^=]*)\./\1_/' -e 'ta')"
+		local first_word=""; eval "for word in $(eval echo "\$$(echo "$p" | sed -E 's/\./_/g')"); do if test -z \"\$first_word\"; then first_word=\"\$word\"; fi; done"
+		if [ -x "$first_word" ]; then
+			if test "$first" != "true"; then printf "\n"; fi; first="false"
+			printf "\033[1;35m%s %s\033[0m\n" "$p" "$*"
+			if ! eval "eval \$$(echo "$p" | sed -E 's/\./_/g') \\\"\\\$@\\\""; then
+				exit_code=1
+			fi
+		fi
+	done
+	return "$exit_code"
+}

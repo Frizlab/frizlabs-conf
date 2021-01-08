@@ -45,13 +45,9 @@ alias cd..='cd ..'
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
-alias pip39-upgrade-all='pip3.9 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.9 install --upgrade'
-#alias pip38-upgrade-all='pip3.8 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.8 install --upgrade'
-#alias pip37-upgrade-all='pip3.7 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.7 install --upgrade'
-alias pip-upgrade-all='printf "\n\033[1;35mpip39-upgrade-all\033[0m\n"; pip39-upgrade-all';# printf "\n\033[1;35mpip38-upgrade-all\033[0m\n"; pip38-upgrade-all; printf "\n\033[1;35mpip37-upgrade-all\033[0m\n"; pip37-upgrade-all'
-# The brew-all alias is in shrc:dyn
-alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mgem update\033[0m\n"; gem update; pip-upgrade-all'
-alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mgem update\033[0m\n"; gem update; pip-upgrade-all'
+# The brew-all and pip-upgrade-all functions are in shrc:dyn
+alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; pip-upgrade-all false; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
+alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; pip-upgrade-all false; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
 alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n"; gem cleanup'
 
 # Joke aliases
