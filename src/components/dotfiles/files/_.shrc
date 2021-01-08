@@ -37,6 +37,7 @@ alias docker-run-cwd='docker run --rm -it -v "$(pwd):/tmp/cwd" --workdir /tmp/cw
 alias docker-run-swift='docker-run-cwd --security-opt=seccomp:unconfined --entrypoint bash happn/swift'
 
 # Misc. aliases
+alias k='true'
 alias x='chmod ug+x'
 alias top='top -o cpu'
 alias rem='trash'
