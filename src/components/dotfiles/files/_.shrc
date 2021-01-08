@@ -42,7 +42,7 @@ alias x='chmod ug+x'
 alias top='top -o cpu'
 alias rem='trash'
 alias cd..='cd ..'
-alias kill_dock="osascript -e 'tell application \"Dock\" to quit'"
+alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
 alias pip39-upgrade-all='pip3.9 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3.9 install --upgrade'
