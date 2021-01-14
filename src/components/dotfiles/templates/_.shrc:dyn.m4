@@ -82,7 +82,7 @@ alias pip2.7='___M4___HOMEBREW_PYTHON27_USER_DIR___M4___/opt/python@2.7/bin/pip2
 alias pip3='pip3.9'
 alias pip2='pip2.7'
 
-m4_define(`m4_frz_alias_pip_upgrade', alias $1-upgrade='$1 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs $1 install --upgrade')m4_dnl
+m4_define(`m4_frz_alias_pip_upgrade', alias $1-upgrade='$1 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs $1 install --upgrade --no-warn-script-location')m4_dnl
 m4_frz_alias_pip_upgrade(pip3.9)
 m4_frz_alias_pip_upgrade(pip3.8)
 m4_frz_alias_pip_upgrade(pip3.7)
