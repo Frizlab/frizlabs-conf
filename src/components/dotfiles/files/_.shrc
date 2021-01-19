@@ -42,6 +42,7 @@ alias x='chmod ug+x'
 alias top='top -o cpu'
 alias rem='trash'
 alias cd..='cd ..'
+alias reload-shell='exec $SHELL -l'; # “Reloads” the current shell (starts a new login shell while replacing current one)
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
