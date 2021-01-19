@@ -81,6 +81,9 @@ fi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
+# Convenient alias for macOS
+alias h='cat ~/.zsh_sessions/*.history*'
+
 
 
 ### Let’s import .zshrc.d/*.sh files
