@@ -51,6 +51,10 @@ ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
 /usr/local/bin/brew update --force
 ----
 
+=== A Thing from Twitter
+
+https://twitter.com/ryleyherrington/status/1354546825739472897
+
 == Some doc related to `.bash_profile`, `.bashrc` & others
 
 === Random links
