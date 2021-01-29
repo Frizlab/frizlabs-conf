@@ -60,12 +60,12 @@ bin "bbsteam" ":Darwin:Linux:" "bash/bash-arrays.sh"
 ### iOS Backup to Files ###
 # Original author is unclear; see script for more info.
 # Linux compat is untested
-bin "frizlab" ":Darwin:Linux" "python2/ios-backup-to-files.py"
+bin "frizlab" ":Darwin:Linux:" "python2/ios-backup-to-files.py"
 
 ### ls mbdb ###
 # Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153.
 # Linux compat is untested
-bin "galloglass" ":Darwin:Linux" "python2/ls-mbdb.py"
+bin "galloglass" ":Darwin:Linux:" "python2/ls-mbdb.py"
 
 ### gem list leaves ###
 # https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa
