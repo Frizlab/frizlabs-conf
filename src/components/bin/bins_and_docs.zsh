@@ -1,3 +1,6 @@
+### Run a Shell Command When a File Changes ###
+bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
+
 ### Backup My Cloud ###
 encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 
