@@ -73,3 +73,10 @@ log_task_from_res "$res"
 CURRENT_TASK_NAME="set Safari search engine"
 catchout res  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
 log_task_from_res "$res"
+
+
+######### TextEdit #########
+
+CURRENT_TASK_NAME="set default document type in TextEdit to text"
+catchout res  defaults_set_int com.apple.TextEdit RichText 0
+log_task_from_res "$res"
