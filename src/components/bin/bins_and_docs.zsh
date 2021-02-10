@@ -4,6 +4,10 @@ bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
 ### Backup My Cloud ###
 encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 
+### Backup All Repos In a Given GitHub Org ###
+# Linux compat is untested, but there’s not reason why it wouldn’t work!
+bin "frizlab" ":Darwin:Linux:" "bash/backup-github-org.sh"
+
 ### Install Homebrew ###
 bin "frizlab" ":Darwin:Linux:" "bash/install-brew.sh"
 
