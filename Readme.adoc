@@ -55,6 +55,10 @@ ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
 
 https://twitter.com/ryleyherrington/status/1354546825739472897
 
+=== Time Machine
+
+Add ignored folders.
+
 == Some doc related to `.bash_profile`, `.bashrc` & others
 
 === Random links
