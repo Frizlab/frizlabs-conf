@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-test $# -eq 3 || { echo "Usage: $0 folder orgname username:PAT" >/dev/stderr; exit 1; }
+test $# -eq 3 || { echo "Usage: $0 folder orgname username:PAT" >&2; exit 1; }
 
 folder="$1"
 orgname="$2"
