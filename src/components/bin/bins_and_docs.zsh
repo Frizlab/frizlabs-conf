@@ -4,8 +4,11 @@ bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
 ### Backup My Cloud ###
 encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 
+### Backup the Stuff I Can’t Live Without ###
+encrypted_bin "frizlab" ":Darwin:" "bash/backup-precious-stuff.sh.cpt"
+
 ### Backup All Repos In a Given GitHub Org ###
-# Linux compat is untested, but there’s not reason why it wouldn’t work!
+# Linux compat is untested, but there’s not reason why it wouldn’t work
 bin "frizlab" ":Darwin:Linux:" "bash/backup-github-org.sh"
 
 ### Install Homebrew ###
@@ -50,7 +53,7 @@ bin "frizlab" ":Darwin:" "sh/abcm2pdf-runabc.sh"
 bin "<unknown>" ":Darwin:" "bin/midi2abc"
 
 ### Chronometer and Timer in TCL/TK ###
-# Linux compat is untested, but there’s not reason why it wouldn’t work!
+# Linux compat is untested, but there’s not reason why it wouldn’t work
 bin "frizlab" ":Darwin:Linux:" "tcl/chronodec.tk"
 
 ### Find Invalid Images ###
