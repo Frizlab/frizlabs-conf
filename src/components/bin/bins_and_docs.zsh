@@ -7,6 +7,9 @@ encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
 ### Backup the Stuff I Can’t Live Without ###
 encrypted_bin "frizlab" ":Darwin:" "bash/backup-precious-stuff.sh.cpt"
 
+### Backup the Main Computer ###
+encrypted_bin "frizlab" ":Darwin:" "bash/backup-main-computer.sh.cpt"
+
 ### Backup All Repos In a Given GitHub Org ###
 # Linux compat is untested, but there’s not reason why it wouldn’t work
 bin "frizlab" ":Darwin:Linux:" "bash/backup-github-org.sh"
