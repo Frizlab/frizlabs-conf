@@ -4,4 +4,4 @@
 set -euo pipefail
 shopt -s nullglob
 
-ag --ignore "./.cache" --ignore "./utils/todos.sh" TODO
+ag --ignore "./.cache" --ignore "./scripts/todos.sh" TODO

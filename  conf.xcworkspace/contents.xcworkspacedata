@@ -11,6 +11,6 @@
       location = "group:tests">
    </FileRef>
    <FileRef
-      location = "group:utils">
+      location = "group:scripts">
    </FileRef>
 </Workspace>
