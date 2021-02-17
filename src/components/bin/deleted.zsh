@@ -42,7 +42,6 @@ delete_bin "frizlab" "local-brew-install"
 delete_bin "frizlab" "xcode-project-version-manager"
 
 ### Find “Unreferenced” Files in an Xcode Project ###
-# Original author: Joachim Bondo
 # Reason: This tool can now be installed via Homebrew
 delete_bin "frizlab" "find-unreferenced-xcode-files"
 
