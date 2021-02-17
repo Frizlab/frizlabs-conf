@@ -10,6 +10,9 @@ encrypted_bin "frizlab" ":Darwin:" "bash/backup-precious-stuff.sh.cpt"
 ### Backup the Main Computer ###
 encrypted_bin "frizlab" ":Darwin:" "bash/backup-main-computer.sh.cpt"
 
+### Clone Media HD ###
+encrypted_bin "frizlab" ":Darwin:" "bash/clone-media-hd.sh.cpt"
+
 ### Backup All Repos In a Given GitHub Org ###
 # Linux compat is untested, but there’s not reason why it wouldn’t work
 bin "frizlab" ":Darwin:Linux:" "bash/backup-github-org.sh"
