@@ -117,7 +117,7 @@ for component in ${(ok)COMPONENTS_STATS_OKS}; do
 done
 
 print >&2
-print -Pn "%F{magenta}%BTotals%b%f: " >&2
+print -Pn "%BTotals%b: " >&2
 # OKs
 if test $total_oks -gt 0; then print -Pn "%F{green}" >&2; fi
 print -n "ok=$total_oks" >&2
