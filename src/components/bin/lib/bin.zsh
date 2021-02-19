@@ -1,10 +1,22 @@
 ## Usage: bin author compatibility relative_path_to_script
+## Compatibility format: ":compatible_host_os:~forbidden_computer_group~"
+## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and
+##          must not be installed at work or home. Will actually be _removed_
+##          from work and home if already present, or on another OS than Darwin
+##          and Linux. (Note we currently don’t have other groups than work and
+##          home, so the example will never be installed.)
 function bin() {
 	author="$1"
 	compatibility="$2"
 	local_relative_script_path="$3"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
+	script_basename="${local_relative_script_path##*/}"
+	script_basename_no_ext="${script_basename%.*}"
+	
+	{ [[ "$compatibility" =~ ":$HOST_OS:" ]] && [[ ! "$compatibility" =~ "~$COMPUTER_GROUP~" ]] } || {
+		delete_bin "$author" "$script_basename_no_ext"
+		return
+	}
 	
 	me="$(whoami)"
 	dest_bin_dir=""
@@ -14,8 +26,6 @@ function bin() {
 	backup_dir="$dest_bin_dir/$BIN_BACKUP_DIR_BASENAME"
 	
 	local_script_path="$(pwd)/files/$local_relative_script_path"
-	script_basename="${local_relative_script_path##*/}"
-	script_basename_no_ext="${script_basename%.*}"
 	script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
 	res=; res_list=()
@@ -30,7 +40,13 @@ function encrypted_bin() {
 	compatibility="$2"
 	local_relative_script_path="$3"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
+	script_basename="${local_relative_script_path##*/}"
+	script_basename_no_ext="${script_basename%.*.cpt}"
+	
+	{ [[ "$compatibility" =~ ":$HOST_OS:" ]] && [[ ! "$compatibility" =~ "~$COMPUTER_GROUP~" ]] } || {
+		delete_bin "$author" "$script_basename_no_ext"
+		return
+	}
 	
 	me="$(whoami)"
 	dest_bin_dir=""
@@ -38,8 +54,6 @@ function encrypted_bin() {
 	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
 	
 	local_script_path="$(pwd)/files/$local_relative_script_path"
-	script_basename="${local_relative_script_path##*/}"
-	script_basename_no_ext="${script_basename%.*.cpt}"
 	script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
 	CURRENT_TASK_NAME="decrypt and install ${script_dest_path/#$HOME/\~}"

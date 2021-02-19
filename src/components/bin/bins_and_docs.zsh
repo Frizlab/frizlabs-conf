@@ -2,20 +2,20 @@
 bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
 
 ### Backup My Cloud ###
-encrypted_bin "frizlab" ":Darwin:" "bash/backup-cloud.sh.cpt"
+encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-cloud.sh.cpt"
 
 ### Backup the Stuff I Can’t Live Without ###
-encrypted_bin "frizlab" ":Darwin:" "bash/backup-precious-stuff.sh.cpt"
+encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-precious-stuff.sh.cpt"
 
 ### Backup the Main Computer ###
-encrypted_bin "frizlab" ":Darwin:" "bash/backup-main-computer.sh.cpt"
+encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-main-computer.sh.cpt"
 
 ### Clone Media HD ###
-encrypted_bin "frizlab" ":Darwin:" "bash/clone-media-hd.sh.cpt"
+encrypted_bin "frizlab" ":Darwin:~work~" "bash/clone-media-hd.sh.cpt"
 
 ### Backup All Repos In a Given GitHub Org ###
 # Linux compat is untested, but there’s not reason why it wouldn’t work
-bin "frizlab" ":Darwin:Linux:" "bash/backup-github-org.sh"
+bin "frizlab" ":Darwin:Linux:~work~" "bash/backup-github-org.sh"
 
 ### Install Homebrew ###
 bin "frizlab" ":Darwin:Linux:" "bash/install-brew.sh"
@@ -66,8 +66,8 @@ bin "frizlab" ":Darwin:Linux:" "tcl/chronodec.tk"
 bin "frizlab" ":Darwin:" "bash/find-invalid-images.sh"
 
 ### Import to Photos ###
-bin "frizlab" ":Darwin:" "bash/import-to-photos.sh"
-doc "frizlab" ":Darwin:" "import-to-photos" "docs/import-to-photos.scpt"
+bin "frizlab" ":Darwin:~work~" "bash/import-to-photos.sh"
+doc "frizlab" ":Darwin:~work~" "import-to-photos" "docs/import-to-photos.scpt"
 
 ### Learning bash arrays ###
 # Linux compat is untested
@@ -103,7 +103,7 @@ doc "frizlab" ":Darwin:" "man/man1" "docs/remove-xattr.1"
 bin "frizlab" ":Darwin:" "bash/find-desktop-pictures.sh"
 
 ### Launch Alarm Clock ###
-bin "frizlab" ":Darwin:" "bash/launch-alarm-clock.sh"
+bin "frizlab" ":Darwin:~work~" "bash/launch-alarm-clock.sh"
 
 ### Connect NetSoul ###
 # This script was originally from someone else than frizlab, but so heavily modified that frizlab can take ownership.
@@ -123,11 +123,11 @@ bin "frizlab" ":Darwin:" "sh/remove-quarantine.sh"
 
 ### Make Link ###
 # This binary allows hard-linking directories. It’s dangerous, don’t do it! See https://stackoverflow.com/a/4707231 for more info.
-bin "frizlab" ":Darwin:" "bin/make-link"
-doc "frizlab" ":Darwin:" "man/man1" "docs/make-link.1"
+bin "frizlab" ":Darwin:~work~" "bin/make-link"
+doc "frizlab" ":Darwin:~work~" "man/man1" "docs/make-link.1"
 
 ### My Split ###
-bin "frizlab" ":Darwin:" "bin/my-split"
+bin "frizlab" ":Darwin:~work~" "bin/my-split"
 
 
 ### compopt ###

@@ -5,7 +5,12 @@ function doc() {
 	relative_path_to_folder="$3"
 	local_relative_doc_path="$4"
 	
-	[[ "$compatibility" =~ ":$HOST_OS:" ]] || return 0
+	doc_basename="${local_relative_doc_path##*/}"
+	
+	{ [[ "$compatibility" =~ ":$HOST_OS:" ]] && [[ ! "$compatibility" =~ "~$COMPUTER_GROUP~" ]] } || {
+		delete_doc "$author" "$relative_path_to_folder/$doc_basename"
+		return
+	}
 	
 	me="$(whoami)"
 	dest_share_dir=""
@@ -16,7 +21,6 @@ function doc() {
 	backup_dir="$dest_doc_dir/$BIN_BACKUP_DIR_BASENAME"
 	
 	local_doc_path="$(pwd)/files/$local_relative_doc_path"
-	doc_basename="${local_relative_doc_path##*/}"
 	doc_dest_path="$dest_doc_dir/$doc_basename"
 	
 	res=; res_list=()
