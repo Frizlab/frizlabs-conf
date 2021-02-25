@@ -51,6 +51,8 @@ ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
 /usr/local/bin/brew update --force
 ----
 
+Get sudo during whole script: https://github.com/nnja/new-computer/blob/master/setup.sh#L73
+
 === A Thing from Twitter
 
 https://twitter.com/ryleyherrington/status/1354546825739472897
