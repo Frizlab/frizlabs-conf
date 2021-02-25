@@ -67,7 +67,11 @@ CURRENT_TASK_NAME="do not automatically rearrange spaces based on most recent us
 catchout res  defaults_set_bool com.apple.dock mru-spaces 0
 log_task_from_res "$res"
 
-CURRENT_TASK_NAME="group windows by app in expose"
+CURRENT_TASK_NAME="enable app exposé trackpad gesture"
+catchout res  defaults_set_bool com.apple.dock showAppExposeGestureEnabled 1
+log_task_from_res "$res"
+
+CURRENT_TASK_NAME="group windows by app in exposé"
 catchout res  defaults_set_bool com.apple.dock expose-group-apps 1
 log_task_from_res "$res"
 
