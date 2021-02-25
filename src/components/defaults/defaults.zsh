@@ -10,43 +10,53 @@ log_task_from_res "$res"
 
 res=; res_list=()
 CURRENT_TASK_NAME="enable tap to click"
-# So! There are two domains. My _guess_ is one is for externally connected
-# bluetooth trackpads, the other is for the built-in trackpad on laptops.
-# Currently verified: First property works on built-in trackpad, other does not.
+# So! There are three domains. My _guess_ is one is for externally connected
+# bluetooth trackpads, the second is for the built-in trackpad on laptops, and
+# the third is for the UI (in System Preferences).
+# Currently verified: First domain works on built-in trackpad, second does not,
+# third updates UI.
 # TODO: Verify second property works w/ external trackpad, first does not!
-{ res_check "$res" &&   catchout res  defaults_set_bool com.apple.AppleMultitouchTrackpad                  Clicking 1 && res_list+=("$res") }
-{ res_check "$res" &&   catchout res  defaults_set_bool com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking 1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_bool              com.apple.AppleMultitouchTrackpad                  Clicking                    1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_bool              com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking                    1 && res_list+=("$res") }
+# Also activate dragging and drag lock in UI. 2 is w/o drag lock, 1 is w/o both.
+{ res_check "$res" &&   catchout res  defaults_set_int  -currentHost NSGlobalDomain                                     com.apple.mouse.tapBehavior 3 && res_list+=("$res") }
 log_task_from_res_list res_list
 
 res=; res_list=()
 CURRENT_TASK_NAME="enable dragging"
-# Two domains, same remarks as for “enable tap to click”
+# Three domains, same remarks as for “enable tap to click”
 { res_check "$res" &&   catchout res  defaults_set_bool com.apple.AppleMultitouchTrackpad                  Dragging 1 && res_list+=("$res") }
 { res_check "$res" &&   catchout res  defaults_set_bool com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging 1 && res_list+=("$res") }
+# Third domain already done w/ “enable tap to click”
 log_task_from_res_list res_list
 
 res=; res_list=()
 CURRENT_TASK_NAME="enable drag lock"
-# Two domains, same remarks as for “enable tap to click”
+# Three domains, same remarks as for “enable tap to click”
 { res_check "$res" &&   catchout res  defaults_set_bool com.apple.AppleMultitouchTrackpad                  DragLock 1 && res_list+=("$res") }
 { res_check "$res" &&   catchout res  defaults_set_bool com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock 1 && res_list+=("$res") }
+# Third domain already done w/ “enable tap to click”
 log_task_from_res_list res_list
 
 res=; res_list=()
 CURRENT_TASK_NAME="set swipe between pages with three fingers (and between spaces with four fingers)"
-# Two domains, same remarks as for “enable tap to click”
-# Note: Apparently the “Swipe Between Pages” options has two values that do not
-# change either domains AFAICT (swipe w/ three fingers and swipe w/ two or three
-# fingers). So there must be another pref changed by this setting!
-{ res_check "$res" &&   catchout res  defaults_set_int com.apple.AppleMultitouchTrackpad                  TrackpadThreeFingerHorizSwipeGesture 1 && res_list+=("$res") }
-{ res_check "$res" &&   catchout res  defaults_set_int com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture 1 && res_list+=("$res") }
+# Three domains, same remarks as for “enable tap to click”
+{ res_check "$res" &&   catchout res  defaults_set_int              com.apple.AppleMultitouchTrackpad                  TrackpadThreeFingerHorizSwipeGesture            1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_int              com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture            1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_int -currentHost NSGlobalDomain                                     com.apple.trackpad.threeFingerHorizSwipeGesture 1 && res_list+=("$res") }
 log_task_from_res_list res_list
+
+CURRENT_TASK_NAME="disable swipe between pages with two fingers"
+# Surprisingly, it seems only one domain is needed there
+catchout res  defaults_set_bool NSGlobalDomain AppleEnableSwipeNavigateWithScrolls 0
+log_task_from_res "$res"
 
 res=; res_list=()
 CURRENT_TASK_NAME="set vertical swipe to four fingers"
-# Two domains, same remarks as for “enable tap to click”
-{ res_check "$res" &&   catchout res  defaults_set_int com.apple.AppleMultitouchTrackpad                  TrackpadThreeFingerVertSwipeGesture 1 && res_list+=("$res") }
-{ res_check "$res" &&   catchout res  defaults_set_int com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture 1 && res_list+=("$res") }
+# Three domains, same remarks as for “enable tap to click”
+{ res_check "$res" &&   catchout res  defaults_set_int              com.apple.AppleMultitouchTrackpad                  TrackpadThreeFingerVertSwipeGesture            1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_int              com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture            1 && res_list+=("$res") }
+{ res_check "$res" &&   catchout res  defaults_set_int -currentHost NSGlobalDomain                                     com.apple.trackpad.threeFingerVertSwipeGesture 1 && res_list+=("$res") }
 log_task_from_res_list res_list
 
 CURRENT_TASK_NAME="do not close window when app quit"
