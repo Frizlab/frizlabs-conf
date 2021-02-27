@@ -38,13 +38,16 @@ for linux_base_image in "${LINUX_BASE_IMAGES[@]}"; do
 			echo "$env" >"$ASSETS_INPUTS_FOLDER/computer_group"
 			
 			# Creating the Dockerfile for our configuration
-			dockerfilepath="$(mktemp)"
+			dockerfilepath="$(mktemp ./.tmp.dockerfile.XXXXXXX)"
+			trap "rm -f $dockerfilepath" EXIT
 			m4 -DM4_USER="$user" -DM4_BASE_IMAGE="$linux_base_image" "linux/Dockerfile.m4" >"$dockerfilepath"
 			
 			# Building the image
 			image_name="frizlab-conf-test-$env-$user:$linux_base_image_no_colon"
 			docker rmi "$image_name" 2>/dev/null || true; # First remove the previous test image if present
 			docker build --build-arg CACHEBUST="$(date +%s)" . -f "$dockerfilepath" -t "$image_name"
+			
+			trap - EXIT
 			rm -f "$dockerfilepath"
 			
 			# Running the test script inside the image

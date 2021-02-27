@@ -7,3 +7,6 @@ xcuserdata/
 
 # Tests inputs
 /tests/assets/inputs/
+# The temporary Dockerfile has to be generated in the current folder instead of
+# in the temporary directory for sandbox reasons apparently.
+/tests/assets/.tmp.dockerfile.*
