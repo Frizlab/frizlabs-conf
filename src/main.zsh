@@ -93,22 +93,22 @@ for component in ${(ok)COMPONENTS_STATS_OKS}; do
 	if test $COMPONENTS_STATS_OKS[$component] -gt 0; then print -Pn "%F{green}" >&2; fi
 	print -n "ok=$COMPONENTS_STATS_OKS[$component]" >&2
 	print -Pn "%f " >&2
-	if test $COMPONENTS_STATS_OKS[$component] -lt 100; then print -n " "; fi
-	if test $COMPONENTS_STATS_OKS[$component] -lt 10;  then print -n " "; fi
+	if test $COMPONENTS_STATS_OKS[$component] -lt 100; then print -n " " >&2; fi
+	if test $COMPONENTS_STATS_OKS[$component] -lt 10;  then print -n " " >&2; fi
 	# Changes
 	total_changes=$((total_changes + COMPONENTS_STATS_CHANGES[$component]))
 	if test $COMPONENTS_STATS_CHANGES[$component] -gt 0; then print -Pn "%F{cyan}" >&2; fi
 	print -n "changes=$COMPONENTS_STATS_CHANGES[$component]" >&2
 	print -Pn "%f " >&2
-	if test $COMPONENTS_STATS_CHANGES[$component] -lt 100; then print -n " "; fi
-	if test $COMPONENTS_STATS_CHANGES[$component] -lt 10;  then print -n " "; fi
+	if test $COMPONENTS_STATS_CHANGES[$component] -lt 100; then print -n " " >&2; fi
+	if test $COMPONENTS_STATS_CHANGES[$component] -lt 10;  then print -n " " >&2; fi
 	# Warnings
 	total_warnings=$((total_warnings + COMPONENTS_STATS_WARNINGS[$component]))
 	if test $COMPONENTS_STATS_WARNINGS[$component] -gt 0; then print -Pn "%F{yellow}" >&2; fi
 	print -n "warnings=$COMPONENTS_STATS_WARNINGS[$component]" >&2
 	print -Pn "%f " >&2
-	if test $COMPONENTS_STATS_WARNINGS[$component] -lt 100; then print -n " "; fi
-	if test $COMPONENTS_STATS_WARNINGS[$component] -lt 10;  then print -n " "; fi
+	if test $COMPONENTS_STATS_WARNINGS[$component] -lt 100; then print -n " " >&2; fi
+	if test $COMPONENTS_STATS_WARNINGS[$component] -lt 10;  then print -n " " >&2; fi
 	# Errors
 	total_errors=$((total_errors + COMPONENTS_STATS_ERRORS[$component]))
 	if test $COMPONENTS_STATS_ERRORS[$component] -gt 0; then print -Pn "%F{red}" >&2; fi
