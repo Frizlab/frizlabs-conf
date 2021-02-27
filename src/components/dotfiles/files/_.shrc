@@ -83,7 +83,7 @@ ssha() {
 # Misc. functions
 del_stores() {
 	# Note: Cannot give "/" in input!
-	dir="$(echo "${1:-.}" | sed -E 's:/*$::')"
+	local -r dir="$(echo "${1:-.}" | sed -E 's:/*$::')"
 	if [ -z "$dir" ]; then echo "Usage: del_stores [dir]" >&2; return 1; fi
 	if [ ! -d "$dir" ]; then echo "dir does not exist or is not a directory" >&2; return 2; fi
 	find "$dir" -name ".DS_Store" -print -delete
@@ -91,6 +91,8 @@ del_stores() {
 
 add_subtitle() {
 	if [ $# -ne 1 ] && [ $# -ne 2 ]; then echo "usage: \"add_subtitle movie_name.\" or \"add_subtitle srt_file.srt movie_file.mp4\"" >&2; return 1; fi
+	
+	local srt; local mp4
 	if [ $# -eq 1 ]; then
 		srt="${1}srt"
 		mp4="${1}mp4"
@@ -98,6 +100,7 @@ add_subtitle() {
 		srt="$1"
 		mp4="$2"
 	fi
+	
 	MP4Box -add "${srt}:lang=eng:layout=0x60x0x-1:group=2:hdlr=sbtl:tx3g" "$mp4" && rm "$srt"
 }
 

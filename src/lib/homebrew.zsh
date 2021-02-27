@@ -43,7 +43,7 @@ function install_homebrew() {
 	local -a arch_launch
 	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
 	
-	dir="$1"
+	local -r dir="$1"
 	
 	test ! -x "$dir/bin/brew" || { echo "ok"; return }
 	"${arch_launch[@]}" "$SRC_FOLDER/components/bin/files/bash/install-brew.sh" "$dir" >/dev/null 2>&1 || { log_task_failure "cannot install homebrew at path $dir"; echo "failed"; return }
@@ -55,16 +55,17 @@ function install_brew_package() {
 	local -a arch_launch
 	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
 	
-	brew_prefix="$1"
-	package_name="$2"
-	path_to_check="$3"
+	local -r brew_prefix="$1"
+	local -r package_name="$2"
+	local -r path_to_check="$3"
 	shift; shift; shift
 	
-	local additional_cask_options=
+	local additional_cask_options
 	case "$brew_prefix" in
 		$HOMEBREW_X86_USER_DIR|$HOMEBREW_ARM64_USER_DIR)     additional_cask_options="$FRZ_HOMEBREW_CASK_OPTS_USER";;
 		$HOMEBREW_X86_SYSTEM_DIR|$HOMEBREW_ARM64_SYSTEM_DIR) additional_cask_options="$FRZ_HOMEBREW_CASK_OPTS_SYSTEM";;
 	esac
+	readonly additional_cask_options
 	
 	if test "${path_to_check:0:1}" = "/"; then test ! -e              "$path_to_check" || { echo "ok"; return }
 	else                                       test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }; fi

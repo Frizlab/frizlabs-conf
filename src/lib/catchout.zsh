@@ -10,7 +10,7 @@ function catchout() {
 	local catchout_tmpfile; catchout_tmpfile="$(mktemp)"; readonly catchout_tmpfile
 	"${@:2}" >"$catchout_tmpfile"
 	local -r ret="$?"
-	eval "$1=\$(cat \"$catchout_tmpfile\")"
-	rm -f "$catchout_tmpfile" || true
+	eval "$1=\$(cat -- \"$catchout_tmpfile\")"
+	rm -f -- "$catchout_tmpfile" || true
 	return "$ret"
 }

@@ -1,27 +1,28 @@
 ## Usage: doc author compatibility relative_path_to_folder relative_path_to_doc
 function doc() {
-	author="$1"
-	compatibility="$2"
-	relative_path_to_folder="$3"
-	local_relative_doc_path="$4"
+	local -r author="$1"
+	local -r compatibility="$2"
+	local -r relative_path_to_folder="$3"
+	local -r local_relative_doc_path="$4"
 	
-	doc_basename="${local_relative_doc_path##*/}"
+	local -r doc_basename="${local_relative_doc_path##*/}"
 	
 	{ [[ "$compatibility" =~ ":$HOST_OS:" ]] && [[ ! "$compatibility" =~ "~$COMPUTER_GROUP~" ]] } || {
 		delete_doc "$author" "$relative_path_to_folder/$doc_basename"
 		return
 	}
 	
-	me="$(whoami)"
-	dest_share_dir=""
+	local dest_share_dir=""
+	local me; me="$(whoami)"; readonly me
 	if test "$author" = "$me"; then dest_share_dir="$FIRST_PARTY_SHARE_DIR";
 	else                            dest_share_dir="$THIRD_PARTY_SHARE_DIR"; fi
+	readonly dest_share_dir
 	
-	dest_doc_dir="$dest_share_dir/$relative_path_to_folder"
-	backup_dir="$dest_doc_dir/$BIN_BACKUP_DIR_BASENAME"
+	local -r dest_doc_dir="$dest_share_dir/$relative_path_to_folder"
+	local -r backup_dir="$dest_doc_dir/$BIN_BACKUP_DIR_BASENAME"
 	
-	local_doc_path="$(pwd)/files/$local_relative_doc_path"
-	doc_dest_path="$dest_doc_dir/$doc_basename"
+	local local_doc_path; local_doc_path="$(pwd)/files/$local_relative_doc_path"; readonly local_doc_path
+	local -r doc_dest_path="$dest_doc_dir/$doc_basename"
 	
 	res=; res_list=()
 	CURRENT_TASK_NAME="install ${doc_dest_path/#$HOME/\~} (from $local_relative_doc_path)"
@@ -32,14 +33,15 @@ function doc() {
 }
 
 function delete_doc() {
-	author="$1"
-	doc_name="$2"
+	local -r author="$1"
+	local -r doc_name="$2"
 	
-	me="$(whoami)"
-	dest_share_dir=""
+	local dest_share_dir=""
+	local me; me="$(whoami)"; readonly me
 	if test "$author" = "$me"; then dest_share_dir="$FIRST_PARTY_SHARE_DIR";
 	else                            dest_share_dir="$THIRD_PARTY_SHARE_DIR"; fi
-	deleted_path="$dest_share_dir/$doc_name"
+	readonly dest_share_dir
+	local -r deleted_path="$dest_share_dir/$doc_name"
 	
 	CURRENT_TASK_NAME="delete doc ${deleted_path/#$HOME/\~}"
 	catchout res   delete "$deleted_path"

@@ -9,15 +9,18 @@ function defaults_set_str() {
 		defaults_options="-currentHost"
 		shift
 	fi
+	readonly defaults_options
 	
-	local domain="$1"
-	local key="$2"
-	local value="$3"
+	local -r domain="$1"
+	local -r key="$2"
+	local -r value="$3"
 	
-	# Note: We do not handle the case where the key does not have the correct type
 	# We fully ignore if defaults cannot read the default at all, because it will
-	# probably be because the key does not exist and it is a normal error.
-	current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)" || true
+	# probably be because the key does not exist and it is a normal error. We
+	# also don’t care about any type mismatch.
+	# Important: The error defaults could return is “hidden” by the “local” var
+	#            declaration, so there is no need to “|| true” the call.
+	local -r current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)"
 	test "$current_value" != "$value" || { echo "ok"; return }
 	
 	defaults $defaults_options write "$domain" "$key" -string "$value" >/dev/null 2>&1 || { log_task_failure "cannot set string value for defaults domain $domain key $key"; echo "failed"; return }
@@ -33,15 +36,18 @@ function defaults_set_int() {
 		defaults_options="-currentHost"
 		shift
 	fi
+	readonly defaults_options
 	
-	local domain="$1"
-	local key="$2"
-	local value="$3"
+	local -r domain="$1"
+	local -r key="$2"
+	local -r value="$3"
 	
-	# Note: We do not handle the case where the key does not have the correct type
 	# We fully ignore if defaults cannot read the default at all, because it will
-	# probably be because the key does not exist and it is a normal error.
-	current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)" || true
+	# probably be because the key does not exist and it is a normal error. We
+	# also don’t care about any type mismatch.
+	# Important: The error defaults could return is “hidden” by the “local” var
+	#            declaration, so there is no need to “|| true” the call.
+	local -r current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)"
 	test "$current_value" != "$value" || { echo "ok"; return }
 	
 	defaults $defaults_options write "$domain" "$key" -int "$value" >/dev/null 2>&1 || { log_task_failure "cannot set integer value for defaults domain $domain key $key"; echo "failed"; return }
@@ -58,18 +64,23 @@ function defaults_set_bool() {
 		defaults_options="-currentHost"
 		shift
 	fi
+	readonly defaults_options
 	
-	local domain="$1"
-	local key="$2"
-	local value="$3"
+	local -r domain="$1"
+	local -r key="$2"
+	local -r value="$3"
 	
+	local value_to_set expected_value
 	if test "$value" = "0"; then expected_value="0"; value_to_set="no";
 	else                         expected_value="1"; value_to_set="yes"; fi
+	readonly value_to_set expected_value
 	
-	# Note: We do not handle the case where the key does not have the correct type
 	# We fully ignore if defaults cannot read the default at all, because it will
-	# probably be because the key does not exist and it is a normal error.
-	current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)" || true
+	# probably be because the key does not exist and it is a normal error. We
+	# also don’t care about any type mismatch.
+	# Important: The error defaults could return is “hidden” by the “local” var
+	#            declaration, so there is no need to “|| true” the call.
+	local -r current_value="$(defaults $defaults_options read "$domain" "$key" 2>/dev/null)"
 	test "$current_value" != "$expected_value" || { echo "ok"; return }
 	
 	defaults $defaults_options write "$domain" "$key" -bool "$value_to_set" >/dev/null 2>&1 || { log_task_failure "cannot set bool value for defaults domain $domain key $key"; echo "failed"; return }

@@ -37,21 +37,21 @@ function log_task_change() {
 function log_task_warning() {
 	COMPONENTS_STATS_WARNINGS[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_WARNINGS[$CURRENT_COMPONENT_NAME] + 1))
 	
-	warning_message="$1"
+	local -r warning_message="$1"
 	print -P "%F{yellow}%Bwarning%b: $CURRENT_TASK_NAME: $warning_message%f" >&2
 }
 
 function log_task_failure() {
 	COMPONENTS_STATS_ERRORS[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_ERRORS[$CURRENT_COMPONENT_NAME] + 1))
 	
-	error_message="$1"
+	local -r error_message="$1"
 	print -P "%F{red}%Bfailed%b: $CURRENT_TASK_NAME: $error_message%f" >&2
 }
 
 function log_task_from_res_list() {
-	local res_list_name="$1"
+	local -r res_list_name="$1"
 	
-	highest_res=
+	local highest_res=
 	for res in ${(P)${res_list_name}}; do
 		case "$highest_res:$res" in
 			:*)             highest_res="$res";;
@@ -67,7 +67,7 @@ function log_task_from_res_list() {
 }
 
 function log_task_from_res() {
-	res="$1"
+	local -r res="$1"
 	case "$res" in
 		"ok")      log_task_ok;;
 		"changed") log_task_change;;
@@ -76,12 +76,12 @@ function log_task_from_res() {
 }
 
 function log_line() {
-	prefix="$1"
-	bold="$2"
-	line_char="${3:-*}"
-	str="$prefix$bold"
-	w=$#str
-	n=$((TERM_WIDTH - w - 1))
+	local -r prefix="$1"
+	local -r bold="$2"
+	local -r line_char="${3:-*}"
+	local -r str="$prefix$bold"
+	local -r w=$#str
+	local -r n=$((TERM_WIDTH - w - 1))
 	print -Pn -- "$prefix%B$bold%b " >&2
 	test $n -gt 0 && printf %"$n"s | tr " " "$line_char" >&2
 	print >&2
