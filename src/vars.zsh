@@ -80,6 +80,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"just"                "bin/just"
 	"lftp"                "bin/lftp"
 	"nmap"                "bin/nmap"
+	"p7zip"               "bin/7z"
 	"pass"                "bin/pass"
 	"recode"              "bin/recode"
 	"ruby"                "opt/ruby/bin/ruby"
