@@ -13,9 +13,9 @@ CURRENT_TASK_NAME="enable tap to click"
 # So! There are three domains. My _guess_ is one is for externally connected
 # bluetooth trackpads, the second is for the built-in trackpad on laptops, and
 # the third is for the UI (in System Preferences).
-# Currently verified: First domain works on built-in trackpad, second does not,
-# third updates UI.
-# TODO: Verify second property works w/ external trackpad, first does not!
+# After verification, first domain works for built-in trackpad _and_ external
+# trackpad, so I don’t know what the second domain is for. The third does change
+# the UI in System Preferences.
 { res_check "$res" &&   catchout res  defaults_set_bool              com.apple.AppleMultitouchTrackpad                  Clicking                    1 && res_list+=("$res") }
 { res_check "$res" &&   catchout res  defaults_set_bool              com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking                    1 && res_list+=("$res") }
 # Also activate dragging and drag lock in UI. 2 is w/o drag lock, 1 is w/o both.
