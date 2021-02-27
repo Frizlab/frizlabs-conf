@@ -15,8 +15,10 @@ LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	ca-certificates \
 	ccrypt \
+	curl \
 	git \
 	locales \
+	m4 \
 	zsh \
 && rm -rf /var/lib/apt/lists/*
 
