@@ -24,12 +24,12 @@ function doc() {
 	local local_doc_path; local_doc_path="$(pwd)/files/$local_relative_doc_path"; readonly local_doc_path
 	local -r doc_dest_path="$dest_doc_dir/$doc_basename"
 	
-	res=; res_list=()
+	RES=; RES_LIST=()
 	CURRENT_TASK_NAME="install ${doc_dest_path/#$HOME/\~} (from $local_relative_doc_path)"
-	{ res_check "$res" &&   catchout res  folder "$dest_doc_dir" "755"                                     && res_list+=("$res") }
-	{ res_check "$res" &&   catchout res  folder "$backup_dir"   "$BIN_BACKUP_DIR_MODE"                    && res_list+=("$res") }
-	{ res_check "$res" &&   catchout res  linknbk "$local_doc_path" "$doc_dest_path" "644" "$backup_dir"   && res_list+=("$res") }
-	log_task_from_res_list res_list
+	{ res_check "$RES" &&   catchout RES  folder "$dest_doc_dir" "755"                                     && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   catchout RES  folder "$backup_dir"   "$BIN_BACKUP_DIR_MODE"                    && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   catchout RES  linknbk "$local_doc_path" "$doc_dest_path" "644" "$backup_dir"   && RES_LIST+=("$RES") }
+	log_task_from_res_list RES_LIST
 }
 
 function delete_doc() {
@@ -44,6 +44,6 @@ function delete_doc() {
 	local -r deleted_path="$dest_share_dir/$doc_name"
 	
 	CURRENT_TASK_NAME="delete doc ${deleted_path/#$HOME/\~}"
-	catchout res   delete "$deleted_path"
-	log_task_from_res "$res"
+	catchout RES   delete "$deleted_path"
+	log_task_from_res "$RES"
 }

@@ -2,8 +2,8 @@
 
 # For now we only check for Darwin ARM64
 if test "$HOST_OS:$HOST_ARCH" != "Darwin:arm64"; then
-	CURRENT_TASK_NAME="install user homebrew x86";   catchout res  install_homebrew                         "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$res"
+	CURRENT_TASK_NAME="install user homebrew x86";   catchout RES  install_homebrew                         "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$RES"
 else
-	CURRENT_TASK_NAME="install user homebrew arm64"; catchout res  install_homebrew                         "$HOMEBREW_ARM64_USER_DIR"; log_task_from_res "$res"
-	CURRENT_TASK_NAME="install user homebrew x86";   catchout res  install_homebrew "--force-arch" "x86_64" "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$res"
+	CURRENT_TASK_NAME="install user homebrew arm64"; catchout RES  install_homebrew                         "$HOMEBREW_ARM64_USER_DIR"; log_task_from_res "$RES"
+	CURRENT_TASK_NAME="install user homebrew x86";   catchout RES  install_homebrew "--force-arch" "x86_64" "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$RES"
 fi

@@ -13,25 +13,25 @@ esac
 
 CURRENT_TASK_NAME="install gcloud"
 if test -n "$tar_url"; then
-	res=; res_list=()
-	{ res_check "$res" &&   temp="$(mktemp)"   || { log_task_failure "cannot create temporary file"   && res_list+=("failed") } }
-	{ res_check "$res" &&   catchout res  folder "$GCLOUD_DIR" "755"                                  && res_list+=("$res") }
-	{ res_check "$res" &&   test -x "$GCLOUD_DIR/bin/gcloud"                                          && res_list+=("ok") } || {
-		{ res_check "$res" &&   curl -L "$tar_url" 2>/dev/null | tar xz --strip 1 -C "$GCLOUD_DIR" && res_list+=("$res") }
+	RES=; RES_LIST=()
+	{ res_check "$RES" &&   temp="$(mktemp)"   || { log_task_failure "cannot create temporary file"   && RES_LIST+=("failed") } }
+	{ res_check "$RES" &&   catchout RES  folder "$GCLOUD_DIR" "755"                                  && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   test -x "$GCLOUD_DIR/bin/gcloud"                                          && RES_LIST+=("ok") } || {
+		{ res_check "$RES" &&   curl -L "$tar_url" 2>/dev/null | tar xz --strip 1 -C "$GCLOUD_DIR" && RES_LIST+=("$RES") }
 	}
-	log_task_from_res_list res_list
+	log_task_from_res_list RES_LIST
 	
 	CURRENT_TASK_NAME="add gcloud to PATH"
 	# We purposefully _not_ use path.zsh.inc (or path.bash.inc) because we want gougle’s path to be *last*.
-	catchout res  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
-	log_task_from_res "$res"
+	catchout RES  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
+	log_task_from_res "$RES"
 	
 	CURRENT_TASK_NAME="install zsh completion"
-	catchout res  lnk "$GCLOUD_DIR/completion.zsh.inc"  "$HOME/.zshrc.d/590-gougle-cloud-sdk-completion.sh"  "600"
-	log_task_from_res "$res"
+	catchout RES  lnk "$GCLOUD_DIR/completion.zsh.inc"  "$HOME/.zshrc.d/590-gougle-cloud-sdk-completion.sh"  "600"
+	log_task_from_res "$RES"
 	CURRENT_TASK_NAME="install bash completion"
-	catchout res  lnk "$GCLOUD_DIR/completion.bash.inc" "$HOME/.bashrc.d/590-gougle-cloud-sdk-completion.sh" "600"
-	log_task_from_res "$res"
+	catchout RES  lnk "$GCLOUD_DIR/completion.bash.inc" "$HOME/.bashrc.d/590-gougle-cloud-sdk-completion.sh" "600"
+	log_task_from_res "$RES"
 else
 	log_task_failure "cannot install gcloud (unable to infer gcloud URL from platform/arch)"
 fi

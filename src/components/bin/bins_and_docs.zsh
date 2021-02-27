@@ -133,7 +133,7 @@ bin "frizlab" ":Darwin:~work~" "bin/my-split"
 ### compopt ###
 # When compopt is not available (e.g. w/ Bash 3), this hides the error we get
 # from some completion scripts that use compopt.
-res=; res_list=()
+RES=; RES_LIST=()
 dest="$THIRD_PARTY_BIN_DIR/compopt"
 backup_dir="$THIRD_PARTY_BIN_DIR/$BIN_BACKUP_DIR_BASENAME"
 CURRENT_TASK_NAME="link fake compopt -> ${dest/#$HOME/\~}"
@@ -142,7 +142,7 @@ test -x "$src" || src="/usr/bin/true"                  || true
 test -x "$src" || src="/bin/true"                      || true
 test -x "$src" || src="$(command -v true 2>/dev/null)" || true
 test -x "$src" || src="$(which true 2>/dev/null)"      || true
-test -x "$src" || { log_task_failure "cannot get path of bin “true”."; res="failed"; res_list+=("$res") }
-{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE" && res_list+=("$res") }
-{ res_check "$res" &&   catchout res  linknbk "$src" "$dest" "755" "$backup_dir"  && res_list+=("$res") }
-log_task_from_res_list res_list
+test -x "$src" || { log_task_failure "cannot get path of bin “true”."; RES="failed"; RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE" && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  linknbk "$src" "$dest" "755" "$backup_dir"  && RES_LIST+=("$RES") }
+log_task_from_res_list RES_LIST

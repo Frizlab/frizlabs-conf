@@ -29,11 +29,11 @@ function bin() {
 	local local_script_path; local_script_path="$(pwd)/files/$local_relative_script_path"; readonly local_script_path
 	local -r script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
-	res=; res_list=()
+	RES=; RES_LIST=()
 	CURRENT_TASK_NAME="install ${script_dest_path/#$HOME/\~} (from $local_relative_script_path)"
-	{ res_check "$res" &&   catchout res  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"                            && res_list+=("$res") }
-	{ res_check "$res" &&   catchout res  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && res_list+=("$res") }
-	log_task_from_res_list res_list
+	{ res_check "$RES" &&   catchout RES  folder "$backup_dir" "$BIN_BACKUP_DIR_MODE"                            && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   catchout RES  linknbk "$local_script_path" "$script_dest_path" "755" "$backup_dir"   && RES_LIST+=("$RES") }
+	log_task_from_res_list RES_LIST
 }
 
 function encrypted_bin() {
@@ -59,8 +59,8 @@ function encrypted_bin() {
 	local -r script_dest_path="$dest_bin_dir/$script_basename_no_ext"
 	
 	CURRENT_TASK_NAME="decrypt and install ${script_dest_path/#$HOME/\~}"
-	catchout res   decrypt_and_copy "$local_script_path" "$script_dest_path" "755"
-	log_task_from_res "$res"
+	catchout RES   decrypt_and_copy "$local_script_path" "$script_dest_path" "755"
+	log_task_from_res "$RES"
 }
 
 function delete_bin() {
@@ -74,6 +74,6 @@ function delete_bin() {
 	readonly deleted_path="$dest_bin_dir/$script_name"
 	
 	CURRENT_TASK_NAME="delete bin ${deleted_path/#$HOME/\~}"
-	catchout res   delete "$deleted_path"
-	log_task_from_res "$res"
+	catchout RES   delete "$deleted_path"
+	log_task_from_res "$RES"
 }
