@@ -61,6 +61,24 @@ https://twitter.com/ryleyherrington/status/1354546825739472897
 
 Add ignored folders.
 
+== zsh (and bash) Fun Stuff
+
+=== Local and Readonly Variables
+
+`local myvar="$(false)"; echo $?` prints `0`. Why? Because `local` never fails!
+Thus, if you have run `set -e`, even the script should stop, it won’t. +
+To workaround this, one should do `local myvar; myvar="$(false)"; echo $?`,
+which will correctly print `1`.
+
+Now how about a readonly local variable? In theory, we could do this: `local -r
+myvar="$(false)"` (BTW, certainly not `readonly local myvar...`, nor `local
+readonly myvar...`!), however, we would have the same problem. +
+The solution here is `local myvar; myvar="$(false)"; readonly myvar`.
+
+Shell scripts are great.
+
+PS: Of course, `test "" = "$(false)"` does not fail either.
+
 == Some doc related to `.bash_profile`, `.bashrc` & others
 
 === Random links
