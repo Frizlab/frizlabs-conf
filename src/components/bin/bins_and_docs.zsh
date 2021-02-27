@@ -136,7 +136,7 @@ bin "frizlab" ":Darwin:~work~" "bin/my-split"
 RES=; RES_LIST=()
 dest="$THIRD_PARTY_BIN_DIR/compopt"
 backup_dir="$THIRD_PARTY_BIN_DIR/$BIN_BACKUP_DIR_BASENAME"
-CURRENT_TASK_NAME="link fake compopt -> ${dest/#$HOME/\~}"
+start_task "link fake compopt -> ${dest/#$HOME/\~}"
 src=
 test -x "$src" || src="/usr/bin/true"                  || true
 test -x "$src" || src="/bin/true"                      || true

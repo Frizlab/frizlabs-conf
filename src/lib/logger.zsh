@@ -23,29 +23,44 @@ function log_component_end() {
 	print >&2
 }
 
+# This function should be somewhere else, I guess…
+function start_task() {
+	# Set the global variables
+	RES=; RES_LIST=()
+	CURRENT_TASK_NAME="$1"
+	log_task_start
+}
+
+function log_task_start() {
+	print -Pn "%F{yellow}%Bin progress%b: $CURRENT_TASK_NAME%f" >&2
+}
+
 # For up-to-date tasks (did not need to do anything)
 function log_task_ok() {
 	COMPONENTS_STATS_OKS[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_OKS[$CURRENT_COMPONENT_NAME] + 1))
-	print -P "%F{green}%Bok%b: $CURRENT_TASK_NAME%f" >&2
+	print -P "\r\033[2K%F{green}%Bok%b: $CURRENT_TASK_NAME%f" >&2
 }
 
+# For tasks that needed an update
 function log_task_change() {
 	COMPONENTS_STATS_CHANGES[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_CHANGES[$CURRENT_COMPONENT_NAME] + 1))
-	print -P "%F{cyan}%Bchanged%b: $CURRENT_TASK_NAME%f" >&2
+	print -P "\r\033[2K%F{cyan}%Bchanged%b: $CURRENT_TASK_NAME%f" >&2
 }
 
+# For tasks that did not fail, but had a warning
 function log_task_warning() {
 	COMPONENTS_STATS_WARNINGS[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_WARNINGS[$CURRENT_COMPONENT_NAME] + 1))
 	
 	local -r warning_message="$1"
-	print -P "%F{yellow}%Bwarning%b: $CURRENT_TASK_NAME: $warning_message%f" >&2
+	print -P "\r\033[2K%F{yellow}%Bwarning%b: $CURRENT_TASK_NAME: $warning_message%f" >&2
 }
 
+# For tasks that failed
 function log_task_failure() {
 	COMPONENTS_STATS_ERRORS[$CURRENT_COMPONENT_NAME]=$((COMPONENTS_STATS_ERRORS[$CURRENT_COMPONENT_NAME] + 1))
 	
 	local -r error_message="$1"
-	print -P "%F{red}%Bfailed%b: $CURRENT_TASK_NAME: $error_message%f" >&2
+	print -P "\r\033[2K%F{red}%Bfailed%b: $CURRENT_TASK_NAME: $error_message%f" >&2
 }
 
 function log_task_from_res_list() {

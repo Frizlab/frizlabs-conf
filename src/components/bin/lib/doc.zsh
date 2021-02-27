@@ -24,8 +24,7 @@ function doc() {
 	local local_doc_path; local_doc_path="$(pwd)/files/$local_relative_doc_path"; readonly local_doc_path
 	local -r doc_dest_path="$dest_doc_dir/$doc_basename"
 	
-	RES=; RES_LIST=()
-	CURRENT_TASK_NAME="install ${doc_dest_path/#$HOME/\~} (from $local_relative_doc_path)"
+	start_task "install ${doc_dest_path/#$HOME/\~} (from $local_relative_doc_path)"
 	{ res_check "$RES" &&   catchout RES  folder "$dest_doc_dir" "755"                                     && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   catchout RES  folder "$backup_dir"   "$BIN_BACKUP_DIR_MODE"                    && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   catchout RES  linknbk "$local_doc_path" "$doc_dest_path" "644" "$backup_dir"   && RES_LIST+=("$RES") }
@@ -43,7 +42,7 @@ function delete_doc() {
 	readonly dest_share_dir
 	local -r deleted_path="$dest_share_dir/$doc_name"
 	
-	CURRENT_TASK_NAME="delete doc ${deleted_path/#$HOME/\~}"
+	start_task "delete doc ${deleted_path/#$HOME/\~}"
 	catchout RES   delete "$deleted_path"
 	log_task_from_res "$RES"
 }

@@ -11,7 +11,7 @@ case "$HOST_OS:$HOST_ARCH" in
 	;;
 esac
 
-CURRENT_TASK_NAME="install gcloud"
+start_task "install gcloud"
 if test -n "$tar_url"; then
 	RES=; RES_LIST=()
 	{ res_check "$RES" &&   temp="$(mktemp)"   || { log_task_failure "cannot create temporary file"   && RES_LIST+=("failed") } }
@@ -21,15 +21,15 @@ if test -n "$tar_url"; then
 	}
 	log_task_from_res_list RES_LIST
 	
-	CURRENT_TASK_NAME="add gcloud to PATH"
+	start_task "add gcloud to PATH"
 	# We purposefully _not_ use path.zsh.inc (or path.bash.inc) because we want gougle’s path to be *last*.
 	catchout RES  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
 	log_task_from_res "$RES"
 	
-	CURRENT_TASK_NAME="install zsh completion"
+	start_task "install zsh completion"
 	catchout RES  lnk "$GCLOUD_DIR/completion.zsh.inc"  "$HOME/.zshrc.d/590-gougle-cloud-sdk-completion.sh"  "600"
 	log_task_from_res "$RES"
-	CURRENT_TASK_NAME="install bash completion"
+	start_task "install bash completion"
 	catchout RES  lnk "$GCLOUD_DIR/completion.bash.inc" "$HOME/.bashrc.d/590-gougle-cloud-sdk-completion.sh" "600"
 	log_task_from_res "$RES"
 else

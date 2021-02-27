@@ -76,6 +76,7 @@ function decrypt_string() {
 		ccdecrypt --keyfile "$CCRYPT_KEY2_PATH" 2>/dev/null | \
 		ccdecrypt --keyfile "$CCRYPT_KEY1_PATH" 2>/dev/null   \
 	|| {
+		log_task_start
 		log_task_warning "Cannot decrypt string. Returning string “<FRZ_DECRYPTION_FAILED>”."
 		echo "<FRZ_DECRYPTION_FAILED>"
 	}
