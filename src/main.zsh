@@ -134,3 +134,6 @@ print -Pn "%f   " >&2
 if test $total_errors -gt 0; then print -Pn "%F{red}" >&2; fi
 print -n "errors=$total_errors" >&2
 print -P "%f" >&2
+
+if test $total_errors -gt 0; then exit 1;
+else                              exit 0; fi
