@@ -12,10 +12,14 @@ LABEL description="Test of Frizlab’s conf for M4_BASE_IMAGE`'ifelse(M4_USER, `
 
 
 # ca-certificates is needed to be able to clone the conf repo
+# build-essential, clang and file are for brew (https://docs.brew.sh/Homebrew-on-Linux#debian-or-ubuntu)
 RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential \
 	ca-certificates \
 	ccrypt \
+	clang \
 	curl \
+	file \
 	git \
 	locales \
 	m4 \
