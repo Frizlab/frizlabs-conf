@@ -82,7 +82,6 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"nmap"                "bin/nmap"
 	"p7zip"               "bin/7z"
 	"pass"                "bin/pass"
-	"recode"              "bin/recode"
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
@@ -92,14 +91,21 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
 	"youtube-dl"          "bin/youtube-dl"
-	
-	"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
-	
-	"mxcl/made/swift-sh" "bin/swift-sh"
-	
-	"happn-tech/public/locmapper" "Cellar/locmapper"
 )
-# The following formulae do not compile (et time of writing) on ARM macOS
+if test "$HOST_OS" != "Linux"; then
+	# These formulae do not compile on Linux (at the time of writing), so we only
+	# add them when we’re not on Linux.
+	MAIN_SYSTEM_HOMEBREW_FORMULAE+=(
+		# Plain patch error when trying to install bottle; probably fixed soon
+		"recode"              "bin/recode"
+		# Needs Swift. I could `brew install swift`, but it’s expensive, probably
+		# (probably because I tried and it failed).
+		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
+		"mxcl/made/swift-sh" "bin/swift-sh"
+		"happn-tech/public/locmapper" "Cellar/locmapper"
+	)
+fi
+# The following formulae do not compile (at the time of writing) on ARM macOS
 # They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this
 # variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
