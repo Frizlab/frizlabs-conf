@@ -4,9 +4,9 @@
 # Python 3.9
 start_task "install homebrew for python3.9";   catchout RES  install_homebrew "$HOMEBREW_PYTHON39_USER_DIR"; log_task_from_res "$RES"
 start_task "install python@3.9"; catchout RES  install_brew_package "$HOMEBREW_PYTHON39_USER_DIR" "python@3.9" "opt/python@3.9/bin/python3" "--formula"; log_task_from_res "$RES"
-# We do not install Python 3.8 and 3.7 because the compilation fails atm
-#start_task "install homebrew for python3.8";   catchout RES  install_homebrew "$HOMEBREW_PYTHON38_USER_DIR"; log_task_from_res "$RES"
-#start_task "install python@3.8"; catchout RES  install_brew_package "$HOMEBREW_PYTHON38_USER_DIR" "python@3.8" "opt/python@3.8/bin/python3" "--formula"; log_task_from_res "$RES"
+start_task "install homebrew for python3.8";   catchout RES  install_homebrew "$HOMEBREW_PYTHON38_USER_DIR"; log_task_from_res "$RES"
+start_task "install python@3.8"; catchout RES  install_brew_package "$HOMEBREW_PYTHON38_USER_DIR" "python@3.8" "opt/python@3.8/bin/python3" "--formula"; log_task_from_res "$RES"
+# We do not install Python 3.7 because the compilation used to fail and it’s too late to test now (when I’m writing this; will test later)
 #start_task "install homebrew for python3.7";   catchout RES  install_homebrew "$HOMEBREW_PYTHON37_USER_DIR"; log_task_from_res "$RES"
 #start_task "install python@3.7"; catchout RES  install_brew_package "$HOMEBREW_PYTHON37_USER_DIR" "python@3.7" "opt/python@3.7/bin/python3" "--formula"; log_task_from_res "$RES"
 
