@@ -16,12 +16,15 @@ m4_changecom(`m4_#')m4_dnl
 PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
 
 # We force the brew installation of the following binaries:
+#    - rsync: system’s rsync is very old;
 #    - ruby: system’s ruby is old and some gems fail to install/update;
-#    - rsync: system’s rsync is very old.
 #    - python*: because pip (don’t talk to me about pip, it makes me angry);
 #               note: we use a separate brew instance for Python.
 #               note: any binaries installed w/ pip will purposefully **not** be in the PATH
 # So the paths to the parent folder of these binaries will be first in the path.
+PATH="___M4___HOMEBREW_PYTHON27_USER_DIR___M4___/opt/python@2.7/bin:${PATH}"
+PATH="___M4___HOMEBREW_PYTHON37_USER_DIR___M4___/opt/python@3.7/bin:${PATH}"
+PATH="___M4___HOMEBREW_PYTHON38_USER_DIR___M4___/opt/python@3.8/bin:${PATH}"
 PATH="___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/opt/python@3.9/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/ruby/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/rsync/bin:${PATH}"
