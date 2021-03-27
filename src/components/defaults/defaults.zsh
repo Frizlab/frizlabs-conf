@@ -119,6 +119,9 @@ log_task_from_res "$RES"
 start_task "set Safari search engine"
 catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
 log_task_from_res "$RES"
+# TODO: In STP (domain com.apple.SafariTechnologyPreview), we get
+#    SearchProviderIdentifierMigratedToSystemPreference = 1;
+#    SearchProviderShortName = DuckDuckGo;
 
 
 ######### TextEdit #########
