@@ -14,3 +14,7 @@
 	rebase = true
 [core]
 	excludesfile = ~/.gitignore_global
+[alias]
+	last = log -1 HEAD
+	fa = fetch -pPtf
+	pr = pull --rebase
