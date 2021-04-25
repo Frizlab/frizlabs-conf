@@ -12,7 +12,7 @@
 	<dict>
 		<!-- Everyday hour -->
 		<key>Minute</key>
-		<string>7</string>
+		<integer>13</integer>
 	</dict>
 	<!-- Setting stdin is probably useless -->
 	<key>StandardInPath</key>
