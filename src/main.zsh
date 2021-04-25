@@ -23,8 +23,8 @@ export PATH
 path+="$(pwd)/.cache/bin"
 
 # Let’s define the different paths we will need
-readonly CACHE_FOLDER="$(pwd)/.cache"
-readonly SRC_FOLDER="$(pwd)/src"
+CACHE_FOLDER="$(pwd)/.cache"; readonly CACHE_FOLDER
+SRC_FOLDER="$(pwd)/src"; readonly SRC_FOLDER
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
 
