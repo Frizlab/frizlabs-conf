@@ -1,6 +1,8 @@
-# Note: We assume none of the binaries call will fail in this script
+# Gather some facts
 
-readonly HOST_OS="$(uname -s)"
-readonly HOST_ARCH="$(uname -m)"
+HOST_OS="$(uname -s)";   typeset -r HOST_OS
+HOST_ARCH="$(uname -m)"; typeset -r HOST_ARCH
 
-readonly TERM_WIDTH="$(tput cols)"
+USER_ID=$(id -u); typeset -r CURRENT_USER_ID
+
+TERM_WIDTH="$(tput cols)"; typeset -r TERM_WIDTH
