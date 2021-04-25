@@ -64,7 +64,7 @@ function copy() {
 	# First we check the destination file is not a folder
 	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
-	diff -- "$src" "$dest" >/dev/null 2>&1 && test "$(stat -c %a -- "$dest" 2>/dev/null || stat -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { rm -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	diff -- "$src" "$dest" >/dev/null 2>&1 && test "$(stat -c %a -- "$dest" 2>/dev/null || stat -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { echo "ok"; return }
 	
 	cp -f -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
 	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
