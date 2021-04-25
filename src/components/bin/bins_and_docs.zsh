@@ -1,3 +1,6 @@
+### Dump Safari tabs to stdout ###
+bin "frizlab" ":Darwin:" "sh/dump-safari-tabs.sh"
+
 ### Run a Shell Command When a File Changes ###
 bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
 
