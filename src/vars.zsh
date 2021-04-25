@@ -19,6 +19,12 @@ readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
 readonly THIRD_PARTY_BASH_COMPLETIONS="$THIRD_PARTY_SHARE_DIR/bash/completions"
 readonly THIRD_PARTY_ZSH_SITE_FUNCTIONS="$THIRD_PARTY_SHARE_DIR/zsh/site-functions"
 
+# The CLT directory for launchd scripts. This contains scripts that are executed
+# by launchd: starting with Catalina sh does not have permission to read files
+# in the user’s Documents folder (and some others), so we have to put them in
+# another folder…
+readonly LAUNCHD_CLT_BIN_DIR="$CLT_DIR/launchd-scripts"
+
 # The x86 user Homebrew instance directory
 readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
 # The arm64 user Homebrew instance directory
@@ -62,6 +68,7 @@ typeset -a COMPONENTS=(
 	"core"
 	"dotfiles"
 	"bin"
+	"launchd"
 	"defaults"
 	
 #	"nix"             "pkgs-nix-base"

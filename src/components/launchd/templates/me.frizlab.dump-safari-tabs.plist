@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>___M4___label___M4___</string>
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>Program</key>
+	<string>___M4___LAUNCHD_CLT_BIN_DIR___M4___/dump-safari-tabs</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<!-- Everyday hour -->
+		<key>Minute</key>
+		<string>7</string>
+	</dict>
+	<!-- Setting stdin is probably useless -->
+	<key>StandardInPath</key>
+	<string>/dev/null</string>
+	<key>StandardOutPath</key>
+	<string>___M4___HOME___M4___/Downloads/safari-dump.out</string>
+	<key>StandardErrorPath</key>
+	<string>___M4___HOME___M4___/Downloads/safari-dump.err</string>
+</dict>
+</plist>

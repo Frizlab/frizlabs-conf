@@ -6,6 +6,10 @@ set -eu
 readonly BROWSER="${1:-Safari}"
 
 # Call AppleScript
+# osascript apparently logs to stderr, so we redirect stderr to stdout. If we
+# assume osascript properly quit w/ a non-0 error code on error, we should save
+# osascript’s output, then check $? and finally output the saved output to the
+# proper fd… (TODO)
 osascript -e '
 -- Get the list of running processes
 tell application "System Events"
@@ -38,4 +42,4 @@ if (listOfRunningProcesses contains "'"$BROWSER"'") then
 		end repeat
 	end tell
 end if
-'
+' 2>&1

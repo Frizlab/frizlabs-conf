@@ -63,6 +63,34 @@ function encrypted_bin() {
 	log_task_from_res "$RES"
 }
 
+## Usage: launchd_bin compatibility relative_path_to_script
+## Compatibility format: Same as for the bin function, but only computer group
+## excludes are considered.
+function launchd_bin() {
+	local -r compatibility="$1"
+	local -r local_relative_script_path="$2"
+	
+	local -r script_basename="${local_relative_script_path##*/}"
+	local -r script_basename_no_ext="${script_basename%.*}"
+	
+	if [ "$HOST_OS" != "Darwin" ]; then
+		return
+	fi
+	
+	[[ ! "$compatibility" =~ "~$COMPUTER_GROUP~" ]] || {
+		delete_launchd_bin "$script_basename_no_ext"
+		return
+	}
+	
+	local local_script_path; local_script_path="$(pwd)/files/$local_relative_script_path"; readonly local_script_path
+	local -r script_dest_path="$LAUNCHD_CLT_BIN_DIR/$script_basename_no_ext"
+	
+	RES=; RES_LIST=()
+	start_task "install ${script_dest_path/#$HOME/\~} (from $local_relative_script_path)"
+	{ res_check "$RES" &&   catchout RES  copy "$local_script_path" "$script_dest_path" "755"   && RES_LIST+=("$RES") }
+	log_task_from_res_list RES_LIST
+}
+
 function delete_bin() {
 	local -r author="$1"
 	local -r script_name="$2"
@@ -73,6 +101,15 @@ function delete_bin() {
 	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
 	readonly deleted_path="$dest_bin_dir/$script_name"
 	
+	start_task "delete bin ${deleted_path/#$HOME/\~}"
+	catchout RES   delete "$deleted_path"
+	log_task_from_res "$RES"
+}
+
+function delete_launchd_bin() {
+	local -r script_name="$1"
+	
+	readonly deleted_path="$LAUNCHD_CLT_BIN_DIR/$script_name"
 	start_task "delete bin ${deleted_path/#$HOME/\~}"
 	catchout RES   delete "$deleted_path"
 	log_task_from_res "$RES"
