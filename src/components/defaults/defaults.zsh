@@ -117,11 +117,12 @@ log_task_from_res "$RES"
 ######### Safari #########
 
 start_task "set Safari search engine"
-catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
-log_task_from_res "$RES"
-# TODO: In STP (domain com.apple.SafariTechnologyPreview), we get
+# TODO: In STP (domain com.apple.SafariTechnologyPreview), we get the following
 #    SearchProviderIdentifierMigratedToSystemPreference = 1;
 #    SearchProviderShortName = DuckDuckGo;
+# It is now also what we get in Safari; see what to do.
+#catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
+#log_task_from_res "$RES"
 
 
 ######### TextEdit #########
