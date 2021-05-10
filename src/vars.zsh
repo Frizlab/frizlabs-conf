@@ -99,8 +99,6 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
 	"youtube-dl"          "bin/youtube-dl"
-	
-	"swiftdocorg/formulae/swift-doc" "bin/swift-doc"
 )
 if test "$HOST_OS" != "Linux"; then
 	# These formulae do not compile on Linux (at the time of writing), so we only
@@ -108,11 +106,14 @@ if test "$HOST_OS" != "Linux"; then
 	MAIN_SYSTEM_HOMEBREW_FORMULAE+=(
 		# Plain patch error when trying to install bottle; probably fixed soon
 		"recode"              "bin/recode"
+		
 		# Needs Swift. I could `brew install swift`, but it’s expensive, probably
 		# (probably because I tried and it failed).
 		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
-		"mxcl/made/swift-sh" "bin/swift-sh"
-		"happn-tech/public/locmapper" "Cellar/locmapper"
+		"xcode-actions/tap/xct"                       "bin/xct"
+		"swiftdocorg/formulae/swift-doc"              "bin/swift-doc"
+		"mxcl/made/swift-sh"                          "bin/swift-sh"
+		"happn-tech/public/locmapper"                 "Cellar/locmapper"
 	)
 fi
 # The following formulae do not compile (at the time of writing) on ARM macOS
