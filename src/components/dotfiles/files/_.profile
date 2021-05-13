@@ -27,12 +27,20 @@ export EDITOR="vi"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 # HOMEBREW_CASK_OPTS and HOMEBREW_GITHUB_API_TOKEN are set in profile:dyn
+
+
+# Mint – For now we only implement system-wide mint; we might wanna do a user
+# one like Homebrew, but I probably won’t need it.
+# Also, TODO: We must create the mint folder
+export MINT_PATH="/opt/mint/cache"
+export MINT_LINK_PATH="/opt/mint/bin"
 
 
 # GPG
