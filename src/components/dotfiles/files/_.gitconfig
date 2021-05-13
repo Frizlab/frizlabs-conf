@@ -18,3 +18,5 @@
 	last = log -1 HEAD
 	fa = fetch -pPtf
 	pr = pull --rebase
+[init]
+	defaultBranch = main
