@@ -34,7 +34,7 @@ alias lt='ls -lrt'
 alias gt="git tag -l --format='%(taggerdate:iso8601)|%(refname:short)' | sort | awk '-F|' '{print \$2}'"; # Outputs git tags in reverse chronological order (close enough at least; dates can have different time zones)
 alias xcsymbolicate='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/ /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash'
 alias docker-run-cwd='docker run --rm -it -v "$(pwd):/tmp/cwd" --workdir /tmp/cwd'
-alias docker-run-swift='docker-run-cwd --security-opt=seccomp:unconfined --entrypoint bash happn/swift'
+alias docker-run-swift='docker-run-cwd --security-opt=seccomp:unconfined --entrypoint bash swift'
 
 # Misc. aliases
 alias k='true'
