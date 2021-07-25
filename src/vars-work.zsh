@@ -10,5 +10,6 @@ COMPONENTS+=(
 )
 
 MAIN_SYSTEM_HOMEBREW_CASKS+=(
-	"firefox" "Caskroom/firefox"
+	# Not needed anymore; now it’s installed via Munki
+#	"firefox" "Caskroom/firefox"
 )
