@@ -55,12 +55,17 @@ PS1=$'%{\e[01;36m%}$FRZ_ZSHPROMPT_CMD_COUNT%{\e[0m%} \\ %{\e[00;32m%}%D{%H:%M:%S
 RPS1='%(0?.🤠🙃😃.😱😭😡)'; # Just to remember we’re using zsh
 
 # We set EDITOR to vi in the profile, which changes the key bindings to vi
-# instead of emacs. Let’s revert this. Also we want to have a more bash-style
-# navigation (word nvigation goes through words, not ’till the next space).
+# instead of emacs. Let’s revert this.
 bindkey -e
-bindkey '\ef' emacs-forward-word
+# We also want to have a more bash-style navigation (word nvigation goes through
+# words, not ’till the next space).
 autoload -U select-word-style
 select-word-style bash
+# However, word suppression via ^W deletes the whole word backward, until next
+# space, just like with bash too.
+zle -N backward-kill-space-word backward-kill-word-match
+zstyle :zle:backward-kill-space-word word-style space
+bindkey '^W' backward-kill-space-word
 
 # Some zsh options we like
 # Mostly from there https://scriptingosx.com/2019/06/moving-to-zsh-part-3-shell-options/
