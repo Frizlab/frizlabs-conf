@@ -102,6 +102,11 @@ start_task "set bottom-left corner action"
 { res_check "$RES" &&   catchout RES  defaults_set_int com.apple.dock wvous-bl-modifier 0 && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
 
+# Note: I’m not fully confident this is actually used anywhere…
+start_task "set system-wide search engine"
+catchout RES  defaults_set_plist NSGlobalDomain NSPreferredWebServices '{NSWebServicesProviderWebSearch = {NSDefaultDisplayName = DuckDuckGo; NSProviderIdentifier = "com.duckduckgo";};}'
+log_task_from_res "$RES"
+
 
 ######### Mail #########
 
@@ -114,15 +119,17 @@ catchout RES  defaults_set_int com.apple.mail NumberOfSnippetLines 3
 log_task_from_res "$RES"
 
 
-######### Safari #########
+######### Safari (& Safari Technology Preview) #########
 
 start_task "set Safari search engine"
-# TODO: In STP (domain com.apple.SafariTechnologyPreview), we get the following
-#    SearchProviderIdentifierMigratedToSystemPreference = 1;
-#    SearchProviderShortName = DuckDuckGo;
-# It is now also what we get in Safari; see what to do.
-#catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo
-#log_task_from_res "$RES"
+{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.Safari SearchProviderShortName  DuckDuckGo     && RES_LIST+=("$RES") } # After  SearchProviderIdentifierMigratedToSystemPreference
+{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo && RES_LIST+=("$RES") } # Before SearchProviderIdentifierMigratedToSystemPreference
+log_task_from_res_list RES_LIST
+
+start_task "set Safari Technology Preview search engine"
+{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.SafariTechnologyPreview SearchProviderShortName  DuckDuckGo     && RES_LIST+=("$RES") } # After  SearchProviderIdentifierMigratedToSystemPreference
+{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.SafariTechnologyPreview SearchProviderIdentifier com.duckduckgo && RES_LIST+=("$RES") } # Before SearchProviderIdentifierMigratedToSystemPreference
+log_task_from_res_list RES_LIST
 
 
 ######### TextEdit #########
