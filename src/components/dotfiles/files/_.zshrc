@@ -57,8 +57,8 @@ RPS1='%(0?.🤠🙃😃.😱😭😡)'; # Just to remember we’re using zsh
 # We set EDITOR to vi in the profile, which changes the key bindings to vi
 # instead of emacs. Let’s revert this.
 bindkey -e
-# We also want to have a more bash-style navigation (word nvigation goes through
-# words, not ’till the next space).
+# We also want to have a more bash-style navigation (word navigation goes
+# through words, not ’till the next space).
 autoload -U select-word-style
 select-word-style bash
 # However, word suppression via ^W deletes the whole word backward, until next
