@@ -66,6 +66,8 @@ select-word-style bash
 zle -N backward-kill-space-word backward-kill-word-match
 zstyle :zle:backward-kill-space-word word-style space
 bindkey '^W' backward-kill-space-word
+# Also fix suppr key which does not work out of the box
+bindkey '^[[3~' delete-char
 
 # Some zsh options we like
 # Mostly from there https://scriptingosx.com/2019/06/moving-to-zsh-part-3-shell-options/
