@@ -3,6 +3,7 @@ readonly COMPUTER_GROUP_PATH="$CACHE_FOLDER/computer_group"
 declare -rA COMPUTER_GROUPS=(
 	1 home
 	2 work
+	2 vm
 )
 
 test -f "$COMPUTER_GROUP_PATH" || {
@@ -16,6 +17,4 @@ test -f "$COMPUTER_GROUP_PATH" || {
 	read -r "group?$message"
 	echo -n "${COMPUTER_GROUPS[$group]}" >"$COMPUTER_GROUP_PATH"
 }
-# Note: We use tmpvar to actually fail on cat error
-tmpvar="$(cat "$COMPUTER_GROUP_PATH")"
-readonly COMPUTER_GROUP="$tmpvar"
+COMPUTER_GROUP="$(cat "$COMPUTER_GROUP_PATH")"; readonly COMPUTER_GROUP

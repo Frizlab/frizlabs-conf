@@ -70,10 +70,6 @@ typeset -a COMPONENTS=(
 	"bin"
 	"launchd"
 	"defaults"
-	
-#	"nix"             "pkgs-nix-base"
-	"homebrew-user"   "pkgs-brew-user-base"
-	"homebrew-system" "pkgs-brew-system-base"
 )
 
 # Not -r because we modify this variable in the env specific vars file

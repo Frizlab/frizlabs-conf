@@ -1,6 +1,12 @@
 # Environment specific vars: home
 readonly DARK_MODE=true
 
+COMPONENTS+=(
+#	"nix"             "pkgs-nix-base"
+	"homebrew-user"   "pkgs-brew-user-base"
+	"homebrew-system" "pkgs-brew-system-base"
+)
+
 readonly DEFAULT_BREW_IS_SYSTEM=false
 MAIN_USER_HOMEBREW_FORMULAE+=(
 	"abcm2ps" "bin/abcm2ps"
