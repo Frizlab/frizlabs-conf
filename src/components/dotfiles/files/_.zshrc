@@ -91,6 +91,11 @@ fi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
+# Edit command line for ^X^E
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # Convenient alias for macOS
 alias h='cat ~/.zsh_sessions/*.history*'
 
