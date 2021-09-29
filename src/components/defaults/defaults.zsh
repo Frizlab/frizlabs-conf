@@ -121,15 +121,14 @@ log_task_from_res "$RES"
 
 ######### Safari (& Safari Technology Preview) #########
 
-start_task "set Safari search engine"
-{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.Safari SearchProviderShortName  DuckDuckGo     && RES_LIST+=("$RES") } # After  SearchProviderIdentifierMigratedToSystemPreference
-{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.Safari SearchProviderIdentifier com.duckduckgo && RES_LIST+=("$RES") } # Before SearchProviderIdentifierMigratedToSystemPreference
-log_task_from_res_list RES_LIST
-
-start_task "set Safari Technology Preview search engine"
-{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.SafariTechnologyPreview SearchProviderShortName  DuckDuckGo     && RES_LIST+=("$RES") } # After  SearchProviderIdentifierMigratedToSystemPreference
-{ res_check "$RES" &&   catchout RES  defaults_set_str com.apple.SafariTechnologyPreview SearchProviderIdentifier com.duckduckgo && RES_LIST+=("$RES") } # Before SearchProviderIdentifierMigratedToSystemPreference
-log_task_from_res_list RES_LIST
+for b in Safari SafariTechnologyPreview; do
+	
+	start_task "set search engine ($b)"
+	{ res_check "$RES" &&   catchout RES  defaults_set_str "com.apple.$b" SearchProviderShortName  DuckDuckGo     && RES_LIST+=("$RES") } # After  SearchProviderIdentifierMigratedToSystemPreference
+	{ res_check "$RES" &&   catchout RES  defaults_set_str "com.apple.$b" SearchProviderIdentifier com.duckduckgo && RES_LIST+=("$RES") } # Before SearchProviderIdentifierMigratedToSystemPreference
+	log_task_from_res_list RES_LIST
+	
+done
 
 
 ######### TextEdit #########
