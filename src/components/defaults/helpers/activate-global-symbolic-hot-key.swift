@@ -37,7 +37,12 @@ guard var values = ud.object(forKey: symbolicHotKeysKey) as? [String: Any] else 
 	print("failed")
 	exit(2)
 }
-var dic = values[keyToActivate] as? [String: Any] ?? [:]
+guard var dicO = values[keyToActivate] as? [String: Any]? else {
+	print("unexpected type for key “\(keyToActivate)”; bailing out.", to: &stderrStream)
+	print("failed")
+	exit(2)
+}
+var dic = dicO ?? [:]
 let enabled: Bool
 if let enabledFromDic = dic["enabled"] {
 	guard let v = enabledFromDic as? Bool else {

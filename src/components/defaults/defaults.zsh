@@ -121,6 +121,12 @@ log_task_from_res "$RES"
 
 ######### Safari (& Safari Technology Preview) #########
 
+local -r SAFARI_TOOLBAR_ITEMS_KEY="OrderedToolbarItemIdentifiers"
+local -r SAFARI_TOOLBAR_CONFIG_DEFAULT_KEY="NSToolbar Configuration BrowserToolbarIdentifier-v4.6"
+local -r SAFARI_TOOLBAR_CONFIG_DEFAULT_ITEMS_KEY="TB Default Item Identifiers"
+local -r SAFARI_TOOLBAR_CONFIG_ITEMS_KEY="TB Item Identifiers"
+local -r SAFARI_TOOLBAR_CONFIG_ITEMS_VALUE="(CombinedSidebarTabGroupToolbarIdentifier, SidebarSeparatorToolbarItemIdentifier, UnifiedTabBarToolbarIdentifier, NewTabToolbarIdentifier)"
+
 for b in Safari SafariTechnologyPreview; do
 	
 	start_task "set search engine ($b)"
@@ -131,6 +137,13 @@ for b in Safari SafariTechnologyPreview; do
 	start_task "disable narrow tabs ($b)"
 	catchout RES  defaults_set_bool "com.apple.$b" EnableNarrowTabs 0
 	log_task_from_res "$RES"
+	
+	start_task "use compact tab layout ($b)"
+	{ res_check "$RES" &&   catchout RES  defaults_set_bool  "com.apple.$b" ShowStandaloneTabBar 0                                                                                                                                                                                                             && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   catchout RES  defaults_set_plist "com.apple.$b" "$SAFARI_TOOLBAR_ITEMS_KEY"                                             "$SAFARI_TOOLBAR_CONFIG_ITEMS_VALUE"                                                                                                                       && RES_LIST+=("$RES") } # Might be useless
+	{ res_check "$RES" &&   catchout RES  defaults_add_dict  "com.apple.$b" "$SAFARI_TOOLBAR_CONFIG_DEFAULT_KEY" "$SAFARI_TOOLBAR_CONFIG_ITEMS_KEY" "$SAFARI_TOOLBAR_CONFIG_ITEMS_VALUE"                                                                                                                       && RES_LIST+=("$RES") }
+	{ res_check "$RES" && { catchout RES  ./helpers/update-safari-default-toolbar-for-compact-tab-layout.swift "com.apple.$b" "$SAFARI_TOOLBAR_CONFIG_DEFAULT_KEY" 2>/dev/null || log_task_failure "error while running update-safari-default-toolbar-for-compact-tab-layout (do you have Xcode installed?)" } && RES_LIST+=("$RES") } # Might be useless
+	log_task_from_res_list RES_LIST
 	
 done
 
