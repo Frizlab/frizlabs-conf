@@ -129,10 +129,11 @@ typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_USER_HOMEBREW_CASKS=(
-	"appcleaner"  "Caskroom/appcleaner" # And **NOT** app-cleaner!
-	"hex-fiend"   "Caskroom/hex-fiend"
-	"imageoptim"  "Caskroom/imageoptim"
-	"netnewswire" "Caskroom/netnewswire"
+	"appcleaner"    "Caskroom/appcleaner" # And **NOT** app-cleaner!
+	"brave-browser" "Caskroom/brave-browser"
+	"hex-fiend"     "Caskroom/hex-fiend"
+	"imageoptim"    "Caskroom/imageoptim"
+	"netnewswire"   "Caskroom/netnewswire"
 	
 	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
 	
