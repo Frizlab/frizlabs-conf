@@ -21,10 +21,4 @@ if test "$HOST_OS" = "Darwin"; then
 	{ res_check "$RES" &&   catchout RES folder "$APP_DIR" "700"             && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   catchout RES acl    "$APP_DIR" "$expected_acl"   && RES_LIST+=("$RES") }
 	log_task_from_res_list RES_LIST
-	
-	RES=; RES_LIST=()
-	start_task "local docs dir"
-	{ res_check "$RES" &&   catchout RES folder "$HOME/Documents.local" "700"             && RES_LIST+=("$RES") }
-	{ res_check "$RES" &&   catchout RES acl    "$HOME/Documents.local" "$expected_acl"   && RES_LIST+=("$RES") }
-	log_task_from_res_list RES_LIST
 fi
