@@ -60,14 +60,33 @@ __show_git_branch() {
 		done
 	fi
 	
-	local -a to_search
 	if test "$iclouded" != "y" -a -n "$gitdir" -a -n "$gitroot"; then
+		local -a to_search
 		case "$gitdir" in
 			"$gitroot"*) to_search=("$gitroot");;
 			*)           to_search=("$gitdir" "$gitroot");;
 		esac
 		for d in "${to_search[@]}"; do
-			if test -n "$(find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
+			# Try and search for matching files fast.
+			# It’s not easy.
+			# Best solution would be to have a cache.
+			# For instance a daemon could run and monitor fsevents and write somewhere when a repo has some file being evicted.
+			# Building on this, said tool could even give a nice GUI w/ list of repos and their current state.
+			# This is all and nice but it requires some work, and thus some time, that I do not have.
+			#
+			# First fast solution was to use mdfind.
+			# It is the perfect solution.
+			# Except mdfind skips a lot of hidden files/folders…
+			# For reference, the command: `mdfind -onlyin "$d" 'kMDItemFSName = *.icloud AND kMDItemFSInvisible = 1'`
+			# (The actual glob is '.*.icloud' but for whatever reason mdfind does not want to find files with full glob.)
+			#
+			# This having failed, I tried searchfs, which was a failure (did not find icloud files, and was not fast).
+			#
+			# Next up was fd.
+			# Results were better than find.
+			# Still not lightning fast, but I think it’ll be as good as I’ll get.
+			# We fallback on find if fd fails (not installed for instance…).
+			if test -n "$(fd -IHs1 '\..*\.icloud$' "$d" 2>/dev/null || find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
 				iclouded=y
 				break
 			fi
