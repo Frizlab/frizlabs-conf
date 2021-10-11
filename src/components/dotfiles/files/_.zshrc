@@ -32,8 +32,8 @@ __show_git_branch() {
 	# iCloud stuff. We manually search for .git file or folder. If we find it,
 	# we’re probably in a git repo.
 	local p="$PWD"
-	local gitdir="${"$(git rev-parse --git-dir 2>/dev/null)":P}"
-	local gitroot="${"$(git rev-parse --show-toplevel 2>/dev/null)":P}"
+	local gitdir="$(realpath "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)"
+	local gitroot="$(realpath "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null)"
 	local iclouded=""
 	# p should in theory always be absolute. Let’s make sure of that (otherwise
 	# we have an infinite loop).
@@ -44,9 +44,10 @@ __show_git_branch() {
 			if test -d "$p/.git"; then
 				gitroot="$p"
 				gitdir="$p/.git"
+				p=
 			elif test -f "$p/.git"; then
 				gitroot="$p"
-				gitdir="$(cd "$p"; echo "${"$(grep -E '^gitdir: ' ".git" 2>/dev/null | sed -E 's/^gitdir: //' 2>/dev/null)":P}")"
+				gitdir="$(cd "$p"; echo "$(realpath "$(grep -E '^gitdir: ' ".git" 2>/dev/null | sed -E 's/^gitdir: //' 2>/dev/null)" 2>/dev/null)")"
 				p=
 			elif test -e "$p/..git.icloud"; then
 				iclouded="y"
@@ -62,11 +63,11 @@ __show_git_branch() {
 	local -a to_search
 	if test "$iclouded" != "y" -a -n "$gitdir" -a -n "$gitroot"; then
 		case "$gitdir" in
-			"$gitroot"*) to_search=("$gitdir");;
+			"$gitroot"*) to_search=("$gitroot");;
 			*)           to_search=("$gitdir" "$gitroot");;
 		esac
 		for d in "${to_search[@]}"; do
-			if test -n "$(find . -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
+			if test -n "$(find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
 				iclouded=y
 				break
 			fi
