@@ -75,7 +75,7 @@ __show_git_branch() {
 	fi
 	
 	if test "$iclouded" = "y"; then
-		printf "[%%{\e[01;41m%%}iCloud%%{\e[0m%%}]" "$output_prelude" "$output_epilogue"
+		printf "[%%{\e[01;41m%%}iCloud%%{\e[0m%%}]"
 		return
 	fi
 	
