@@ -28,6 +28,56 @@ echo "START: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 # PS1, see bashrc for more info
 __show_git_branch() {
 	setopt pipefail; # Apparently there is no need for `setopt localoptions` here, though I’m not sure why.
+	
+	# iCloud stuff. We manually search for .git file or folder. If we find it,
+	# we’re probably in a git repo.
+	local p="$PWD"
+	local gitdir="${"$(git rev-parse --git-dir 2>/dev/null)":P}"
+	local gitroot="${"$(git rev-parse --show-toplevel 2>/dev/null)":P}"
+	local iclouded=""
+	# p should in theory always be absolute. Let’s make sure of that (otherwise
+	# we have an infinite loop).
+	if test "${p:0:1}" = "/" -a '(' -z "$gitdir" -o -z "$gitroot" ')'; then
+		# git failed to find the top-level or git directory, so we search for it
+		# manually (some critical files from git dir might’ve been iclouded)
+		while test -n "$p"; do
+			if test -d "$p/.git"; then
+				gitroot="$p"
+				gitdir="$p/.git"
+			elif test -f "$p/.git"; then
+				gitroot="$p"
+				gitdir="$(cd "$p"; echo "${"$(grep -E '^gitdir: ' ".git" 2>/dev/null | sed -E 's/^gitdir: //' 2>/dev/null)":P}")"
+				p=
+			elif test -e "$p/..git.icloud"; then
+				iclouded="y"
+				p=
+			else
+				if test "$p" = "/"; then p=
+				else                     p="$(dirname "$p")" || p=
+				fi
+			fi
+		done
+	fi
+	
+	local -a to_search
+	if test "$iclouded" != "y" -a -n "$gitdir" -a -n "$gitroot"; then
+		case "$gitdir" in
+			"$gitroot"*) to_search=("$gitdir");;
+			*)           to_search=("$gitdir" "$gitroot");;
+		esac
+		for d in "${to_search[@]}"; do
+			if test -n "$(find . -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
+				iclouded=y
+				break
+			fi
+		done
+	fi
+	
+	if test "$iclouded" = "y"; then
+		printf "[%%{\e[01;41m%%}iCloud%%{\e[0m%%}]" "$output_prelude" "$output_epilogue"
+		return
+	fi
+	
 	# No need for more than 2 lines of status in theory as untracked are shown at the end
 	git_status="$(git status -b --porcelain 2>/dev/null | head -n 3)"
 	git_status_ret=$?

@@ -41,9 +41,10 @@ __show_branch3() {
 	if git branch >/dev/null 2>&1; then printf "]"; fi
 }
 # \W: last path component
-# IMPORTANT NOTE: The colors should be set directly within the variable, not
-#                 from the output of the __show_branch* methods (which is why
-#                 there are three methods)
+# NOTE: Unlike my zsh PS1, my bash PS1 does not support iCloud checks for git.
+# Dev note: The colors should be set directly within the variable, not from the
+#           output of the __show_branch* methods (which is why there are three
+#           methods instead of just one).
 # We used to set this in the bash_profile because it’s a variable that can be
 # exported and does not need to be reloaded for the children (was defined as
 # `export PS1=`). However, this variable is only needed for interactive shells,
