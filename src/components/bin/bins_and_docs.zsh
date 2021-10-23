@@ -12,7 +12,7 @@ encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-cloud.sh.cpt"
 encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-precious-stuff.sh.cpt"
 
 ### Backup the Main Computer ###
-encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-main-computer.sh.cpt"
+encrypted_bin "frizlab" ":Darwin:~work~" "zsh/backup-main-computer.sh.cpt"
 
 ### Clone Media HD ###
 encrypted_bin "frizlab" ":Darwin:~work~" "zsh/clone-media-hd.sh.cpt"
