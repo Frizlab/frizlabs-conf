@@ -20,3 +20,5 @@
 	pr = pull --rebase
 [init]
 	defaultBranch = main
+[checkout]
+	defaultRemote = origin
