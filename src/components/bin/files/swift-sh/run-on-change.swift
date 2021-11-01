@@ -2,8 +2,8 @@
 
 import Foundation
 
-import ArgumentParser  // apple/swift-argument-parser ~> 0.3.2
-import FSEventsWrapper // @Frizlab                    ~> 1.0.0
+import ArgumentParser  // apple/swift-argument-parser ~> 1.0.1
+import FSEventsWrapper // @Frizlab                    ~> 1.0.2
 import SwiftShell      // @kareman                    ~> 5.1.0
 
 
