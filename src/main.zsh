@@ -28,8 +28,11 @@ SRC_FOLDER="$(pwd)/src"; readonly SRC_FOLDER
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
 
+# We need this now (because it defines the MKDIR var)
+source "$LIB_FOLDER/executables.zsh"
+
 # Create the cache folder if needed
-mkdir -p "$CACHE_FOLDER" && chmod 700 "$CACHE_FOLDER"
+"$MKDIR" -p "$CACHE_FOLDER" && "$CHMOD" 700 "$CACHE_FOLDER"
 
 
 ###############

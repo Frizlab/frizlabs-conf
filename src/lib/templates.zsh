@@ -22,13 +22,13 @@ function detemplate() {
 		m4_args+=("-D___M4___${var}___M4___=$value")
 	done
 	IFS="$OLD_IFS"
-	eval m4 --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" 2>/dev/null || { log_task_failure "cannot run m4"; echo "failed"; return }
-	grep -E '^[^#]' -- "$tmpl_tmpfile" | grep -qE '___M4___[A-Za-z0-9_]*___M4___' && { log_task_failure "it seems there are undefined variables in the file"; echo "failed"; return }
+	eval "$M4" --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" 2>/dev/null || { log_task_failure "cannot run $M4"; echo "failed"; return }
+	"$GREP" -E '^[^#]' -- "$tmpl_tmpfile" | "$GREP" -qE '___M4___[A-Za-z0-9_]*___M4___' && { log_task_failure "it seems there are undefined variables in the file"; echo "failed"; return }
 	
 	# Next we move the temporary file if needed at the destination
-	diff -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a -- "$dest" 2>/dev/null || stat -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { rm -f -- "$tmpl_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	"$DIFF" -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { "$RM" -f -- "$tmpl_tmpfile" >/dev/null 2>&1; echo "ok"; return }
 	
-	mv -f -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move detemplated file to expected location"; echo "failed"; return }
-	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	"$MV" -f -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move detemplated file to expected location"; echo "failed"; return }
+	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }

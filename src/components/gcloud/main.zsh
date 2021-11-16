@@ -17,7 +17,7 @@ if test -n "$tar_url"; then
 	{ res_check "$RES" &&   temp="$(mktemp)"   || { log_task_failure "cannot create temporary file"   && RES_LIST+=("failed") } }
 	{ res_check "$RES" &&   catchout RES  folder "$GCLOUD_DIR" "755"                                  && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   test -x "$GCLOUD_DIR/bin/gcloud"                                          && RES_LIST+=("ok") } || {
-		{ res_check "$RES" &&   curl -L "$tar_url" 2>/dev/null | tar xz --strip 1 -C "$GCLOUD_DIR" && RES_LIST+=("$RES") }
+		{ res_check "$RES" &&   curl -L "$tar_url" 2>/dev/null | "$TAR" xz --strip 1 -C "$GCLOUD_DIR" && RES_LIST+=("$RES") }
 	}
 	log_task_from_res_list RES_LIST
 	

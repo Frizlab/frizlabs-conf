@@ -12,12 +12,12 @@
 		echo "***** ERROR: ccrypt sha does not match expected sha. Bailing out."
 		exit 1
 	}
-	tar xf "$CCRYPT_TAR_NAME"
+	"$TAR" xf "$CCRYPT_TAR_NAME"
 	pushd "$CCRYPT_BASENAME"
 	./configure --prefix "$CACHE_FOLDER"
 	make install
 	popd
-	rm -fr "$CCRYPT_BASENAME"
+	"$RM" -fr "$CCRYPT_BASENAME"
 	popd
 }
 

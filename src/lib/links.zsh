@@ -11,10 +11,10 @@ function lnk() {
 	
 	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
 	test ! -e "$dst" || test -L "$dst" || { log_task_failure "destination already exists and is not a link"; echo "failed"; return }
-	test "$(readlink -- "$dst" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$(stat -f %Lp -- "$dst" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	test "$("$READLINK" -- "$dst" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dst" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
 	
-	ln -sf -- "$src" "$dst" >/dev/null 2>&1 || { log_task_failure "ln failed"; echo "failed"; return }
-	{ test "$HOST_OS" != "Darwin" || chmod -h -- "$lnkmode" "$dst" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
+	"$LN" -sf -- "$src" "$dst" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dst" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -33,11 +33,11 @@ function linknbk() {
 	
 	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
 	test -e "$dest" && ! test -L "$dest" && {
-		mv -- "$dest" "$bkfolder" >/dev/null 2>&1 || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
+		"$MV" -- "$dest" "$bkfolder" >/dev/null 2>&1 || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
 	}
-	test "$(readlink -- "$dest" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$(stat -f %Lp -- "$dest" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	test "$("$READLINK" -- "$dest" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
 	
-	ln -sf -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "ln failed"; echo "failed"; return }
-	{ test "$HOST_OS" != "Darwin" || chmod -h -- "$lnkmode" "$dest" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
+	"$LN" -sf -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dest" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
 	echo "changed"
 }

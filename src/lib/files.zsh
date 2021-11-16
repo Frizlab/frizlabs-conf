@@ -7,9 +7,9 @@ function folder() {
 	local -r folder_name="$1" permission="$2"
 	# %Lp format is for Darwin, %a is for Linux. Linux version must be first
 	# because -f option is known by Linux stat but does not mean the same thing.
-	test -d "$folder_name" && test "$(stat -c %a -- "$folder_name" 2>/dev/null || stat -f %Lp -- "$folder_name" 2>/dev/null)" = "$permission" && { echo "ok"; return }
-	mkdir -p --            "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
-	chmod -- "$permission" "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
+	test -d "$folder_name" && test "$("$STAT" -c %a -- "$folder_name" 2>/dev/null || "$STAT" -f %Lp -- "$folder_name" 2>/dev/null)" = "$permission" && { echo "ok"; return }
+	"$MKDIR" -p --            "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
+	"$CHMOD" -- "$permission" "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -20,9 +20,9 @@ function acl() {
 	local -r file_name="$1" acl="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
-	test "$(ls -led -- "$file_name" 2>/dev/null | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
+	test "$("$LS" -led -- "$file_name" 2>/dev/null | "$TAIL" -n+2 | "$SED" -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
 	
-	chmod -E "$file_name" <<<"$acl" >/dev/null 2>&1 || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
+	"$CHMOD" -E "$file_name" <<<"$acl" >/dev/null 2>&1 || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -33,9 +33,9 @@ function flags() {
 	local -r file_name="$1" flag="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
-	grep -q -- "$flag" <<<"$(stat -f %Sf -- "$file_name" 2>/dev/null)" && { echo "ok"; return }
+	"$GREP" -q -- "$flag" <<<"$("$STAT" -f %Sf -- "$file_name" 2>/dev/null)" && { echo "ok"; return }
 	
-	chflags -- "$flag" "$file_name" >/dev/null 2>&1 || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
+	"$CHFLAGS" -- "$flag" "$file_name" >/dev/null 2>&1 || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -48,7 +48,7 @@ function delete() {
 	test -e "$file_name" || { echo "ok"; return }
 	test ! -d "$file_name" || { log_task_failure "not deleting folder $file_name"; echo "failed"; return }
 	
-	rm -f -- "$file_name" >/dev/null 2>&1 || { log_task_failure "rm failed for $file_name"; echo "failed"; return }
+	"$RM" -f -- "$file_name" >/dev/null 2>&1 || { log_task_failure "$RM failed for $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -64,10 +64,10 @@ function copy() {
 	# First we check the destination file is not a folder
 	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
-	diff -- "$src" "$dest" >/dev/null 2>&1 && test "$(stat -c %a -- "$dest" 2>/dev/null || stat -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { echo "ok"; return }
+	"$DIFF" -- "$src" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { echo "ok"; return }
 	
-	cp -f -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
-	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	"$CP" -f -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
+	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -84,12 +84,12 @@ function decrypt_and_copy() {
 	
 	# Then we decrypt the source file at a temporary location
 	decrcpy_tmpfile="$(mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
-	cp -f -- "$src" "$decrcpy_tmpfile" >/dev/null 2>&1 || { rm -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
-	decrypt --suffix "" -- "$decrcpy_tmpfile" || { rm -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	"$CP" -f -- "$src" "$decrcpy_tmpfile" >/dev/null 2>&1 || { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
+	decrypt --suffix "" -- "$decrcpy_tmpfile" || { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
-	diff -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 && test "$(stat -c %a -- "$dest" 2>/dev/null || stat -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { rm -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	"$DIFF" -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
 	
-	mv -f -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
-	chmod -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	"$MV" -f -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
+	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
