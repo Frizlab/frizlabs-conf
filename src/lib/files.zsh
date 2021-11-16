@@ -27,8 +27,8 @@ function acl() {
 }
 
 ## Make sure the given file or folder has at least the given flag
-## Usage: acl file_or_folder flag
-## Example: acl /var/log "hidden"
+## Usage: flags file_or_folder flag
+## Example: flags /var/log "hidden"
 function flags() {
 	local -r file_name="$1" flag="$2"
 	
