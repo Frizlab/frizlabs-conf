@@ -9,10 +9,9 @@ echo "ENTER: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 # shellcheck source=_.shrc
-# Let’s first include the non-standard non-zsh specific rc file. We disable the
-# nomatch option for the time of the import because zsh does not behave the same
-# as (ba)sh, and fails when the glob does not match anything. There might me
-# more options to disable later.
+# Let’s first include the non-standard non-zsh specific rc file.
+# We disable the nomatch option for the time of the import because zsh does not behave the same as (ba)sh, and fails when the glob does not match anything.
+# There might me more options to disable later.
 { test -r "${HOME}/.shrc" && (){ setopt localoptions; unsetopt nomatch; source "${HOME}/.shrc"; }; } || true
 
 
@@ -29,17 +28,18 @@ echo "START: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 __show_git_branch() {
 	setopt pipefail; # Apparently there is no need for `setopt localoptions` here, though I’m not sure why.
 	
-	# iCloud stuff. We manually search for .git file or folder. If we find it,
-	# we’re probably in a git repo.
+	# iCloud stuff.
+	# We manually search for .git file or folder.
+	# If we find it, we’re probably in a git repo.
 	local p="$PWD"
 	local gitdir="$(realpath "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)"
 	local gitroot="$(realpath "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null)"
 	local iclouded=""
-	# p should in theory always be absolute. Let’s make sure of that (otherwise
-	# we have an infinite loop).
+	# p should in theory always be absolute.
+	# Let’s make sure of that (otherwise we have an infinite loop).
 	if test "${p:0:1}" = "/" -a '(' -z "$gitdir" -o -z "$gitroot" ')'; then
-		# git failed to find the top-level or git directory, so we search for it
-		# manually (some critical files from git dir might’ve been iclouded)
+		# git failed to find the top-level or git directory, so we search for it manually
+		# (some critical files from git dir might’ve been iclouded).
 		while test -n "$p"; do
 			if test -d "$p/.git"; then
 				gitroot="$p"
@@ -111,32 +111,32 @@ __show_git_branch() {
 	fi
 	printf "%%{\e[0m%%}]"
 }
-# We have to enable prompt substitutions for the git functions to work
-# We also set transientrprompt to remove RPS1 when the command has been accepted
+# We have to enable prompt substitutions for the git functions to work.
+# We also set transientrprompt to remove RPS1 when the command has been accepted.
 setopt promptsubst transientrprompt
 # Emulate \# from bash: https://superuser.com/a/696900
 [[ $FRZ_ZSHPROMPT_CMD_COUNT -ge 1 ]] || FRZ_ZSHPROMPT_CMD_COUNT=1
 preexec() { ((FRZ_ZSHPROMPT_CMD_COUNT++)) }
-# Note: There is probably a better way to handle the git prompt. I don’t care.
-# \e is the same as \033. We could probably use %F and %B and co instead, but I
-# did not find the same colors I was used to fast enough, and found the %{%}
-# solution to have the RPS1 correctly placed, so I did not search any further.
+# Notes:
+# There is probably a better way to handle the git prompt.
+# I don’t care.
+# \e is the same as \033.
+# We could probably use %F and %B and co instead, but I did not find the same colors I was used to fast enough,
+# and found the %{%} solution to have the RPS1 correctly placed, so I did not search any further.
 PS1=$'%{\e[01;36m%}$FRZ_ZSHPROMPT_CMD_COUNT%{\e[0m%} \\ %{\e[00;32m%}%D{%H:%M:%S}%{\e[0m%} / %{\e[00;33m%}%n@%m%{\e[0m%}[%{\e[00;31m%}%?%{\e[0m%}] %{\e[01;38m%}%~%{\e[0m%}`__show_git_branch`%) '
 RPS1='%(0?.🤠🙃😃.😱😭😡)'; # Just to remember we’re using zsh
 
-# We set EDITOR to vi in the profile, which changes the key bindings to vi
-# instead of emacs. Let’s revert this.
+# We set EDITOR to vi in the profile, which changes the key bindings to vi instead of emacs.
+# Let’s revert this.
 bindkey -e
-# We also want to have a more bash-style navigation (word navigation goes
-# through words, not ’till the next space).
+# We also want to have a more bash-style navigation (word navigation goes through words, not ’till the next space).
 autoload -U select-word-style
 select-word-style bash
-# However, word suppression via ^W deletes the whole word backward, until next
-# space, just like with bash too.
+# However, word suppression via ^W deletes the whole word backward, until next space, just like with bash too.
 zle -N backward-kill-space-word backward-kill-word-match
 zstyle :zle:backward-kill-space-word word-style space
 bindkey '^W' backward-kill-space-word
-# Also fix suppr key which does not work out of the box
+# Also fix suppr key which does not work out of the box.
 bindkey '^[[3~' delete-char
 
 # Some zsh options we like
@@ -152,21 +152,21 @@ setopt hist_ignore_space; # Do not store commands starting with space (after nex
 setopt hist_no_store; # Do not store history and fc commands in history
 #setopt correct correct_all; # Propose correction for incorrect commands in Terminal; disabled because I don’t like it
 if test "$(uname -s)" != "Darwin"; then
-	# Add to history incrementally instead of when shell quits
-	# Not enabled on macOS because it disables state restoration
+	# Add to history incrementally instead of when shell quits.
+	# Not enabled on macOS because it disables state restoration.
 	setopt inc_append_history
 fi
 
-# Search through history when something is typed
+# Search through history when something is typed.
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-# Edit command line for ^X^E
+# Edit command line for ^X^E.
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# Convenient alias for macOS
+# Convenient alias for macOS.
 alias h='cat ~/.zsh_sessions/*.history*'
 
 

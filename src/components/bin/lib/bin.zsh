@@ -1,10 +1,7 @@
 ## Usage: bin author compatibility relative_path_to_script
 ## Compatibility format: ":compatible_host_os:~forbidden_computer_group~"
-## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and
-##          must not be installed at work or home. Will actually be _removed_
-##          from work and home if already present, or on another OS than Darwin
-##          and Linux. (Note we currently don’t have other groups than work and
-##          home, so the example will never be installed.)
+## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and must not be installed at work or home.
+##          Will actually be _removed_ from work and home if already present, or on another OS than Darwin and Linux.
 function bin() {
 	local -r author="$1"
 	local -r compatibility="$2"
@@ -64,8 +61,7 @@ function encrypted_bin() {
 }
 
 ## Usage: launchd_bin compatibility relative_path_to_script
-## Compatibility format: Same as for the bin function, but only computer group
-## excludes are considered.
+## Compatibility format: Same as for the bin function, but only computer group excludes are considered.
 function launchd_bin() {
 	local -r compatibility="$1"
 	local -r local_relative_script_path="$2"

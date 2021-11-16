@@ -38,10 +38,9 @@ function reload_user_launchd() {
 		;;
 	esac
 	
-	# plist installation changed the plist, so we must reload
-	# We ignore bootout error as it is normal to get an error if plist was not
-	# loaded yet. In theory we should check whether the plist was loaded, etc.,
-	# but I don’t want to do it.
+	# plist installation changed the plist, so we must reload.
+	# We ignore bootout error as it is normal to get an error if plist was not loaded yet.
+	# In theory we should check whether the plist was loaded, etc., but I don’t want to do it.
 	launchctl bootout   "gui/$USER_ID" "$plist_path" 2>/dev/null || true
 	launchctl bootstrap "gui/$USER_ID" "$plist_path" 2>/dev/null || { log_task_failure "cannot bootstrap $plist_path with domain gui/$USER_ID"; echo "failed"; return }
 	echo "changed"

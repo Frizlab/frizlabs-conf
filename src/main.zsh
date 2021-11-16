@@ -15,23 +15,22 @@ test "$(basename "$0")" = "install" || {
 }
 cd "$(dirname "$0")"
 
-# We export PATH in case the variable is not exported yet
+# We export PATH in case the variable is not exported yet.
 export PATH
 
-# We add our own bins to the path, but agree to use the system or user-defined
-# ones if they are already there
+# We add our own bins to the path, but agree to use the system or user-defined ones if they are already there.
 path+="$(pwd)/.cache/bin"
 
-# Let’s define the different paths we will need
+# Let’s define the different paths we will need.
 CACHE_FOLDER="$(pwd)/.cache"; readonly CACHE_FOLDER
 SRC_FOLDER="$(pwd)/src"; readonly SRC_FOLDER
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
 
-# We need this now (because it defines the MKDIR var)
+# We need this now (because it defines the MKDIR var).
 source "$LIB_FOLDER/executables.zsh"
 
-# Create the cache folder if needed
+# Create the cache folder if needed.
 "$MKDIR" -p "$CACHE_FOLDER" && "$CHMOD" 700 "$CACHE_FOLDER"
 
 

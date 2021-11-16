@@ -1,4 +1,4 @@
-# Install an admin-owned Homebrew
+# Install an admin-owned Homebrew.
 
 case "$HOST_OS:$HOST_ARCH" in
 	"Darwin:arm64")

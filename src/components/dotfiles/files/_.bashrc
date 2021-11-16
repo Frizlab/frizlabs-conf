@@ -17,7 +17,7 @@ echo "ENTER: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 echo "START: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # shellcheck source=/dev/null
-# We import the .bashrc:dyn first because of the variables we could reuse
+# We import the .bashrc:dyn first because of the variables we could reuse.
 { test -r "${HOME}/.bashrc:dyn" && source "${HOME}/.bashrc:dyn"; } || true
 
 
@@ -42,19 +42,14 @@ __show_branch3() {
 }
 # \W: last path component
 # NOTE: Unlike my zsh PS1, my bash PS1 does not support iCloud checks for git.
-# Dev note: The colors should be set directly within the variable, not from the
-#           output of the __show_branch* methods (which is why there are three
-#           methods instead of just one).
-# We used to set this in the bash_profile because it’s a variable that can be
-# exported and does not need to be reloaded for the children (was defined as
-# `export PS1=`). However, this variable is only needed for interactive shells,
-# not login ones, and children of the shell definitely do not need to know about
-# my PS1, so we moved it here.
+# Dev note: The colors should be set directly within the variable, not from the output of the __show_branch* methods
+#           (which is why there are three methods instead of just one).
+# We used to set this in the bash_profile because it’s a variable that can be exported and does not need to be reloaded for the children (was defined as `export PS1=`).
+# However, this variable is only needed for interactive shells, not login ones, and children of the shell definitely do not need to know about my PS1, so we moved it here.
 PS1='\[\033[01;36m\]\#\[\033[0m\] \\ \[\033[00;32m\]\t\[\033[0m\] / \[\033[00;33m\]\u@\h\[\033[0m\][\[\033[00;31m\]$?\[\033[0m\]] \[\033[01;38m\]\w\[\033[0m\]`__show_branch1`\[\033[00;31m\]`__show_branch2`\[\033[0m\]`__show_branch3`) '
-# - We may want to set PS2 too. It sets the prompt shown after a return when the
-#   command line is not finished.
-# - If we ever wanted to set PROMPT_COMMAND (we don’t need it now but why not),
-#   we should be careful and keep the previous PROMPT_COMMAND value:
+# - We may want to set PS2 too.
+#   It sets the prompt shown after a return when the command line is not finished.
+# - If we ever wanted to set PROMPT_COMMAND (we don’t need it now but why not), we should be careful and keep the previous PROMPT_COMMAND value:
 #      PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }new_code_here"
 #   See /etc/bashrc_Apple_Terminal for some additional info.
 #   Some light info on this var: https://stackoverflow.com/a/3058366

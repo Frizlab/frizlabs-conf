@@ -4,8 +4,7 @@ for formula_name path_to_check in ${(kv)MAIN_SYSTEM_HOMEBREW_FORMULAE}; do
 	start_task "install formula $formula_name";   catchout RES  install_brew_package "$HOMEBREW_SYSTEM_DIR" "$formula_name" "$path_to_check" "--formula";   log_task_from_res "$RES"
 done
 
-# We install the x86-only formulae in main Homebrew if not on Darwin arm64,
-# otherwise we install a separate Homebrew dedicated for x86 installs
+# We install the x86-only formulae in main Homebrew if not on Darwin arm64, otherwise we install a separate Homebrew dedicated for x86 installs.
 if test "$HOST_OS:$HOST_ARCH" != "Darwin:arm64"; then
 	for formula_name path_to_check in ${(kv)X86_SYSTEM_HOMEBREW_FORMULAE}; do
 		start_task "install formula $formula_name";   catchout RES  install_brew_package                         "$HOMEBREW_SYSTEM_DIR"     "$formula_name" "$path_to_check" "--formula";   log_task_from_res "$RES"
@@ -16,7 +15,7 @@ else
 	done
 fi
 
-# Install casks
+# Install casks.
 if test "$HOST_OS" = "Darwin"; then
 	for cask_name path_to_check in ${(kv)MAIN_SYSTEM_HOMEBREW_CASKS}; do
 		start_task "install cask $cask_name";   catchout RES  install_brew_package "$HOMEBREW_SYSTEM_DIR" "$cask_name" "$path_to_check" "--cask";   log_task_from_res "$RES"

@@ -4,25 +4,24 @@ readonly APP_DIR="$HOME/Applications"
 # The CLT (Command-Line Tools) directory.
 readonly CLT_DIR="$HOME/clt"
 
-# The user’s CLT directory. All binaries/scripts whose author is the same as the
-# current user will go there.
+# The user’s CLT directory.
+# All binaries/scripts whose author is the same as the current user will go there.
 readonly FIRST_PARTY_CLT_DIR="$CLT_DIR/1st-party-ad-hoc"
 readonly FIRST_PARTY_BIN_DIR="$FIRST_PARTY_CLT_DIR/bin"
 readonly FIRST_PARTY_SHARE_DIR="$FIRST_PARTY_CLT_DIR/share"
 readonly FIRST_PARTY_BASH_COMPLETIONS="$FIRST_PARTY_SHARE_DIR/bash/completions"
 readonly FIRST_PARTY_ZSH_SITE_FUNCTIONS="$FIRST_PARTY_SHARE_DIR/zsh/site-functions"
 
-# Other binaries and scripts
+# Other binaries and scripts.
 readonly THIRD_PARTY_CLT_DIR="$CLT_DIR/3rd-party-ad-hoc"
 readonly THIRD_PARTY_BIN_DIR="$THIRD_PARTY_CLT_DIR/bin"
 readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
 readonly THIRD_PARTY_BASH_COMPLETIONS="$THIRD_PARTY_SHARE_DIR/bash/completions"
 readonly THIRD_PARTY_ZSH_SITE_FUNCTIONS="$THIRD_PARTY_SHARE_DIR/zsh/site-functions"
 
-# The CLT directory for launchd scripts. This contains scripts that are executed
-# by launchd: starting with Catalina sh does not have permission to read files
-# in the user’s Documents folder (and some others), so we have to put them in
-# another folder…
+# The CLT directory for launchd scripts.
+# This contains scripts that are executed by launchd:
+# starting with Catalina sh does not have permission to read files in the user’s Documents folder (and some others), so we have to put them in another folder…
 readonly LAUNCHD_CLT_BIN_DIR="$CLT_DIR/launchd-scripts"
 
 # The x86 user Homebrew instance directory
@@ -48,7 +47,8 @@ else
 	readonly HOMEBREW_SYSTEM_DIR="$HOMEBREW_ARM64_SYSTEM_DIR"
 fi
 
-# Python* (user) Homebrew instance. Should only have Python* installed, and the eggs installed with pip.
+# Python* (user) Homebrew instance.
+# Should only have Python* installed, and the eggs installed with pip.
 readonly HOMEBREW_PYTHON39_USER_DIR="$CLT_DIR/homebrew-python3.9"
 readonly HOMEBREW_PYTHON38_USER_DIR="$CLT_DIR/homebrew-python3.8"
 readonly HOMEBREW_PYTHON37_USER_DIR="$CLT_DIR/homebrew-python3.7"
@@ -97,14 +97,13 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"youtube-dl"          "bin/youtube-dl"
 )
 if test "$HOST_OS" != "Linux"; then
-	# These formulae do not compile on Linux (at the time of writing), so we only
-	# add them when we’re not on Linux.
+	# These formulae do not compile on Linux (at the time of writing), so we only add them when we’re not on Linux.
 	MAIN_SYSTEM_HOMEBREW_FORMULAE+=(
 		# Plain patch error when trying to install bottle; probably fixed soon
 		"recode"              "bin/recode"
 		
-		# Needs Swift. I could `brew install swift`, but it’s expensive, probably
-		# (probably because I tried and it failed).
+		# Needs Swift.
+		# I could `brew install swift`, but it’s expensive, probably (probably because I tried and it failed).
 		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
 		"xcode-actions/tap/xct"                       "bin/xct"
 		"swiftdocorg/formulae/swift-doc"              "bin/swift-doc"
@@ -112,22 +111,21 @@ if test "$HOST_OS" != "Linux"; then
 		"happn-tech/public/locmapper"                 "Cellar/locmapper"
 	)
 fi
-# The following formulae do not compile (at the time of writing) on ARM macOS
-# They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this
-# variable as everything will work natively on ARM.
+# The following formulae do not compile (at the time of writing) on ARM macOS.
+# They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
 	"shellcheck"          "bin/shellcheck"
 )
 
-# Not -r because we modify this variable in the env specific vars file
+# Not -r because we modify this variable in the env specific vars file.
 typeset -A MAIN_SYSTEM_HOMEBREW_CASKS=(
 )
 
-# Not -r because we modify this variable in the env specific vars file
+# Not -r because we modify this variable in the env specific vars file.
 typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 )
 
-# Not -r because we modify this variable in the env specific vars file
+# Not -r because we modify this variable in the env specific vars file.
 typeset -A MAIN_USER_HOMEBREW_CASKS=(
 	"appcleaner"    "Caskroom/appcleaner" # And **NOT** app-cleaner!
 	"brave-browser" "Caskroom/brave-browser"

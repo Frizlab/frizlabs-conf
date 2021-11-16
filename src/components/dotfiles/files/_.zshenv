@@ -18,10 +18,8 @@ echo "START: .zshenv" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 
-# Nothing should be done here because this file is read by ALL zsh shells,
-# including script ones.
-# Usually this file is used to set ZDOTDIR when the zsh config files are stored
-# in a non-standard location.
+# Nothing should be done here because this file is read by ALL zsh shells, including script ones.
+# Usually this file is used to set ZDOTDIR when the zsh config files are stored in a non-standard location.
 
 
 

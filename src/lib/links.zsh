@@ -1,7 +1,8 @@
 # Link-related utilities
 
-## Soft create link at dst, pointing to src. Check src exists first. Fails if
-## dst already exists and is not a link.
+## Soft create link at dst, pointing to src.
+## Check src exists first.
+## Fails if dst already exists and is not a link.
 ## On macOS, gives the link the given mode.
 ## Usage: lnk ~/clt/homebrew-arm64 ~/clt/homebrew 755
 function lnk() {
@@ -18,11 +19,10 @@ function lnk() {
 	echo "changed"
 }
 
-## Link the given file to the given destination, backuping the destination if it
-## already existed. The backup folder must already exist.
-## link_mode is mostly useless (ignored on most fs) and is fully ignored on
-## Linux as it is not possible to change the perm of a link w/ chmod on it (says
-## the man).
+## Link the given file to the given destination, backuping the destination if it already existed.
+## The backup folder must already exist.
+## link_mode is mostly useless (ignored on most fs) and is fully ignored on Linux
+## as it is not possible to change the perm of a link w/ chmod on it (says the man).
 ## Usage: linknbk src dest link_mode backup_folder
 ## Example: linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
 function linknbk() {

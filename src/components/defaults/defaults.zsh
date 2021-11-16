@@ -9,12 +9,14 @@ catchout RES  defaults_set_int NSGlobalDomain InitialKeyRepeat 15
 log_task_from_res "$RES"
 
 start_task "enable tap to click"
-# So! There are three domains. My _guess_ is one is for externally connected
-# bluetooth trackpads, the second is for the built-in trackpad on laptops, and
-# the third is for the UI (in System Preferences).
-# After verification, first domain works for built-in trackpad _and_ external
-# trackpad, so I don’t know what the second domain is for. The third does change
-# the UI in System Preferences.
+# So!
+# There are three domains.
+# My _guess_ is the first one is for externally connected bluetooth trackpads,
+# the second one is for the built-in trackpad on laptops,
+# and the third one is for the UI (in System Preferences).
+# After verification, first domain works for built-in trackpad _and_ external trackpad,
+# so I don’t know what the second domain is for.
+# The third does change the UI in System Preferences.
 { res_check "$RES" &&   catchout RES  defaults_set_bool              com.apple.AppleMultitouchTrackpad                  Clicking                    1 && RES_LIST+=("$RES") }
 { res_check "$RES" &&   catchout RES  defaults_set_bool              com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking                    1 && RES_LIST+=("$RES") }
 # Also activate dragging and drag lock in UI. 2 is w/o drag lock, 1 is w/o both.

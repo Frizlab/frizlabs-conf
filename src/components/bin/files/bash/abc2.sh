@@ -396,8 +396,7 @@ midi () {
 }
 
 
-# global variable who can be used by other to know
-# what is the name of the file created
+# global variable who can be used by other to know what is the name of the file created
 namenewfile=
 
 tmpdir=/tmp/

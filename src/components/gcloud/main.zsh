@@ -1,4 +1,4 @@
-# Install the google cloud sdk and add its path to the PATH
+# Install the google cloud sdk and add its path to the PATH.
 
 tar_url=
 case "$HOST_OS:$HOST_ARCH" in

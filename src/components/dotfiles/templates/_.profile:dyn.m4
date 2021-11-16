@@ -29,13 +29,13 @@ PATH="___M4___HOMEBREW_PYTHON39_USER_DIR___M4___/opt/python@3.9/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/ruby/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/rsync/bin:${PATH}"
 
-# Next we want to use the system binaries as much as possible. So we do not put
-# anything else than the override above in front of the PATH.
-# Above all, the 1st and 3rd party bin folders win
+# Next we want to use the system binaries as much as possible.
+# So we do not put anything else than the override above in front of the PATH.
+# Above all, the 1st and 3rd party bin folders win.
 PATH="${PATH}:___M4___FIRST_PARTY_BIN_DIR___M4___"
 PATH="${PATH}:___M4___THIRD_PARTY_BIN_DIR___M4___"
-# Then the user homebrew(s) – WHICH MEANS THE DEFAULT HOMEBREW IS THE USER ONE
-# WHEN USING THE PATH RESOLUTION! There are aliases in the shrc to select brew.
+# Then the user homebrew(s) – WHICH MEANS THE DEFAULT HOMEBREW IS THE USER ONE WHEN USING THE PATH RESOLUTION!
+# There are aliases in the shrc to select brew.
 PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/bin"
 PATH="${PATH}:___M4___HOMEBREW_USER_DIR___M4___/sbin"
 m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',m4_dnl
@@ -49,8 +49,8 @@ m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',m4_d
 PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin"
 PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/sbin"
 )m4_dnl
-# After that we add /usr/local bin and sbin (note: they are probably already
-# added with the system homebrew)
+# After that we add /usr/local bin and sbin.
+# Note: they are probably already added with the system homebrew.
 PATH="${PATH}:/usr/local/bin"
 PATH="${PATH}:/usr/local/sbin"
 PATH="${PATH}:___M4___CLT_DIR___M4___/cappuccino/bin"
@@ -63,8 +63,7 @@ PATH="${PATH}:."
 # Export PATH in case it was not exported.
 export PATH
 
-# We do _not_ set PKG_CONFIG_PATH & co by design to be closer to a pristine
-# macOS install by default.
+# We do _not_ set PKG_CONFIG_PATH & co by design to be closer to a pristine macOS install by default.
 
 # Python
 # --> We use the brewed Python
@@ -84,8 +83,8 @@ export NPM_CONFIG_PREFIX="___M4___CLT_DIR___M4___/npm"
 export GOPATH="___M4___CLT_DIR___M4___/go"
 
 
-# Homebrew GitHub API token. Homebrew does some requests to GitHub’s API; giving
-# it a token will allow for more requests to GitHub.
+# Homebrew GitHub API token.
+# Homebrew does some requests to GitHub’s API; giving it a token will allow for more requests to GitHub.
 export HOMEBREW_GITHUB_API_TOKEN="___M4___HOMEBREW_GITHUB_TOKEN___M4___"
 # The appdir and other dirs are chosen through brew aliases. See shrc:dyn.
 export HOMEBREW_CASK_OPTS="___M4___FRZ_HOMEBREW_CASK_OPTS_BASE___M4___"

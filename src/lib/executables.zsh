@@ -1,4 +1,4 @@
-# Binaries paths (this avoids rogue PATH fucking things up
+# Binaries paths (this avoids rogue PATH fucking things up).
 # TODO: Linux paths…
 readonly CAT="/bin/cat"
 readonly CHFLAGS="/usr/bin/chflags"

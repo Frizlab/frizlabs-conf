@@ -1,4 +1,4 @@
-# Install base user packages (using user Homebrew)
+# Install base user packages (using user Homebrew).
 
 for formula_name path_to_check in ${(kv)MAIN_USER_HOMEBREW_FORMULAE}; do
 	start_task "install formula $formula_name";   catchout RES  install_brew_package "$HOMEBREW_USER_DIR" "$formula_name" "$path_to_check" "--formula";   log_task_from_res "$RES"

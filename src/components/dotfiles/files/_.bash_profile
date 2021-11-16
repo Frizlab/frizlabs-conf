@@ -22,11 +22,10 @@ echo "START: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 
 
-# Bash history control. Set to ignore duplicates in
-# history, as well as lines starting with a space
+# Bash history control.
+# Set to ignore duplicates in history, as well as lines starting with a space.
 # Note: An alias for this is ignoreboth
-# Note2: Technically this is POSIX-compliant (this is after all simply an export
-#        of a variable) but as it is only useful for bash, we keep it here.
+# Note2: Technically this is POSIX-compliant (this is after all simply an export of a variable) but as it is only useful for bash, we keep it here.
 export HISTCONTROL=ignoredups:ignorespace
 
 # !12 will retype command #12, NOT reexecute it without asking
@@ -48,8 +47,7 @@ done
 
 
 # shellcheck source=_.bashrc
-# Now we’ve done anything login-specific, we import the non-login rc file, which
-# bash does not import automatically in a login shell.
+# Now we’ve done anything login-specific, we import the non-login rc file, which bash does not import automatically in a login shell.
 { test -r "${HOME}/.bashrc" && source "${HOME}/.bashrc"; } || true
 
 

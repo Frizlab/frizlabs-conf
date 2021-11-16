@@ -40,8 +40,8 @@ imprime
 unset t[4]
 imprime
 # surprise: la case d'indice 4 n'existe plus (t[4] retourne '')
-# et on a bien un élément de moins dans le tableau... mais il
-# faut regarder ${!t[@]} pour savoir le(s)quel(s) manque(nt) !
+# et on a bien un élément de moins dans le tableau...
+# mais il faut regarder ${!t[@]} pour savoir le(s)quel(s) manque(nt) !
 
 t[12]="bien plus loin !"
 imprime

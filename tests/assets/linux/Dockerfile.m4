@@ -43,10 +43,10 @@ WORKDIR "/home/M4_USER"
 )dnl
 
 
-# Clone of the repository
+# Clone of the repository.
 RUN git clone --depth 1 --recursive "https://github.com/Frizlab/frizlabs-conf.git"
 
-# We copy the inputs in tmp, they’ll be retrieved in the next step
+# We copy the inputs in tmp, they’ll be retrieved in the next step.
 COPY --chown=M4_USER:users inputs /tmp/inputs
 
 # Config
@@ -59,16 +59,13 @@ RUN \
 	cp /tmp/inputs/computer_group .cache/computer_group && \
 	rm -fr /tmp/inputs
 
-# This is set to an arbitrary, always different, value in the docker build
-# invocation to force re-building after this line.
+# This is set to an arbitrary, always different, value in the docker build invocation to force re-building after this line.
 ARG CACHEBUST=1
 
-# We run the install here in a separate step to avoid re-cloning the whole repo
-# if that fails.
+# We run the install here in a separate step to avoid re-cloning the whole repo if that fails.
 RUN cd frizlabs-conf && git fetch && git merge && ./install
 
 
-# We launch bash in non-login interactive mode by default. The caller can add -l
-# when starting the docker to get a login shell and have the .bash_profile and
-# .profile loaded (otherwise only the .bashrc and .shrc will be loaded).
+# We launch bash in non-login interactive mode by default.
+# The caller can add -l when starting the docker to get a login shell and have the .bash_profile and .profile loaded (otherwise only the .bashrc and .shrc will be loaded).
 ENTRYPOINT ["/bin/bash"]

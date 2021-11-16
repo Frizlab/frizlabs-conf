@@ -22,9 +22,8 @@ readonly LOCAL_HOMEBREW_INSTALL="$1"
 readonly BREW="${LOCAL_HOMEBREW_INSTALL}/bin/brew"
 
 if [ ! -x "$BREW" ]; then
-	# I kinda like this check, because it makes sure parent folders are
-	# consciously created w/ correct perms before installing brew. However it is
-	# annoying in some cases, so we disable it, at least for now.
+	# I kinda like this check, because it makes sure parent folders are consciously created w/ correct perms before installing brew.
+	# However it is annoying in some cases, so we disable it, at least for now.
 #	if [ ! -d "$(dirname -- "$LOCAL_HOMEBREW_INSTALL")" ]; then
 #		echo "Asked to install brew at path '$LOCAL_HOMEBREW_INSTALL' but parent folder does not exist." >&2
 #		exit 4

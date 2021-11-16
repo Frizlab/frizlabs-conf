@@ -36,8 +36,7 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 # HOMEBREW_CASK_OPTS and HOMEBREW_GITHUB_API_TOKEN are set in profile:dyn
 
 
-# Mint – For now we only implement system-wide mint; we might wanna do a user
-# one like Homebrew, but I probably won’t need it.
+# Mint – For now we only implement system-wide mint; we might wanna do a user one like Homebrew, but I probably won’t need it.
 # Also, TODO: We must create the mint folder
 export MINT_PATH="/opt/mint/cache"
 export MINT_LINK_PATH="/opt/mint/bin"
@@ -58,18 +57,13 @@ done
 ################################################################################
 
 
-# Now we’ve done everything login-specific, we import the non-standard non-login
-# rc file, which sh does not import automatically in a login shell. The import
-# is done using the ENV var so children inherit it, and bash does not do the
-# import (it is done in .bashrc too).
+# Now we’ve done everything login-specific, we import the non-standard non-login rc file, which sh does not import automatically in a login shell.
+# The import is done using the ENV var so children inherit it, and bash does not do the import (it is done in .bashrc too).
 
-# Note: We export the ENV var here, but the export is not necessary to make the
-#       sh login shell load ~/.shrc
-#       However, if we try and launch a non-login sh from a login shell, the
-#       .shrc is not loaded if ENV is not exported (obviously)
-# Note2: If the ENV is set to a NULL value, we do NOT re-export it to a new
-#        value; we assume there as been a good reason for the ENV to be set to
-#        NULL and leave it as-is.
+# Note: We export the ENV var here, but the export is not necessary to make the sh login shell load ~/.shrc
+#       However, if we try and launch a non-login sh from a login shell, the .shrc is not loaded if ENV is not exported (obviously)
+# Note2: If the ENV is set to a NULL value, we do NOT re-export it to a new value;
+#        we assume there as been a good reason for the ENV to be set to NULL and leave it as-is.
 export ENV="${ENV-${HOME}/.shrc}"
 
 

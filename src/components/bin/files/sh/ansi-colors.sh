@@ -3,8 +3,7 @@
 # colors v1.03
 #
 # A simple shell script to output an ANSI terminal color chart.
-# It may be useful when trying to customize your ANSI terminal
-# color scheme!
+# It may be useful when trying to customize your ANSI terminal color scheme!
 #
 # Written and placed in the public domain by Ian Abbott <ian@abbott.org>
 #

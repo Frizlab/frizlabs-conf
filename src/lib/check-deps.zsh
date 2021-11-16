@@ -1,4 +1,4 @@
-# Check the required dependencies are installed
+# Check the required dependencies are installed.
 case "$HOST_OS" in
 	"Darwin")
 		xcode-select -p >/dev/null 2>&1 || {
@@ -7,8 +7,8 @@ case "$HOST_OS" in
 		}
 	;;
 	"Linux")
-		# ccdecrypt, curl and m4 are the only truly required dependencies. Other
-		# binaries are needed _after_ the configuration is installed.
+		# ccdecrypt, curl and m4 are the only truly required dependencies.
+		# Other binaries are needed _after_ the configuration is installed.
 		readonly DEPS=("ccdecrypt" "curl" "git" "locale-gen" "m4")
 		for dep in $DEPS; do
 			command -v "$dep" >/dev/null 2>&1 || {

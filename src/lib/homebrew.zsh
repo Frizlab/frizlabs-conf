@@ -5,7 +5,7 @@ readonly FRZ_HOMEBREW_CASK_OPTS_BASE="\
 # After further thinking, disabling quarantine might not be the best idea…
 #FRZ_HOMEBREW_CASK_OPTS_BASE+=" '--no-quarantine'"
 
-# Update the list from `man brew` from time to time
+# Update the list from `man brew` from time to time.
 
 readonly FRZ_HOMEBREW_CASK_OPTS_USER="\
 '--appdir=$HOME/Applications' \

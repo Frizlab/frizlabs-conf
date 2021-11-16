@@ -54,10 +54,9 @@ alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n";
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
 
-# The functions below are POSIX-compatible, so we want them in a POSIX shell as
-# well as bash. Ideally the functions would be defined in the profile, however,
-# exporting a function with a POSIX shell is not possible… so we have to put the
-# function in the shrc!
+# The functions below are POSIX-compatible, so we want them in a POSIX shell as well as bash.
+# Ideally the functions would be defined in the profile, however, exporting a function with a POSIX shell is not possible…
+# so we have to put the function in the shrc!
 
 # Dev. Functions
 find_lib_with() {

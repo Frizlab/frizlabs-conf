@@ -2,11 +2,10 @@
 pushd "$(dirname "$0")/.."
 
 
-# We export PATH in case the variable is not exported yet
+# We export PATH in case the variable is not exported yet.
 export PATH
 
-# We add our own bins to the path, but agree to use the system or user-defined
-# ones if they are already there
+# We add our own bins to the path, but agree to use the system or user-defined ones if they are already there.
 path+="$(pwd)/.cache/bin"
 
 readonly CACHE_FOLDER="$(pwd)/.cache"

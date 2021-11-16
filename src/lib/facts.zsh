@@ -1,4 +1,4 @@
-# Gather some facts
+# Gather some facts.
 
 HOST_OS="$(uname -s)";   readonly HOST_OS
 HOST_ARCH="$(uname -m)"; readonly HOST_ARCH

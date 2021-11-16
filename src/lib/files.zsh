@@ -5,8 +5,8 @@
 ## Example: folder /var/log 755
 function folder() {
 	local -r folder_name="$1" permission="$2"
-	# %Lp format is for Darwin, %a is for Linux. Linux version must be first
-	# because -f option is known by Linux stat but does not mean the same thing.
+	# %Lp format is for Darwin, %a is for Linux.
+	# Linux version must be first because -f option is known by Linux stat but does not mean the same thing.
 	test -d "$folder_name" && test "$("$STAT" -c %a -- "$folder_name" 2>/dev/null || "$STAT" -f %Lp -- "$folder_name" 2>/dev/null)" = "$permission" && { echo "ok"; return }
 	"$MKDIR" -p --            "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
 	"$CHMOD" -- "$permission" "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
