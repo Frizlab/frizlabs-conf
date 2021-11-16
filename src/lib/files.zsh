@@ -22,7 +22,7 @@ function acl() {
 	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
 	test "$(ls -led -- "$file_name" 2>/dev/null | tail -n+2 | sed -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
 	
-	chmod -E "$file_name" <<<"$acl" || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
+	chmod -E "$file_name" <<<"$acl" >/dev/null 2>&1 || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -35,7 +35,7 @@ function flags() {
 	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
 	grep -q -- "$flag" <<<"$(stat -f %Sf -- "$file_name" 2>/dev/null)" && { echo "ok"; return }
 	
-	chflags -- "$flag" "$file_name" 2>/dev/null || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
+	chflags -- "$flag" "$file_name" >/dev/null 2>&1 || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
