@@ -34,6 +34,9 @@ properly, and is IMHO generally better, though more complex.
 
 == Notes/TODOs
 
+=== Little Snitch Rules
+Prepare Rule Group Subscription and automate installation of said subscription in Little Snitch (if possible).
+
 === `brew` installation in `/usr/local`
 Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh,
 but simplified.
