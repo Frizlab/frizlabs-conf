@@ -129,6 +129,7 @@ typeset -A MAIN_USER_HOMEBREW_FORMULAE=(
 typeset -A MAIN_USER_HOMEBREW_CASKS=(
 	"appcleaner"    "Caskroom/appcleaner" # And **NOT** app-cleaner!
 	"brave-browser" "Caskroom/brave-browser"
+	"chalk"         "Caskroom/chalk"
 	"dash"          "Caskroom/dash"
 	"hex-fiend"     "Caskroom/hex-fiend"
 	"imageoptim"    "Caskroom/imageoptim"
