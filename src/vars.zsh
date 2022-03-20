@@ -88,6 +88,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
+	"swift-format"        "bin/swift-format"
 	"terminal-notifier"   "bin/terminal-notifier"
 	"the_silver_searcher" "bin/ag"
 	"tmux"                "bin/tmux"
