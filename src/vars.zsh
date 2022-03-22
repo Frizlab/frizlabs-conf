@@ -109,7 +109,7 @@ if test "$HOST_OS" != "Linux"; then
 		"xcode-actions/tap/xct"                       "bin/xct"
 		"swiftdocorg/formulae/swift-doc"              "bin/swift-doc"
 		"mxcl/made/swift-sh"                          "bin/swift-sh"
-		"happn-tech/public/locmapper"                 "Cellar/locmapper"
+		"happn-app/public/locmapper"                  "Cellar/locmapper"
 	)
 fi
 # The following formulae do not compile (at the time of writing) on ARM macOS.
@@ -138,9 +138,9 @@ typeset -A MAIN_USER_HOMEBREW_CASKS=(
 	
 	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
 	
-	"happn-tech/public/base64"           "Caskroom/base64"
-	"happn-tech/public/locmapper-app"    "Caskroom/locmapper-app"
-	"happn-tech/public/locmapper-linter" "Caskroom/locmapper-linter"
+	"happn-app/public/base64"           "Caskroom/base64"
+	"happn-app/public/locmapper-app"    "Caskroom/locmapper-app"
+	"happn-app/public/locmapper-linter" "Caskroom/locmapper-linter"
 )
 
 
