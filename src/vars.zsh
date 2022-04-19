@@ -85,6 +85,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"nmap"                "bin/nmap"
 	"p7zip"               "bin/7z"
 	"pass"                "bin/pass"
+	"pstree"              "bin/pstree"
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
