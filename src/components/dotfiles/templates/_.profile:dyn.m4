@@ -19,7 +19,7 @@ PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
 #    - rsync: system’s rsync is very old;
 #    - ruby: system’s ruby is old and some gems fail to install/update;
 #    - python: system’s python3 might be ok, but I’ve learned not to rely on system binaries (we have no guarantees; they are installed because the system needs them).
-#              IMPORTANT: `pip3 install` will install in the system brew prefix folder. Use `pip3 install --user` to install in ~/clt/python3.
+#              IMPORTANT: “pip3 install” will install in the system brew prefix folder. Use “pip3 install --user” to install in ~/clt/python3.
 # So the paths to the parent folder of these binaries will be first in the path.
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/python3/bin:${PATH}"
 PATH="___M4___HOMEBREW_SYSTEM_DIR___M4___/opt/ruby/bin:${PATH}"
