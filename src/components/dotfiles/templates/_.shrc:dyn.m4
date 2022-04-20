@@ -58,7 +58,7 @@ alias   brew-user-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOM
 alias brew-system-arm64='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'"              "___M4___HOMEBREW_ARM64_SYSTEM_DIR___M4___/bin/brew"'
 alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" arch -x86_64 "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
 
-m4_frz_brew_all(brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27)
+m4_frz_brew_all(brew-user-arm64 brew-user-x86 brew-system-arm64 brew-system-x86)
 ,m4_dnl
 alias   brew-user='brew-user-x86'
 alias brew-system='brew-system-x86'
@@ -67,5 +67,5 @@ alias brew-user-arm64='echo "error: arm64 brew not available on this platform+ar
 alias   brew-system-x86='HOMEBREW_CASK_OPTS="$HOMEBREW_CASK_OPTS '"___M4___FRZ_HOMEBREW_CASK_OPTS_SYSTEM___M4___"'" "___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin/brew"'
 alias brew-system-arm64='echo "error: arm64 brew not available on this platform+arch" >&2; false'
 
-m4_frz_brew_all(brew-user-x86 brew-system-x86 brew-python39 brew-python38 brew-python37 brew-python27)
+m4_frz_brew_all(brew-user-x86 brew-system-x86)
 ))m4_dnl
