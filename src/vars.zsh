@@ -79,6 +79,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"p7zip"               "bin/7z"
 	"pass"                "bin/pass"
 	"pstree"              "bin/pstree"
+	"python3"             "bin/python3"
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"

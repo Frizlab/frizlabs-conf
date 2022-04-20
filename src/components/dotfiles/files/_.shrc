@@ -47,13 +47,12 @@ alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
 # The brew-all function is in shrc:dyn
-alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
-alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
+alias pip3-upgrade-all='pip3 list --outdated --format=freeze | grep -v -e wheel -e pip -e setuptools | cut -d= -f1 | xargs pip3 install --user --upgrade --no-warn-script-location'
+alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mpip3 upgrade\033[0m\n"; pip3-upgrade-all; printf "\n\033[1;35mgem upgrade\033[0m\n"; gem update'
+alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mpip3 upgrade\033[0m\n"; pip3-upgrade-all; printf "\n\033[1;35mgem upgrade\033[0m\n"; gem update'
 alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n"; gem cleanup'
-# Disable pip
-alias pip='echo "Do not use pip. Use venvs, whatever, but not pip directly."; false'
-alias pip3='pip'
-alias pip2='pip'
+# Safeguard non --user pip3 installs. This spawns a sub-shell. I don’t care. Have I mentionned I hate pip?
+alias pip3='__fuck_pip'
 
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
@@ -105,6 +104,21 @@ add_subtitle() {
 	fi
 	
 	MP4Box -add "${srt}:lang=eng:layout=0x60x0x-1:group=2:hdlr=sbtl:tx3g" "$mp4" && rm "$srt"
+}
+
+# pip3 launcher
+__fuck_pip() {
+	local foundI=f foundU=f
+	for arg in "$@"; do
+		[ "$arg" = "install" ] && foundI=t
+		[ "$arg" = "--user" ] && foundU=t
+	done
+	[ "$foundI" = "f" -o "$foundU" = "t" ] || {
+		echo "Do yourself a favor, install stuff from pip in your user folder." >&2
+		echo "If you’re sure you known what you’re doing, you can invoke pip3 with \pip3 to bypass the check (it’s done in an alias)." >&2
+		return 1
+	}
+	\pip3 "$@"
 }
 
 
