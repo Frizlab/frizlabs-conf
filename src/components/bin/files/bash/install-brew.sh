@@ -21,6 +21,12 @@ fi
 readonly LOCAL_HOMEBREW_INSTALL="$1"
 readonly BREW="${LOCAL_HOMEBREW_INSTALL}/bin/brew"
 
+# Very basic detection for install in /usr/local. Our goal is to prevent mistakes here, not to be foolproof (realpath is not built-in on macOS).
+if [[ $LOCAL_HOMEBREW_INSTALL =~ ^/+usr/+local/*$ ]]; then
+	echo "brew installation in /usr/local is currently not supported." >&2
+	exit 5
+fi
+
 if [ ! -x "$BREW" ]; then
 	# I kinda like this check, because it makes sure parent folders are consciously created w/ correct perms before installing brew.
 	# However it is annoying in some cases, so we disable it, at least for now.
