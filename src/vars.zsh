@@ -47,13 +47,6 @@ else
 	readonly HOMEBREW_SYSTEM_DIR="$HOMEBREW_ARM64_SYSTEM_DIR"
 fi
 
-# Python* (user) Homebrew instance.
-# Should only have Python* installed, and the eggs installed with pip.
-readonly HOMEBREW_PYTHON39_USER_DIR="$CLT_DIR/homebrew-python3.9"
-readonly HOMEBREW_PYTHON38_USER_DIR="$CLT_DIR/homebrew-python3.8"
-readonly HOMEBREW_PYTHON37_USER_DIR="$CLT_DIR/homebrew-python3.7"
-readonly HOMEBREW_PYTHON27_USER_DIR="$CLT_DIR/homebrew-python2.7"
-
 # Ruby (gem) Packages
 readonly RUBY_DIR="$CLT_DIR/ruby"
 

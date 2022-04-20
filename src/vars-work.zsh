@@ -10,7 +10,6 @@ COMPONENTS+=(
 	"homebrew-system" "pkgs-brew-system-base"
 	
 	"gcloud"
-	"homebrew-user-pythons"
 )
 
 MAIN_SYSTEM_HOMEBREW_CASKS+=(

@@ -46,10 +46,14 @@ alias reload-shell='exec $SHELL -l'; # “Reloads” the current shell (starts a
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 
 # Package aliases
-# The brew-all and pip-upgrade-all functions are in shrc:dyn
-alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; pip-upgrade-all false; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
-alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; pip-upgrade-all false; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
+# The brew-all function is in shrc:dyn
+alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
+alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mgem update\033[0m\n"; gem update'
 alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n"; gem cleanup'
+# Disable pip
+alias pip='echo "Do not use pip. Use venvs, whatever, but not pip directly."; false'
+alias pip3='pip'
+alias pip2='pip'
 
 # Joke aliases
 alias tit="open https://madamevoyeur.com; git"
