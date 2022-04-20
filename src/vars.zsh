@@ -89,6 +89,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
 	"speedtest-cli"       "bin/speedtest-cli"
+	"shellcheck"          "bin/shellcheck"
 	"swift-format"        "bin/swift-format"
 	"terminal-notifier"   "bin/terminal-notifier"
 	"the_silver_searcher" "bin/ag"
@@ -116,7 +117,6 @@ fi
 # The following formulae do not compile (at the time of writing) on ARM macOS.
 # They should be in the MAIN_HOMEBREW_FORMULAE; in fine we’ll get rid of this variable as everything will work natively on ARM.
 typeset -A X86_SYSTEM_HOMEBREW_FORMULAE=(
-	"shellcheck"          "bin/shellcheck"
 )
 
 # Not -r because we modify this variable in the env specific vars file.
