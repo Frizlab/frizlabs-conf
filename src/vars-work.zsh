@@ -12,10 +12,6 @@ COMPONENTS+=(
 	"gcloud"
 )
 
-MAIN_SYSTEM_HOMEBREW_FORMULAE+=(
-	"ansible" "bin/ansible"
-)
-
 MAIN_SYSTEM_HOMEBREW_CASKS+=(
 	# Not needed anymore; now it’s installed via Munki
 #	"firefox" "Caskroom/firefox"
