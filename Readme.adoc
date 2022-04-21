@@ -21,8 +21,6 @@ folder. There is one folder per component I install.
 
 == My `brew` Setup
 I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
-Additionally, on an M1 Mac, for both these brews, there will be an “x86” and an
-“arm64” install done.
 
 This is done to be able to use brew on a multi-user machine properly: the admin
 manages the system brew, and “normal” users can use a “user” brew without
@@ -55,6 +53,10 @@ ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
 ----
 
 Get sudo during whole script: https://github.com/nnja/new-computer/blob/master/setup.sh#L73
+
+=== `brew` installation in `/opt/homebrew`
+
+That one is a “normal” brew install (`install-brew` correctly handles it), but before we have to create the `/opt/homebrew` folder using sudo.
 
 === A Thing from Twitter
 
