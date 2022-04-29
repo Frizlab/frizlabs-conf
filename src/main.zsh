@@ -2,7 +2,20 @@
 
 # Install Frizlab’s conf
 # Tested on macOS and Debian
-# Usage: ./install [component ...]
+# Usage: ./install [-v] [component ...]
+
+
+##############
+# Parse args #
+##############
+
+# MUST be either /dev/null or /dev/tty
+VERBOSE_OUTPUT="/dev/null"
+if [ $# -gt 0 -a "$1" = "-v" ]; then
+	VERBOSE_OUTPUT="/dev/tty"
+	shift
+fi
+readonly VERBOSE_OUTPUT
 
 
 ################################
@@ -22,15 +35,17 @@ export PATH
 path+="$(pwd)/.cache/bin"
 
 # Let’s define the different paths we will need.
-CACHE_FOLDER="$(pwd)/.cache"; readonly CACHE_FOLDER
 SRC_FOLDER="$(pwd)/src"; readonly SRC_FOLDER
+CACHE_FOLDER="$(pwd)/.cache"; readonly CACHE_FOLDER
+RUN_LOG="$(pwd)/runs/$(date '+%d.%m.%Y-%H:%M:%S').log"; readonly RUN_LOG
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
 
 # We need this now (because it defines the MKDIR var).
 source "$LIB_FOLDER/executables.zsh"
 
-# Create the cache folder if needed.
+# Create the runs and cache folder if needed.
+"$MKDIR" -p "$(pwd)/runs" && "$CHMOD" 700 "$(pwd)/runs"
 "$MKDIR" -p "$CACHE_FOLDER" && "$CHMOD" 700 "$CACHE_FOLDER"
 
 
@@ -45,7 +60,8 @@ source "$LIB_FOLDER/ccrypt.zsh"
 source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
 
-source "$LIB_FOLDER/files.zsh"
+source "$LIB_FOLDER/files-lib.zsh"
+source "$LIB_FOLDER/files-tasks.zsh"
 source "$LIB_FOLDER/links.zsh"
 source "$LIB_FOLDER/templates.zsh"
 source "$LIB_FOLDER/defaults.zsh"

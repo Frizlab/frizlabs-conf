@@ -3,20 +3,20 @@
 ## Make sure the given folder exists with given permission
 ## Usage: folder folder_name permission
 ## Example: folder /var/log 755
-function folder() {
+function libfiles__folder() {
 	local -r folder_name="$1" permission="$2"
 	# %Lp format is for Darwin, %a is for Linux.
 	# Linux version must be first because -f option is known by Linux stat but does not mean the same thing.
-	test -d "$folder_name" && test "$("$STAT" -c %a -- "$folder_name" 2>/dev/null || "$STAT" -f %Lp -- "$folder_name" 2>/dev/null)" = "$permission" && { echo "ok"; return }
-	"$MKDIR" -p --            "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
-	"$CHMOD" -- "$permission" "$folder_name" >/dev/null 2>&1 || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
+	test -d "$folder_name" && test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$folder_name" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$folder_name")" = "$permission" && { echo "ok"; return }
+	run_and_log "$MKDIR" -p --            "$folder_name" || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
+	run_and_log "$CHMOD" -- "$permission" "$folder_name" || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Make sure the given file or folder has the correct ACLs
 ## Usage: acl file_or_folder acl
 ## Example: acl /var/log "group:everyone deny delete"
-function acl() {
+function libfiles__acl() {
 	local -r file_name="$1" acl="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
@@ -29,7 +29,7 @@ function acl() {
 ## Make sure the given file or folder has at least the given flag
 ## Usage: flags file_or_folder flag
 ## Example: flags /var/log "hidden"
-function flags() {
+function libfiles__flags() {
 	local -r file_name="$1" flag="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
@@ -42,7 +42,7 @@ function flags() {
 ## Make sure the given file does not exist. Fails if the given path is a folder
 ## Usage: delete file
 ## Example: delete "$HOME/.obsolete"
-function delete() {
+function libfiles__delete() {
 	local -r file_name="$1"
 	
 	test -e "$file_name" || { echo "ok"; return }
@@ -56,7 +56,7 @@ function delete() {
 ## Usage: copy src dest mode
 ## In practice the linknbk function should be preferred over a copy.
 ## Example: copy ./_.bashrc.scp ~/.bashrc 600
-function copy() {
+function libfiles__copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"
@@ -74,7 +74,7 @@ function copy() {
 ##
 ## Usage: decrypt_and_copy src dest mode
 ## Example: decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
-function decrypt_and_copy() {
+function libfiles__decrypt_and_copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"

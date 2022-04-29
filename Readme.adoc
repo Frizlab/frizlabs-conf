@@ -1,43 +1,57 @@
 = Frizlab’s Conf
 François Lamboley <fload@me.com>
 
-Originally based on https://github.com/wincent/wincent[wincent’s conf], I then
-realized Ansible was too complex and had too many dependencies to continue using
-it for managing dotfiles and some defaults. (Funnily enough, wincent seems to
-have reached the same conclusion as me and switched away from Ansible in his
-conf repo too!)
+Originally based on https://github.com/wincent/wincent[wincent’s conf],
+  I then realized Ansible was too complex and had too many dependencies to continue using it for managing dotfiles and some defaults.
+(Funnily enough, wincent seems to have reached the same conclusion as me and switched away from Ansible in his conf repo too!)
 
-The repo is now pure zsh. You can try and install it at home using `./install`.
-When prompted for the passphrase, just leave it empty; the actions requiring the
-password will simply fail. On macOS, the command-line tools are enough to use
-this repo; on Linux you should install `ccrypt`, `curl`, `git`, `locale-gen` and
-`m4`.
+The repo is now pure zsh.
+You can try and install it at home using `./install`.
+When prompted for the passphrase, just leave it empty; the actions requiring the password will simply fail.
+On macOS, the command-line tools are enough to use this repo; on Linux you should install `ccrypt`, `curl`, `git`, `locale-gen` and `m4`.
 
-⚠️ Use at your own risks! This repo installs defaults I’m confortable with, but
-is in no way intended to be used by anybody else than me.
+⚠️ Use at your own risks!
+This repo installs defaults I’m confortable with, but is in no way intended to be used by anybody else than me.
 
-To simply see what I do, and steal whatever you like, go in the `src/components`
-folder. There is one folder per component I install.
+To simply see what I do, and steal whatever you like, go in the `src/components` folder.
+There is one folder per component I install.
 
-== My `brew` Setup
-I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
+== Tech Notes
 
-This is done to be able to use brew on a multi-user machine properly: the admin
-manages the system brew, and “normal” users can use a “user” brew without
-issues (well, at least for formulae which do not fail compilation, but that’s
-another problem).
+=== Function Naming
 
-_Future direction_: Fully switch to Nix, which manages a multi-user install
-properly, and is IMHO generally better, though more complex.
+- `lib<#component#>__*`: A “lib” function (e.g. `defaults_set_bool`).
+These are functions that only do one simple “atomic” thing (e.g. set a user default). +
+The function **must** check whether the action is needed first. +
+If it is not, the function **must** output "ok" to stdout and do nothing. +
+If something is required to be done, the function **must** do it, then output "changed" to stdout. +
+In case of an error, the function **must** log the failure using `log_task_failure`, and then output "failed" to stdout.
 
-== Notes/TODOs
+Most of the time these kind of function are found in the `./src/lib` folder, but sometimes some can be put in a component’s `lib` folder.
+
+- `task__*`: A function doing an actual task.
+This is rarely used.
+
+== TODOs
+
+=== Unhide Private Entries in macOS Logs
+
+https://georgegarside.com/blog/macos/sierra-console-private/
 
 === Little Snitch Rules
 Prepare Rule Group Subscription and automate installation of said subscription in Little Snitch (if possible).
 
-=== `brew` installation in `/usr/local`
-Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh,
-but simplified.
+=== My `brew` Setup
+I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
+
+This is done to be able to use brew on a multi-user machine properly:
+ the admin manages the system brew, and “normal” users can use a “user” brew without issues
+ (well, at least for formulae which do not fail compilation, but that’s another problem).
+
+_Future direction_: Fully switch to Nix, which manages a multi-user install properly, and is IMHO generally better, though more complex.
+
+==== `brew` installation in `/usr/local`
+Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh, but simplified.
 [source,bash]
 ----
 cd /usr/local
@@ -66,18 +80,39 @@ https://twitter.com/ryleyherrington/status/1354546825739472897
 
 Add ignored folders.
 
+== `launchctl` Titbits
+
+=== Launching AppleEvents from a LaunchAgent
+
+It just works: the user gets a prompt from TCC telling the launched program wants to use AppleScript.
+In theory this is not a problem, but if the program is `/bin/sh` (or some other generic script interpreter, or a script whose shebang will be the actual binary), the interpreter will be whitelisted (if the user accepts it).
+This is not great security-wise.
+
+The only proper alternative I found is not launching the script directly, but instead use a custom wrapper whose sole purpose is to exec the script.
+This is what the `exec-bin` template (in this repo) does.
+
+⚠️ Do not do a generic exec-bin which would execute whatever is given in argument!
+If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
+(With a small gotcha: nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
+
+Other unsuccessful attempts:
+- `exec`’ing from the shell script;
+- Creating a soft link to the interpreter and launching this link.
+This does not work because it’s not the link which is launched, it’s the link’s destination;
+- Hard-linking `/bin/sh` and launching this link.
+This probably works (hard-linking does work), but hard-linking `/bin/sh` is forbidden (SIP-protected).
+
 == zsh (and bash) Fun Stuff
 
 === Local and Readonly Variables
 
 `local myvar="$(false)"; echo $?` prints `0`. Why? Because `local` never fails!
 Thus, if you have run `set -e`, even the script should stop, it won’t. +
-To workaround this, one should do `local myvar; myvar="$(false)"; echo $?`,
-which will correctly print `1`.
+To workaround this, one should do `local myvar; myvar="$(false)"; echo $?`, which will correctly print `1`.
 
-Now how about a readonly local variable? In theory, we could do this: `local -r
-myvar="$(false)"` (BTW, certainly not `readonly local myvar...`, nor `local
-readonly myvar...`!), however, we would have the same problem. +
+Now how about a readonly local variable? In theory, we could do this: `local -r myvar="$(false)"`
+ (BTW, certainly not `readonly local myvar...`, nor `local readonly myvar...`!),
+ however, we would have the same problem. +
 The solution here is `local myvar; myvar="$(false)"; readonly myvar`.
 
 Shell scripts are great.
@@ -95,41 +130,35 @@ PS: Of course, `test "" = "$(false)"` does not fail either.
 
 === Roles
 
-_Lexicographic note_: When I say “conf that is propagated to its children,” I mean
-for instance `export var=`, or `export -f function_name` in bash. That is everything
-that is exported to children of the shell.
+_Lexicographic note_: When I say “conf that is propagated to its children,” I mean for instance `export var=`, or `export -f function_name` in bash.
+That is everything that is exported to children of the shell.
 
 ==== `.bash_profile`
 Should contain only bash-specific conf that is propagated to its children.
-For instance, exported env variables, exported functions (this is possible with
-bash with `export -f func_name`).
+For instance, exported env variables, exported functions (this is possible with bash with `export -f func_name`).
 
 It is important to know aliases cannot be exported.
 
 ==== `.profile`
 Should contain only POSIX-compliant conf that is propagated to its children.
 
-*Important*: In theory https://stackoverflow.com/a/29239838[it is not possible to
-export a function in a POSIX shell], though `bash --posix` does not
-complain when doing it, for whatever reason, neither on Debian, nor on macOS!
+*Important*: In theory https://stackoverflow.com/a/29239838[it is not possible to export a function in a POSIX shell],
+ though `bash --posix` does not complain when doing it, for whatever reason, neither on Debian, nor on macOS!
 
 ==== `.bashrc`
 Should contain only bash-specific conf that cannot be propagated to children.
-Aliases might fall into this category, but you might want to put them in `.shrc`
-if they’re POSIX-compliant.
+Aliases might fall into this category, but you might want to put them in `.shrc` if they’re POSIX-compliant.
 
 ==== `.shrc`
 (Not a standard file per-se.) +
-Should contain only POSIX-compliant conf that cannot be propagated to children
-(e.g. aliases).
+Should contain only POSIX-compliant conf that cannot be propagated to children (e.g. aliases).
 
 
 === Scenarios
 All login shells are considered interactive. +
-All of this has been tested on macOS and Debian. On both, the shell is `bash`,
-even when launching an `sh` shell. However, when `bash` is launched as `sh`, it
-tries and mimic the startup behavior of `sh`, while still conforming to the
-POSIX standard (says the man of bash).
+All of this has been tested on macOS and Debian.
+On both, the shell is `bash`, even when launching an `sh` shell.
+However, when `bash` is launched as `sh`, it tries and mimic the startup behavior of `sh`, while still conforming to the POSIX standard (says the man of bash).
 
 ==== bash, login
 * `.bash_profile`
@@ -153,6 +182,4 @@ POSIX standard (says the man of bash).
 * `.shrc` via the `ENV` variable, only if the login shell above had set it
 
 ==== bash --posix
-Does not load anything unless the `ENV` var is set, in which case it loads the
-file in `$ENV` (in theory; not the behavior observed on macOS; untested on
-Debian).
+Does not load anything unless the `ENV` var is set, in which case it loads the file in `$ENV` (in theory; not the behavior observed on macOS; untested on Debian).

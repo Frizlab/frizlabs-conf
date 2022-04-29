@@ -5,6 +5,9 @@ xcuserdata/
 # The cache (saved pass, compiled ccrypt, etc.)
 /.cache/
 
+# Run logs
+/runs/
+
 # Tests inputs
 /tests/assets/inputs/
 # The temporary Dockerfile has to be generated in the current folder instead of
