@@ -6,7 +6,7 @@ catchout res_folder folder "$DOTFILES_BACKUP_DIR" "$DOTFILES_BACKUP_DIR_MODE"
 log_task_from_res "$res_folder"
 
 res_check "$res_folder" && {
-	for file in $DOTFILE_FILES; do
+	for file in "${DOTFILE_FILES[@]}"; do
 		dest_file="$HOME/$file"
 		repo_file="$(pwd)/files/_$file"
 		start_task "link _$file -> ${dest_file/#$HOME/\~}"
