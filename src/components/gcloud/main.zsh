@@ -1,13 +1,21 @@
 # Install the google cloud sdk and add its path to the PATH.
+# TODO: Check checksum
 
+# Update URLs from https://cloud.google.com/sdk/docs/install
 tar_url=
+tar_shasum=
 case "$HOST_OS:$HOST_ARCH" in
-	Darwin:*)
-		# Note: We ignore 32-bits macOS (it does not exist anymore)
-		tar_url="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-320.0.0-darwin-x86_64.tar.gz"
+	Darwin:x86_64)
+		tar_url="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-383.0.1-darwin-x86_64.tar.gz"
+		tar_shasum="f1899cbf58061f5ca97923565d7fc7a9729b0f65f9387b43330c00aef41252d1"
+	;;
+	Darwin:arm64)
+		tar_url="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-383.0.1-darwin-arm.tar.gz"
+		tar_shasum="6179311562f0397e8926ee5483b65daa926b64774ee0ce48cb993de298e98f97"
 	;;
 	Linux:x86_64)
-		tar_url="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-320.0.0-linux-x86_64.tar.gz"
+		tar_url="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-383.0.1-linux-x86_64.tar.gz"
+		tar_shasum="978cc2b7e3d58d680abd600bbdc96dca6eccd0d7ff11df15760e5321db8ce07d"
 	;;
 esac
 
