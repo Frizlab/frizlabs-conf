@@ -1,3 +1,15 @@
+## Usage: fatal [error_msg]
+## Exits with code 255, optionally printing an error message before to stderr, in red.
+function fatal() {
+	if [ $# -gt 0 ]; then
+		print -P "%F{red}%BINTERNAL ERROR%b: $*%f"
+	else
+		print -P "%F{red}%BINTERNAL ERROR%b%f"
+	fi
+	exit 255
+}
+
+
 ## Usage: catchout stdoutvar command args...
 ##
 ## This is the question and the complicated answers to do this.
