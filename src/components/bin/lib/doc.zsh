@@ -19,7 +19,7 @@ function doc() {
 	readonly dest_share_dir
 	
 	local -r dest_doc_dir="$dest_share_dir/$relative_path_to_folder"
-	local -r backup_dir="$dest_doc_dir/$BIN_BACKUP_DIR_BASENAME"
+	local -r backup_dir="$dest_doc_dir/$BACKUP_DIR_BASENAME"
 	
 	local local_doc_path; local_doc_path="$(pwd)/files/$local_relative_doc_path"; readonly local_doc_path
 	local -r doc_dest_path="$dest_doc_dir/$doc_basename"

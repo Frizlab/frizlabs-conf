@@ -138,7 +138,7 @@ bin "frizlab" ":Darwin:~work~" "bin/my-split"
 # When compopt is not available (e.g. w/ Bash 3), this hides the error we get from some completion scripts that use compopt.
 RES=; RES_LIST=()
 dest="$THIRD_PARTY_BIN_DIR/compopt"
-backup_dir="$THIRD_PARTY_BIN_DIR/$BIN_BACKUP_DIR_BASENAME"
+backup_dir="$THIRD_PARTY_BIN_DIR/$BACKUP_DIR_BASENAME"
 start_task "link fake compopt -> ${dest/#$HOME/\~}"
 src=
 test -x "$src" || src="/usr/bin/true"                  || true

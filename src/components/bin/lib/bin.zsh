@@ -21,7 +21,7 @@ function bin() {
 	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
 	readonly dest_bin_dir
 	
-	local -r backup_dir="$dest_bin_dir/$BIN_BACKUP_DIR_BASENAME"
+	local -r backup_dir="$dest_bin_dir/$BACKUP_DIR_BASENAME"
 	
 	local local_script_path; local_script_path="$(pwd)/files/$local_relative_script_path"; readonly local_script_path
 	local -r script_dest_path="$dest_bin_dir/$script_basename_no_ext"
