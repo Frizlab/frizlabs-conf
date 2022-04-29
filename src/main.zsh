@@ -40,7 +40,7 @@ source "$LIB_FOLDER/executables.zsh"
 
 source "$LIB_FOLDER/facts.zsh"
 source "$LIB_FOLDER/check-deps.zsh"
-source "$LIB_FOLDER/catchout.zsh"
+source "$LIB_FOLDER/utils.zsh"
 source "$LIB_FOLDER/ccrypt.zsh"
 source "$LIB_FOLDER/group.zsh"
 source "$LIB_FOLDER/logger.zsh"
