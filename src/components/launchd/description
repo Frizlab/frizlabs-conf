@@ -1,1 +1,1 @@
-Install some launch agents and/or daemons I need.
+Install some launch agents and/or daemons I need. Has an indirect dependency on the bin component, through the dump-safari-tabs script and the exec-script binary.

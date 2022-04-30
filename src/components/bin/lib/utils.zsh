@@ -5,11 +5,9 @@ function install_dest() {
 	local -r dest_3rd_party="$1"; shift
 	local -r dest_subfolder="$1"; shift
 	
-	local me; me="$(whoami)"; readonly me
-	if test "$author" = "$me"; then echo "$dest_1st_party${dest_subfolder:+/}$dest_subfolder";
-	else                            echo "$dest_3rd_party${dest_subfolder:+/}$dest_subfolder"; fi
+	echo "$(get_author_val "$author" "$dest_1st_party" "$dest_3rd_party")${dest_subfolder:+/}$dest_subfolder"
 }
-## Usage: install_dest destname_method local_path
+## Usage: install_name destname_method local_path
 function install_name() {
 	local -r destname_method="$1"; shift
 	local -r local_path="$1"; shift
@@ -17,6 +15,7 @@ function install_name() {
 	local -r basename="${local_path##*/}"
 	case "$destname_method" in
 		same)                      echo "$basename";;
+		custom:*)                  echo "${destname_method#custom:}";;
 		remove_ext)                echo "${basename%.*}";;
 		remove_ext_from_encrypted) echo "${basename%.*.cpt}";;
 		*) fatal "Unknown destname_method $destname_method"
@@ -24,7 +23,8 @@ function install_name() {
 }
 
 
-## Usage: task__install author compatibility dest_1st_party dest_3rd_party dest_subfolder relative_path_to_install mode install_method destname_method
+## Usage: task__install author compatibility dest_1st_party dest_3rd_party dest_subfolder relative_path_to_install mode install_method destname_method [-cflags cflags]
+## Note: cflags is ignored if install_method is not compile-c
 function task__install() {
 	local -r author="$1"; shift
 	local -r compatibility="$1"; shift
@@ -35,6 +35,21 @@ function task__install() {
 	local -r mode="$1"; shift
 	local -r install_method="$1"; shift
 	local -r destname_method="$1"; shift
+	
+	local cflags=
+	while [ $# -gt 0 ]; do
+		case "$1" in
+			-cflags)
+				shift
+				[ $# -gt 0 ] || fatal "Invalid call to task__install: no argument given to -cflags."
+				cflags="$1"; shift
+			;;
+			*)
+				fatal "Invalid call to task__install: unknown option $1."
+			;;
+		esac
+	done
+	readonly cflags
 	
 	local local_path; local_path="$(pwd)/files/$local_relative_path"; readonly local_path
 	
@@ -62,6 +77,11 @@ function task__install() {
 			decrypt)
 				start_task "install (decrypt and copy) ${dest_path/#$HOME/\~} (from $local_relative_path)"
 				catchout RES   libfiles__decrypt_and_copy "$local_path" "$dest_path" "755"
+				log_task_from_res "$RES"
+			;;
+			compile-c)
+				start_task "install (compile c) ${dest_path/#$HOME/\~} (from $local_relative_path)"
+				catchout RES   libfiles__compilec "$local_path" "$dest_path" "$cflags"
 				log_task_from_res "$RES"
 			;;
 		esac

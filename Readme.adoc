@@ -88,7 +88,7 @@ In theory this is not a problem, but if the program is `/bin/sh` (or some other 
 This is not great security-wise.
 
 The only proper alternative I found is not launching the script directly, but instead use a custom wrapper whose sole purpose is to exec the script.
-This is what the `exec-bin` template (in this repo) does.
+This is what `exec-script.c` (in this repo) is for.
 
 ⚠️ Do not do a generic exec-bin which would execute whatever is given in argument!
 If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
