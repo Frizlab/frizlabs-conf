@@ -51,6 +51,17 @@ function highest_res_from_res_list() {
 }
 
 
+## Usage: get_author_val author_name user_is_author_value user_is_not_author_value
+function get_author_val() {
+	local -r author="$1"; shift
+	local -r val_1st_party="$1"; shift
+	local -r val_3rd_party="$1"; shift
+	
+	if test "$author" = "${USER:-$(whoami)}"; then echo "$val_1st_party";
+	else                                           echo "$val_3rd_party"; fi
+}
+
+
 ## Compatibility format: ":compatible_host_os:~forbidden_computer_group~"
 ##
 ## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and must not be installed at work or home.
