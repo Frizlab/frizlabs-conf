@@ -20,19 +20,11 @@ function task__delete_bin() {
 	local -r author="$1"
 	local -r script_name="$2"
 	
-	local dest_bin_dir=""
-	local me; me="$(whoami)"; readonly me
-	if test "$author" = "$me"; then dest_bin_dir="$FIRST_PARTY_BIN_DIR";
-	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
-	readonly deleted_path="$dest_bin_dir/$script_name"
-	
-	task__delete_file "$deleted_path"
+	task__delete_file "$(get_author_val "$author" "$FIRST_PARTY_BIN_DIR" "$THIRD_PARTY_BIN_DIR")/$script_name"
 }
 
-function delete_launchd_bin() {
+function task__delete_launchd_bin() {
 	local -r script_name="$1"
 	
-	readonly deleted_path="$LAUNCHD_CLT_BIN_DIR/$script_name"
-	
-	task__delete_file "$deleted_path"
+	task__delete_file "$LAUNCHD_CLT_BIN_DIR/$script_name"
 }

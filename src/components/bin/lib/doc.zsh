@@ -8,12 +8,5 @@ function task__delete_doc() {
 	local -r author="$1"
 	local -r doc_name="$2"
 	
-	local dest_share_dir=""
-	local me; me="$(whoami)"; readonly me
-	if test "$author" = "$me"; then dest_share_dir="$FIRST_PARTY_SHARE_DIR";
-	else                            dest_share_dir="$THIRD_PARTY_SHARE_DIR"; fi
-	readonly dest_share_dir
-	local -r deleted_path="$dest_share_dir/$doc_name"
-	
-	task__delete_file "$deleted_path"
+	task__delete_file "$(get_author_val "$author" "$FIRST_PARTY_SHARE_DIR" "$THIRD_PARTY_SHARE_DIR")/$doc_name"
 }
