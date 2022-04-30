@@ -10,8 +10,9 @@ case "$HOST_OS" in
 		run_and_log_keep_stdout "$SED" '/en_US.UTF-8/s/^# //g' -- "$LOCALE_FILE" >"$TEMP_LOCALE"
 		# We run locale-gen if the locale file has been modified
 		{ run_and_log "$DIFF" -- "$TEMP_LOCALE" "$LOCALE_FILE" && log_task_ok } || {
-			{ run_and_log "$CAT" -- "$TEMP_LOCALE" >"$LOCALE_FILE" && locale-gen && log_task_change } ||
-				log_task_failure "Cannot write to $LOCALE_FILE. Do you have the permissions to do it?"
+			# Note: Instead of tee we could simply move the temp file to the destination…
+			{ run_and_log tee -- "$LOCALE_FILE" <"$TEMP_LOCALE" && run_and_log "$LOCALE_GEN" && log_task_change } ||
+				log_task_failure "Cannot write to $LOCALE_FILE or locale-gen failed."
 		}
 		run_and_log "$RM" -f -- "$TEMP_LOCALE"
 	;;

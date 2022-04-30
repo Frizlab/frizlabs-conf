@@ -29,6 +29,7 @@ case "$HOST_OS" in
 		readonly GREP="/bin/grep"
 		readonly READLINK="/bin/readlink"
 		readonly TAR="/bin/tar"
+		readonly LOCALE_GEN="/usr/sbin/locale-gen"
 	;;
 	*)
 		print "Unknown host os $HOST_OS; don’t know basic utilities paths. Failing." >&2
