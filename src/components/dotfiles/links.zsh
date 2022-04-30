@@ -2,7 +2,7 @@
 
 # First create the backup folder
 start_task "dotfiles backup folder ${DOTFILES_BACKUP_DIR/#$HOME/\~}"
-catchout res_folder folder "$DOTFILES_BACKUP_DIR" "$DOTFILES_BACKUP_DIR_MODE"
+catchout res_folder libfiles__folder "$DOTFILES_BACKUP_DIR" "$DOTFILES_BACKUP_DIR_MODE"
 log_task_from_res "$res_folder"
 
 res_check "$res_folder" && {
@@ -10,7 +10,7 @@ res_check "$res_folder" && {
 		dest_file="$HOME/$file"
 		repo_file="$(pwd)/files/_$file"
 		start_task "link _$file -> ${dest_file/#$HOME/\~}"
-		catchout RES   linknbk "$repo_file" "$dest_file" "600" "$DOTFILES_BACKUP_DIR"
+		catchout RES   libfiles__linknbk "$repo_file" "$dest_file" "600" "$DOTFILES_BACKUP_DIR"
 		log_task_from_res "$RES"
 	done
 } || true
