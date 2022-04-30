@@ -53,44 +53,44 @@ function libfiles__delete_file() {
 }
 
 ##
-## Usage: copy src dest mode
+## Usage: libfiles__copy src dest mode
 ## In practice the linknbk function should be preferred over a copy.
-## Example: copy ./_.bashrc.scp ~/.bashrc 600
-function copy() {
+## Example: libfiles__copy ./_.bashrc.scp ~/.bashrc 600
+function libfiles__copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"
 	
 	# First we check the destination file is not a folder
-	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
-	"$DIFF" -- "$src" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { echo "ok"; return }
+	run_and_log "$DIFF" -- "$src" "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { echo "ok"; return }
 	
-	"$CP" -f -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
-	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	run_and_log "$CP" -f -- "$src" "$dest" || { log_task_failure "cannot copy file to expected location"; echo "failed"; return }
+	run_and_log "$CHMOD" -- "$mode" "$dest" || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
 
 ##
-## Usage: decrypt_and_copy src dest mode
-## Example: decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
-function decrypt_and_copy() {
+## Usage: libfiles__decrypt_and_copy src dest mode
+## Example: libfiles__decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
+function libfiles__decrypt_and_copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"
 	
 	# First we check the destination file is not a folder
-	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
 	# Then we decrypt the source file at a temporary location
-	decrcpy_tmpfile="$(mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
-	"$CP" -f -- "$src" "$decrcpy_tmpfile" >/dev/null 2>&1 || { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
-	decrypt --suffix "" -- "$decrcpy_tmpfile" || { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	decrcpy_tmpfile="$(run_and_log_keep_stdout mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
+	run_and_log "$CP" -f -- "$src" "$decrcpy_tmpfile"     || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
+	run_and_log decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
-	"$DIFF" -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { "$RM" -f -- "$decrcpy_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	run_and_log "$DIFF" -- "$decrcpy_tmpfile" "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; echo "ok"; return }
 	
-	"$MV" -f -- "$decrcpy_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
-	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	run_and_log "$MV" -f -- "$decrcpy_tmpfile" "$dest" || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
+	run_and_log "$CHMOD" -- "$mode" "$dest" || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -117,21 +117,21 @@ function lnk() {
 ## The backup folder must already exist.
 ## link_mode is mostly useless (ignored on most fs) and is fully ignored on Linux
 ## as it is not possible to change the perm of a link w/ chmod on it (says the man).
-## Usage: linknbk src dest link_mode backup_folder
-## Example: linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
-function linknbk() {
+## Usage: libfiles__linknbk src dest link_mode backup_folder
+## Example: libfiles__linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
+function libfiles__linknbk() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r lnkmode="$3"
 	local -r bkfolder="$4"
 	
-	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
-	test -e "$dest" && ! test -L "$dest" && {
-		"$MV" -- "$dest" "$bkfolder" >/dev/null 2>&1 || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
+	run_and_log test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
+	run_and_log test -e "$dest" && ! run_and_log test -L "$dest" && {
+		run_and_log "$MV" -- "$dest" "$bkfolder" || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
 	}
-	test "$("$READLINK" -- "$dest" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	run_and_log test "$(run_and_log_keep_stdout "$READLINK" -- "$dest")" = "$src" && { run_and_log test "$HOST_OS" != "Darwin" || run_and_log test "$(run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$lnkmode" } && { echo "ok"; return }
 	
-	"$LN" -sf -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
-	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dest" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
+	run_and_log "$LN" -sf -- "$src" "$dest" || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ run_and_log test "$HOST_OS" != "Darwin" || run_and_log "$CHMOD" -h -- "$lnkmode" "$dest" } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
 	echo "changed"
 }
