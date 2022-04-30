@@ -13,6 +13,8 @@ case "$HOST_OS" in
 		for dep in $DEPS; do
 			command -v "$dep" >/dev/null 2>&1 || {
 				echo "The following dependencies are required (at least one of them is missing): $DEPS" >&2
+				echo "Possible installation command line:" >&2
+				echo "   apt-get update && apt-get install -y --no-install-recommends zsh ccrypt curl git locales m4" >&2
 				exit 1
 			}
 		done
