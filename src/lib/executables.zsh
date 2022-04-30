@@ -1,20 +1,37 @@
 # Binaries paths (this avoids rogue PATH fucking things up).
-# TODO: Linux paths…
+
 readonly CAT="/bin/cat"
 readonly CHFLAGS="/usr/bin/chflags"
 readonly CHMOD="/bin/chmod"
-readonly CHOWN="/usr/sbin/chown"
 readonly CP="/bin/cp"
 readonly DIFF="/usr/bin/diff"
-readonly GREP="/usr/bin/grep"
 readonly LN="/bin/ln"
 readonly LS="/bin/ls"
 readonly M4="/usr/bin/m4"
 readonly MKDIR="/bin/mkdir"
 readonly MV="/bin/mv"
-readonly READLINK="/usr/bin/readlink"
 readonly RM="/bin/rm"
-readonly SED="/usr/bin/sed"
 readonly STAT="/usr/bin/stat"
 readonly TAIL="/usr/bin/tail"
-readonly TAR="/usr/bin/tar"
+
+
+case "$HOST_OS" in
+	"Darwin")
+		readonly SED="/usr/bin/sed"
+		readonly CHOWN="/usr/sbin/chown"
+		readonly GREP="/usr/bin/grep"
+		readonly READLINK="/usr/bin/readlink"
+		readonly TAR="/usr/bin/tar"
+	;;
+	"Linux")
+		readonly SED="/bin/sed"
+		readonly CHOWN="/bin/chown"
+		readonly GREP="/bin/grep"
+		readonly READLINK="/bin/readlink"
+		readonly TAR="/bin/tar"
+	;;
+	*)
+		print "Unknown host os $HOST_OS; don’t know basic utilities paths. Failing." >&2
+		exit 1
+	;;
+esac

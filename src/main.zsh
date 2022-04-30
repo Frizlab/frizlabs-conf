@@ -41,7 +41,8 @@ RUN_LOG="$(pwd)/runs/$(date '+%d.%m.%Y-%H:%M:%S').log"; readonly RUN_LOG
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
 
-# We need this now (because it defines the MKDIR var).
+# We need executables now (because it defines the MKDIR var), and executables needs facts (the host OS).
+source "$LIB_FOLDER/facts.zsh"
 source "$LIB_FOLDER/executables.zsh"
 
 # Create the runs and cache folder if needed.
@@ -53,7 +54,6 @@ source "$LIB_FOLDER/executables.zsh"
 # Import libs #
 ###############
 
-source "$LIB_FOLDER/facts.zsh"
 source "$LIB_FOLDER/check-deps.zsh"
 source "$LIB_FOLDER/utils.zsh"
 source "$LIB_FOLDER/ccrypt.zsh"
