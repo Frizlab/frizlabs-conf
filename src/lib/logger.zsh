@@ -89,20 +89,7 @@ function log_task_failure() {
 
 function log_task_from_res_list() {
 	local -r res_list_name="$1"
-	
-	local highest_res=
-	for res in ${(P)${res_list_name}}; do
-		case "$highest_res:$res" in
-			:*)             highest_res="$res";;
-			failed:*)       highest_res="failed";;
-			changed:failed) highest_res="failed";;
-			changed:*)      highest_res="changed";;
-			ok:failed)      highest_res="failed";;
-			ok:changed)     highest_res="changed";;
-			*)              highest_res="ok";;
-		esac
-	done
-	log_task_from_res "$highest_res"
+	log_task_from_res "$(highest_res_from_res_list "$res_list_name")"
 }
 
 function log_task_from_res() {

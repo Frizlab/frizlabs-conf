@@ -29,3 +29,41 @@ function catchout() {
 	"$RM" -f -- "$catchout_tmpfile" || true
 	return "$ret"
 }
+
+
+##
+function highest_res_from_res_list() {
+	local -r res_list_name="$1"
+	
+	local highest_res=
+	for res in ${(P)${res_list_name}}; do
+		case "$highest_res:$res" in
+			:*)             highest_res="$res";;
+			failed:*)       highest_res="failed";;
+			changed:failed) highest_res="failed";;
+			changed:*)      highest_res="changed";;
+			ok:failed)      highest_res="failed";;
+			ok:changed)     highest_res="changed";;
+			*)              highest_res="ok";;
+		esac
+	done
+	echo "$highest_res"
+}
+
+
+## Compatibility format: ":compatible_host_os:~forbidden_computer_group~"
+##
+## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and must not be installed at work or home.
+
+##
+function check_host_compatibility() {
+	[[ "$1" =~ ":$HOST_OS:" ]]
+}
+##
+function check_env_compatibility() {
+	[[ ! "$1" =~ "~$COMPUTER_GROUP~" ]]
+}
+##
+function check_full_compatibility() {
+	check_host_compatibility "$1" && check_env_compatibility "$1"
+}
