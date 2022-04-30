@@ -39,26 +39,25 @@ readonly FRZ_HOMEBREW_CASK_OPTS_SYSTEM="\
 '--vst3_plugindir=/Library/Audio/Plug-Ins/VST3' \
 '--screen_saverdir=/Library/Screen Savers'"
 
-function install_homebrew() {
+function libbrew__install_homebrew() {
 	local -a arch_launch
 	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
 	
 	local -r dir="$1"
 	
 	test ! -x "$dir/bin/brew" || { echo "ok"; return }
-	"${arch_launch[@]}" "$SRC_FOLDER/components/bin/files/bash/install-brew.sh" "$dir" >/dev/null 2>&1 || { log_task_failure "cannot install homebrew at path $dir"; echo "failed"; return }
+	run_and_log "${arch_launch[@]}" "$SRC_FOLDER/components/bin/files/bash/install-brew.sh" "$dir" || { log_task_failure "cannot install homebrew at path $dir"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Usage: install_brew_package brew_prefix package_name path_to_check
-function install_brew_package() {
+function libbrew__install_brew_package() {
 	local -a arch_launch
 	if test "$1" = "--force-arch"; then shift; arch_launch=("arch" "-$1"); shift; fi
 	
-	local -r brew_prefix="$1"
-	local -r package_name="$2"
-	local -r path_to_check="$3"
-	shift; shift; shift
+	local -r brew_prefix="$1"; shift
+	local -r package_name="$1"; shift
+	local -r path_to_check="$1"; shift
 	
 	local additional_cask_options
 	case "$brew_prefix" in
@@ -67,11 +66,11 @@ function install_brew_package() {
 	esac
 	readonly additional_cask_options
 	
-	if test "${path_to_check:0:1}" = "/"; then test ! -e              "$path_to_check" || { echo "ok"; return }
-	else                                       test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }; fi
+	if test "${path_to_check:0:1}" = "/"; then run_and_log test ! -e              "$path_to_check" || { echo "ok"; return }
+	else                                       run_and_log test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }; fi
 	HOMEBREW_NO_ANALYTICS=1 \
 	HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 \
 	HOMEBREW_CASK_OPTS="$FRZ_HOMEBREW_CASK_OPTS_BASE $additional_cask_options" \
-	"${arch_launch[@]}" "$brew_prefix/bin/brew" install "$@" -- "$package_name" >/dev/null 2>&1 || { log_task_failure "cannot install using brew in prefix $brew_prefix"; echo "failed"; return }
+	run_and_log "${arch_launch[@]}" "$brew_prefix/bin/brew" install "$@" -- "$package_name" || { log_task_failure "cannot install using brew in prefix $brew_prefix"; echo "failed"; return }
 	echo "changed"
 }
