@@ -93,3 +93,45 @@ function decrypt_and_copy() {
 	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }
+
+## Soft create link at dst, pointing to src.
+## Check src exists first.
+## Fails if dst already exists and is not a link.
+## On macOS, gives the link the given mode.
+## Usage: lnk ~/clt/homebrew-arm64 ~/clt/homebrew 755
+function lnk() {
+	local -r src="$1"
+	local -r dst="$2"
+	local -r lnkmode="$3"
+	
+	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
+	test ! -e "$dst" || test -L "$dst" || { log_task_failure "destination already exists and is not a link"; echo "failed"; return }
+	test "$("$READLINK" -- "$dst" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dst" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	
+	"$LN" -sf -- "$src" "$dst" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dst" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
+	echo "changed"
+}
+
+## Link the given file to the given destination, backuping the destination if it already existed.
+## The backup folder must already exist.
+## link_mode is mostly useless (ignored on most fs) and is fully ignored on Linux
+## as it is not possible to change the perm of a link w/ chmod on it (says the man).
+## Usage: linknbk src dest link_mode backup_folder
+## Example: linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
+function linknbk() {
+	local -r src="$1"
+	local -r dest="$2"
+	local -r lnkmode="$3"
+	local -r bkfolder="$4"
+	
+	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
+	test -e "$dest" && ! test -L "$dest" && {
+		"$MV" -- "$dest" "$bkfolder" >/dev/null 2>&1 || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
+	}
+	test "$("$READLINK" -- "$dest" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	
+	"$LN" -sf -- "$src" "$dest" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dest" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
+	echo "changed"
+}
