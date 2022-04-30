@@ -99,17 +99,17 @@ function libfiles__decrypt_and_copy() {
 ## Fails if dst already exists and is not a link.
 ## On macOS, gives the link the given mode.
 ## Usage: lnk ~/clt/homebrew-arm64 ~/clt/homebrew 755
-function lnk() {
+function libfiles__lnk() {
 	local -r src="$1"
 	local -r dst="$2"
 	local -r lnkmode="$3"
 	
-	test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
-	test ! -e "$dst" || test -L "$dst" || { log_task_failure "destination already exists and is not a link"; echo "failed"; return }
-	test "$("$READLINK" -- "$dst" 2>/dev/null)" = "$src" && { test "$HOST_OS" != "Darwin" || test "$("$STAT" -f %Lp -- "$dst" 2>/dev/null)" = "$lnkmode" } && { echo "ok"; return }
+	run_and_log test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
+	run_and_log test ! -e "$dst" || run_and_log test -L "$dst" || { log_task_failure "destination already exists and is not a link"; echo "failed"; return }
+	run_and_log test "$(run_and_log_keep_stdout "$READLINK" -- "$dst")" = "$src" && { test "$HOST_OS" != "Darwin" || run_and_log test "$(run_and_log_keep_stdout "$STAT" -f %Lp -- "$dst")" = "$lnkmode" } && { echo "ok"; return }
 	
-	"$LN" -sf -- "$src" "$dst" >/dev/null 2>&1 || { log_task_failure "$LN failed"; echo "failed"; return }
-	{ test "$HOST_OS" != "Darwin" || "$CHMOD" -h -- "$lnkmode" "$dst" >/dev/null 2>&1 } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
+	run_and_log "$LN" -sf -- "$src" "$dst" || { log_task_failure "$LN failed"; echo "failed"; return }
+	{ test "$HOST_OS" != "Darwin" || run_and_log "$CHMOD" -h -- "$lnkmode" "$dst" } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
 	echo "changed"
 }
 
