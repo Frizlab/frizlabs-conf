@@ -63,7 +63,7 @@ source "$LIB_FOLDER/logger.zsh"
 source "$LIB_FOLDER/files-lib.zsh"
 source "$LIB_FOLDER/files-tasks.zsh"
 source "$LIB_FOLDER/templates.zsh"
-source "$LIB_FOLDER/defaults.zsh"
+source "$LIB_FOLDER/defaults-lib.zsh"
 source "$LIB_FOLDER/homebrew.zsh"
 
 source "$SRC_FOLDER/vars.zsh"
