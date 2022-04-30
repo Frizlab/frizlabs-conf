@@ -31,7 +31,7 @@ function doc() {
 	log_task_from_res_list RES_LIST
 }
 
-function delete_doc() {
+function task__delete_doc() {
 	local -r author="$1"
 	local -r doc_name="$2"
 	
@@ -42,7 +42,5 @@ function delete_doc() {
 	readonly dest_share_dir
 	local -r deleted_path="$dest_share_dir/$doc_name"
 	
-	start_task "delete doc ${deleted_path/#$HOME/\~}"
-	catchout RES   delete "$deleted_path"
-	log_task_from_res "$RES"
+	task__delete_file "$deleted_path"
 }

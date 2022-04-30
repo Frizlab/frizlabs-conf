@@ -16,7 +16,7 @@ function libfiles__folder() {
 ## Make sure the given file or folder has the correct ACLs
 ## Usage: acl file_or_folder acl
 ## Example: acl /var/log "group:everyone deny delete"
-function libfiles__acl() {
+function acl() {
 	local -r file_name="$1" acl="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
@@ -29,7 +29,7 @@ function libfiles__acl() {
 ## Make sure the given file or folder has at least the given flag
 ## Usage: flags file_or_folder flag
 ## Example: flags /var/log "hidden"
-function libfiles__flags() {
+function flags() {
 	local -r file_name="$1" flag="$2"
 	
 	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
@@ -39,16 +39,16 @@ function libfiles__flags() {
 	echo "changed"
 }
 
-## Make sure the given file does not exist. Fails if the given path is a folder
+## Make sure the given file does not exist. Fails if the given path is a folder.
 ## Usage: delete file
 ## Example: delete "$HOME/.obsolete"
-function libfiles__delete() {
+function libfiles__delete_file() {
 	local -r file_name="$1"
 	
-	test -e "$file_name" || { echo "ok"; return }
-	test ! -d "$file_name" || { log_task_failure "not deleting folder $file_name"; echo "failed"; return }
+	run_and_log test -e "$file_name" || { echo "ok"; return }
+	run_and_log test ! -d "$file_name" || { log_task_failure "not deleting folder $file_name"; echo "failed"; return }
 	
-	"$RM" -f -- "$file_name" >/dev/null 2>&1 || { log_task_failure "$RM failed for $file_name"; echo "failed"; return }
+	run_and_log "$RM" -f -- "$file_name" || { log_task_failure "$RM failed for $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -56,7 +56,7 @@ function libfiles__delete() {
 ## Usage: copy src dest mode
 ## In practice the linknbk function should be preferred over a copy.
 ## Example: copy ./_.bashrc.scp ~/.bashrc 600
-function libfiles__copy() {
+function copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"
@@ -74,7 +74,7 @@ function libfiles__copy() {
 ##
 ## Usage: decrypt_and_copy src dest mode
 ## Example: decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
-function libfiles__decrypt_and_copy() {
+function decrypt_and_copy() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"

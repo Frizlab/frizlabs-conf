@@ -61,7 +61,7 @@ function encrypted_bin() {
 }
 
 ## Usage: launchd_bin compatibility relative_path_to_script
-## Compatibility format: Same as for the bin function, but only computer group excludes are considered.
+## Compatibility format: Same as for the bin function, but only computer group excludes are considered (this is only useful on Darwin AFAIK).
 function launchd_bin() {
 	local -r compatibility="$1"
 	local -r local_relative_script_path="$2"
@@ -87,7 +87,7 @@ function launchd_bin() {
 	log_task_from_res_list RES_LIST
 }
 
-function delete_bin() {
+function task__delete_bin() {
 	local -r author="$1"
 	local -r script_name="$2"
 	
@@ -97,9 +97,7 @@ function delete_bin() {
 	else                            dest_bin_dir="$THIRD_PARTY_BIN_DIR"; fi
 	readonly deleted_path="$dest_bin_dir/$script_name"
 	
-	start_task "delete bin ${deleted_path/#$HOME/\~}"
-	catchout RES   delete "$deleted_path"
-	log_task_from_res "$RES"
+	task__delete_file "$deleted_path"
 }
 
 function delete_launchd_bin() {

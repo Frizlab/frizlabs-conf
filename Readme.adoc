@@ -20,7 +20,7 @@ There is one folder per component I install.
 
 === Function Naming
 
-- `lib<#component#>__*`: A “lib” function (e.g. `defaults_set_bool`).
+- `lib<#component#>__*`: A “lib” function (e.g. `libdefaults__set_bool`).
 These are functions that only do one simple “atomic” thing (e.g. set a user default). +
 The function **must** check whether the action is needed first. +
 If it is not, the function **must** output "ok" to stdout and do nothing. +
@@ -30,7 +30,6 @@ In case of an error, the function **must** log the failure using `log_task_failu
 Most of the time these kind of function are found in the `./src/lib` folder, but sometimes some can be put in a component’s `lib` folder.
 
 - `task__*`: A function doing an actual task.
-This is rarely used.
 
 == TODOs
 
