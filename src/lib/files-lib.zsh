@@ -1,47 +1,47 @@
 # Files and folders-related utilities
 
 ## Make sure the given folder exists with given permission
-## Usage: folder folder_name permission
-## Example: folder /var/log 755
+## Usage: libfiles__folder folder_name permission
+## Example: libfiles__folder /var/log 755
 function libfiles__folder() {
 	local -r folder_name="$1" permission="$2"
 	# %Lp format is for Darwin, %a is for Linux.
 	# Linux version must be first because -f option is known by Linux stat but does not mean the same thing.
-	test -d "$folder_name" && test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$folder_name" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$folder_name")" = "$permission" && { echo "ok"; return }
+	run_and_log test -d "$folder_name" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$folder_name" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$folder_name")" = "$permission" && { echo "ok"; return }
 	run_and_log "$MKDIR" -p --            "$folder_name" || { log_task_failure "cannot create folder at path $folder_name";             echo "failed"; return }
 	run_and_log "$CHMOD" -- "$permission" "$folder_name" || { log_task_failure "cannot set permission for folder at path $folder_name"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Make sure the given file or folder has the correct ACLs
-## Usage: acl file_or_folder acl
-## Example: acl /var/log "group:everyone deny delete"
-function acl() {
+## Usage: libfiles__acl file_or_folder acl
+## Example: libfiles__acl /var/log "group:everyone deny delete"
+function libfiles__acl() {
 	local -r file_name="$1" acl="$2"
 	
-	test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
-	test "$("$LS" -led -- "$file_name" 2>/dev/null | "$TAIL" -n+2 | "$SED" -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
+	run_and_log test -e "$file_name" || { log_task_failure "cannot set ACL for file at path $file_name: file not found"; echo "failed"; return }
+	run_and_log test "$(run_and_log_keep_stdout "$LS" -led -- "$file_name" | run_and_log_keep_stdout "$TAIL" -n+2 | run_and_log_keep_stdout "$SED" -E -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')" = "0: $acl" && { echo "ok"; return }
 	
-	"$CHMOD" -E "$file_name" <<<"$acl" >/dev/null 2>&1 || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
+	run_and_log "$CHMOD" -E "$file_name" <<<"$acl" || { log_task_failure "cannot set ACL for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Make sure the given file or folder has at least the given flag
-## Usage: flags file_or_folder flag
-## Example: flags /var/log "hidden"
-function flags() {
+## Usage: libfiles__flags file_or_folder flag
+## Example: libfiles__flags /var/log "hidden"
+function libfiles__flags() {
 	local -r file_name="$1" flag="$2"
 	
-	test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
-	"$GREP" -q -- "$flag" <<<"$("$STAT" -f %Sf -- "$file_name" 2>/dev/null)" && { echo "ok"; return }
+	run_and_log test -e "$file_name" || { log_task_failure "cannot set flag for file at path $file_name: file not found"; echo "failed"; return }
+	run_and_log "$GREP" -q -- "$flag" <<<"$(run_and_log_keep_stdout "$STAT" -f %Sf -- "$file_name")" && { echo "ok"; return }
 	
-	"$CHFLAGS" -- "$flag" "$file_name" >/dev/null 2>&1 || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
+	run_and_log "$CHFLAGS" -- "$flag" "$file_name" || { log_task_failure "cannot set flag for file at path $file_name"; echo "failed"; return }
 	echo "changed"
 }
 
 ## Make sure the given file does not exist. Fails if the given path is a folder.
-## Usage: delete file
-## Example: delete "$HOME/.obsolete"
+## Usage: libfiles__delete_file file
+## Example: libfiles__delete_file "$HOME/.obsolete"
 function libfiles__delete_file() {
 	local -r file_name="$1"
 	
