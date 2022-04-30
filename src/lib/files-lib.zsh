@@ -135,3 +135,18 @@ function libfiles__linknbk() {
 	{ run_and_log test "$HOST_OS" != "Darwin" || run_and_log "$CHMOD" -h -- "$lnkmode" "$dest" } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
 	echo "changed"
 }
+
+function libfiles__compilec() {
+	local -r src="$1"
+	local -r dest="$2"
+	local -r cflags="$3"
+	
+	# First we check the destination file is not a folder
+	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	
+	local -r makefile="$dest: $src\n\tcc $cflags \$< -o \$@"
+	
+	print "$makefile" | run_and_log "$MAKE" -f - -q && { echo "ok"; return }
+	print "$makefile" | run_and_log "$MAKE" -f -    || { log_task_failure "cannot make the destination"; echo "failed"; return }
+	echo "changed"
+}
