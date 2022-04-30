@@ -11,7 +11,7 @@
 
 # MUST be either /dev/null or /dev/tty
 VERBOSE_OUTPUT="/dev/null"
-if [ $# -gt 0 -a "$1" = "-v" ]; then
+if [ "${1:-}" = "-v" ]; then
 	VERBOSE_OUTPUT="/dev/tty"
 	shift
 fi
