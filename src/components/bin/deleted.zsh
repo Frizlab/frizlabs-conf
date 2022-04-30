@@ -33,39 +33,39 @@ task__delete_bin "frizlab" "my_split"
 ######### Deleted #########
 
 ### Local Homebrew Install ###
-# Reason: Replaced by a script to install homebrew unconditionally
+# Reason: Replaced by a script to install homebrew unconditionally.
 task__delete_bin "frizlab" "local-brew-install"
 
 ### Xcode Project Version Manager ###
 # Original author: Joachim Bondo
-# Reason: Far better solutions exist on the Internet
+# Reason: Far better solutions exist on the Internet.
 task__delete_bin "frizlab" "xcode-project-version-manager"
 
 ### Find “Unreferenced” Files in an Xcode Project ###
-# Reason: This tool can now be installed via Homebrew
+# Reason: This tool can now be installed via Homebrew.
 task__delete_bin "frizlab" "find-unreferenced-xcode-files"
 
 ### Merge Xcode strings Files ###
 # Original author was João Moreno but I rewrote pretty much everything.
-# Reason: Obsoleted by LocMapper
+# Reason: Obsoleted by LocMapper.
 task__delete_bin "frizlab" "merge-strings"
 
 ### Markdown Render Opener ###
-# Reason: Not useful anymore; might re-create later if needed
+# Reason: Not useful anymore; might re-create later if needed.
 task__delete_bin "frizlab" "markdown"
 
 ### Code Beautifier for C++ ###
 # Version: 1.2
-# Reason: 32-bits only; upstream could not be found
+# Reason: 32-bits only; upstream could not be found.
 task__delete_bin "lingxiaofeng" "codebt"
 
 ### mo3 encoder and decoder ###
-# Reason: 32-bits only; upstream could not be found; can most likely be replaced by ffmpeg
+# Reason: 32-bits only; upstream could not be found; can most likely be replaced by ffmpeg.
 task__delete_bin "<unknown>" "mo3enc"
 task__delete_bin "<unknown>" "unmo3"
 
 ### ts to mov ###
-# Reason: Converts to mov files that only QuickTime Player (32-bits) can read IIRC
+# Reason: Converts to mov files that only QuickTime Player (32-bits) can read IIRC.
 task__delete_bin "<unknown>" "ts2mov"
 
 ### QTCoffee ###
