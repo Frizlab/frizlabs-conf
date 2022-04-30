@@ -15,7 +15,7 @@ function install_user_launch_agent() {
 	RES=; RES_TPLT=; RES_LIST=()
 	start_task "install user agent $label"
 	{ res_check "$RES"      &&   catchout RES       folder "$AGENT_FOLDER_PATH" "755"                          && RES_LIST+=("$RES")      }
-	{ res_check "$RES"      &&   catchout RES_TPLT  detemplate "$local_template_path" "$agent_dest_path" "644" && RES_LIST+=("$RES_TPLT") }
+	{ res_check "$RES"      &&   catchout RES_TPLT  libtemplates__detemplate "$local_template_path" "$agent_dest_path" "644" && RES_LIST+=("$RES_TPLT") }
 	{ res_check "$RES_TPLT" &&   catchout RES       reload_user_launchd "$agent_dest_path" "$RES_TPLT"         && RES_LIST+=("$RES")      }
 	log_task_from_res_list RES_LIST
 }

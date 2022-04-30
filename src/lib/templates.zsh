@@ -3,7 +3,7 @@
 ##
 ## Usage: detemplate src dest mode
 ## Example: detemplate ./_.bashrc ~/.bashrc 600
-function detemplate() {
+function libtemplates__detemplate() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r mode="$3"
@@ -12,7 +12,7 @@ function detemplate() {
 	test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
 	# Then we detemplate the source file at a temporary location
-	local tmpl_tmpfile; tmpl_tmpfile="$(mktemp)"; readonly tmpl_tmpfile
+	local tmpl_tmpfile; tmpl_tmpfile="$(run_and_log_keep_stdout mktemp)"; readonly tmpl_tmpfile
 	local m4_args=()
 	local OLD_IFS="$IFS"; local IFS=$'\n'
 	for varvalue in $(set); do
@@ -22,13 +22,13 @@ function detemplate() {
 		m4_args+=("-D___M4___${var}___M4___=$value")
 	done
 	IFS="$OLD_IFS"
-	eval "$M4" --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" 2>/dev/null || { log_task_failure "cannot run $M4"; echo "failed"; return }
-	"$GREP" -E '^[^#]' -- "$tmpl_tmpfile" | "$GREP" -qE '___M4___[A-Za-z0-9_]*___M4___' && { log_task_failure "it seems there are undefined variables in the file"; echo "failed"; return }
+	eval run_and_log_keep_stdout "$M4" --prefix-builtins --fatal-warnings "${m4_args[@]}" -- "${(q)src}" ">${(q)tmpl_tmpfile}" || { log_task_failure "cannot run $M4"; echo "failed"; return }
+	run_and_log_keep_stdout "$GREP" -E '^[^#]' -- "$tmpl_tmpfile" | run_and_log "$GREP" -qE '___M4___[A-Za-z0-9_]*___M4___' && { log_task_failure "it seems there are undefined variables in the file"; echo "failed"; return }
 	
 	# Next we move the temporary file if needed at the destination
-	"$DIFF" -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { "$RM" -f -- "$tmpl_tmpfile" >/dev/null 2>&1; echo "ok"; return }
+	run_and_log "$DIFF" -- "$tmpl_tmpfile" "$dest" && test "$("$STAT" -c %a -- "$dest" 2>/dev/null || "$STAT" -f %Lp -- "$dest" 2>/dev/null)" = "$mode" && { "$RM" -f -- "$tmpl_tmpfile" >/dev/null 2>&1; echo "ok"; return }
 	
-	"$MV" -f -- "$tmpl_tmpfile" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot move detemplated file to expected location"; echo "failed"; return }
-	"$CHMOD" -- "$mode" "$dest" >/dev/null 2>&1 || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	run_and_log "$MV" -f -- "$tmpl_tmpfile" "$dest" || { log_task_failure "cannot move detemplated file to expected location"; echo "failed"; return }
+	run_and_log "$CHMOD" -- "$mode" "$dest" || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
 	echo "changed"
 }

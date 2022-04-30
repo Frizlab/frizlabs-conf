@@ -31,7 +31,7 @@ if test -n "$tar_url"; then
 	
 	start_task "add gcloud to PATH"
 	# We purposefully _not_ use path.zsh.inc (or path.bash.inc) because we want gougle’s path to be *last*.
-	catchout RES  detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
+	catchout RES  libtemplates__detemplate "$(pwd)/templates/profile.sh.m4" "$HOME/.profile.d/590-gougle-cloud-sdk.sh" "600"
 	log_task_from_res "$RES"
 	
 	start_task "install zsh completion"
