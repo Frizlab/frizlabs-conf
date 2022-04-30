@@ -25,7 +25,7 @@ if test -n "$tar_url"; then
 	{ res_check "$RES" &&   temp="$(run_and_log_keep_stdout mktemp)"   || { log_task_failure "cannot create temporary file" && RES_LIST+=("failed") } }
 	{ res_check "$RES" &&   catchout RES  libfiles__folder "$GCLOUD_DIR" "755"                                              && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   run_and_log test -x "$GCLOUD_DIR/bin/gcloud"                                                    && RES_LIST+=("ok") } || {
-		{ res_check "$RES" &&   run_and_log_keep_stdout curl -L "$tar_url" | run_and_log "$TAR" xz --strip 1 -C "$GCLOUD_DIR" && RES_LIST+=("ok") || { log_task_failure "cannot download or extract gcloud" && RES_LIST+=("failed") } }
+		{ res_check "$RES" &&   curl -sL "$tar_url" | run_and_log "$TAR" xz --strip 1 -C "$GCLOUD_DIR" && RES_LIST+=("ok") || { log_task_failure "cannot download or extract gcloud" && RES_LIST+=("failed") } }
 	}
 	log_task_from_res_list RES_LIST
 	
