@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# either one should suffice to enter POSIX mode,
-# but... there are no arrays in POSIX mode, and
-# this script runs fine !!
+# Either one should suffice to enter POSIX mode, but…
+#  there are no arrays in POSIX mode, and this script runs fine!
 export POSIXLY_CORRECT
 set -o posix
 
 
-# imprime un tableau (y compris associatif)
+# Imprime un tableau (y compris associatif).
 imprime() {
 	n=$((${#t[@]}-1))
 	echo
@@ -21,13 +20,13 @@ imprime() {
 }
 
 
-# ajoute une case à un tableau
+# Ajoute une case à un tableau.
 append () {
 	t[${#t[@]}]="$1"
 }
 
 
-# quelques essais
+# Quelques essais.
 declare -a t=(a b ccc ddddd eeeee ffffff)
 imprime
 
@@ -39,18 +38,18 @@ imprime
 
 unset t[4]
 imprime
-# surprise: la case d'indice 4 n'existe plus (t[4] retourne '')
-# et on a bien un élément de moins dans le tableau...
-# mais il faut regarder ${!t[@]} pour savoir le(s)quel(s) manque(nt) !
+# Surprise : la case d'indice 4 n'existe plus (t[4] retourne '')
+#  et on a bien un élément de moins dans le tableau…
+# Mais il faut regarder ${!t[@]} pour savoir le(s)quel(s) manque(nt) !
 
 t[12]="bien plus loin !"
 imprime
 
-# variante pour l'initialisation
+# Variante pour l'initialisation.
 t=([17]=seventeen [24]=twenty-four)
 imprime
 
-# tableaux associatifs
+# Tableaux associatifs.
 if [ $BASH_VERSINFO -ge 4 ] ; then
 	unset t
 	declare -A t
