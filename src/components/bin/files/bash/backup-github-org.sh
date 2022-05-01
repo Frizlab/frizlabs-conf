@@ -19,4 +19,3 @@ n=0; while true; do
 		fi
 	done
 done
-
