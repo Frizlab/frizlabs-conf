@@ -19,22 +19,22 @@ if [ "$caffeinate" -ne 0 ]; then
 fi
 sleep $(echo "$t * 60 * 60" | bc)
 
-start_itunes_vol=5
-end_itunes_vol=85
+start_music_vol=5
+end_music_vol=85
 vol_delay=2
 vol_inc=1
 
 echo "Starting alarm-clock"
-osascript -e 'tell application "iTunes" to activate'
-osascript -e 'tell application "iTunes" to set sound volume to '$start_itunes_vol
-osascript -e 'tell application "System Events" to set volume 5'; # Max is 8, min is 0
-osascript -e 'tell application "iTunes" to play user playlist "Alarm Clock"'
+osascript -e 'tell application "Music" to activate'
+osascript -e 'tell application "Music" to set sound volume to '$start_music_vol
+osascript -e 'tell application "System Events" to set volume 3'; # Max is 8, min is 0
+osascript -e 'tell application "Music" to play user playlist "Alarm Clock"'
 
-cur_vol=$start_itunes_vol
-while [ $cur_vol -lt $end_itunes_vol ]; do
+cur_vol=$start_music_vol
+while [ $cur_vol -lt $end_music_vol ]; do
 	sleep $vol_delay
 	cur_vol=$((cur_vol + vol_inc))
-	osascript -e 'tell application "iTunes" to set sound volume to '$cur_vol
+	osascript -e 'tell application "Music" to set sound volume to '$cur_vol
 done
 
 if [ "$caffeinate" -ne 0 ]; then
