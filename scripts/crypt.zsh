@@ -9,6 +9,7 @@ export PATH
 path+="$(pwd)/.cache/bin"
 
 readonly CACHE_FOLDER="$(pwd)/.cache"
+source "./src/lib/facts.zsh"
 source "./src/lib/executables.zsh"
 source "./src/lib/ccrypt.zsh"
 
