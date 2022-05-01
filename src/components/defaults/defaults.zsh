@@ -81,7 +81,7 @@ catchout RES  libdefaults__set_int NSGlobalDomain AppleKeyboardUIMode 2
 log_task_from_res "$RES"
 
 start_task "ctrl-1 to go to first space"
-catchout RES  run_and_log ./helpers/activate-global-symbolic-hot-key.swift 118 || log_task_failure "error while running activate-global-symbolic-hot-key (do you have Xcode installed?)"
+catchout RES  run_and_log_keep_stdout ./helpers/activate-global-symbolic-hot-key.swift 118 || log_task_failure "error while running activate-global-symbolic-hot-key (do you have Xcode installed?)"
 log_task_from_res "$RES"
 
 start_task "set top-left corner action"
