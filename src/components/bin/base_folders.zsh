@@ -8,7 +8,3 @@ task__folder "$THIRD_PARTY_SBIN_DIR" "755"
 
 task__folder "$FIRST_PARTY_SHARE_DIR" "755"
 task__folder "$THIRD_PARTY_SHARE_DIR" "755"
-
-if [ "$HOST_OS" = "Darwin" ]; then
-	task__folder "$LAUNCHD_CLT_BIN_DIR" "755"
-fi
