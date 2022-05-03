@@ -4,5 +4,5 @@ if ! command -v defaults >/dev/null 2>&1; then
 	start_task "defaults is not available (we’re probably not on macOS); skipping this component…"
 	log_task_from_res "ok"
 else
-	source "./defaults.zsh"
+	source "./tasks/set-defaults.zsh"
 fi

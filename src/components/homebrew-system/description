@@ -1,1 +1,0 @@
-(sudo) Installs a system Homebrew. On macOS, installation is in /opt/homebrew for ARM Homebrew, and in /usr/local for x86 one. On Linux, installation is in /home/linuxbrew/.linuxbrew.

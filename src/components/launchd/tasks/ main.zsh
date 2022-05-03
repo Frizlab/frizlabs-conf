@@ -4,5 +4,5 @@ if ! command -v launchctl >/dev/null 2>&1; then
 	start_task "launchctl is not available (we’re probably not on macOS); skipping this component…"
 	log_task_from_res "ok"
 else
-	source "./launchd.zsh"
+	source "./tasks/install-daemons.zsh"
 fi

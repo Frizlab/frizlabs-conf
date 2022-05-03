@@ -66,7 +66,8 @@ source "$LIB_FOLDER/templates-lib.zsh"
 source "$LIB_FOLDER/defaults-lib.zsh"
 source "$LIB_FOLDER/homebrew-lib.zsh"
 
-source "$SRC_FOLDER/vars.zsh"
+# Also imports the env-specific vars.
+source "$SRC_FOLDER/vars/ main.zsh"
 
 
 ##################
@@ -85,7 +86,7 @@ for component in $components_to_run; do
 	test $max_component_width -lt $#component && max_component_width=$#component
 	log_component_start "$component"
 	pushd "$COMPONENTS_FOLDER/$component"
-	source "./main.zsh"
+	source "./tasks/ main.zsh"
 	popd
 	log_component_end
 done

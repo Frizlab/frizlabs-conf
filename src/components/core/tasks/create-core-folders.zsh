@@ -1,4 +1,4 @@
-# Creates the missing folders w/ correct perms/acls/flags
+# Creates the missing core folders w/ correct perms/acls/flags
 
 expected_acl="group:everyone deny delete"
 
@@ -22,3 +22,16 @@ if test "$HOST_OS" = "Darwin"; then
 	{ res_check "$RES" &&   catchout RES libfiles__acl    "$APP_DIR" "$expected_acl"   && RES_LIST+=("$RES") }
 	log_task_from_res_list RES_LIST
 fi
+
+# CLT subfolders
+
+task__folder "$CLT_LOGS_DIR" "755"
+
+task__folder "$FIRST_PARTY_BIN_DIR" "755"
+task__folder "$THIRD_PARTY_BIN_DIR" "755"
+
+task__folder "$FIRST_PARTY_SBIN_DIR" "755"
+task__folder "$THIRD_PARTY_SBIN_DIR" "755"
+
+task__folder "$FIRST_PARTY_SHARE_DIR" "755"
+task__folder "$THIRD_PARTY_SHARE_DIR" "755"

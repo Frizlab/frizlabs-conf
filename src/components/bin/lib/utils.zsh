@@ -1,5 +1,5 @@
-## Usage: install_dest author 1st_party_folder 3rd_party_folder subfolder
-function install_dest() {
+## Usage: bin__install_dest author 1st_party_folder 3rd_party_folder subfolder
+function bin__install_dest() {
 	local -r author="$1"; shift
 	local -r dest_1st_party="$1"; shift
 	local -r dest_3rd_party="$1"; shift
@@ -7,8 +7,8 @@ function install_dest() {
 	
 	echo "$(get_author_val "$author" "$dest_1st_party" "$dest_3rd_party")${dest_subfolder:+/}$dest_subfolder"
 }
-## Usage: install_name destname_method local_path
-function install_name() {
+## Usage: bin__install_name destname_method local_path
+function bin__install_name() {
 	local -r destname_method="$1"; shift
 	local -r local_path="$1"; shift
 	
@@ -25,7 +25,7 @@ function install_name() {
 
 ## Usage: task__install author compatibility dest_1st_party dest_3rd_party dest_subfolder relative_path_to_install mode install_method destname_method [-cflags cflags]
 ## Note: cflags is ignored if install_method is not compile-c
-function task__install() {
+function bin_task__install() {
 	local -r author="$1"; shift
 	local -r compatibility="$1"; shift
 	local -r dest_1st_party="$1"; shift
@@ -53,10 +53,10 @@ function task__install() {
 	
 	local local_path; local_path="$(pwd)/files/$local_relative_path"; readonly local_path
 	
-	local -r dest_folder="$(install_dest "$author" "$dest_1st_party" "$dest_3rd_party" "$dest_subfolder" "$local_relative_path")"
+	local -r dest_folder="$(bin__install_dest "$author" "$dest_1st_party" "$dest_3rd_party" "$dest_subfolder" "$local_relative_path")"
 	local -r backup_dir="$dest_folder/$BACKUP_DIR_BASENAME"
 	
-	local -r dest_name="$(install_name "$destname_method" "$local_relative_path")"
+	local -r dest_name="$(bin__install_name "$destname_method" "$local_relative_path")"
 	local -r dest_path="$dest_folder/$dest_name"
 	
 	if check_full_compatibility "$compatibility"; then

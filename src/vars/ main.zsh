@@ -3,6 +3,8 @@ readonly APP_DIR="$HOME/Applications"
 
 # The CLT (Command-Line Tools) directory.
 readonly CLT_DIR="$HOME/clt"
+# Logs from some CLT tools (e.g. launchd output).
+readonly CLT_LOGS_DIR="$CLT_DIR/logs"
 
 # The user’s CLT directory.
 # All binaries/scripts whose author is the same as the current user will go there.
@@ -137,4 +139,4 @@ typeset -A MAIN_USER_HOMEBREW_CASKS=(
 
 
 # Sourcing env specific vars file
-source "$SRC_FOLDER/vars-$COMPUTER_GROUP.zsh"
+source "$SRC_FOLDER/vars/vars-$COMPUTER_GROUP.zsh"

@@ -1,4 +1,4 @@
-# Generate locale for UTF-8 if needed
+# Generate locale for UTF-8 if needed.
 CURRENT_TASK_NAME="utf8-locale"
 
 case "$HOST_OS" in

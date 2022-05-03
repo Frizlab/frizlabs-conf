@@ -4,7 +4,7 @@
 
 ## Usage: install_user_launch_agent label
 ## label should be of the reverse DNS form (e.g. me.frizlab.the-best-agent)
-function task__install_user_launch_agent() {
+function launchd_task__install_user_launch_agent() {
 	local -r label="$1"
 	
 	local -r AGENT_FOLDER_PATH="$HOME/Library/LaunchAgents"
@@ -14,16 +14,16 @@ function task__install_user_launch_agent() {
 	
 	RES=; RES_TPLT=; RES_LIST=()
 	start_task "install user agent $label"
-	{ res_check "$RES"      &&   catchout RES       libfiles__folder "$AGENT_FOLDER_PATH" "755"                          && RES_LIST+=("$RES")      }
+	{ res_check "$RES"      &&   catchout RES       libfiles__folder "$AGENT_FOLDER_PATH" "755"                              && RES_LIST+=("$RES")      }
 	{ res_check "$RES"      &&   catchout RES_TPLT  libtemplates__detemplate "$local_template_path" "$agent_dest_path" "644" && RES_LIST+=("$RES_TPLT") }
-	{ res_check "$RES_TPLT" &&   catchout RES       reload_user_launchd "$agent_dest_path" "$RES_TPLT"         && RES_LIST+=("$RES")      }
+	{ res_check "$RES_TPLT" &&   catchout RES       launchd__reload_user_launchd "$agent_dest_path" "$RES_TPLT"              && RES_LIST+=("$RES")      }
 	log_task_from_res_list RES_LIST
 }
 
 ## NOT intended to be used directly
-## Usage: reload_user_launchd label plist_path plist_install_res
+## Usage: launchd_reload_user_launchd label plist_path plist_install_res
 ## label should be of the reverse DNS form (e.g. me.frizlab.the-best-agent)
-function reload_user_launchd() {
+function launchd__reload_user_launchd() {
 	local -r plist_path="$1"
 	local -r plist_install_res="$2"
 	
