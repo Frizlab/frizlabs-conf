@@ -54,7 +54,7 @@ function bin_task__install() {
 	local local_path; local_path="$(pwd)/files/$local_relative_path"; readonly local_path
 	
 	local -r dest_folder="$(bin__install_dest "$author" "$dest_1st_party" "$dest_3rd_party" "$dest_subfolder" "$local_relative_path")"
-	local -r backup_dir="$dest_folder/$BACKUP_DIR_BASENAME"
+	local -r backup_dir="$dest_folder/$BIN__BACKUP_DIR_BASENAME"
 	
 	local -r dest_name="$(bin__install_name "$destname_method" "$local_relative_path")"
 	local -r dest_path="$dest_folder/$dest_name"
@@ -64,7 +64,7 @@ function bin_task__install() {
 			link)
 				start_task "install (link) ${dest_path/#$HOME/\~} (from $local_relative_path)"
 				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                                && RES_LIST+=("$RES") }
-				{ res_check "$RES" &&   catchout RES  libfiles__folder "$backup_dir"   "$BIN_BACKUP_DIR_MODE"              && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$backup_dir"   "$BIN__BACKUP_DIR_MODE"             && RES_LIST+=("$RES") }
 				{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$local_path" "$dest_path" "$mode" "$backup_dir"   && RES_LIST+=("$RES") }
 				log_task_from_res_list RES_LIST
 			;;
