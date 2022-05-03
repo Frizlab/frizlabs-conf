@@ -2,13 +2,20 @@
 set -eu
 
 
-# Let’s the user choose "Safari Technology Preview" instead of Safari
+# Tests were done on 2022-05-03
+# This script is compatible with:
+#   - Safari
+#   - Safari Technology Preview
+#   - Orion
+#   - Brave Browser
+# It is _not_ compatible with:
+#   - DuckDuckGo
+#   - Firefox
 readonly BROWSER="${1:-Safari}"
 
-# Call AppleScript
-# osascript apparently logs to stderr, so we redirect stderr to stdout.
-# If we assume osascript properly quit w/ a non-0 error code on error,
-# we should save osascript’s output, then check $? and finally output the saved output to the proper fd… (TODO)
+# Call AppleScript.
+# osascript apparently logs to stderr, so we redirect stderr to stdout and
+#  prefix stdout logs w/ “stdout: ” and stderr logs w/ “stderr: ”.
 osascript -e '
 -- Get the list of running processes
 tell application "System Events"
@@ -29,15 +36,19 @@ if (listOfRunningProcesses contains "'"$BROWSER"'") then
 			set lr to (item 3 of b)
 			-- The distance in pixels from the top of the screen to the bottom of the window.
 			set tb to (item 4 of b)
-			log "windowid - bounds: " & (index of theWindow as string) & " -" & ¬
+			log "stdout: windowid - bounds: " & (index of theWindow as string) & " -" & ¬
 				" ll=" & (ll as string) & ¬
 				",tt=" & (tt as string) & ¬
 				",lr=" & (lr as string) & ¬
 				",tb=" & (tb as string)
 			
-			repeat with theTab in tab of theWindow
-				log "windowid - url: " & (index of theWindow as string) & " - " & (URL of theTab as string)
-			end repeat
+			try
+				repeat with theTab in tab of theWindow
+					log "stdout: windowid - url: " & (index of theWindow as string) & " - " & (URL of theTab as string)
+				end repeat
+			on error errMsg
+				log "stderr: error while iterating tab of window named " & (name of theWindow as string) & ": " & errMsg
+			end try
 		end repeat
 	end tell
 end if
