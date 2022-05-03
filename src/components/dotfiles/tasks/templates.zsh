@@ -1,5 +1,5 @@
 # Detemplatize the templates and put them at the correct location.
-for template in "${DOTFILE_TEMPLATES[@]}"; do
+for template in "${DOTFILES__TEMPLATES[@]}"; do
 	dest_file="$HOME/$template"
 	repo_file="$(pwd)/templates/_$template.m4"
 	start_task "template ${dest_file/#$HOME/\~}"

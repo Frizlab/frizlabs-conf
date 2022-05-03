@@ -1,18 +1,19 @@
 # The Applications directory.
-readonly HOMEBREW_GITHUB_TOKEN_ENCRYPTED='
+readonly DOTFILES__HOMEBREW_GITHUB_TOKEN_ENCRYPTED='
 	jPf2eWoOaSczcvJQ/SMlXLxxrEx5nR5xOTctBwP+DNnvSP172HU/WdW6aKzBDBbmXMJoYsNHyr2Q6
 	UK0fDMJ+LAdx2xfKSpgsQT7eVCbekWCGJ6jUpPIs+ORluzhiSZXCWqJ/oPMn6dsyF1kFOZmediu86
 	e2h8Cu9vPUjo2jpQSGdRJyEehWmw=='
 
 CURRENT_TASK_NAME="decrypt HOMEBREW_GITHUB_TOKEN"
-catchout decrypted_string  decrypt_string "$HOMEBREW_GITHUB_TOKEN_ENCRYPTED"
-readonly HOMEBREW_GITHUB_TOKEN="$decrypted_string"
+catchout decrypted_string  decrypt_string "$DOTFILES__HOMEBREW_GITHUB_TOKEN_ENCRYPTED"
+readonly DOTFILES__HOMEBREW_GITHUB_TOKEN="$decrypted_string"
+unset decrypted_string
 
 
-readonly DOTFILES_BACKUP_DIR="$HOME/.:dotfiles_backups"
-readonly DOTFILES_BACKUP_DIR_MODE="700"
+readonly DOTFILES__BACKUP_DIR="$HOME/.:dotfiles_backups"
+readonly DOTFILES__BACKUP_DIR_MODE="700"
 
-readonly DOTFILE_FOLDERS=(
+readonly DOTFILES__FOLDERS=(
 	".zshenv.d"
 	".zprofile.d"
 	".zshrc.d"
@@ -23,7 +24,7 @@ readonly DOTFILE_FOLDERS=(
 	".shrc.d"
 )
 
-readonly DOTFILE_FILES=(
+readonly DOTFILES__FILES=(
 	".zshenv"
 	".zprofile"
 	".zshrc"
@@ -38,7 +39,7 @@ readonly DOTFILE_FILES=(
 	".gitignore_global"
 )
 
-readonly DOTFILE_TEMPLATES=(
+readonly DOTFILES__TEMPLATES=(
 	".profile:dyn"
 	".shrc:dyn"
 	".zshrc:dyn"
