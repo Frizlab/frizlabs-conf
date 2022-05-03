@@ -7,6 +7,7 @@
 	<key>ProcessType</key>
 	<string>Background</string>
 	<key>Program</key>
+	<!-- Note USER is only available on Darwin (or at least it is not available in a debian:11-slim Linux). -->
 	<string>m4_ifelse(___M4___USER___M4___, `frizlab', `___M4___FIRST_PARTY_BIN_DIR___M4___', `___M4___THIRD_PARTY_BIN_DIR___M4___')/dump-safari-tabs</string>
 	<key>StartCalendarInterval</key>
 	<dict>
