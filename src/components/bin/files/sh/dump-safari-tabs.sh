@@ -73,3 +73,4 @@ for browser in "${@:-Safari}"; do
 		end if
 	' 2>&1 | redirect_osascript_output
 done
+echo
