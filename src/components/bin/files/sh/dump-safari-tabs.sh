@@ -13,9 +13,20 @@ set -eu
 #   - Firefox
 readonly BROWSER="${1:-Safari}"
 
-# Call AppleScript.
+
 # osascript apparently logs to stderr, so we redirect stderr to stdout and
 #  prefix stdout logs w/ “stdout: ” and stderr logs w/ “stderr: ”.
+# This function redirect lines to the proper fd.
+# Improperly prefixed lines are output to stderr.
+function redirect_osascript_output() {
+	while read line; do
+		if echo "$line" | grep -Eq '^stdout: '; then echo "$line" | sed -E 's/^stdout: //';
+		else                                         echo "$line" | sed -E 's/^stderr: //' >/dev/stderr; fi
+	done
+}
+
+
+# Call AppleScript.
 osascript -e '
 -- Get the list of running processes
 tell application "System Events"
@@ -52,4 +63,4 @@ if (listOfRunningProcesses contains "'"$BROWSER"'") then
 		end repeat
 	end tell
 end if
-' 2>&1
+' 2>&1 | redirect_osascript_output
