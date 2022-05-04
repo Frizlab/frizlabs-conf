@@ -26,8 +26,8 @@
 	<key>StandardInPath</key>
 	<string>/dev/null</string>
 	<key>StandardOutPath</key>
-	<string>___M4___LAUNCHD__DUMP_SAFARI_TABS_LOGS_DIR___M4___/dump-safari-tabs.out</string>
+	<string>___M4___LAUNCHD__DUMP_SAFARI_TABS_LOGS_DIR___M4___/dump-safari-tabs.log</string>
 	<key>StandardErrorPath</key>
-	<string>___M4___LAUNCHD__DUMP_SAFARI_TABS_LOGS_DIR___M4___/dump-safari-tabs.err</string>
+	<string>___M4___LAUNCHD__DUMP_SAFARI_TABS_LOGS_DIR___M4___/dump-safari-tabs.log</string>
 </dict>
 </plist>
