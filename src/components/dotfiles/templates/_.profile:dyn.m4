@@ -51,7 +51,7 @@ PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/sbin"
 # Note: They are probably already added with the system homebrew.
 PATH="${PATH}:/usr/local/bin"
 PATH="${PATH}:/usr/local/sbin"
-PATH="${PATH}:___M4___CAPPUCCINO_DIR_DIR___M4___/bin"
+PATH="${PATH}:___M4___CAPPUCCINO_DIR___M4___/bin"
 #PATH="${PATH}:___M4___RUBY_DIR___M4___/bin"
 #PATH="${PATH}:___M4___NPM_DIR___M4___/bin"
 #PATH="${PATH}:___M4___GO_DIR___M4___/bin"
