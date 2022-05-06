@@ -92,6 +92,7 @@ typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
 	"speedtest-cli"       "bin/speedtest-cli"
 	"shellcheck"          "bin/shellcheck"
 	"swift-format"        "bin/swift-format"
+	"tcl-tk"              "opt/tcl-tk/bin/tclsh"
 	"terminal-notifier"   "bin/terminal-notifier"
 	"the_silver_searcher" "bin/ag"
 	"tmux"                "bin/tmux"
