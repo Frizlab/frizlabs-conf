@@ -46,13 +46,13 @@ PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/bin"
 PATH="${PATH}:___M4___HOMEBREW_X86_SYSTEM_DIR___M4___/sbin"
 )m4_dnl
 # After that we add /usr/local bin and sbin.
-# Note: they are probably already added with the system homebrew.
+# Note: They are probably already added with the system homebrew.
 PATH="${PATH}:/usr/local/bin"
 PATH="${PATH}:/usr/local/sbin"
-PATH="${PATH}:___M4___CLT_DIR___M4___/cappuccino/bin"
-#PATH="${PATH}:___M4___CLT_DIR___M4___/ruby/bin"
-#PATH="${PATH}:___M4___CLT_DIR___M4___/npm/bin"
-#PATH="${PATH}:___M4___CLT_DIR___M4___/go/bin"
+PATH="${PATH}:___M4___CAPPUCCINO_DIR_DIR___M4___/bin"
+#PATH="${PATH}:___M4___RUBY_DIR___M4___/bin"
+#PATH="${PATH}:___M4___NPM_DIR___M4___/bin"
+#PATH="${PATH}:___M4___GO_DIR___M4___/bin"
 #PATH="${PATH}:${HOME}/.krew/bin"
 PATH="${PATH}:."
 
