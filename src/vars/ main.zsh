@@ -51,6 +51,9 @@ fi
 # Ruby (gem) Packages
 readonly RUBY_DIR="$CLT_ENVS_DIR/ruby"
 
+# Python Packages
+readonly PYTHON_DIR="$CLT_ENVS_DIR/python3"
+
 # NPM Packages
 readonly NPM_DIR="$CLT_ENVS_DIR/npm"
 

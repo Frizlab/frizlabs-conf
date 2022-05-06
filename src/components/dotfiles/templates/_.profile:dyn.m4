@@ -65,20 +65,20 @@ export PATH
 # This forces USER installs from pip to go to this folder. Not non-user installs.
 # We have hidden pip3 behind an alias to check installs are done as user installs.
 # Fuck pip. Again and more.
-export PYTHONUSERBASE="___M4___CLT_DIR___M4___/python3"
+export PYTHONUSERBASE="___M4___PYTHON_DIR___M4___"
 
 # Ruby
-export GEM_HOME="___M4___CLT_DIR___M4___/ruby"
+export GEM_HOME="___M4___RUBY_DIR___M4___"
 
 # Cappuccino
 export NARWHAL_ENGINE=jsc
 export CAPP_BUILD="${HOME}/Library/Caches/Cappuccino/DerivedData"
 
 # NPM
-export NPM_CONFIG_PREFIX="___M4___CLT_DIR___M4___/npm"
+export NPM_CONFIG_PREFIX="___M4___NPM_DIR___M4___"
 
 # Go
-export GOPATH="___M4___CLT_DIR___M4___/go"
+export GOPATH="___M4___GO_DIR___M4___"
 
 
 # Homebrew GitHub API token.
