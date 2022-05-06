@@ -3,6 +3,8 @@ readonly APP_DIR="$HOME/Applications"
 
 # The CLT (Command-Line Tools) directory.
 readonly CLT_DIR="$HOME/clt"
+# Envs (Python envs, Ruby gems, etc.).
+readonly CLT_ENVS_DIR="$CLT_DIR/envs"
 # Logs from some CLT tools (e.g. launchd output).
 readonly CLT_LOGS_DIR="$CLT_DIR/logs"
 
@@ -47,13 +49,13 @@ else
 fi
 
 # Ruby (gem) Packages
-readonly RUBY_DIR="$CLT_DIR/ruby"
+readonly RUBY_DIR="$CLT_ENVS_DIR/ruby"
 
 # NPM Packages
-readonly NPM_DIR="$CLT_DIR/npm"
+readonly NPM_DIR="$CLT_ENVS_DIR/npm"
 
 # Go Packages
-readonly GO_DIR="$CLT_DIR/go"
+readonly GO_DIR="$CLT_ENVS_DIR/go"
 
 # Not -r because we modify this variable in the env specific vars file
 typeset -a COMPONENTS=(

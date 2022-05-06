@@ -25,6 +25,7 @@ fi
 
 # CLT subfolders
 
+task__folder "$CLT_ENVS_DIR" "755"
 task__folder "$CLT_LOGS_DIR" "755"
 
 task__folder "$FIRST_PARTY_BIN_DIR" "755"
