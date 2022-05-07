@@ -8,7 +8,8 @@ COMPUTER_GROUP_PATH="$CACHE_FOLDER/computer_group"
 declare -A COMPUTER_GROUPS=(
 	1 home
 	2 work
-	3 vm
+	3 server
+	4 vm
 )
 
 test -f "$COMPUTER_GROUP_PATH" || {
