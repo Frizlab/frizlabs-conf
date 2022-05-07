@@ -1,7 +1,3 @@
-source "./vars.zsh"
-
-source "./lib/launch-agents.zsh"
-
 # Install dump-safari-tabs agent.
 # TODO: Correctly manage output (currently each run is appended to output file).
 task__folder "$LAUNCHD__DUMP_SAFARI_TABS_LOGS_DIR" "755"

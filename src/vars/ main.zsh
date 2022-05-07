@@ -68,9 +68,14 @@ typeset -a COMPONENTS=(
 	"core"
 	"dotfiles"
 	"bin"
-	"launchd"
-	"defaults"
 )
+if [ "$HOST_OS" = "Darwin" ]; then
+	COMPONENTS+=(
+		"launchd"
+		"defaults"
+	)
+fi
+
 
 # Not -r because we modify this variable in the env specific vars file
 typeset -A MAIN_SYSTEM_HOMEBREW_FORMULAE=(
