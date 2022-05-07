@@ -1,6 +1,11 @@
+### Needs: CACHE_FOLDER var.
+### Gives: COMPUTER_GROUP var.
+
 # Get computer group (home, work, etc.)
-readonly COMPUTER_GROUP_PATH="$CACHE_FOLDER/computer_group"
-declare -rA COMPUTER_GROUPS=(
+
+# Both vars are NOT readonly because we unset them at the end of the file.
+COMPUTER_GROUP_PATH="$CACHE_FOLDER/computer_group"
+declare -A COMPUTER_GROUPS=(
 	1 home
 	2 work
 	3 vm
@@ -22,3 +27,5 @@ test -f "$COMPUTER_GROUP_PATH" || {
 	fi
 }
 COMPUTER_GROUP="$("$CAT" "$COMPUTER_GROUP_PATH")"; readonly COMPUTER_GROUP
+
+unset COMPUTER_GROUPS COMPUTER_GROUP_PATH

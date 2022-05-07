@@ -5,7 +5,7 @@ readonly DOTFILES__HOMEBREW_GITHUB_TOKEN_ENCRYPTED='
 	e2h8Cu9vPUjo2jpQSGdRJyEehWmw=='
 
 CURRENT_TASK_NAME="decrypt HOMEBREW_GITHUB_TOKEN"
-catchout decrypted_string  decrypt_string "$DOTFILES__HOMEBREW_GITHUB_TOKEN_ENCRYPTED"
+catchout decrypted_string  libccrypt__decrypt_string "$DOTFILES__HOMEBREW_GITHUB_TOKEN_ENCRYPTED"
 readonly DOTFILES__HOMEBREW_GITHUB_TOKEN="$decrypted_string"
 unset decrypted_string
 

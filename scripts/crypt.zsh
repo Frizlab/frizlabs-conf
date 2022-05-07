@@ -9,16 +9,16 @@ export PATH
 path+="$(pwd)/.cache/bin"
 
 readonly CACHE_FOLDER="$(pwd)/.cache"
-source "./src/lib/facts.zsh"
-source "./src/lib/executables.zsh"
-source "./src/lib/ccrypt.zsh"
+source "./src/lib/vars-facts.zsh"
+source "./src/lib/vars-executables.zsh"
+source "./src/lib/lib-ccrypt.zsh"
 
 popd
 case "${${0:t}:r}" in
-	"decrypt_file") util_decrypt "$@";;
-	"encrypt_file") util_encrypt "$@";;
-	"decrypt_string") util_decrypt_string "$*";;
-	"encrypt_string") printf "$*" | util_encrypt | base64;;
+	"decrypt_file") decrypt "$@";;
+	"encrypt_file") encrypt "$@";;
+	"decrypt_string") decrypt_string "$*";;
+	"encrypt_string") printf "$*" | encrypt | base64;;
 	*)
 		echo "You must call this script from the encrypt_* or decrypt_* scripts"
 		exit 1

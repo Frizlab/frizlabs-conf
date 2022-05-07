@@ -85,7 +85,7 @@ function libfiles__decrypt_and_copy() {
 	# Then we decrypt the source file at a temporary location
 	decrcpy_tmpfile="$(run_and_log_keep_stdout mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
 	run_and_log "$CP" -f -- "$src" "$decrcpy_tmpfile"     || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
-	run_and_log decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	run_and_log libccrypt__decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
 	run_and_log "$DIFF" -- "$decrcpy_tmpfile" "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; echo "ok"; return }
 	

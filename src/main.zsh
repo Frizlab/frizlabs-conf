@@ -22,51 +22,66 @@ readonly VERBOSE_OUTPUT
 # Paths Setup and Verification #
 ################################
 
+# First define the root folder and cd to it.
+# We let basename output its errors if it has any.
 test "$(basename "$0")" = "install" || {
-	echo "This script must be run from the install alias." >&2
+	print "This script must be run from the install alias." >&2
 	exit 1
 }
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || { print "FATAL: cd or dirname failed." >&2; exit 255; }
+ROOT_FOLDER="$(pwd)" || { print "FATAL: pwd failed." >&2; exit 255; }; readonly ROOT_FOLDER
 
+# We add our own bins to the path, but agree to use the system or user-defined ones if they are already there.
+path+="$PWD/.cache/bin"
 # We export PATH in case the variable is not exported yet.
 export PATH
 
-# We add our own bins to the path, but agree to use the system or user-defined ones if they are already there.
-path+="$(pwd)/.cache/bin"
-
 # Let’s define the different paths we will need.
-SRC_FOLDER="$(pwd)/src"; readonly SRC_FOLDER
-CACHE_FOLDER="$(pwd)/.cache"; readonly CACHE_FOLDER
-RUN_LOG="$(pwd)/runs/$(date '+%d.%m.%Y-%H:%M:%S').log"; readonly RUN_LOG
+readonly SRC_FOLDER="$ROOT_FOLDER/src"
+readonly CACHE_FOLDER="$ROOT_FOLDER/.cache"
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
+RUN_LOG="$ROOT_FOLDER/runs/$(date '+%d.%m.%Y-%H:%M:%S').log" || { print "FATAL: date failed." >&2; exit 255; }; readonly RUN_LOG
 
-# We need executables now (because it defines the MKDIR var), and executables needs facts (the host OS).
-source "$LIB_FOLDER/facts.zsh"
-source "$LIB_FOLDER/executables.zsh"
+# Import other vars.
+source "$LIB_FOLDER/vars-facts.zsh"
+source "$LIB_FOLDER/vars-executables.zsh"
 
 # Create the runs and cache folder if needed.
-"$MKDIR" -p "$(pwd)/runs" && "$CHMOD" 700 "$(pwd)/runs"
-"$MKDIR" -p "$CACHE_FOLDER" && "$CHMOD" 700 "$CACHE_FOLDER"
+"$MKDIR" -p "$CACHE_FOLDER"     && "$CHMOD" 700 "$CACHE_FOLDER"     || { print "FATAL: $MKDIR or $CHMOD failed." >&2; exit 255; }
+"$MKDIR" -p "$ROOT_FOLDER/runs" && "$CHMOD" 700 "$ROOT_FOLDER/runs" || { print "FATAL: $MKDIR or $CHMOD failed." >&2; exit 255; }
 
 
-###############
-# Import libs #
-###############
+#######################
+# Imports libs and co #
+#######################
 
-source "$LIB_FOLDER/check-deps.zsh"
-source "$LIB_FOLDER/utils.zsh"
-source "$LIB_FOLDER/ccrypt.zsh"
-source "$LIB_FOLDER/group.zsh"
-source "$LIB_FOLDER/logger.zsh"
+### Retrieve required info ###
 
-source "$LIB_FOLDER/files-lib.zsh"
-source "$LIB_FOLDER/files-tasks.zsh"
-source "$LIB_FOLDER/templates-lib.zsh"
-source "$LIB_FOLDER/defaults-lib.zsh"
-source "$LIB_FOLDER/homebrew-lib.zsh"
+source "$LIB_FOLDER/input-check-deps.zsh" # Exits the script if some deps are missing.
+source "$LIB_FOLDER/input-ccrypt.zsh"
+source "$LIB_FOLDER/input-group.zsh"
 
-# Also imports the env-specific vars.
+### Utils ###
+
+source "$LIB_FOLDER/utils-logger.zsh"
+source "$LIB_FOLDER/utils-misc.zsh"
+
+### Libs ###
+
+source "$LIB_FOLDER/lib-ccrypt.zsh"
+
+source "$LIB_FOLDER/lib-files.zsh"
+source "$LIB_FOLDER/lib-templates.zsh"
+source "$LIB_FOLDER/lib-defaults.zsh"
+source "$LIB_FOLDER/lib-brew.zsh"
+
+### Tasks ###
+
+source "$LIB_FOLDER/tasks-files.zsh"
+
+### Vars (also imports env-specific vars) ###
+
 source "$SRC_FOLDER/vars/ main.zsh"
 
 
