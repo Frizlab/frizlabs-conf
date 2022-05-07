@@ -92,7 +92,7 @@ source "$SRC_FOLDER/vars/ main.zsh"
 # Note: We do **not** handle dependencies…
 components_to_run=("$@")
 if test ${#components_to_run[@]} -eq 0; then
-	components_to_run=("${COMPONENTS[@]}")
+	components_to_run=("${DEFAULT_COMPONENTS_TO_INSTALL[@]}")
 fi
 
 max_component_width=0
