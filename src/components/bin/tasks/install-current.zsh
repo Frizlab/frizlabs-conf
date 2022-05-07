@@ -13,16 +13,16 @@ bin_task__install "frizlab" ":Darwin:" "$FIRST_PARTY_BIN_DIR"   "$THIRD_PARTY_BI
 bin_task__bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
 
 ### Backup My Cloud ###
-bin_task__encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-cloud.sh.cpt"
+bin_task__encrypted_bin "frizlab" ":Darwin:~work~server~vm~" "bash/backup-cloud.sh.cpt"
 
 ### Backup the Stuff I Can’t Live Without ###
-bin_task__encrypted_bin "frizlab" ":Darwin:~work~" "bash/backup-precious-stuff.sh.cpt"
+bin_task__encrypted_bin "frizlab" ":Darwin:~work~server~vm~" "bash/backup-precious-stuff.sh.cpt"
 
 ### Backup the Main Computer ###
-bin_task__encrypted_bin "frizlab" ":Darwin:~work~" "zsh/backup-main-computer.sh.cpt"
+bin_task__encrypted_bin "frizlab" ":Darwin:~work~server~vm~" "zsh/backup-main-computer.sh.cpt"
 
 ### Clone Media HD ###
-bin_task__encrypted_bin "frizlab" ":Darwin:~work~" "zsh/clone-media-hd.sh.cpt"
+bin_task__encrypted_bin "frizlab" ":Darwin:~work~server~vm~" "zsh/clone-media-hd.sh.cpt"
 
 ### Backup All Repos In a Given GitHub Org ###
 # Linux compat is untested, but there’s not reason why it wouldn’t work
@@ -77,8 +77,8 @@ bin_task__bin "frizlab" ":Darwin:Linux:" "tcl/chronodec.tk"
 bin_task__bin "frizlab" ":Darwin:" "bash/find-invalid-images.sh"
 
 ### Import to Photos ###
-bin_task__bin "frizlab" ":Darwin:~work~" "bash/import-to-photos.sh"
-bin_task__doc "frizlab" ":Darwin:~work~" "import-to-photos" "docs/import-to-photos.scpt"
+bin_task__bin "frizlab" ":Darwin:~work~server~" "bash/import-to-photos.sh"
+bin_task__doc "frizlab" ":Darwin:~work~server~" "import-to-photos" "docs/import-to-photos.scpt"
 
 ### Learning bash arrays ###
 # Linux compat is untested
@@ -114,7 +114,7 @@ bin_task__doc "frizlab" ":Darwin:" "man/man1" "docs/remove-xattr.1"
 bin_task__bin "frizlab" ":Darwin:" "bash/find-desktop-pictures.sh"
 
 ### Launch Alarm Clock ###
-bin_task__bin "frizlab" ":Darwin:~work~" "bash/launch-alarm-clock.sh"
+bin_task__bin "frizlab" ":Darwin:~work~server~" "bash/launch-alarm-clock.sh"
 
 ### Connect NetSoul ###
 # This script was originally from someone else than frizlab, but so heavily modified that frizlab can take ownership.
