@@ -41,7 +41,7 @@ readonly SRC_FOLDER="$ROOT_FOLDER/src"
 readonly CACHE_FOLDER="$ROOT_FOLDER/.cache"
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
-RUN_LOG="$ROOT_FOLDER/runs/$(date '+%d.%m.%Y-%H:%M:%S').log" || { print "FATAL: date failed." >&2; exit 255; }; readonly RUN_LOG
+RUN_LOG="$ROOT_FOLDER/runs/$(date '+%Y.%m.%d-%H:%M:%S').log" || { print "FATAL: date failed." >&2; exit 255; }; readonly RUN_LOG
 
 # Import other vars.
 source "$LIB_FOLDER/vars-facts.zsh"
