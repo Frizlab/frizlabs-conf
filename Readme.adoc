@@ -18,18 +18,30 @@ There is one folder per component I install.
 
 == Tech Notes
 
-=== Function Naming
+=== My `brew` Setup
+I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
 
-- `lib<#component#>__*`: A “lib” function (e.g. `libdefaults__set_bool`).
-These are functions that only do one simple “atomic” thing (e.g. set a user default). +
-The function **must** check whether the action is needed first. +
-If it is not, the function **must** output "ok" to stdout and do nothing. +
-If something is required to be done, the function **must** do it, then output "changed" to stdout. +
+This is done to be able to use brew on a multi-user machine properly:
+ the admin manages the system brew, and “normal” users can use a “user” brew without issues
+ (well, at least for formulae which do not fail compilation, but that’s another problem).
+
+_Future direction_: Fully switch to Nix, which manages a multi-user install properly, and is IMHO generally better, though more complex.
+
+=== Function Naming in This Repo
+
+==== `lib<#component#>__*`
+A “lib” function (e.g. `libdefaults__set_bool`).
+These are functions that only do one simple “atomic” thing (e.g. set a user default).
+
+The function **must** check whether the action is needed first.
+If it is not, the function **must** output "ok" to stdout and do nothing.
+If something is required to be done, the function **must** do it, then output "changed" to stdout.
 In case of an error, the function **must** log the failure using `log_task_failure`, and then output "failed" to stdout.
 
 Most of the time these kind of function are found in the `./src/lib` folder, but sometimes some can be put in a component’s `lib` folder.
 
-- `task__*`: A function doing an actual task.
+==== `task__*`
+A function doing an actual task.
 
 == TODOs
 
@@ -40,36 +52,9 @@ https://georgegarside.com/blog/macos/sierra-console-private/
 === Little Snitch Rules
 Prepare Rule Group Subscription and automate installation of said subscription in Little Snitch (if possible).
 
-=== My `brew` Setup
-I do a somehow twisted Homebrew setup, with a “system” brew and a “user” one.
-
-This is done to be able to use brew on a multi-user machine properly:
- the admin manages the system brew, and “normal” users can use a “user” brew without issues
- (well, at least for formulae which do not fail compilation, but that’s another problem).
-
-_Future direction_: Fully switch to Nix, which manages a multi-user install properly, and is IMHO generally better, though more complex.
-
-==== `brew` installation in `/usr/local`
-Mostly from https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh, but simplified.
-[source,bash]
-----
-cd /usr/local
-directories=(bin etc include lib sbin share var opt
-             share/zsh share/zsh/site-functions
-             var/homebrew var/homebrew/linked
-             Cellar Caskroom Homebrew Frameworks)
-for d in $directories; do sudo mkdir "$d"; done
-for d in $directories; do sudo chown -h frizlab:staff "$d"; done
-curl -SL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /usr/local/Homebrew
-ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
-/usr/local/bin/brew update --force
-----
-
-Get sudo during whole script: https://github.com/nnja/new-computer/blob/master/setup.sh#L73
-
-=== `brew` installation in `/opt/homebrew`
-
-That one is a “normal” brew install (`install-brew` correctly handles it), but before we have to create the `/opt/homebrew` folder using sudo.
+=== `brew` installation
+The “system” brew installations fail for now (no sudo, no support for install in /usr/local).
+See link:./src/components/homebrew-system/tasks/%20main.zsh#L4[Homebrew System Install Task] for more info.
 
 === A Thing from Twitter
 
