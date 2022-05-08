@@ -2,9 +2,9 @@
 ## Exits with code 255, optionally printing an error message before to stderr, in red.
 function fatal() {
 	if [ $# -gt 0 ]; then
-		print -P "%F{red}%BINTERNAL ERROR%b: $*%f"
+		print -P "%F{red}%BFATAL ERROR%b: $*%f"
 	else
-		print -P "%F{red}%BINTERNAL ERROR%b%f"
+		print -P "%F{red}%BFATAL ERROR%b%f"
 	fi
 	exit 255
 }
