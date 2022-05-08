@@ -38,10 +38,17 @@ If it is not, the function **must** output "ok" to stdout and do nothing.
 If something is required to be done, the function **must** do it, then output "changed" to stdout.
 In case of an error, the function **must** log the failure using `log_task_failure`, and then output "failed" to stdout.
 
-Most of the time these kind of function are found in the `./src/lib` folder, but sometimes some can be put in a component’s `lib` folder.
+Most, if not all calls to executables or functions _should_ be done through the `run_and_log` function.
+
+Most of the time the libs are found in the `./src/lib` folder, but some components have their own `lib` folder with their own libs.
 
 ==== `task__*`
 A function doing an actual task.
+
+The task **must** start with a call to `start_task "name of the task"` and
+ end with a call to one of `log_task_{ok,change,warning,failure}`, or use the convenience `log_task_from_res` or `log_task_from_res_list`.
+
+_Note_: The `log_task_from_res{,_list}` convenience expects `log_task_failure` to be called manually.
 
 == TODOs
 
@@ -53,7 +60,7 @@ https://georgegarside.com/blog/macos/sierra-console-private/
 Prepare Rule Group Subscription and automate installation of said subscription in Little Snitch (if possible).
 
 === `brew` installation
-The “system” brew installations fail for now (no sudo, no support for install in /usr/local).
+The “system” brew installations fails for now (no sudo, no support for install in /usr/local).
 See link:./src/components/homebrew-system/tasks/%20main.zsh#L4[Homebrew System Install Task] for more info.
 
 === A Thing from Twitter
@@ -75,24 +82,38 @@ This is not great security-wise.
 The only proper alternative I found is not launching the script directly, but instead use a custom wrapper whose sole purpose is to exec the script.
 This is what `exec-script.c` (in this repo) is for.
 
-⚠️ Do not do a generic exec-bin which would execute whatever is given in argument!
-If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
-(With a small gotcha: nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
-
 Other unsuccessful attempts:
+
 - `exec`’ing from the shell script;
 - Creating a soft link to the interpreter and launching this link.
 This does not work because it’s not the link which is launched, it’s the link’s destination;
 - Hard-linking `/bin/sh` and launching this link.
 This probably works (hard-linking does work), but hard-linking `/bin/sh` is forbidden (SIP-protected).
 
+⚠️ Do not do a generic exec-bin which would execute whatever is given in argument!
+If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
+(With a small gotcha: nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
+
+**TODO**: Somehow add an identity check to the script executed by the wrapper, and refuse execution if the identity is incorrect.
+Otherwise any script can be executed through this wrapper (by simply replacing the original script).
+As long as the wrapper is signed, we could implement one of the following method:
+
+- Create a temporary file with the contents of the script, and execute this temporary file;
+- Send the script through a named pipe (basically the same as the previous solution, but avoids writing the script to a temporary file);
+- Send the script through stdin to the interpreter (this is another variant as the previous solutions, probably the best as it does not create any files and avoids the possiblity of a rogue actor modifying the files during or before execution). But is `-` supported by all interpreters? For `zsh` and `bash`, it’s `-s` apparently, for `swift` and `python3`, `-` seems supported;
+- Embed the SHA of the script in the wrapper, and check it hasn’t changed before launching the script;
+- If the script is small enough, we could simply put the whole script in a string and pass it as an argument to the interpreter, but passing a script as an argument to the interpreter might not be supported by the interpreter, and the syntax likely differs between interpreters.
+
+The install in this repo will have to recompile the wrapper each time the script is modified, of course.
+
 == zsh (and bash) Fun Stuff
 
 === Local and Readonly Variables
 
 `local myvar="$(false)"; echo $?` prints `0`. Why? Because `local` never fails!
-Thus, if you have run `set -e`, even the script should stop, it won’t. +
-To workaround this, one should do `local myvar; myvar="$(false)"; echo $?`, which will correctly print `1`.
+Thus, for a script with the `-e` option set, `local myvar="$(false)` will happily succeed, and the script will continue to the next line.
+
+To workaround this, one should separate the local declaration and the value assignment: `local myvar; myvar="$(false)"`.
 
 Now how about a readonly local variable? In theory, we could do this: `local -r myvar="$(false)"`
  (BTW, certainly not `readonly local myvar...`, nor `local readonly myvar...`!),
