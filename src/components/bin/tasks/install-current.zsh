@@ -1,13 +1,6 @@
 ### Dump Safari Tabs to stdout ###
-# We do not install the script directly because it is launched through a custom-made launcher.
-# We have to do this because the script uses AppleEvents and we do not want to whitelist `sh` for AppleEvents.
-# See the Readme for more info about launchd and AppleEvents.
-# We _copy_ the script instead of (soft-)linking it because otherwise
-#  the launcher would need access to the Documents folder (if the conf repo is in Documents),
-#  which is an otherwise unnecessary permission (and thus unwise to give if it can be avoided).
-# Note: We could probably hard-link the file instead of copying it.
-bin_task__install "frizlab" ":Darwin:" "$FIRST_PARTY_SHARE_DIR" "$THIRD_PARTY_SHARE_DIR" "dump-safari-tabs" "sh/dump-safari-tabs.sh" "644" "copy"      "same"
-bin_task__install "frizlab" ":Darwin:" "$FIRST_PARTY_BIN_DIR"   "$THIRD_PARTY_BIN_DIR"   ""                 "c/exec-script.c"        "755" "compile-c" "custom:dump-safari-tabs" -cflags "-DINTERPRETER=/bin/sh -DSCRIPT=$(get_author_val "frizlab" "$FIRST_PARTY_SHARE_DIR" "$THIRD_PARTY_SHARE_DIR")/dump-safari-tabs/dump-safari-tabs.sh"
+# TODO: Remove old files we used to install
+bin_task__wrapped_bin "frizlab" ":Darwin:" "sh/dump-safari-tabs.sh" "/bin/sh"
 
 ### Run a Shell Command When a File Changes ###
 bin_task__bin "frizlab" ":Darwin:" "swift-sh/run-on-change.swift"
