@@ -24,7 +24,15 @@ function bin__install_name() {
 
 
 ## Usage: task__install author compatibility dest_1st_party dest_3rd_party dest_subfolder relative_path_to_install mode install_method destname_method [-cflags cflags]
-## Note: cflags is ignored if install_method is not compile-c
+##
+## Notes:
+## install_method can be one of:
+##    - link
+##    - copy
+##    - decrypt
+##    - compile-c
+##    - wrap
+## cflags is ignored if install_method is not compile-c or wrap
 function bin_task__install() {
 	local -r author="$1"; shift
 	local -r compatibility="$1"; shift
@@ -85,6 +93,18 @@ function bin_task__install() {
 				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                     && RES_LIST+=("$RES") }
 				{ res_check "$RES" &&   catchout RES  libfiles__compilec "$local_path" "$dest_path" "$cflags"   && RES_LIST+=("$RES") }
 				log_task_from_res_list RES_LIST
+			;;
+			wrap)
+				local script=
+				local interpreter_args=
+				start_task "install (wrap) ${dest_path/#$HOME/\~} (from $local_relative_path and c/exec-script.c)"
+				{ res_check "$RES" &&   script="$(run_and_log_keep_stdout file_to_hex "$local_path")"                        || { log_task_failure "cannot convert script to hex.";  RES="failed"; RES_LIST+=("$RES") } }
+				{ res_check "$RES" &&   interpreter_args="$(run_and_log_keep_stdout extract_interpreter_args "$local_path")" || { log_task_failure "cannot get script interpreter."; RES="failed"; RES_LIST+=("$RES") } }
+				local compiled_file="$COMPONENT_ROOT_FOLDER/files/c/exec-script.c"
+				local full_cflags="$cflags ${interpreter_args:+-DINTERPRETER_ARGS='}$interpreter_args${interpreter_args:+'} -DSCRIPT_PATH='$local_path' -DSCRIPT='$script'"
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                                           && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__compilec "$compiled_file" "$dest_path" "$full_cflags" "$local_path" "$local_path"   && RES_LIST+=("$RES") }
+				log_task_from_res "$RES"
 			;;
 		esac
 	else
