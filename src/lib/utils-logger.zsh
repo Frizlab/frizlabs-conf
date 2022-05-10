@@ -6,6 +6,9 @@ typeset -gA COMPONENTS_STATS_CHANGES
 typeset -gA COMPONENTS_STATS_WARNINGS
 
 # Log the command and run it. Also logs the command’s output, prefixing by stdout or stderr. Drop real stdout and stderr.
+function debug_log() {
+	printf -- "$*\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+}
 function run_and_log() {
 	printf -- "\n--- RUNNING $*\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 	"$@" > >(sed -E 's/^/-> stdout: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null) 2> >(sed -E 's/^/-> stderr: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null)
