@@ -99,8 +99,10 @@ max_component_width=0
 typeset -g CURRENT_TASK_NAME
 for component in $components_to_run; do
 	test $max_component_width -lt $#component && max_component_width=$#component
+	COMPONENT_ROOT_FOLDER="$COMPONENTS_FOLDER/$component"
+	test -d "$COMPONENT_ROOT_FOLDER" || { print -P "%F{yellow}%BWARNING%b: $component does not exist; skipping...%f\n"; continue }
 	log_component_start "$component"
-	pushd "$COMPONENTS_FOLDER/$component"
+	pushd "$COMPONENT_ROOT_FOLDER"
 	source "./tasks/ main.zsh"
 	popd
 	log_component_end
