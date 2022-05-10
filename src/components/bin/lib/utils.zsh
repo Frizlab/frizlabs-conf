@@ -51,7 +51,7 @@ function bin_task__install() {
 	done
 	readonly cflags
 	
-	local local_path; local_path="$(pwd)/files/$local_relative_path"; readonly local_path
+	local -r local_path="$COMPONENT_ROOT_FOLDER/files/$local_relative_path"
 	
 	local -r dest_folder="$(bin__install_dest "$author" "$dest_1st_party" "$dest_3rd_party" "$dest_subfolder" "$local_relative_path")"
 	local -r backup_dir="$dest_folder/$BIN__BACKUP_DIR_BASENAME"
