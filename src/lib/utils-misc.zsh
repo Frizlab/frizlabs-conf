@@ -62,6 +62,29 @@ function get_author_val() {
 }
 
 
+## Usage: file_to_hex path
+## Outputs the contents of the file converted to hex (like so "0x48,0x65,0x6c,0x6c,0x6f,0x0a").
+function file_to_hex() {
+	xxd -c0 -ps "$1" | sed -r 's/(..)/0x\1,/g;s/,$//'
+}
+
+
+## Usage: extract_interpreter_args path
+## Retrieve the shebang from a script in a format suitable for exec-script.c (e.g. '"/bin/sh","-ed",NULL').
+## If there are no shebang found, an empty string is returned.
+function extract_interpreter_args() {
+	local -r script_path="$1"
+	# Retrieve first line of the file.
+	line="$(head -n"+1" "$script_path")" || return 1
+	# If the first line do not start with #! we simply say we’re good and return an empty string.
+	print "$line" | grep -qE '^#!' || return 0
+	# We do a simple double-quote escaping and nothing else.
+	printf '"' || return 1
+	printf "%s" "$line" | sed -E 's/^#!//;s/"/\\"/g;s/ /","/g' || return 1
+	printf '",NULL' || return 1
+}
+
+
 ## Compatibility format: ":compatible_host_os:~forbidden_computer_group~"
 ##
 ## Example: ":Darwin:Linux:~work~home~" is compatible with Darwin and Linux and must not be installed at work or home.
