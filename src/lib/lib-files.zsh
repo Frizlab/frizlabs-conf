@@ -137,14 +137,19 @@ function libfiles__linknbk() {
 }
 
 function libfiles__compilec() {
-	local -r src="$1"
-	local -r dest="$2"
-	local -r cflags="$3"
+	local -r src="$1"; shift
+	local -r dest="$1"; shift
+	local -r cflags="$1"; shift
+	local -r additionaldeps="$@"
 	
 	# First we check the destination file is not a folder
 	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
-	local -r makefile="$dest: $src\n\tcc $cflags \$< -o \$@"
+	# We almost handle spaces correctly there, but not for the dependencies of the target.
+	# If the target contains a space, it _must_ be in a variable AFAICT, and cannot be escaped inline.
+	# The variable must be defined as such: “DEP1 := file\ with\ spaces” (aka.: “DEP1 := ${(q)dep}’)
+	local -r makefile="$dest: ${(q)src}${additionaldeps:+ ${(q)additionaldeps[@]}}\n\tcc $cflags ${(qq)src} -o ${(qq)dest}"
+	debug_log "Makefile:\n---\n$makefile\n---"
 	
 	print "$makefile" | run_and_log "$MAKE" -f - -q && { echo "ok"; return }
 	print "$makefile" | run_and_log "$MAKE" -f -    || { log_task_failure "cannot make the destination"; echo "failed"; return }
