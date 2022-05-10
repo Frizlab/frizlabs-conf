@@ -76,13 +76,15 @@ function bin_task__install() {
 			;;
 			decrypt)
 				start_task "install (decrypt and copy) ${dest_path/#$HOME/\~} (from $local_relative_path)"
-				catchout RES   libfiles__decrypt_and_copy "$local_path" "$dest_path" "755"
-				log_task_from_res "$RES"
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                         && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__decrypt_and_copy "$local_path" "$dest_path" "755"   && RES_LIST+=("$RES") }
+				log_task_from_res_list RES_LIST
 			;;
 			compile-c)
 				start_task "install (compile c) ${dest_path/#$HOME/\~} (from $local_relative_path)"
-				catchout RES   libfiles__compilec "$local_path" "$dest_path" "$cflags"
-				log_task_from_res "$RES"
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                     && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__compilec "$local_path" "$dest_path" "$cflags"   && RES_LIST+=("$RES") }
+				log_task_from_res_list RES_LIST
 			;;
 		esac
 	else
