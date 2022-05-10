@@ -7,21 +7,21 @@ typeset -gA COMPONENTS_STATS_WARNINGS
 
 # Log the command and run it. Also logs the command’s output, prefixing by stdout or stderr. Drop real stdout and stderr.
 function debug_log() {
-	printf -- "$*\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+	printf -- "%s\n" "$*" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 }
 function run_and_log() {
-	printf -- "\n--- RUNNING $*\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+	printf -- "\n%s\n" "--- RUNNING $*" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 	"$@" > >(sed -E 's/^/-> stdout: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null) 2> >(sed -E 's/^/-> stderr: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null)
 	local -r res="$?"
-	printf -- "--- DONE ($res)\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+	printf -- "%s\n" "--- DONE ($res)" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 	return "$res"
 }
 # Same as previous, but real stdout is kept (in addition to being logged). stderr is still dropped.
 function run_and_log_keep_stdout() {
-	printf -- "\n--- RUNNING $*\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+	printf -- "\n%s\n" "--- RUNNING $*" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 	"$@" 2> >(sed -E 's/^/-> stderr: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null) | tee >(sed -E 's/^/-> stdout: /' | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null)
 	local -r res="$?"
-	printf -- "--- DONE ($res)\n" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
+	printf -- "%s\n" "--- DONE ($res)" | tee -a "$RUN_LOG" "$VERBOSE_OUTPUT" >/dev/null
 	return "$res"
 }
 
