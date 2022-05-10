@@ -103,7 +103,7 @@ for component in $components_to_run; do
 	test -d "$COMPONENT_ROOT_FOLDER" || { print -P "%F{yellow}%BWARNING%b: $component does not exist; skipping...%f\n"; continue }
 	log_component_start "$component"
 	pushd "$COMPONENT_ROOT_FOLDER"
-	source "./tasks/ main.zsh"
+	source "./tasks/ main.zsh" || fatal "Component “$component” did not exit properly."
 	popd
 	log_component_end
 done
