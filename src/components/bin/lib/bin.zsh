@@ -10,18 +10,8 @@ function bin_task__encrypted_bin() {
 	bin_task__install "$1" "$2" "$FIRST_PARTY_BIN_DIR" "$THIRD_PARTY_BIN_DIR" "" "$3" "755" "decrypt" "remove_ext_from_encrypted"
 }
 
-# TODO: Fix the doc and do the function
-# We do not install the script directly because it is launched through a custom-made launcher.
-# We have to do this because the script uses AppleEvents and we do not want to whitelist `sh` for AppleEvents.
-# See the Readme for more info about launchd and AppleEvents.
-# We _copy_ the script instead of (soft-)linking it because otherwise
-#  the launcher would need access to the Documents folder (if the conf repo is in Documents),
-#  which is an otherwise unnecessary permission (and thus unwise to give if it can be avoided).
-# Note: We could probably hard-link the file instead of copying it.
 function bin_task__wrapped_bin() {
-	# xxd -c0 -ps "$FILE" | sed -r 's/(..)/0x\1,/g;s/,$//'
-	start_task "install a wrapped bin"
-	log_task_failure "not implemented"
+	bin_task__install "$1" "$2" "$FIRST_PARTY_BIN_DIR" "$THIRD_PARTY_BIN_DIR" "" "$3" "755" "wrap" "remove_ext"
 }
 
 function bin_task__delete_bin() {
