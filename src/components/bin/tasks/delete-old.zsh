@@ -32,6 +32,10 @@ bin_task__delete_bin "frizlab" "my_split"
 
 ######### Deleted #########
 
+### The dump-safari-tabs Uncompiled Script ###
+## Reason: The script is now compiled in the wrapper.
+bin_task__delete_doc "frizlab" "dump-safari-tabs/dump-safari-tabs.sh"
+
 ### Local Homebrew Install ###
 # Reason: Replaced by a script to install homebrew unconditionally.
 bin_task__delete_bin "frizlab" "local-brew-install"

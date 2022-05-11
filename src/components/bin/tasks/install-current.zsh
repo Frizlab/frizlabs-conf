@@ -1,5 +1,4 @@
 ### Dump Safari Tabs to stdout ###
-# TODO: Remove old files we used to install
 bin_task__wrapped_bin "frizlab" ":Darwin:" "sh/dump-safari-tabs.sh" "/bin/sh"
 
 ### Run a Shell Command When a File Changes ###
@@ -136,7 +135,6 @@ bin_task__bin "frizlab" ":Darwin:~work~" "bin/my-split"
 
 ### compopt ###
 # When compopt is not available (e.g. w/ Bash 3), this hides the error we get from some completion scripts that use compopt.
-RES=; RES_LIST=()
 dest="$THIRD_PARTY_BIN_DIR/compopt"
 backup_dir="$THIRD_PARTY_BIN_DIR/$BIN__BACKUP_DIR_BASENAME"
 start_task "link fake compopt -> ${dest/#$HOME/\~}"
