@@ -58,7 +58,7 @@ int getTempFile(char *outputPath) {
 	assert(delta < MAXPATHLEN);
 	
 	/* mkstemps with a suffixlen set to 0 is the same as mkstemp AFAICT.
-	 * I had the idea to put the original file extension in the temp file, but I did not do it. */
+	 * I had the idea to put the original file extension in the temp file, but I did not do it (it’s useless, we delete the file immediately). */
 	int fd = mkstemps(outputPath, 0);
 	if (fd == -1) return -1;
 	if (unlink(outputPath) != 0)
