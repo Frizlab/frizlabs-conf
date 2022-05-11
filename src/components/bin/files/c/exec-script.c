@@ -74,7 +74,7 @@ int getTempFile(char *outputPath) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char *argv[], char *environ[]) {
 	const char *script = SCRIPT;
 	const size_t scriptlen = strlen(script);
 	
@@ -94,6 +94,7 @@ int main(int argc, char **argv) {
 	if (lseek(tmpfd, 0, SEEK_SET) == -1)
 		return fatal_perror("cannot seek to the beginning of the temp file");
 	
+	/* Set the new args. */
 	char *interpreterArgs[] = {INTERPRETER_ARGS};
 	STATIC_ASSERT(sizeof(interpreterArgs)/sizeof(char**) - 1 > 0, empty_interpreter_args);
 	
@@ -114,17 +115,37 @@ int main(int argc, char **argv) {
 		newargv[i++] = argv[j];
 	}
 	
+	/* Create new env var. */
+	char newenvvar_static[MAXPATHLEN];
+	char *newenvvar = newenvvar_static;
+	int s = snprintf(newenvvar, MAXPATHLEN, "__FRZ__EXEC_SCRIPT__ORIGINAL_EXEC_NAME=%s", argv[0]);
+	if (s < 0 || s >= MAXPATHLEN) {
+		fprintf(stderr, "warning: cannot add __FRZ__EXEC_SCRIPT__ORIGINAL_EXEC_NAME var to environment: var name and value is too long");
+		newenvvar = NULL;
+	}
+	
+	/* Set the new env. */
+	size_t environ_count = 0;
+	for (char **curenv = environ; *curenv != NULL; ++curenv) environ_count += 1;
+	char *newenv[environ_count + 1/*new env var*/ + 1/*NULL at the end*/];
+	for (char **curenv = environ, **curnewenv = newenv; *curenv != NULL; ++curenv, ++curnewenv) *curnewenv = *curenv;
+	newenv[environ_count] = newenvvar;
+	newenv[environ_count + 1] = NULL;
+	
 #ifndef NDEBUG
 	fprintf(stderr, "Original script path at compilation time: '%s'\n", S(SCRIPT_PATH));
 	fprintf(stderr, "Script sent to interpreter:\n---\n%s\n---\n", script);
+	fprintf(stderr, "Env in script:\n");
+	for (char **curenv = newenv; *curenv != NULL; ++curenv) {
+		fprintf(stderr, "   - %s\n", *curenv);
+	}
 	fprintf(stderr, "Launching: '%s'", interpreterArgs[0]);
-	for (char **curarg = newargv; *curarg != NULL; ++ curarg) {
+	for (char **curarg = newargv; *curarg != NULL; ++curarg) {
 		fprintf(stderr, " '%s'", *curarg);
 	}
 	fprintf(stderr, "\n");
 #endif
 	
-	/* TODO: Maybe pass original script path and original $0 to script via an env var? */
-	execv(interpreterArgs[0], newargv);
+	execve(interpreterArgs[0], newargv, newenv);
 	return fatal_perror("error running execv");
 }
