@@ -94,17 +94,7 @@ This probably works (hard-linking does work), but hard-linking `/bin/sh` is forb
 If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
 (With a small gotcha: nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
 
-**TODO**: Somehow add an identity check to the script executed by the wrapper, and refuse execution if the identity is incorrect.
-Otherwise any script can be executed through this wrapper (by simply replacing the original script).
-As long as the wrapper is signed, we could implement one of the following method:
-
-- Create a temporary file with the contents of the script, and execute this temporary file;
-- Send the script through a named pipe (basically the same as the previous solution, but avoids writing the script to a temporary file);
-- Send the script through stdin to the interpreter (this is another variant as the previous solutions, probably the best as it does not create any files and avoids the possiblity of a rogue actor modifying the files during or before execution). But is `-` supported by all interpreters? For `zsh` and `bash`, it’s `-s` apparently, for `swift` and `python3`, `-` seems supported;
-- Embed the SHA of the script in the wrapper, and check it hasn’t changed before launching the script;
-- If the script is small enough, we could simply put the whole script in a string and pass it as an argument to the interpreter, but passing a script as an argument to the interpreter might not be supported by the interpreter, and the syntax likely differs between interpreters.
-
-The install in this repo will have to recompile the wrapper each time the script is modified, of course.
+Because of this, the compiled wrapper depends on the C source, of course, but also the script, which means whenever is modified, the final binary will be recompiled.
 
 == zsh (and bash) Fun Stuff
 
