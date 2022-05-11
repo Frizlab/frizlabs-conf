@@ -1,3 +1,6 @@
+#define NDEBUG
+#undef NDEBUG
+
 #include <stdio.h>
 #include <unistd.h>
 
@@ -13,6 +16,8 @@
 #endif
 
 int main(int argc, char **argv) {
+	const char *script = SCRIPT;
+	
 	char *interpreterArgs[] = {INTERPRETER_ARGS};
 	STATIC_ASSERT(sizeof(interpreterArgs)/sizeof(char**) - 1 > 0, empty_interpreter_args);
 	
@@ -33,14 +38,15 @@ int main(int argc, char **argv) {
 		newargv[i++] = argv[j];
 	}
 	
-	if (1) {
-		fprintf(stderr, "Original script path at compilation time: '%s'\n", S(SCRIPT_PATH));
-		fprintf(stderr, "Launching: '%s'", interpreterArgs[0]);
-		for (char **curarg = newargv; *curarg != NULL; ++ curarg) {
-			fprintf(stderr, " '%s'", *curarg);
-		}
-		fprintf(stderr, "\n");
+#ifndef NDEBUG
+	fprintf(stderr, "Original script path at compilation time: '%s'\n", S(SCRIPT_PATH));
+	fprintf(stderr, "Script sent to interpreter:\n---\n%s\n---\n", script);
+	fprintf(stderr, "Launching: '%s'", interpreterArgs[0]);
+	for (char **curarg = newargv; *curarg != NULL; ++ curarg) {
+		fprintf(stderr, " '%s'", *curarg);
 	}
+	fprintf(stderr, "\n");
+#endif
 	
 	execve(interpreterArgs[0], newargv, NULL);
 	fprintf(stderr, "error running execve\n");

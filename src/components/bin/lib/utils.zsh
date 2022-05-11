@@ -98,7 +98,7 @@ function bin_task__install() {
 				local script=
 				local interpreter_args=
 				start_task "install (wrap) ${dest_path/#$HOME/\~} (from $local_relative_path and c/exec-script.c)"
-				{ res_check "$RES" &&   script="$(run_and_log_keep_stdout file_to_hex "$local_path")"                        || { log_task_failure "cannot convert script to hex.";  RES="failed"; RES_LIST+=("$RES") } }
+				{ res_check "$RES" &&   script="$(run_and_log_keep_stdout file_to_c_hex "$local_path")"                      || { log_task_failure "cannot convert script to hex.";  RES="failed"; RES_LIST+=("$RES") } }
 				{ res_check "$RES" &&   interpreter_args="$(run_and_log_keep_stdout extract_interpreter_args "$local_path")" || { log_task_failure "cannot get script interpreter."; RES="failed"; RES_LIST+=("$RES") } }
 				local compiled_file="$COMPONENT_ROOT_FOLDER/files/c/exec-script.c"
 				local full_cflags="$cflags ${interpreter_args:+-DINTERPRETER_ARGS='}$interpreter_args${interpreter_args:+'} -DSCRIPT_PATH='$local_path' -DSCRIPT='$script'"

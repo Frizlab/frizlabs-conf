@@ -63,9 +63,9 @@ function get_author_val() {
 
 
 ## Usage: file_to_hex path
-## Outputs the contents of the file converted to hex (like so "0x48,0x65,0x6c,0x6c,0x6f,0x0a").
-function file_to_hex() {
-	xxd -c0 -ps "$1" | sed -r 's/(..)/0x\1,/g;s/,$//'
+## Outputs the contents of the file converted to hex (like so '"\x48""\x65""\x6c""\x6c""\x6f""\x0a").
+function file_to_c_hex() {
+	xxd -c0 -ps "$1" | sed -r 's/(..)/"\\x\1"/g'
 }
 
 
