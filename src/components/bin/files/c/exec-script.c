@@ -124,6 +124,6 @@ int main(int argc, char **argv) {
 	fprintf(stderr, "\n");
 #endif
 	
-	execve(interpreterArgs[0], newargv, NULL);
-	return fatal("error running execve");
+	execv(interpreterArgs[0], newargv);
+	return fatal_perror("error running execv");
 }
