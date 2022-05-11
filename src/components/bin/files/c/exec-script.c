@@ -124,6 +124,7 @@ int main(int argc, char **argv) {
 	fprintf(stderr, "\n");
 #endif
 	
+	/* TODO: Maybe pass original script path and original $0 to script via an env var? */
 	execv(interpreterArgs[0], newargv);
 	return fatal_perror("error running execv");
 }
