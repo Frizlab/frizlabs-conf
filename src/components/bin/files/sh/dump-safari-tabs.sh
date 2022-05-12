@@ -31,7 +31,7 @@ function redirect_osascript_output() {
 
 
 printf "DATE: "
-date '+%d.%m.%Y-%H:%M:%S'
+date '+%Y.%m.%d-%H:%M:%S'
 for browser in "${@:-Safari}"; do
 	# Call AppleScript.
 	osascript -e '
