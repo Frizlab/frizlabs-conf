@@ -63,11 +63,6 @@ bin_task__delete_bin "frizlab" "markdown"
 # Reason: 32-bits only; upstream could not be found.
 bin_task__delete_bin "lingxiaofeng" "codebt"
 
-### mo3 encoder and decoder ###
-# Reason: 32-bits only; upstream could not be found; can most likely be replaced by ffmpeg.
-bin_task__delete_bin "<unknown>" "mo3enc"
-bin_task__delete_bin "<unknown>" "unmo3"
-
 ### ts to mov ###
 # Reason: Converts to mov files that only QuickTime Player (32-bits) can read IIRC.
 bin_task__delete_bin "<unknown>" "ts2mov"

@@ -1,3 +1,9 @@
+### mo3 encoder and decoder ###
+# From http://www.un4seen.com/
+# There is also a Linux and Windows version available for download on the site.
+bin_task__bin "un4seen" ":Darwin:" "bin/mo3enc"
+bin_task__bin "un4seen" ":Darwin:" "bin/unmo3"
+
 ### Dump Safari Tabs to stdout ###
 bin_task__wrapped_bin "frizlab" ":Darwin:" "sh/dump-safari-tabs.sh"
 
