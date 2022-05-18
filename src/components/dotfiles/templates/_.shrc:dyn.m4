@@ -13,7 +13,9 @@
 ########
 
 m4_define(`m4_frz_brew_all',m4_dnl
-brew-all() {
+m4_dnl # The quadruple quotes make m4 understand the text should be literal (mainly a pb for commas if not done).
+m4_dnl # Triple quotes would have been enough, but we get weird colors in Xcode w/ triple quotes…
+````brew-all() {
 	local exit_code=0
 	local first="true"
 	for b in $1; do
@@ -24,8 +26,7 @@ brew-all() {
 		# 2. Then check the binary the alias calls exists;
 		# 3. And finally execute the alias with args given to brew-all.
 		# Nah… it’s safe!
-m4_dnl # The triple quotes around the comma make m4 understand the comma is not to be interpreted.
-		alias "$b" >/dev/null 2>&1 || { printf "\033[1;31mInvalid alias %s```,''' please fix the “.shrc:dyn” file.\033[0m\n" "$b" >&2; continue; }
+		alias "$b" >/dev/null 2>&1 || { printf "\033[1;31mInvalid alias %s, please fix the “.shrc:dyn” file.\033[0m\n" "$b" >&2; continue; }''''
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		local last_word=""; eval "for word in $(eval echo "\$$(echo "$b" | sed -E 's/-/_/g')"); do last_word=\"\$word\"; done"
 		if [ -x "$last_word" ]; then
