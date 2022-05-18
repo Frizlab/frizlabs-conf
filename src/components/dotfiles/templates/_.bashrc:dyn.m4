@@ -7,6 +7,7 @@
 #
 # \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 
+
 ### Let’s import the bash completion files
 m4_dnl # We put all brews, even arm64 on non-arm64 envs for simplicity
 # First homebrew
