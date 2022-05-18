@@ -24,8 +24,8 @@ brew-all() {
 		# 2. Then check the binary the alias calls exists;
 		# 3. And finally execute the alias with args given to brew-all.
 		# Nah… it’s safe!
-m4_dnl # Funny Story about the semicolon after the %s. Initially I wanted a comma, but m4 wasn’t happy (too many arguments to m4_define). I did not find a way to escape the comma…
-		alias "$b" >/dev/null 2>&1 || { printf "\033[1;31mInvalid alias %s; please fix the “.shrc:dyn” file.\033[0m\n" "$b" >&2; continue; }
+m4_dnl # The triple quotes around the comma make m4 understand the comma is not to be interpreted.
+		alias "$b" >/dev/null 2>&1 || { printf "\033[1;31mInvalid alias %s```,''' please fix the “.shrc:dyn” file.\033[0m\n" "$b" >&2; continue; }
 		eval "local $(alias "$b" | sed -E -e ':a' -e 's/^([^=]*)-/\1_/' -e 'ta')"
 		local last_word=""; eval "for word in $(eval echo "\$$(echo "$b" | sed -E 's/-/_/g')"); do last_word=\"\$word\"; done"
 		if [ -x "$last_word" ]; then
