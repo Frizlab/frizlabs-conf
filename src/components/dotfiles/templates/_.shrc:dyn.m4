@@ -15,7 +15,7 @@
 m4_define(`m4_frz_brew_all',m4_dnl
 m4_dnl # The quadruple quotes make m4 understand the text should be literal (mainly a pb for commas if not done).
 m4_dnl # Triple quotes would have been enough, but we get weird colors in Xcode w/ triple quotes…
-````brew-all() {
+brew-all() {````
 	local exit_code=0
 	local first="true"
 	for b in $1; do
