@@ -77,8 +77,8 @@ function bin_task__install() {
 			;;
 			copy)
 				start_task "install (copy) ${dest_path/#$HOME/\~} (from $local_relative_path)"
-				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                             && RES_LIST+=("$RES") }
-				{ res_check "$RES" &&   catchout RES  libfiles__copy "$local_path" "$dest_path" "$mode" "$backup_dir"   && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"               && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__copy "$local_path" "$dest_path" "$mode"   && RES_LIST+=("$RES") }
 				log_task_from_res_list RES_LIST
 			;;
 			decrypt)
