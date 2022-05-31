@@ -10,7 +10,7 @@ res_check "$res_folder" && {
 	# The backup folder was created successfully, we can create the links.
 	for file in "${DOTFILES__FILES[@]}"; do
 		dest_file="$HOME/$file"
-		repo_file="$(pwd)/files/_$file"
+		repo_file="$COMPONENT_ROOT_FOLDER/files/_$file"
 		start_task "link _$file -> ${dest_file/#$HOME/\~}"
 		catchout RES   libfiles__linknbk "$repo_file" "$dest_file" "600" "$DOTFILES__BACKUP_DIR"
 		log_task_from_res "$RES"
