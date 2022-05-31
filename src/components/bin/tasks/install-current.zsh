@@ -150,6 +150,5 @@ run_and_log test -x "$src" || src="/bin/true"                                  |
 run_and_log test -x "$src" || src="$(run_and_log_keep_stdout command -v true)" || true
 run_and_log test -x "$src" || src="$(run_and_log_keep_stdout which true)"      || true
 run_and_log test -x "$src" || { log_task_failure "cannot get path of bin “true”."; RES="failed"; RES_LIST+=("$RES") }
-{ res_check "$RES" &&   catchout RES  libfiles__folder "$backup_dir" "$BIN__BACKUP_DIR_MODE" && RES_LIST+=("$RES") }
-{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$src" "$dest" "755" "$backup_dir"   && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$src" "$dest" "755" "$backup_dir" "$BIN__BACKUP_DIR_MODE"   && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST

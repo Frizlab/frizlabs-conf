@@ -36,12 +36,15 @@ path+="$PWD/.cache/bin"
 # We export PATH in case the variable is not exported yet.
 export PATH
 
+# This variable can be used in the components to get the run date.
+RUN_DATE="$(date '+%Y.%m.%d-%H:%M:%S')" || { print "FATAL: date failed." >&2; exit 255; }; readonly RUN_DATE
+
 # Let’s define the different paths we will need.
 readonly SRC_FOLDER="$ROOT_FOLDER/src"
 readonly CACHE_FOLDER="$ROOT_FOLDER/.cache"
 readonly LIB_FOLDER="$SRC_FOLDER/lib"
 readonly COMPONENTS_FOLDER="$SRC_FOLDER/components"
-RUN_LOG="$ROOT_FOLDER/runs/$(date '+%Y.%m.%d-%H:%M:%S').log" || { print "FATAL: date failed." >&2; exit 255; }; readonly RUN_LOG
+readonly RUN_LOG="$ROOT_FOLDER/runs/$RUN_DATE.log"
 
 # Import other vars.
 source "$LIB_FOLDER/vars-facts.zsh"

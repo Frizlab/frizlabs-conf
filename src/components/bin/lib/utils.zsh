@@ -71,9 +71,8 @@ function bin_task__install() {
 		case "$install_method" in
 			link)
 				start_task "install (link) ${dest_path/#$HOME/\~} (from $local_relative_path)"
-				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                                && RES_LIST+=("$RES") }
-				{ res_check "$RES" &&   catchout RES  libfiles__folder "$backup_dir"   "$BIN__BACKUP_DIR_MODE"             && RES_LIST+=("$RES") }
-				{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$local_path" "$dest_path" "$mode" "$backup_dir"   && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                                                        && RES_LIST+=("$RES") }
+				{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$local_path" "$dest_path" "$mode" "$backup_dir" "$BIN__BACKUP_DIR_MODE"   && RES_LIST+=("$RES") }
 				log_task_from_res_list RES_LIST
 			;;
 			copy)

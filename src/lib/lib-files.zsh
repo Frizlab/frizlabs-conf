@@ -115,23 +115,33 @@ function libfiles__lnk() {
 
 ## Link the given file to the given destination, backuping the destination if it already existed.
 ##
-## The backup folder must already exist if the destination file might exist as anything but a link (it is used in this case).
-## If the destination has no chance of already existing, giving an empty string for the backup folder is ok.
+## The backup folder is only created if the destination file exists as anything but a link.
+## If the destination has no chance of already existing, giving an empty string for the backup folder is ok (and the mode does not matter).
 ##
 ## link_mode is mostly useless (ignored on most fs) and is fully ignored on Linux
 ##  as it is not possible to change the perm of a link w/ chmod on it (says the man).
 ##
-## Usage: libfiles__linknbk src dest link_mode backup_folder
-## Example: libfiles__linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup
+## Usage: libfiles__linknbk src dest link_mode backup_folder backup_folder_mode
+## Example: libfiles__linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup 700
 function libfiles__linknbk() {
 	local -r src="$1"
 	local -r dest="$2"
 	local -r lnkmode="$3"
 	local -r bkfolder="$4"
+	local -r bkmode="$5"
 	
 	run_and_log test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
 	run_and_log test -e "$dest" && ! run_and_log test -L "$dest" && {
-		run_and_log "$MV" -- "$dest" "$bkfolder" || { log_task_failure "cannot backup existing file when linking"; echo "failed"; return }
+		local TMPRES
+		local -r BACKUP_DEST="$bkfolder/$RUN_DATE--$(run_and_log_keep_stdout basename "$dest")"
+		
+		catchout TMPRES  libfiles__folder "$bkfolder" "$bkmode"
+		res_check "$TMPRES" || { echo "failed"; return }
+		
+		# The -n option of mv does not fail when dest already exists! We cannot use it.
+		# Instead we manually check if file exists before moving.
+		run_and_log test ! -e "$BACKUP_DEST"           || { log_task_failure "cannot backup existing file when linking (backup dest already exist)";      echo "failed"; return }
+		run_and_log "$MV" -f -- "$dest" "$BACKUP_DEST" || { log_task_failure "cannot backup existing file when linking (cannot move file to backup dir)"; echo "failed"; return }
 	}
 	run_and_log test "$(run_and_log_keep_stdout "$READLINK" -- "$dest")" = "$src" && { run_and_log test "$HOST_OS" != "Darwin" || run_and_log test "$(run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$lnkmode" } && { echo "ok"; return }
 	
