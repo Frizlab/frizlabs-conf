@@ -94,6 +94,7 @@ log_task_from_res "$RES"
 
 ### Key Bindings ###
 
+# Note: We could copy instead of link the idekeybindings file as Xcode first remove the file then rewrites it when it modifies it.
 start_task "set smart beginning and ending of lines in Xcode"
 local -r DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
 local -r BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
