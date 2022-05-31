@@ -2,6 +2,7 @@
 typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"cloc"                "bin/cloc"
 	"coreutils"           "bin/gsort"
+	"fd"                  "bin/fd"
 	"git-lfs"             "bin/git-lfs"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
