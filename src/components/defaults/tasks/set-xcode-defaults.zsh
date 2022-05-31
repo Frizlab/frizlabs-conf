@@ -95,6 +95,8 @@ log_task_from_res "$RES"
 ### Key Bindings ###
 
 start_task "set smart beginning and ending of lines in Xcode"
-{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Frizlab.idekeybindings" "$HOME/Library/Developer/Xcode/UserData/KeyBindings/Frizlab.idekeybindings" "644" ""   && RES_LIST+=("$RES") }
-{ res_check "$RES" &&   catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet Frizlab.idekeybindings                                                               && RES_LIST+=("$RES") }
+local -r DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
+local -r BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
+{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Frizlab.idekeybindings" "$DEST_FOLDER/Frizlab.idekeybindings" "644" "$BACKUP_FOLDER" "755"   && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet Frizlab.idekeybindings                                             && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
