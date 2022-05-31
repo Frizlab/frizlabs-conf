@@ -1,1 +1,5 @@
-source "./tasks/set-defaults.zsh"
+source "./tasks/set-system-defaults.zsh"
+source "./tasks/set-mail-defaults.zsh"
+source "./tasks/set-safari-defaults.zsh"
+source "./tasks/set-textedit-defaults.zsh"
+source "./tasks/set-xcode-defaults.zsh"
