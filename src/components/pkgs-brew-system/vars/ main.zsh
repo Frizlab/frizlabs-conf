@@ -37,7 +37,6 @@ if test "$HOST_OS" != "Linux"; then
 		# I could `brew install swift`, but it’s expensive, probably (probably because I tried and it failed).
 		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
 		"xcode-actions/tap/xct"                       "bin/xct"
-		"swiftdocorg/formulae/swift-doc"              "bin/swift-doc"
 		"mxcl/made/swift-sh"                          "bin/swift-sh"
 		"happn-app/public/locmapper"                  "Cellar/locmapper"
 	)
