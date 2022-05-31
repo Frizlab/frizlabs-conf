@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Text Key Bindings</key>
+	<dict>
+		<key>Key Bindings</key>
+		<dict>
+			<key></key>
+			<array>
+				<string>deleteToBeginningOfText:</string>
+				<string>moveToEndOfTextAndModifySelection:</string>
+				<string>moveToBeginningOfTextAndModifySelection:</string>
+				<string>moveToEndOfText:</string>
+				<string>moveToBeginningOfText:</string>
+			</array>
+			<key>$@</key>
+			<string>moveToBeginningOfLineAndModifySelection:</string>
+			<key>$@</key>
+			<string>moveToEndOfLineAndModifySelection:</string>
+			<key>@</key>
+			<string>deleteToBeginningOfLine:</string>
+			<key>@</key>
+			<string>moveToBeginningOfLine:</string>
+			<key>@</key>
+			<string>moveToEndOfLine:</string>
+		</dict>
+		<key>Version</key>
+		<integer>3</integer>
+	</dict>
+</dict>
+</plist>

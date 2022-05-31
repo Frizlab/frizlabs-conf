@@ -90,3 +90,11 @@ log_task_from_res "$RES"
 start_task "set show invisibles in Xcode"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextShowInvisibleCharacters 1
 log_task_from_res "$RES"
+
+
+### Key Bindings ###
+
+start_task "set smart beginning and ending of lines in Xcode"
+{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Frizlab.idekeybindings" "$HOME/Library/Developer/Xcode/UserData/KeyBindings/Frizlab.idekeybindings" "644" ""   && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet Frizlab.idekeybindings                                                               && RES_LIST+=("$RES") }
+log_task_from_res_list RES_LIST
