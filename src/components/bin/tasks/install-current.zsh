@@ -1,3 +1,6 @@
+### defaults diff ###
+bin_task__bin "frizlab" ":Darwin:" "sh/deff.sh"
+
 ### mo3 encoder and decoder ###
 # From http://www.un4seen.com/
 # There is also a Linux and Windows version available for download on the site.
