@@ -165,6 +165,7 @@ for action in actions {
 				let transformedFont: String
 				switch fontComponents[0] {
 					case let v where v.hasPrefix("SFMono-"): transformedFont = v
+					case "Helvetica":                        transformedFont = "SFMono-Regular"
 					case "HelveticaNeue":                    transformedFont = "SFMono-Regular"
 					case ".AppleSystemUIFont":               transformedFont = "SFMono-Regular"
 					case ".AppleSystemUIFontBold":           transformedFont = "SFMono-Bold"
