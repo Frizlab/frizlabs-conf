@@ -72,6 +72,24 @@ function libfiles__copy() {
 }
 
 ##
+## Usage: libfiles__copy_from_memory content dest mode
+## Example: libfiles__copy_from_memory "this_is_a_secret" ~/.pass 600
+function libfiles__copy_from_memory() {
+	local -r content="$1"; shift
+	local -r dest="$1"; shift
+	local -r mode="$1"; shift
+	
+	# First we check the destination file is not a folder
+	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
+	
+	printf "%s" "$content" | run_and_log "$DIFF" -- - "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { echo "ok"; return }
+	
+	printf "%s" "$content" >"$dest"         || { log_task_failure "cannot copy file contents to expected location"; echo "failed"; return }
+	run_and_log "$CHMOD" -- "$mode" "$dest" || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
+	echo "changed"
+}
+
+##
 ## Usage: libfiles__decrypt_and_copy src dest mode
 ## Example: libfiles__decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
 function libfiles__decrypt_and_copy() {
