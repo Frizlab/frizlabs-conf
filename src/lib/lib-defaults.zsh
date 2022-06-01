@@ -60,6 +60,7 @@ function libdefaults__set_int() {
 
 
 ## Set a string value for the given key using macOS defaults CLT.
+## TODO: (BUG) If a default is undefined and one try and set it to an empty string, the default will be considered up-to-date.
 ## Usage: libdefaults__set_str [-currentHost] domain key value
 ## Example: libdefaults__set_str com.apple.Safari SearchProviderIdentifier "com.duckduckgo"
 function libdefaults__set_str() {
