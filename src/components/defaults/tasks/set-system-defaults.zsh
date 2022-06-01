@@ -108,3 +108,13 @@ log_task_from_res_list RES_LIST
 start_task "set system-wide search engine"
 catchout RES  libdefaults__set_plist NSGlobalDomain NSPreferredWebServices '{NSWebServicesProviderWebSearch = {NSDefaultDisplayName = DuckDuckGo; NSProviderIdentifier = "com.duckduckgo";};}'
 log_task_from_res "$RES"
+
+# https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/
+# https://github.com/tech-otaku/menu-bar-clock (more up-to-date than blog post)
+# We do not do `AppleICUForce12HourTime`; maybe we should, idk.
+# Note: DateFormat has an additional space after the 'at' when set by Apple.
+start_task "set menubar clock format"
+{ res_check "$RES" &&   catchout RES  libdefaults__set_str  com.apple.menuextra.clock DateFormat "EEE d MMM 'at' HH:mm:ss" && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.menuextra.clock Show24Hour  1                        && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.menuextra.clock ShowSeconds 1                        && RES_LIST+=("$RES") }
+log_task_from_res_list RES_LIST
