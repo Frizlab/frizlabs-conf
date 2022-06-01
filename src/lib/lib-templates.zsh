@@ -1,8 +1,8 @@
 # Template-related utilities
 
 ##
-## Usage: detemplate src dest mode
-## Example: detemplate ./_.bashrc ~/.bashrc 600
+## Usage: libtemplates__detemplate src dest mode
+## Example: libtemplates__detemplate ./_.bashrc ~/.bashrc 600
 function libtemplates__detemplate() {
 	local -r src="$1"
 	local -r dest="$2"
