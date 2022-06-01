@@ -63,6 +63,11 @@ Prepare Rule Group Subscription and automate installation of said subscription i
 The “system” brew installations fails for now (no sudo, no support for install in /usr/local).
 See link:./src/components/homebrew-system/tasks/%20main.zsh#L4[Homebrew System Install Task] for more info.
 
+=== `systemsetup`
+This tool allows changing a few things (timezone, time before sleep, …).
+It might be useful.
+It must be run with sudo though.
+
 === A Thing from Twitter
 
 https://twitter.com/ryleyherrington/status/1354546825739472897
