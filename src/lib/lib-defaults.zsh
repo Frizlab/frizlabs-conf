@@ -82,8 +82,9 @@ function libdefaults__set_str() {
 	local -r current_value_escaped_with_dot="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key"; printf ".")"
 	# There are probably values that do not pass the unescaping we do, but we do all major cases AFAICT.
 	# Fuzzy testing would help in this particular instance I’d say.
-	local current_value_over_escaped_with_dot="$(run_and_log_keep_stdout printf "%s" "${current_value_escaped_with_dot%$NEW_LINE.}" | run_and_log_keep_stdout sed -E "s/'/'\\\'\$'/g" && printf ".")" || { log_task_failure "error escaping string value for defaults domain $domain key $key"; echo "failed"; return }
-	local current_value_with_dot="$(run_and_log_keep_stdout eval printf "%s" \$\'"${current_value_over_escaped_with_dot%.}"\'                                                         && printf ".")" || { log_task_failure "error escaping string value for defaults domain $domain key $key"; echo "failed"; return }
+	local current_value_over_escaped_with_dot current_value_with_dot
+	current_value_over_escaped_with_dot="$(run_and_log_keep_stdout printf "%s" "${current_value_escaped_with_dot%$NEW_LINE.}" | run_and_log_keep_stdout sed -E "s/'/'\\\'\$'/g" && printf ".")" || { log_task_failure "error escaping string value for defaults domain $domain key $key"; echo "failed"; return }
+	current_value_with_dot="$(run_and_log_keep_stdout eval printf "%s" \$\'"${current_value_over_escaped_with_dot%.}"\'                                                         && printf ".")" || { log_task_failure "error escaping string value for defaults domain $domain key $key"; echo "failed"; return }
 	readonly current_value_over_escaped_with_dot current_value_with_dot
 	
 	run_and_log test "${current_value_with_dot%.}" != "$value" || { echo "ok"; return }
