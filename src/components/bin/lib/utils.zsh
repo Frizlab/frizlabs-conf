@@ -103,7 +103,7 @@ function bin_task__install() {
 				local full_cflags="$cflags ${interpreter_args:+-DINTERPRETER_ARGS='}$interpreter_args${interpreter_args:+'} -DSCRIPT_PATH='$local_path' -DSCRIPT='$script'"
 				{ res_check "$RES" &&   catchout RES  libfiles__folder "$dest_folder" "755"                                           && RES_LIST+=("$RES") }
 				{ res_check "$RES" &&   catchout RES  libfiles__compilec "$compiled_file" "$dest_path" "$full_cflags" "$local_path"   && RES_LIST+=("$RES") }
-				log_task_from_res "$RES"
+				log_task_from_res_list RES_LIST
 			;;
 		esac
 	else
