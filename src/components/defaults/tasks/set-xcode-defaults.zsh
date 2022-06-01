@@ -103,6 +103,21 @@ local -r KB_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBac
 log_task_from_res_list RES_LIST
 
 
+### Font and Color Themes ###
+
+# Note: AFAIK we could install the modified Xcode themes w/ the same name as the builtin ones; Xcode would use the modified ones.
+#       Might be a future TODO as having an explicit variant of the theme is good for clarity, but in our case not really necessary.
+defaults_task__install_modified_xcode_theme "Default (Dark)"  "Default + Frizlab (Dark)"  mono smaller
+defaults_task__install_modified_xcode_theme "Default (Light)" "Default + Frizlab (Light)" mono smaller
+
+start_task "set dark theme to “Default + Frizlab (Dark)” in Xcode"
+catchout RES  libdefaults__set_str com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme "Default + Frizlab (Dark).xccolortheme"
+log_task_from_res "$RES"
+start_task "set light theme to “Default + Frizlab (Light)” in Xcode"
+catchout RES  libdefaults__set_str com.apple.dt.Xcode XCFontAndColorCurrentTheme "Default + Frizlab (Light).xccolortheme"
+log_task_from_res "$RES"
+
+
 ### Other ###
 
 start_task "link code snippets from conf folder to Xcode user data"
