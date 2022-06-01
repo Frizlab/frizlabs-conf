@@ -60,7 +60,6 @@ function libdefaults__set_int() {
 
 
 ## Set a string value for the given key using macOS defaults CLT.
-## TODO: (BUG) If a default is undefined and one try and set it to an empty string, the default will be considered up-to-date.
 ## Usage: libdefaults__set_str [-currentHost] domain key value
 ## Example: libdefaults__set_str com.apple.Safari SearchProviderIdentifier "com.duckduckgo"
 function libdefaults__set_str() {
@@ -80,7 +79,7 @@ function libdefaults__set_str() {
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
 	# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
-	local -r current_value_escaped_with_dot="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key" && printf ".")"
+	local -r current_value_escaped_with_dot="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key"; printf ".")"
 	# There are probably values that do not pass the unescaping we do, but we do all major cases AFAICT.
 	# Fuzzy testing would help in this particular instance I’d say.
 	local current_value_over_escaped_with_dot current_value_with_dot
@@ -88,7 +87,8 @@ function libdefaults__set_str() {
 	current_value_with_dot="$(run_and_log_keep_stdout eval printf "%s" \$\'"${current_value_over_escaped_with_dot%.}"\'                                                         && printf ".")" || { log_task_failure "error escaping string value for defaults domain $domain key $key"; echo "failed"; return }
 	readonly current_value_over_escaped_with_dot current_value_with_dot
 	
-	run_and_log test "${current_value_with_dot%.}" != "$value" || { echo "ok"; return }
+	# If current_value_with_dot is _exactly_ equal to ".." (without any newlines), that means the default did not exist and so we must set it.
+	run_and_log test "${current_value_with_dot%.}" != "$value" -o "$current_value_with_dot" = ".." || { echo "ok"; return }
 	
 	run_and_log defaults $defaults_options write "$domain" "$key" -string "$value" || { log_task_failure "cannot set string value for defaults domain $domain key $key"; echo "failed"; return }
 	echo "changed"
