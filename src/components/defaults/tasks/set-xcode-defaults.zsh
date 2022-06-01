@@ -96,8 +96,17 @@ log_task_from_res "$RES"
 
 # Note: We could copy instead of link the idekeybindings file as Xcode first remove the file then rewrites it when it modifies it.
 start_task "set smart beginning and ending of lines in Xcode"
-local -r DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
-local -r BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
-{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Frizlab.idekeybindings" "$DEST_FOLDER/Frizlab.idekeybindings" "644" "$BACKUP_FOLDER" "755"   && RES_LIST+=("$RES") }
-{ res_check "$RES" &&   catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet Frizlab.idekeybindings                                             && RES_LIST+=("$RES") }
+local -r KB_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
+local -r KB_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
+{ res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Frizlab.idekeybindings" "$KB_DEST_FOLDER/Frizlab.idekeybindings" "644" "$KB_BACKUP_FOLDER" "755"   && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet Frizlab.idekeybindings                                                   && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
+
+
+### Other ###
+
+start_task "link code snippets from conf folder to Xcode user data"
+local -r CS_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
+local -r CS_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippetsBackups"
+catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/CodeSnippets" "$CS_DEST_FOLDER" "755" "$CS_BACKUP_FOLDER" "755"
+log_task_from_res "$RES"

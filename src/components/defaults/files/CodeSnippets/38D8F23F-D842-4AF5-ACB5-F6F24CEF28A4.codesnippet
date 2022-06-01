@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>set-default</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>start_task "set &lt;#stuff#&gt; in &lt;#app#&gt;"
+catchout RES  libdefaults__set_&lt;#type#&gt; &lt;#app.bundle#&gt; &lt;#key#&gt; &lt;#value#&gt;
+log_task_from_res "$RES"
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>38D8F23F-D842-4AF5-ACB5-F6F24CEF28A4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.BourneShellScript</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Conf – Set Defaults</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
