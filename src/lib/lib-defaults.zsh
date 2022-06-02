@@ -59,6 +59,32 @@ function libdefaults__set_int() {
 }
 
 
+## Set an float value for the given key using macOS defaults CLT.
+## Usage: libdefaults__set_float [-currentHost] domain key value
+## Example: libdefaults__set_float NSGlobalDomain KeyRepeat 2
+function libdefaults__set_float() {
+	local defaults_options=
+	if [ "$1" = "-currentHost" ]; then
+		defaults_options="-currentHost"
+		shift
+	fi
+	readonly defaults_options
+	
+	local -r domain="$1"
+	local -r key="$2"
+	local -r value="$3"
+	
+	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
+	# We also don’t care about any type mismatch.
+	# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
+	local -r current_value="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key")"
+	run_and_log test "$current_value" != "$value" || { echo "ok"; return }
+	
+	run_and_log defaults $defaults_options write "$domain" "$key" -float "$value" || { log_task_failure "cannot set float value for defaults domain $domain key $key"; echo "failed"; return }
+	echo "changed"
+}
+
+
 ## Set a string value for the given key using macOS defaults CLT.
 ## Usage: libdefaults__set_str [-currentHost] domain key value
 ## Example: libdefaults__set_str com.apple.Safari SearchProviderIdentifier "com.duckduckgo"
@@ -122,8 +148,8 @@ function libdefaults__set_plist() {
 }
 
 
-## Add some dictionary values in a given key using macOS defaults CLT. The key’s
-## value must either not already exist or be a dictionary.
+## Add some dictionary values in a given key using macOS defaults CLT.
+## The key’s value must either not already exist or be a dictionary.
 ## Usage: libdefaults__add_dict [-currentHost] domain key dict_key1 dict_value1 dict_key2 dict_value2 ...
 ## Example: libdefaults__add_dict com.apple.Safari "NSToolbar Configuration BrowserToolbarIdentifier-v4.6" "TB Default Item Identifiers" '(CombinedSidebarTabGroupToolbarIdentifier, SidebarSeparatorToolbarItemIdentifier, UnifiedTabBarToolbarIdentifier, ShareToolbarIdentifier, NewTabToolbarIdentifier)'
 function libdefaults__add_dict() {
