@@ -107,8 +107,8 @@ log_task_from_res_list RES_LIST
 
 # Note: AFAIK we could install the modified Xcode themes w/ the same name as the builtin ones; Xcode would use the modified ones.
 #       Might be a future TODO as having an explicit variant of the theme is good for clarity, but in our case not really necessary.
-defaults_task__install_modified_xcode_theme "Default (Dark)"  "Default + Frizlab (Dark)"  mono smaller
-defaults_task__install_modified_xcode_theme "Default (Light)" "Default + Frizlab (Light)" mono smaller
+defaults_task__install_modified_xcode_theme "Default (Dark)"  "Default + Frizlab (Dark)"  "${DEFAULTS__XCODE_THEME_ACTIONS[@]}"
+defaults_task__install_modified_xcode_theme "Default (Light)" "Default + Frizlab (Light)" "${DEFAULTS__XCODE_THEME_ACTIONS[@]}"
 
 start_task "set dark theme to “Default + Frizlab (Dark)” in Xcode"
 catchout RES  libdefaults__set_str com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme "Default + Frizlab (Dark).xccolortheme"
