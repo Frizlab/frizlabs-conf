@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>hasResources</string>
+			<key>Required</key>
+			<false/>
+			<key>Name</key>
+			<string>Has Resources</string>
+			<key>Description</key>
+			<string>Whether the module has resources (changes the Package definition)</string>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>Default</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>
