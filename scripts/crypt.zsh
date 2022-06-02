@@ -11,6 +11,7 @@ path+="$(pwd)/.cache/bin"
 readonly CACHE_FOLDER="$(pwd)/.cache"
 source "./src/lib/vars-facts.zsh"
 source "./src/lib/vars-executables.zsh"
+source "./src/lib/input-ccrypt.zsh"
 source "./src/lib/lib-ccrypt.zsh"
 
 popd
