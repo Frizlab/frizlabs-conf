@@ -11,20 +11,6 @@
 	<key>Options</key>
 	<array>
 		<dict>
-			<key>Identifier</key>
-			<string>prefix</string>
-			<key>Required</key>
-			<false/>
-			<key>Name</key>
-			<string>Module Prefix:</string>
-			<key>Description</key>
-			<string>A prefix for the module name. Can be empty.</string>
-			<key>Type</key>
-			<string>text</string>
-			<key>Default</key>
-			<string/>
-		</dict>
-		<dict>
 			<!-- The Identifier MUST be “productName” here: that’s what makes Xcode _not_ ask for the file name when creating the file. -->
 			<key>Identifier</key>
 			<string>productName</string>
@@ -40,6 +26,20 @@
 			<true/>
 			<!-- We must set an empty string as a default.
 			     If we don’t, Xcode will prefix the value with the project’s class prefix. -->
+			<key>Default</key>
+			<string/>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>prefix</string>
+			<key>Required</key>
+			<false/>
+			<key>Name</key>
+			<string>Module Prefix:</string>
+			<key>Description</key>
+			<string>A prefix for the module name. Can be empty.</string>
+			<key>Type</key>
+			<string>text</string>
 			<key>Default</key>
 			<string/>
 		</dict>
