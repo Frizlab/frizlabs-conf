@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>swift-script</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#!/usr/bin/swift sh
+
+import Foundation
+
+import ArgumentParser // apple/swift-argument-parser ~&gt; 1.1.2
+import CLTLogger      // xcode-actions/clt-logger    ~&gt; 0.3.6
+import Logging        // apple/swift-log             ~&gt; 1.4.2
+
+
+
+/* Let’s bootstrap the logger before anything else. */
+LoggingSystem.bootstrap{ _ in CLTLogger() }
+let logger: Logger = {
+	var ret = Logger(label: "main")
+	ret.logLevel = .info
+	return ret
+}()
+
+/* Then call main. */
+&lt;#MainCommand#&gt;.main()
+
+
+struct &lt;#MainCommand#&gt; : ParsableCommand {
+	
+	func run() throws {
+		/* swift-sh creates a binary whose path is not one we expect, so we cannot use main.path directly.
+		 * Using the _ env variable is **extremely** hacky, but seems to do the job…
+		 * See https://github.com/mxcl/swift-sh/issues/101 */
+		let fm = FileManager.default
+		let filepath = ProcessInfo.processInfo.environment["_"] ?? fm.currentDirectoryPath
+		fm.changeCurrentDirectoryPath(URL(fileURLWithPath: filepath).deletingLastPathComponent().appendingPathComponent("..").path)
+		
+		/* Start your code here. */
+	}
+	
+}
+
+
+struct SimpleError : Error {
+	var message: String
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ED89F9AF-F645-408D-A907-15EAEFAB1857</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>The full boilerplate for a Swift script.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift Script</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
