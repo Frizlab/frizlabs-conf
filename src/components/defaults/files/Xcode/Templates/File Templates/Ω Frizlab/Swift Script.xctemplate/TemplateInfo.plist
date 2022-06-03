@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>Platforms</key>
+	<array/>
+	<key>Image</key>
+	<dict>
+		<key>FileTypeIcon</key>
+		<string>swift</string>
+	</dict>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>mainCommandName</string>
+			<key>Required</key>
+			<true/>
+			<key>Name</key>
+			<string>Main Command Name:</string>
+			<key>Description</key>
+			<string>The name of the struct that will represent the main command.</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Default</key>
+			<string/>
+		</dict>
+	</array>
+</dict>
+</plist>
