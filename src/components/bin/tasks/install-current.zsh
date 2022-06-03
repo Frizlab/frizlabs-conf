@@ -1,3 +1,7 @@
+### Fix Xcode Headers ###
+# Fix broken headers from Xcode forcing a //-styled comment before the header.
+bin_task__bin "frizlab" ":Darwin:" "swift-sh/fix-xcode-headers.swift"
+
 ### defaults diff ###
 bin_task__bin "frizlab" ":Darwin:" "sh/deff.sh"
 
