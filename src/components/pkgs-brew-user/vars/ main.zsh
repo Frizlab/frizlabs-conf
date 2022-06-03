@@ -6,7 +6,6 @@ typeset -A PKGS_BREW_USER__FORMULAE=(
 typeset -A PKGS_BREW_USER__CASKS=(
 	"chalk"       "Caskroom/chalk"
 	"dash"        "Caskroom/dash"
-	"hex-fiend"   "Caskroom/hex-fiend"
 	"imageoptim"  "Caskroom/imageoptim"
 	"netnewswire" "Caskroom/netnewswire"
 	
