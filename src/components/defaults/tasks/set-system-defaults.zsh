@@ -109,6 +109,10 @@ start_task "set system-wide search engine"
 catchout RES  libdefaults__set_plist NSGlobalDomain NSPreferredWebServices '{NSWebServicesProviderWebSearch = {NSDefaultDisplayName = DuckDuckGo; NSProviderIdentifier = "com.duckduckgo";};}'
 log_task_from_res "$RES"
 
+start_task "set short date format to a sane value (year/month/day)"
+catchout RES  libdefaults__set_plist NSGlobalDomain AppleICUDateFormatStrings '{1 = "y/MM/dd";}'
+log_task_from_res "$RES"
+
 # https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/
 # https://github.com/tech-otaku/menu-bar-clock (more up-to-date than blog post)
 # We do not do `AppleICUForce12HourTime`; maybe we should, idk.
