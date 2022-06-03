@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FILEHEADER</key>
+	<!-- The header starts with a newline to workaround Apple templates having the FILEHEADER value prefixed by “//”. -->
+	<!-- We use the DATE variable, but what we really want is YEAR/MONTH/DAY.
+	     Unfortunately Apple only gives DATE and YEAR… -->
+	<string>
+/*
+ * ___FILENAME___
+ * ___PRODUCTNAME___
+ *
+ * Created by ___FULLUSERNAME___ on ___DATE___.
+ * ___COPYRIGHT___
+ */</string>
+</dict>
+</plist>

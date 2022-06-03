@@ -120,6 +120,12 @@ log_task_from_res "$RES"
 
 ### Other ###
 
+start_task "link template macros to Xcode user data"
+local -r TM_DEST_FILE="$HOME/Library/Developer/Xcode/UserData/IDETemplateMacros.plist"
+local -r TM_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/IDETemplateMacrosBackups"
+catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Xcode/IDETemplateMacros.plist" "$TM_DEST_FILE" "644" "$TM_BACKUP_FOLDER" "755"
+log_task_from_res "$RES"
+
 start_task "link code snippets from conf folder to Xcode user data"
 local -r CS_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
 local -r CS_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippetsBackups"
