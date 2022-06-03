@@ -12,10 +12,10 @@ start_task "enable tap to click"
 # So!
 # There are three domains.
 # My _guess_ is the first one is for externally connected bluetooth trackpads,
-# the second one is for the built-in trackpad on laptops,
-# and the third one is for the UI (in System Preferences).
+#  the second one is for the built-in trackpad on laptops,
+#  and the third one is for the UI (in System Preferences).
 # After verification, first domain works for built-in trackpad _and_ external trackpad,
-# so I don’t know what the second domain is for.
+#  so I don’t know what the second domain is for.
 # The third does change the UI in System Preferences.
 { res_check "$RES" &&   catchout RES  libdefaults__set_bool              com.apple.AppleMultitouchTrackpad                  Clicking                    1 && RES_LIST+=("$RES") }
 { res_check "$RES" &&   catchout RES  libdefaults__set_bool              com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking                    1 && RES_LIST+=("$RES") }
