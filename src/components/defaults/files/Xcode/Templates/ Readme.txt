@@ -17,3 +17,8 @@ Possible Image values found:
 		<string>com.apple.dt.IDEKit</string>
 		<key>BundleImageName</key>
 		<string>framework</string>
+
+
+Some official doc related to the text templates:
+	- https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/devc8a500cb9
+	- https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0

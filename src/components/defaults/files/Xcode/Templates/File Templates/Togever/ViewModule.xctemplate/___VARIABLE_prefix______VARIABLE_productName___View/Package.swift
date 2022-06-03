@@ -3,14 +3,15 @@ import PackageDescription
 
 
 let package = Package(
-	name: "___FILEBASENAME___",
+	name: "___VARIABLE_prefix______VARIABLE_productName___View",
+	defaultLocalization: .init(rawValue: "en"),
 	platforms: [.iOS(.v14)],
-	products: [.library(name: "___FILEBASENAME___", targets: ["___FILEBASENAME___"])],
+	products: [.library(name: "___VARIABLE_prefix______VARIABLE_productName___View", targets: ["___VARIABLE_prefix______VARIABLE_productName___View"])],
 	dependencies: [
 		.package(path: "../../Modules/CoordinatorProtocol")
 	],
 	targets: [
-		.target(name: "___FILEBASENAME___", dependencies: [
+		.target(name: "___VARIABLE_prefix______VARIABLE_productName___View", dependencies: [
 			.product(name: "CoordinatorProtocol", package: "CoordinatorProtocol")
 		]/*, swiftSettings: [
 			.unsafeFlags(["-Xfrontend", "-warn-concurrency", "-Xfrontend", "-enable-actor-data-race-checks"])
