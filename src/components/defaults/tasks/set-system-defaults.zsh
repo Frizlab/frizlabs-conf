@@ -56,6 +56,13 @@ start_task "set vertical swipe to four fingers"
 { res_check "$RES" &&   catchout RES  libdefaults__set_int -currentHost NSGlobalDomain                                     com.apple.trackpad.threeFingerVertSwipeGesture 1 && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
 
+start_task "enable ctrl-scroll to zoom"
+# Three domains, same remarks as for “enable tap to click” (most likely, but not fully verified, especially for third domain)
+{ res_check "$RES" &&   catchout RES  libdefaults__set_int  com.apple.AppleMultitouchTrackpad                  HIDScrollZoomModifierMask  262144 && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_int  com.apple.driver.AppleBluetoothMultitouch.trackpad HIDScrollZoomModifierMask  262144 && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.universalaccess                          closeViewScrollWheelToggle 1      && RES_LIST+=("$RES") }
+log_task_from_res_list RES_LIST
+
 start_task "do not close window when app quit"
 catchout RES  libdefaults__set_bool NSGlobalDomain NSQuitAlwaysKeepsWindows 1
 log_task_from_res "$RES"
