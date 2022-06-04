@@ -84,7 +84,7 @@ It just works: the user gets a prompt from TCC telling the launched program want
 In theory this is not a problem, but if the program is `/bin/sh` (or some other generic script interpreter, or a script whose shebang will be the actual binary), the interpreter will be whitelisted (if the user accepts it).
 This is not great security-wise.
 
-The only proper alternative I found is not launching the script directly, but instead use a custom wrapper whose sole purpose is to exec the script.
+The only proper alternative I found is not to launch the script directly, but instead use a custom wrapper whose sole purpose is to exec the script.
 This is what `exec-script.c` (in this repo) is for.
 
 Other unsuccessful attempts:
@@ -97,7 +97,7 @@ This probably works (hard-linking does work), but hard-linking `/bin/sh` is forb
 
 ⚠️ Do not do a generic exec-bin which would execute whatever is given in argument!
 If you do, you would whitelist this wrapper, and basically would be able to run whatever you want, and you’d be back to the initial problem.
-(With a small gotcha: nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
+(With a small gotcha: Nobody knows about your wrapper and it would thus not really be an attack vector, but security through ignorance of the public is not good.)
 
 Because of this, the compiled wrapper depends on the C source, of course, but also the script, which means whenever is modified, the final binary will be recompiled.
 
