@@ -5,3 +5,6 @@ Regarding the icon:
 Regarding the File Header, we do the same as Apple and prefix it w/ a //-style comment.
 Ideally there should be no prefix at all, and the FILEHEADER variable should contain the comment itself.
 We keep the comment prefix only because Apple has it in all of its templates.
+
+There is a hidden .locmapper folder in there, that should be in the generated files by Xcode, but Xcode simply ignores it, sadly.
+TODO: There might be a way to get it anyway using a variable, but I did not try.
