@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 
 import CoordinatorProtocol
+import CommonViews
 import PWZeXtenderZ
 
 import ___VARIABLE_prefix______VARIABLE_productName___View
