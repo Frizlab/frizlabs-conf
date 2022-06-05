@@ -52,6 +52,9 @@ _Note_: The `log_task_from_res{,_list}` convenience expects `log_task_failure` t
 
 == TODOs
 
+=== Install the Developer Tools Automatically
+This should probably be a Brew formula in our private tap for convenience; then we’d only have to install the formula directly.
+
 === Unhide Private Entries in macOS Logs
 
 https://georgegarside.com/blog/macos/sierra-console-private/
