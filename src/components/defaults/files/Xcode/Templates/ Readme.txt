@@ -1,4 +1,5 @@
 Some doc regarding Xcode templates:
+  https://aleahim.com/xcode-templates/
   https://www.raywenderlich.com/26582967-xcode-project-and-file-templates
   https://diamantidis.github.io/2019/07/21/xcode-custom-templates
 
