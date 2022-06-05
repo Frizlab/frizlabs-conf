@@ -17,6 +17,11 @@ function libdefaults__set_bool() {
 	local -r key="$2"
 	local -r value="$3"
 	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
+	
 	local value_to_set expected_value
 	if test "$value" = "0"; then expected_value="0"; value_to_set="no";
 	else                         expected_value="1"; value_to_set="yes"; fi
@@ -48,6 +53,11 @@ function libdefaults__set_int() {
 	local -r key="$2"
 	local -r value="$3"
 	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
+	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
 	# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
@@ -73,6 +83,11 @@ function libdefaults__set_float() {
 	local -r domain="$1"
 	local -r key="$2"
 	local -r value="$3"
+	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
@@ -101,6 +116,11 @@ function libdefaults__set_str() {
 	local -r value="$3"
 	
 	local -r NEW_LINE=$'\n'
+	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
@@ -136,6 +156,11 @@ function libdefaults__set_plist() {
 	local -r key="$2"
 	local -r value="$3"
 	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
+	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
 	# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
@@ -163,6 +188,11 @@ function libdefaults__add_dict() {
 	local -r domain="$1"
 	local -r key="$2"
 	shift; shift
+	
+	# Check the domain exists first.
+	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
+		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+	}
 	
 	local witness=
 	for k v in "$@"; do
