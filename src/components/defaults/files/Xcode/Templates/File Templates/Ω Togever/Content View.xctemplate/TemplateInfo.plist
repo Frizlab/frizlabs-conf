@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>SupportsSwiftPackage</key>
+	<true/>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.swift-source</string>
+	</array>
+	<key>Options</key>
+	<array>
+		<dict>
+			<!-- The Identifier MUST be “productName” here: that’s what makes Xcode _not_ ask for the file name when creating the file. -->
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Required</key>
+			<true/>
+			<key>Name</key>
+			<string>View Base Name:</string>
+			<key>Description</key>
+			<string>The name of the created view (no “View” suffix).</string>
+			<key>Type</key>
+			<string>text</string>
+			<key>NotPersisted</key>
+			<true/>
+			<!-- We must set an empty string as a default.
+			     If we don’t, Xcode will prefix the value with the project’s class prefix. -->
+			<key>Default</key>
+			<string/>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>XIB</string>
+			<!-- This option is actually required, but Xcode does not understand there’s a default value and
+			      forces the user to have at least one interaction w/ the checkbox before allowing going to the next step. -->
+			<key>Required</key>
+			<false/>
+			<key>Name</key>
+			<string>Use a xib</string>
+			<key>Description</key>
+			<string>Whether the content view will use a xib.</string>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>Default</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>
