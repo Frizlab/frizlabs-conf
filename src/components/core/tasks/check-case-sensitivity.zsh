@@ -1,8 +1,9 @@
 # Check whether the file-system is case-sensitive
 
 start_task "check whether the file-system is case-sensitive"
-[ -e "/tmp" ] && {
-	[ -e "/Tmp" -a -e "/tMp" -a -e "/tmP" ] && \
-		log_task_warning "/tmp, /Tmp, /tMp and /tmP exist, we’re probably case-insensitive." || \
+# ⚠️ Do NOT check /tmp! On macOS, /tmp folder is ALWAYS case-insensitive (like the rest of the system).
+[ -e "$ROOT_FOLDER/src" ] && {
+	[ -e "$ROOT_FOLDER/sRc" ] && \
+		log_task_warning "An sRc file at the root of the repo was found; we’re probably case-insensitive." || \
 		log_task_ok
-} || log_task_failure "/tmp does not exist, cannot check for case-sensitivity"
+} || log_task_failure "The src folder does not exist, this is not normal."
