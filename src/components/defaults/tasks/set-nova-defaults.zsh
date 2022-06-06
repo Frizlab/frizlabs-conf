@@ -23,3 +23,7 @@ log_task_from_res "$RES"
 start_task "set noscroll in file navigator on file change in Nova"
 catchout RES  libdefaults__set_int com.panic.Nova FilesAutomaticallySelectFocused 1
 log_task_from_res "$RES"
+
+start_task "do not show launch window on last window close in Nova"
+catchout RES  libdefaults__set_bool com.panic.Nova ShowWelcomeOnLastWindowClosed 0
+log_task_from_res "$RES"
