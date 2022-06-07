@@ -36,6 +36,12 @@ alias xcsymbolicate='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer/ /
 alias docker-run-cwd='docker run --rm -it -v "$(pwd):/tmp/cwd" --workdir /tmp/cwd'
 alias docker-run-swift='docker-run-cwd --security-opt=seccomp:unconfined --entrypoint bash swift'
 
+# Beta software aliases
+alias xp='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer'
+alias xb='DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer'
+alias xedp='xp xed'
+alias xedb='xb xed'
+
 # Misc. aliases
 alias k='true'
 alias x='chmod ug+x'
