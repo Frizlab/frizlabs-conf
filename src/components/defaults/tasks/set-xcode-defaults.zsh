@@ -91,6 +91,10 @@ start_task "set show invisibles in Xcode"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextShowInvisibleCharacters 1
 log_task_from_res "$RES"
 
+start_task "set side-by-side comparison for code review in Xcode"
+catchout RES  libdefaults__set_int com.apple.dt.Xcode IDEEditorDefaultCodeReviewPreference 1
+log_task_from_res "$RES"
+
 
 ### Key Bindings ###
 
