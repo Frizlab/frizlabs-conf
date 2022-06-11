@@ -41,6 +41,8 @@ alias xp='DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer'
 alias xb='DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer'
 alias xedp='xp xed'
 alias xedb='xb xed'
+alias xcrunp='xp xcrun'
+alias xcrunb='xb xcrun'
 
 # Misc. aliases
 alias k='true'
