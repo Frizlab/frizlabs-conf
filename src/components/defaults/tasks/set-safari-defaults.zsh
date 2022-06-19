@@ -17,11 +17,10 @@ for b in Safari SafariTechnologyPreview; do
 	catchout RES  libdefaults__set_bool "com.apple.$b" EnableNarrowTabs 0
 	log_task_from_res "$RES"
 	
-	start_task "use compact tab layout ($b)"
-	{ res_check "$RES" &&   catchout RES  libdefaults__set_bool  "com.apple.$b" ShowStandaloneTabBar 0                                                                                                                                                                                                                 && RES_LIST+=("$RES") }
-	{ res_check "$RES" &&   catchout RES  libdefaults__set_plist "com.apple.$b" "$SAFARI_TOOLBAR_ITEMS_KEY"                                             "$SAFARI_TOOLBAR_CONFIG_ITEMS_VALUE"                                                                                                                           && RES_LIST+=("$RES") } # Might be useless
-	{ res_check "$RES" &&   catchout RES  libdefaults__add_dict  "com.apple.$b" "$SAFARI_TOOLBAR_CONFIG_DEFAULT_KEY" "$SAFARI_TOOLBAR_CONFIG_ITEMS_KEY" "$SAFARI_TOOLBAR_CONFIG_ITEMS_VALUE"                                                                                                                           && RES_LIST+=("$RES") }
-	{ res_check "$RES" && { catchout RES  run_and_log_keep_stdout ./lib/update-safari-default-toolbar-for-compact-tab-layout.swift "com.apple.$b" "$SAFARI_TOOLBAR_CONFIG_DEFAULT_KEY" || log_task_failure "error while running update-safari-default-toolbar-for-compact-tab-layout (do you have Xcode installed?)" } && RES_LIST+=("$RES") } # Might be useless
-	log_task_from_res_list RES_LIST
+	# We used to have a very complicated setup here where we tried and anticipate the changes to the toolbar that the show standalone tab bar setting entails.
+	# However after some testing it seems changing this single key is enough, and the rest follows whenever it wants.
+	start_task "use separate tab layout ($b)"
+	catchout RES  libdefaults__set_bool "com.apple.$b" ShowStandaloneTabBar 1
+	log_task_from_res "$RES"
 	
 done
