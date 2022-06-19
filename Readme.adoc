@@ -48,7 +48,7 @@ A function doing an actual task.
 The task **must** start with a call to `start_task "name of the task"` and
  end with a call to one of `log_task_{ok,change,warning,failure}`, or use the convenience `log_task_from_res` or `log_task_from_res_list`.
 
-_Note_: The `log_task_from_res{,_list}` convenience expects `log_task_failure` to be called manually.
+_Note_: The `log_task_from_res{,_list}` convenience expects `log_task_failure` or `log_task_warning` to be called manually.
 
 == TODOs
 

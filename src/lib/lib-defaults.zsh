@@ -19,7 +19,7 @@ function libdefaults__set_bool() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	local value_to_set expected_value
@@ -55,7 +55,7 @@ function libdefaults__set_int() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
@@ -86,7 +86,7 @@ function libdefaults__set_float() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
@@ -119,7 +119,7 @@ function libdefaults__set_str() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
@@ -158,7 +158,7 @@ function libdefaults__set_plist() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
@@ -191,7 +191,7 @@ function libdefaults__add_dict() {
 	
 	# Check the domain exists first.
 	test "$domain" = "NSGlobalDomain" -o "$(run_and_log_keep_stdout defaults $defaults_options domains | sed -E 's/, /\n/g' | fgrep --line-regex "$domain")" = "$domain" || {
-		log_task_failure "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
+		log_task_warning "cannot set a value for defaults domain $domain as it does not exist yet"; echo "failed"; return
 	}
 	
 	local witness=
