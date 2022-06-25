@@ -9,7 +9,7 @@ function defaults_task__install_modified_xcode_theme() {
 	local -r dest_folder="$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
 	local -r dest="$dest_folder/$dest_name.xccolortheme"
 	
-	start_task "install modified Xcode theme “$dest_name” from builtin “$xcode_theme” with transformations “$*”"
+	start_task "Xcode: install modified theme “$dest_name” from builtin “$xcode_theme” with transformations “$*”"
 	
 	# Let’s create the modified theme.
 	local modified_theme
