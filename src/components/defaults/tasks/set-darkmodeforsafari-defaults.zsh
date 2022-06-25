@@ -11,3 +11,11 @@ log_task_from_res "$RES"
 start_task "Dark Mode for Safari: set filter mode to ignore list"
 catchout RES  libdefaults__set_int "com.alexandrudenk.Dark-Mode-for-Safari.Dark-Mode" "SITE_FILTER_KEY" 0
 log_task_from_res "$RES"
+
+start_task "Dark Mode for Safari: set blacklist"
+catchout RES  run_and_log_keep_stdout ./lib/set-dark-mode-for-safari-sites-list.swift "FORGET_" "${DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES[@]}" || log_task_failure "error while running set-dark-mode-for-safari-sites-list (do you have Xcode installed?)"
+log_task_from_res "$RES"
+
+start_task "Dark Mode for Safari: set whitelist"
+catchout RES  run_and_log_keep_stdout ./lib/set-dark-mode-for-safari-sites-list.swift "ONLY_" "${DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES[@]}" || log_task_failure "error while running set-dark-mode-for-safari-sites-list (do you have Xcode installed?)"
+log_task_from_res "$RES"
