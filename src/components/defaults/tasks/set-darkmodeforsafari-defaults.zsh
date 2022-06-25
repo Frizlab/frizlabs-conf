@@ -8,7 +8,7 @@ start_task "Dark Mode for Safari: set to activate when system is in dark mode"
 catchout RES  libdefaults__set_int "com.alexandrudenk.Dark-Mode-for-Safari.Dark-Mode" "ACTIVATION_KEY" 2
 log_task_from_res "$RES"
 
-start_task "Dark Mode for Safari: set filter mode to ignore list"
+start_task "Dark Mode for Safari: set filter mode to blacklist"
 catchout RES  libdefaults__set_int "com.alexandrudenk.Dark-Mode-for-Safari.Dark-Mode" "SITE_FILTER_KEY" 0
 log_task_from_res "$RES"
 
