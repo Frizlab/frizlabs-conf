@@ -6,5 +6,5 @@ shopt -s nullglob
 
 cd "$(dirname "$0")/.."
 
-printf "./runs/"
-ls -1 "./runs" | tail -n 1
+p="$(ls -1 "./runs" 2>/dev/null || true | tail -n 1)"
+test -n "$p" && printf "./runs/%s" "$p" || { printf "No runs; returning /dev/null.\n" >&2; printf "/dev/null"; }
