@@ -10,8 +10,6 @@ import UIKit
 @IBDesignable
 final class ___FILEBASENAMEASIDENTIFIER___ : UIView, UIContentView {
 	
-//	/*@CodeOutlet */private var amazingOutlet: UIView!
-	
 	var configuration: UIContentConfiguration {
 		didSet {
 			guard let viewModel = configuration as? ___VARIABLE_productName:identifier___Config,
@@ -47,18 +45,20 @@ final class ___FILEBASENAMEASIDENTIFIER___ : UIView, UIContentView {
 	   MARK: - Private
 	   *************** */
 	
+//	/*@CodeOutlet */private var amazingOutlet: UIView!
+	
 	private func loadFromCode() {
 #warning("Non-implemented method from template.")
 	}
 	
-	private func didLoad(_ viewModel: BenefitCellConfig) {
+	private func didLoad(_ viewModel: ___VARIABLE_productName:identifier___Config) {
 		/* Do one-time configs here after view is loaded. */
 		
 		/* Update views from properties. */
 		applyViewModel(viewModel)
 	}
 	
-	private func applyViewModel(_ viewModel: BenefitCellConfig) {
+	private func applyViewModel(_ viewModel: ___VARIABLE_productName:identifier___Config) {
 #warning("Non-implemented method from template.")
 	}
 	
