@@ -79,6 +79,10 @@ https://twitter.com/ryleyherrington/status/1354546825739472897
 
 Add ignored folders.
 
+== Some Repo With Amazing Stuff
+
+- https://git.herrbischoff.com/awesome-macos-command-line/about/
+
 == `launchctl` Titbits
 
 === Launching AppleEvents from a LaunchAgent
