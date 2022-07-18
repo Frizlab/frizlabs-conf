@@ -151,6 +151,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"tvtime.com"
 	"twitter.com"
 	"userinyerface.com"
+	"useyourloaf.com"
 	"vapor.codes"
 	"vimeo.com"
 	"voscomptesenligne.labanquepostale.fr"
