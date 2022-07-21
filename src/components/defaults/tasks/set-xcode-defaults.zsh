@@ -141,3 +141,7 @@ local -r TPL_DEST_FOLDER="$HOME/Library/Developer/Xcode/Templates"
 local -r TPL_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/TemplatesBackups"
 catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Xcode/Templates" "$TPL_DEST_FOLDER" "755" "$TPL_BACKUP_FOLDER" "755"
 log_task_from_res "$RES"
+
+start_task "Xcode: set scm file review view"
+catchout RES  libdefaults__set_int com.apple.dt.Xcode IDESourceControlReviewFilesSelectedChoice 6
+log_task_from_res "$RES"
