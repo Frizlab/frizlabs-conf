@@ -5,6 +5,7 @@ start_task "Character Picker: set the favorite characters"
 catchout RES  libdefaults__set_plist com.apple.CharacterPicker Favorites:com.apple.CharacterPicker.DefaultDataStorage "
 	(
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U03a9\\\"}\", /* Ω */
+		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0251\\\"}\", /* ɑ (lowercase alpha) */
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0130\\\"}\", /* İ */
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0131\\\"}\", /* ı */
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0219\\\"}\", /* ș */
