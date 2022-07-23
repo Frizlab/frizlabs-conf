@@ -3,6 +3,8 @@
 import Foundation
 import UIKit
 
+import eXtenderZ
+
 import CoordinatorProtocol
 import CommonViews
 import PWZeXtenderZ
@@ -24,7 +26,7 @@ final class ___FILEBASENAMEASIDENTIFIER___ : ___VARIABLE_prefix______VARIABLE_pr
 	
 	func start(animated: Bool) {
 		let viewController = ___VARIABLE_productName___ViewController.instantiate(viewModel: ___VARIABLE_productName___ViewModel(), coordinator: self)
-		viewController.hpn_add(DismissedCallbackVCE{ [weak self] _ in self.flatMap{ $0.parentCoordinator?.childDidEnd($0) } })
+		HPNCheckedAddExtender(viewController, DismissedCallbackVCE{ [weak self] _ in self.flatMap{ $0.parentCoordinator?.childDidEnd($0) } })
 		
 		navigationController.pushViewController(viewController, animated: animated)
 		viewController.refreshTitle()
