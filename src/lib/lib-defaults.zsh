@@ -164,7 +164,7 @@ function libdefaults__set_plist() {
 	# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 	# We also don’t care about any type mismatch.
 	# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
-	local -r current_value_xml="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key" | run_and_log_keep_stdout plutil -convert xml1 -o - -)"
+	local -r current_value_xml="$(run_and_log_keep_stdout echo "$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key")" | run_and_log_keep_stdout plutil -convert xml1 -o - -)"
 	local value_xml; value_xml="$(run_and_log_keep_stdout echo "$value" | run_and_log_keep_stdout plutil -convert xml1 -o - -)"; readonly value_xml
 	run_and_log test "$current_value_xml" != "$value_xml" || { echo "ok"; return }
 	
@@ -199,7 +199,7 @@ function libdefaults__add_dict() {
 		# We fully ignore if defaults cannot read the default at all, because it will probably be because the key does not exist and it is a normal error.
 		# We also don’t care about any type mismatch.
 		# Important: The error defaults could return is “hidden” by the “local” var declaration, so there is no need to “|| true” the call.
-		local current_value_xml="$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key" | run_and_log_keep_stdout plutil -extract "$k" xml1 -o - -)"
+		local current_value_xml="$(run_and_log_keep_stdout echo "$(run_and_log_keep_stdout defaults $defaults_options read "$domain" "$key")" | run_and_log_keep_stdout plutil -extract "$k" xml1 -o - -)"
 		local value_xml; value_xml="$(run_and_log_keep_stdout echo "$v" | run_and_log_keep_stdout plutil -convert xml1 -o - -)"
 		run_and_log test "$current_value_xml" = "$value_xml" || { witness=diff; break }
 	done
