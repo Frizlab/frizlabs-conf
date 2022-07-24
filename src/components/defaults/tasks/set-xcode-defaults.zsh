@@ -130,6 +130,12 @@ local -r TM_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/IDETemplateMac
 catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Xcode/IDETemplateMacros.plist" "$TM_DEST_FILE" "644" "$TM_BACKUP_FOLDER" "755"
 log_task_from_res "$RES"
 
+start_task "Xcode: link find navigator scopes from conf folder to Xcode user data"
+local -r FNS_DEST_FILE="$HOME/Library/Developer/Xcode/UserData/IDEFindNavigatorScopes.plist"
+local -r FNS_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/IDEFindNavigatorScopesBackups"
+catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Xcode/IDEFindNavigatorScopes.plist" "$FNS_DEST_FILE" "644" "$FNS_BACKUP_FOLDER" "755"
+log_task_from_res "$RES"
+
 start_task "Xcode: link code snippets from conf folder to Xcode user data"
 local -r CS_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
 local -r CS_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippetsBackups"
