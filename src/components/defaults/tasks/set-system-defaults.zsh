@@ -130,3 +130,19 @@ start_task "macOS: set menubar clock format"
 # Show date when space allows (whatever that means)
 { res_check "$RES" &&   catchout RES  libdefaults__set_int  com.apple.menuextra.clock ShowDate 0                            && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
+
+start_task "macOS: display alerts for uncaught exceptions"
+catchout RES  libdefaults__set_bool NSGlobalDomain NSApplicationShowExceptions 1
+log_task_from_res "$RES"
+
+start_task "macOS: show crash reporter window as regular app in the Dock"
+catchout RES  libdefaults__set_bool com.apple.CrashReporter UseRegularActivationPolicy 1
+log_task_from_res "$RES"
+
+start_task "macOS: set crash reporter mode to Developer"
+catchout RES  libdefaults__set_str com.apple.CrashReporter DialogType "developer"
+log_task_from_res "$RES"
+
+start_task "macOS: use the notification center for crash report notifications"
+catchout RES  libdefaults__set_bool com.apple.CrashReporter UseUNC 1
+log_task_from_res "$RES"
