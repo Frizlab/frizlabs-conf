@@ -10,7 +10,9 @@ catchout RES  libdefaults__set_plist com.apple.CharacterPicker Favorites:com.app
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0131\\\"}\", /* ı */
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0219\\\"}\", /* ș */
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U0103\\\"}\", /* ă */
-		\"com.apple.cpk:{\\\"char\\\":\\\"\\U021b\\\"}\"  /* ț */
+		\"com.apple.cpk:{\\\"char\\\":\\\"\\U021b\\\"}\", /* ț */
+		\"com.apple.cpk:{\\\"char\\\":\\\"₋\\\"}\",       /* Separator for the “gender me”    group of XibLoc. */
+		\"com.apple.cpk:{\\\"char\\\":\\\"¦\\\"}\"        /* Separator for the “gender other” group of XibLoc. */
 	)
 "
 log_task_from_res "$RES"
