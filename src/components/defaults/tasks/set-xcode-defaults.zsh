@@ -155,6 +155,6 @@ log_task_from_res "$RES"
 
 ### Advanced ###
 
-start_task "Xcode: do close window when app quit"
+start_task "Xcode: do close windows when app quit"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0
 log_task_from_res "$RES"
