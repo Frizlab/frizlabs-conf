@@ -1,5 +1,6 @@
 # Not -r because we modify this variable in the env specific vars file.
 typeset -A PKGS_BREW_USER__FORMULAE=(
+	"cliclick" "bin/cliclick"
 )
 
 # Not -r because we modify this variable in the env specific vars file.
