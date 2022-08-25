@@ -42,6 +42,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"dashboard.nativeconnect.app"
 	"departmentmap.store"
 	"developer.apple.com"
+	"developers.cloudflare.com"
 	"deviantart.com"
 	"discord.com"
 	"discordapp.com"
