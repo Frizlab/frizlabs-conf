@@ -38,6 +38,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"cnpnet.cnp.fr"
 	"cocacola.fr"
 	"connexion.numericable.fr"
+	"css-tricks.com"
 	"daringfireball.net"
 	"dashboard.nativeconnect.app"
 	"departmentmap.store"
