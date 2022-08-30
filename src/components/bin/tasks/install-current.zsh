@@ -1,3 +1,6 @@
+### Offload Work ###
+bin_task__encrypted_bin "frizlab" ":Darwin:~home~server~vm~" "zsh/offload-work.sh.cpt"
+
 ### Fix Xcode Headers ###
 # Fix broken headers from Xcode forcing a //-styled comment before the header.
 bin_task__bin "frizlab" ":Darwin:" "swift-sh/fix-xcode-headers.swift"
