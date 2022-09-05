@@ -40,6 +40,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"connexion.numericable.fr"
 	"css-tricks.com"
 	"daringfireball.net"
+	"dash.cloudflare.com"
 	"dashboard.nativeconnect.app"
 	"departmentmap.store"
 	"developer.apple.com"
