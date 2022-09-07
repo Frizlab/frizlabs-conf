@@ -90,6 +90,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"leetcode.com"
 	"lg.com"
 	"lidentitenumerique.laposte.fr"
+	"linear.app"
 	"loneliness.one"
 	"louvre.fr"
 	"macintoshgarden.org"
