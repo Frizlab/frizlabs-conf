@@ -19,6 +19,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"app.n26.com"
 	"appartager.com"
 	"apple.com"
+	"apple.github.io"
 	"appleid.apple.com"
 	"assure.ameli.fr"
 	"auth.eversports.com"
