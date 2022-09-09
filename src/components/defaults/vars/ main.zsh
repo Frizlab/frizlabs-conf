@@ -4,9 +4,12 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 )
 
 # Not -r because we can modify this variable in the env specific vars file
-# We do not use a whitelist, but we prepare everything for it anyway
-typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=()
+# Only used when filter mode is whitelist
+typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
+	"console.cloud.google.com"
+)
 # Not -r because we can modify this variable in the env specific vars file
+# Only used when filter mode is blacklist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
