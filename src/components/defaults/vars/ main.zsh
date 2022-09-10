@@ -6,7 +6,16 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 # Not -r because we can modify this variable in the env specific vars file
 # Only used when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
+	"amazon.fr"
 	"console.cloud.google.com"
+	"dashboard.stripe.com"
+	"issuehunt.io"
+	"jobs.apple.com"
+	"lafibre.info"
+	"mon-compte.enedis.fr"
+	"prestigere.gercop-extranet.com"
+	"searx.be"
+	"tapas.io"
 )
 # Not -r because we can modify this variable in the env specific vars file
 # Only used when filter mode is blacklist
