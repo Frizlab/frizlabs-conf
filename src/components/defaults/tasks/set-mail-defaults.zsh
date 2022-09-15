@@ -38,3 +38,7 @@ log_task_from_res "$RES"
 start_task "Mail: set default message format to plain text"
 catchout RES  libdefaults__set_str com.apple.mail SendFormat "Plain"
 log_task_from_res "$RES"
+
+start_task "Mail: disable smart address"
+catchout RES  libdefaults__set_int com.apple.mail-shared AddressDisplayMode 3
+log_task_from_res "$RES"
