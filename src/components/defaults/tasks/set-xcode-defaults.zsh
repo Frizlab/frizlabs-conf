@@ -158,3 +158,10 @@ log_task_from_res "$RES"
 start_task "Xcode: do close windows when app quit"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0
 log_task_from_res "$RES"
+
+
+### Hidden ###
+
+start_task "Xcode: show build operation duration"
+catchout RES  libdefaults__set_bool com.apple.dt.Xcode ShowBuildOperationDuration 1
+log_task_from_res "$RES"
