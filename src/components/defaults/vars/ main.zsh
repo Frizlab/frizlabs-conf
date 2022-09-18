@@ -7,6 +7,7 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 # Only used when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"amazon.fr"
+	"apple.stackexchange.com"
 	"askubuntu.com"
 	"community.ui.com"
 	"console.cloud.google.com"
