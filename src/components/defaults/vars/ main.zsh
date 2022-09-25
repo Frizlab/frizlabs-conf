@@ -18,6 +18,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"discuss.hashicorp.com"
 	"dmarcly.com"
 	"en.wikipedia.org"
+	"forum.affinity.serif.com"
 	"groups.google.com"
 	"issuehunt.io"
 	"jobs.apple.com"
