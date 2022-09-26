@@ -7,10 +7,12 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 # Only used when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"a.simplemdm.com"
+	"admin.google.com"
 	"amazon.fr"
 	"apple.stackexchange.com"
 	"appleid.apple.com"
 	"askubuntu.com"
+	"blog.logrocket.com"
 	"community.ui.com"
 	"console.cloud.google.com"
 	"dashboard.stripe.com"
@@ -35,9 +37,11 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"showrss.info"
 	"tapas.io"
 	"v6.testmyipv6.com"
+	"vadimbulavin.com"
 	"vaultproject.io"
 	"wiki.csnu.org"
 	"x0r.fr"
+	"youperv.com"
 )
 # Not -r because we can modify this variable in the env specific vars file
 # Only used when filter mode is blacklist
