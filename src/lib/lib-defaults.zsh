@@ -208,3 +208,26 @@ function libdefaults__add_dict() {
 	run_and_log defaults $defaults_options write "$domain" "$key" -dict-add "$@" || { log_task_failure "cannot add dict for defaults domain $domain key $key"; echo "failed"; return }
 	echo "changed"
 }
+
+
+## Remove the key from the defaults.
+## Usage: libdefaults__remove_key [-currentHost] domain key
+## Example: libdefaults__remove_key com.apple.dt.Xcode ShowBuildOperationDuration
+function libdefaults__remove_key() {
+	local defaults_options=
+	if [ "$1" = "-currentHost" ]; then
+		defaults_options="-currentHost"
+		shift
+	fi
+	readonly defaults_options
+	
+	local -r domain="$1"
+	local -r key="$2"
+	
+	# Check if the domain/key pair is already absent (we consider defaults will only fail in this case).
+	run_and_log defaults $defaults_options read "$domain" "$key" || { echo "ok"; return }
+	
+	# Delete the domain/key pair.
+	run_and_log defaults $defaults_options delete "$domain" "$key" || { log_task_failure "cannot remove defaults for domain $domain and key $key"; echo "failed"; return }
+	echo "changed"
+}

@@ -162,6 +162,6 @@ log_task_from_res "$RES"
 
 ### Hidden ###
 
-start_task "Xcode: show build operation duration"
-catchout RES  libdefaults__set_bool com.apple.dt.Xcode ShowBuildOperationDuration 1
+start_task "Xcode: reset show build operation duration to default"
+catchout RES  libdefaults__remove_key com.apple.dt.Xcode ShowBuildOperationDuration
 log_task_from_res "$RES"
