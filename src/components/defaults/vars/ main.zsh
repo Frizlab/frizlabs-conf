@@ -6,6 +6,8 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 # Not -r because we can modify this variable in the env specific vars file
 # Only used when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
+	"https://www.reddit.com/dev/api/oauth"
+	
 	"a.simplemdm.com"
 	"admin.google.com"
 	"amazon.fr"
@@ -19,9 +21,12 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"developer.hashicorp.com"
 	"discuss.hashicorp.com"
 	"dmarcly.com"
+	"docs.asciidoctor.org"
 	"en.wikipedia.org"
 	"forum.affinity.serif.com"
+	"gitpay.me"
 	"groups.google.com"
+	"hub.docker.com"
 	"issuehunt.io"
 	"jobs.apple.com"
 	"lafibre.info"
@@ -31,6 +36,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"mon-compte.enedis.fr"
 	"news.ycombinator.com"
 	"objc.io"
+	"pbrown.me"
 	"prestigere.gercop-extranet.com"
 	"rutorrent.frostland.fr"
 	"searx.be"
