@@ -25,6 +25,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"dmarcly.com"
 	"docs.asciidoctor.org"
 	"en.wikipedia.org"
+	"en.wiktionary.org"
 	"forum.affinity.serif.com"
 	"gitpay.me"
 	"groups.google.com"

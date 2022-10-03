@@ -4,6 +4,8 @@ DEFAULTS__XCODE_THEME_ACTIONS+=(
 )
 
 DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES+=(
+	"happn.pagerduty.com"
+	"happnapp.atlassian.net"
 	"office.1e42.net"
 	"vip-vault.pod0.happn.io"
 )
