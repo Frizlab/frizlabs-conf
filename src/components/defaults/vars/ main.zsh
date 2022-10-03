@@ -47,6 +47,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"searx.be"
 	"service-public.fr"
 	"showrss.info"
+	"swiftui-lab.com"
 	"tapas.io"
 	"tukaani.org"
 	"unix.stackexchange.com"
