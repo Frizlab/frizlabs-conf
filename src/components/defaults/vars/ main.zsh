@@ -46,6 +46,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"mxtoolbox.com"
 	"news.ycombinator.com"
 	"objc.io"
+	"osintframework.com"
 	"pagerduty.com"
 	"pbrown.me"
 	"powerdmarc.com"
