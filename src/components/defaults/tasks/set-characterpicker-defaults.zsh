@@ -14,7 +14,8 @@ catchout RES  libdefaults__set_plist com.apple.CharacterPicker Favorites:com.app
 		\"com.apple.cpk:{\\\"char\\\":\\\"\\U03bc\\\"}\", /* μ (lowercase mu, official abbreviation for “micro-”). Not to be confused with µ (U+00B5), which is the legacy codepoint for the same thing. See “https://en.wikipedia.org/wiki/Micro-”. */
 		\"com.apple.cpk:{\\\"char\\\":\\\"→\\\"}\",       /* Sub-section MARK prefix in Xcode. Also quite simply the best right arrow there is. */
 		\"com.apple.cpk:{\\\"char\\\":\\\"₋\\\"}\",       /* Separator for the “gender me”    group of XibLoc. */
-		\"com.apple.cpk:{\\\"char\\\":\\\"¦\\\"}\"        /* Separator for the “gender other” group of XibLoc. */
+		\"com.apple.cpk:{\\\"char\\\":\\\"¦\\\"}\",       /* Separator for the “gender other” group of XibLoc. */
+		\"com.apple.cpk:{\\\"char\\\":\\\"⍼\\\"}\"        /* Right angle with downwards zigzag arrow. See https://ionathan.ch/2022/04/09/angzarr.html */
 	)
 "
 log_task_from_res "$RES"
