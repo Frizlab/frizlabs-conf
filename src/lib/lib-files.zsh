@@ -90,22 +90,30 @@ function libfiles__copy_from_memory() {
 }
 
 ##
-## Usage: libfiles__decrypt_and_copy src dest mode
+## Usage: libfiles__decrypt_and_copy src dest mode [backup_dir backup_mode]
 ## Example: libfiles__decrypt_and_copy ./_.bashrc.scp ~/.bashrc 600
 function libfiles__decrypt_and_copy() {
-	local -r src="$1"
-	local -r dest="$2"
-	local -r mode="$3"
+	local -r src="$1"; shift
+	local -r dest="$1"; shift
+	local -r mode="$1"; shift
 	
-	# First we check the destination file is not a folder
+	# First we check the destination file is not a folder.
 	run_and_log test ! -d "$dest" || { log_task_failure "destination file is a folder"; echo "failed"; return }
 	
-	# Then we decrypt the source file at a temporary location
+	# Then we decrypt the source file at a temporary location.
 	decrcpy_tmpfile="$(run_and_log_keep_stdout mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
 	run_and_log "$CP" -f -- "$src" "$decrcpy_tmpfile"     || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
 	run_and_log libccrypt__decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt script"; echo "failed"; return }
 	
 	run_and_log "$DIFF" -- "$decrcpy_tmpfile" "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; echo "ok"; return }
+	
+	# Backup original file if needed.
+	if [ $# -eq 2 ]; then
+		local -r bkfolder="$1"; shift
+		local -r bkmode="$1"; shift
+		catchout TMPRES  libfiles__bk "$dest" "$bkfolder" "$bkmode"
+		res_check "$TMPRES" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; echo "failed"; return }
+	fi
 	
 	run_and_log "$MV" -f -- "$decrcpy_tmpfile" "$dest" || { log_task_failure "cannot move decrypted file to expected location"; echo "failed"; return }
 	run_and_log "$CHMOD" -- "$mode" "$dest" || { log_task_failure "cannot set permission for file at path $dest"; echo "failed"; return }
@@ -116,11 +124,11 @@ function libfiles__decrypt_and_copy() {
 ## Check src exists first.
 ## Fails if dst already exists and is not a link.
 ## On macOS, gives the link the given mode.
-## Usage: lnk ~/clt/homebrew-arm64 ~/clt/homebrew 755
+## Usage: libfiles__lnk source destination link_mode
 function libfiles__lnk() {
-	local -r src="$1"
-	local -r dst="$2"
-	local -r lnkmode="$3"
+	local -r src="$1"; shift
+	local -r dst="$1"; shift
+	local -r lnkmode="$1"; shift
 	
 	run_and_log test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
 	run_and_log test ! -e "$dst" || run_and_log test -L "$dst" || { log_task_failure "destination already exists and is not a link"; echo "failed"; return }
@@ -128,6 +136,26 @@ function libfiles__lnk() {
 	
 	run_and_log "$LN" -sf -- "$src" "$dst" || { log_task_failure "$LN failed"; echo "failed"; return }
 	{ test "$HOST_OS" != "Darwin" || run_and_log "$CHMOD" -h -- "$lnkmode" "$dst" } || { log_task_failure "cannot set permission for link at path $dst"; echo "failed"; return }
+	echo "changed"
+}
+
+## Move the given file in the backup folder.
+## Usage: libfiles__bk file backup_folder backup_folder_mode
+function libfiles__bk() {
+	local -r file="$1"; shift
+	local -r bkfolder="$1"; shift
+	local -r bkmode="$1"; shift
+	
+	local TMPRES
+	local -r BACKUP_DEST="$bkfolder/$RUN_DATE--$(run_and_log_keep_stdout basename "$file")"
+	
+	catchout TMPRES  libfiles__folder "$bkfolder" "$bkmode"
+	res_check "$TMPRES" || { echo "failed"; return }
+	
+	# The -n option of mv does not fail when the file already exists! We cannot use it.
+	# Instead we manually check if file exists before moving.
+	run_and_log test ! -e "$BACKUP_DEST"           || { log_task_failure "cannot backup existing file when linking (backup dest already exist)";      echo "failed"; return }
+	run_and_log "$MV" -f -- "$file" "$BACKUP_DEST" || { log_task_failure "cannot backup existing file when linking (cannot move file to backup dir)"; echo "failed"; return }
 	echo "changed"
 }
 
@@ -142,24 +170,16 @@ function libfiles__lnk() {
 ## Usage: libfiles__linknbk src dest link_mode backup_folder backup_folder_mode
 ## Example: libfiles__linknbk ./_.bashrc ~/.bashrc 600 ~/.dotfiles_backup 700
 function libfiles__linknbk() {
-	local -r src="$1"
-	local -r dest="$2"
-	local -r lnkmode="$3"
-	local -r bkfolder="$4"
-	local -r bkmode="$5"
+	local -r src="$1"; shift
+	local -r dest="$1"; shift
+	local -r lnkmode="$1"; shift
+	local -r bkfolder="$1"; shift
+	local -r bkmode="$1"; shift
 	
 	run_and_log test -e "$src" || { log_task_failure "destination file does not exist"; echo "failed"; return }
 	run_and_log test -e "$dest" && ! run_and_log test -L "$dest" && {
-		local TMPRES
-		local -r BACKUP_DEST="$bkfolder/$RUN_DATE--$(run_and_log_keep_stdout basename "$dest")"
-		
-		catchout TMPRES  libfiles__folder "$bkfolder" "$bkmode"
+		catchout TMPRES  libfiles__bk "$dest" "$bkfolder" "$bkmode"
 		res_check "$TMPRES" || { echo "failed"; return }
-		
-		# The -n option of mv does not fail when dest already exists! We cannot use it.
-		# Instead we manually check if file exists before moving.
-		run_and_log test ! -e "$BACKUP_DEST"           || { log_task_failure "cannot backup existing file when linking (backup dest already exist)";      echo "failed"; return }
-		run_and_log "$MV" -f -- "$dest" "$BACKUP_DEST" || { log_task_failure "cannot backup existing file when linking (cannot move file to backup dir)"; echo "failed"; return }
 	}
 	run_and_log test "$(run_and_log_keep_stdout "$READLINK" -- "$dest")" = "$src" && { run_and_log test "$HOST_OS" != "Darwin" || run_and_log test "$(run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$lnkmode" } && { echo "ok"; return }
 	
