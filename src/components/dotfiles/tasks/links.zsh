@@ -1,5 +1,4 @@
-# Create links to files in this repo, with backup if needed
-
+# Create links to files in this repo, with backup if needed.
 for file in "${DOTFILES__FILES[@]}"; do
 	dest_file="$HOME/$file"
 	repo_file="$COMPONENT_ROOT_FOLDER/files/_$file"

@@ -22,6 +22,7 @@ readonly DOTFILES__FOLDERS=(
 	".bashrc.d"
 	".profile.d"
 	".shrc.d"
+	".ssh"
 )
 
 readonly DOTFILES__FILES=(
@@ -45,4 +46,8 @@ readonly DOTFILES__TEMPLATES=(
 	".zshrc:dyn"
 	".bashrc:dyn"
 	".vimrc:dyn"
+)
+
+readonly DOTFILES__ENCRYPTED=(
+	".ssh/config"
 )
