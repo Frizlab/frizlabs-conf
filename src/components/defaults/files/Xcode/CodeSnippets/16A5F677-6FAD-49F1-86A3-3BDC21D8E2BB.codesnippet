@@ -6,13 +6,13 @@
 	<string>mark</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>TopLevel</string>
 		<string>ClassImplementation</string>
+		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>/* *************
+	<string>/* ***************
    MARK: &lt;#Amazing Mark#&gt;
-   ************* */</string>
+   *************** */</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>16A5F677-6FAD-49F1-86A3-3BDC21D8E2BB</string>
 	<key>IDECodeSnippetLanguage</key>
