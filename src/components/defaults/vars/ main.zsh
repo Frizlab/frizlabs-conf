@@ -10,6 +10,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	
 	"a.simplemdm.com"
 	"admin.google.com"
+	"akismet.com"
 	"amazon.fr"
 	"app.pagerduty.com"
 	"apple.stackexchange.com"
