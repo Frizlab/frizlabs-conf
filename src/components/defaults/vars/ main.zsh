@@ -4,7 +4,7 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 )
 
 # Not -r because we can modify this variable in the env specific vars file
-# Only used when filter mode is whitelist
+# Only useful when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"https://www.reddit.com/dev/api/oauth"
 	
@@ -98,7 +98,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"zewo.io"
 )
 # Not -r because we can modify this variable in the env specific vars file
-# Only used when filter mode is blacklist
+# Only useful when filter mode is blacklist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"

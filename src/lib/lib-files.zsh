@@ -102,13 +102,13 @@ function libfiles__decrypt_and_copy() {
 	
 	# Then we decrypt the source file at a temporary location.
 	decrcpy_tmpfile="$(run_and_log_keep_stdout mktemp)" || { log_task_failure "cannot create temporary file"; echo "failed"; return }
-	run_and_log "$CP" -f -- "$src" "$decrcpy_tmpfile"     || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot copy script to temporary file"; echo "failed"; return }
-	run_and_log libccrypt__decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt script"; echo "failed"; return }
+	run_and_log "$CP" -f -- "$src" "$decrcpy_tmpfile"     || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot copy file to temporary file"; echo "failed"; return }
+	run_and_log libccrypt__decrypt --suffix "" -- "$decrcpy_tmpfile" || { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; log_task_failure "cannot decrypt file"; echo "failed"; return }
 	
 	run_and_log "$DIFF" -- "$decrcpy_tmpfile" "$dest" && run_and_log test "$(run_and_log_keep_stdout "$STAT" -c %a -- "$dest" || run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$mode" && { run_and_log "$RM" -f -- "$decrcpy_tmpfile" || true; echo "ok"; return }
 	
 	# Backup original file if needed.
-	if [ $# -eq 2 ]; then
+	if [ $# -eq 2 -a -e "$dest" ]; then
 		local -r bkfolder="$1"; shift
 		local -r bkmode="$1"; shift
 		catchout TMPRES  libfiles__bk "$dest" "$bkfolder" "$bkmode"
@@ -154,8 +154,8 @@ function libfiles__bk() {
 	
 	# The -n option of mv does not fail when the file already exists! We cannot use it.
 	# Instead we manually check if file exists before moving.
-	run_and_log test ! -e "$BACKUP_DEST"           || { log_task_failure "cannot backup existing file when linking (backup dest already exist)";      echo "failed"; return }
-	run_and_log "$MV" -f -- "$file" "$BACKUP_DEST" || { log_task_failure "cannot backup existing file when linking (cannot move file to backup dir)"; echo "failed"; return }
+	run_and_log test ! -e "$BACKUP_DEST"           || { log_task_failure "cannot backup existing file (backup dest already exist)";      echo "failed"; return }
+	run_and_log "$MV" -f -- "$file" "$BACKUP_DEST" || { log_task_failure "cannot backup existing file (cannot move file to backup dir)"; echo "failed"; return }
 	echo "changed"
 }
 

@@ -49,5 +49,9 @@ readonly DOTFILES__TEMPLATES=(
 )
 
 readonly DOTFILES__ENCRYPTED=(
+	".ssh/config-$COMPUTER_GROUP"
+)
+
+readonly DOTFILES__ENCRYPTED_TEMPLATES=(
 	".ssh/config"
 )
