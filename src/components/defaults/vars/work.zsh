@@ -9,6 +9,7 @@ DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES+=(
 	"happnapp.atlassian.net"
 	"office.1e42.net"
 	"vip-vault.pod0.happn.io"
+	"vmalertmanager-prod.1e42.net"
 )
 
 DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES+=(
