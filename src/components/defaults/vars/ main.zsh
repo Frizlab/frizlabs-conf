@@ -13,6 +13,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"akismet.com"
 	"amazon.fr"
 	"andyibanez.com"
+	"api.slack.com"
 	"app.pagerduty.com"
 	"apple.stackexchange.com"
 	"appleid.apple.com"
