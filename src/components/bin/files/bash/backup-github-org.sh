@@ -14,6 +14,7 @@ n=0; while true; do
 	[ -z "$urls" ] && break
 	for url in $urls; do
 		basename="$(basename "$url")"
+		echo "${url}"
 		if [ -d "$basename" ]; then git -C "$basename" remote update --prune
 		else                        git clone --mirror "$url"
 		fi
