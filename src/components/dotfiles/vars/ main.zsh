@@ -46,6 +46,7 @@ readonly DOTFILES__TEMPLATES=(
 	".zshrc:dyn"
 	".bashrc:dyn"
 	".vimrc:dyn"
+	".colima/default/colima.yaml"
 )
 
 readonly DOTFILES__ENCRYPTED=(
@@ -55,3 +56,11 @@ readonly DOTFILES__ENCRYPTED=(
 readonly DOTFILES__ENCRYPTED_TEMPLATES=(
 	".ssh/config"
 )
+
+# All colima vars are expected to be changed in env-specific var files.
+DOTFILES__COLIMA__NCPU="2"
+DOTFILES__COLIMA__MEMORY="8"
+DOTFILES__COLIMA__RWMOUNT="/tmp"
+
+# Sourcing env specific vars file
+test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true

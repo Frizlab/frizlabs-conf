@@ -1,0 +1,2 @@
+DOTFILES__COLIMA__MEMORY="12"
+DOTFILES__COLIMA__RWMOUNT="/Volumes/Common/Documents"

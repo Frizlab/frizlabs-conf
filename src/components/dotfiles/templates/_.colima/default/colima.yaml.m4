@@ -1,0 +1,184 @@
+# Number of CPUs to be allocated to the virtual machine.
+# Default: 2
+cpu: ___M4___DOTFILES__COLIMA__NCPU___M4___
+
+# Size of the disk in GiB to be allocated to the virtual machine.
+# NOTE: changing this has no effect after the virtual machine has been created.
+# Default: 60
+disk: 60
+
+# Size of the memory in GiB to be allocated to the virtual machine.
+# Default: 2
+memory: ___M4___DOTFILES__COLIMA__MEMORY___M4___
+
+# Architecture of the virtual machine (x86_64, aarch64, host).
+# Default: host
+arch: host
+
+# Container runtime to be used (docker, containerd).
+# Default: docker
+runtime: docker
+
+# Kubernetes configuration for the virtual machine.
+kubernetes:
+  # Enable kubernetes.
+  # Default: false
+  enabled: false
+  
+  # Kubernetes version to use.
+  # This needs to exactly match a k3s version https://github.com/k3s-io/k3s/releases
+  # Default: latest stable release
+  version: v1.25.4+k3s1
+  
+  # Disable k3s features [coredns servicelb traefik local-storage metrics-server].
+  # All features are enabled unless disabled.
+  #
+  # EXAMPLE - disable traefik and metrics-server
+  # disable: [traefik, metrics-server]
+  #
+  # Default: [traefik]
+  disable:
+    - traefik
+
+# Auto-activate on the Host for client access.
+# Setting to true does the following on startup
+#  - sets as active Docker context (for Docker runtime).
+#  - sets as active Kubernetes context (if Kubernetes is enabled).
+# Default: true
+autoActivate: true
+
+# Network configurations for the virtual machine.
+network:
+  # Assign reachable IP address to the virtual machine.
+  # NOTE: this is currently macOS only and ignored on Linux.
+  # Default: false
+  address: false
+  
+  # Custom DNS nameservers for the virtual machine.
+  #
+  # EXAMPLE
+  # dns: [1.1.1.1, 8.8.8.8]
+  #
+  # Default: []
+  dns: []
+  
+  # DNS hostnames to resolve to custom targets using the internal Lima resolver.
+  # This setting has no effect if a custom DNS resolver list is supplied above.
+  # It does not configure the /etc/hosts files of any machine or container.
+  # The value can be an IP address or another host.
+  #
+  # EXAMPLE
+  # dnsHosts:
+  #   example.com: 1.2.3.4
+  dnsHosts: {}
+
+# ===================================================================== #
+# ADVANCED CONFIGURATION
+# ===================================================================== #
+
+# Forward the host's SSH agent to the virtual machine.
+# Default: false
+forwardAgent: false
+
+# Docker daemon configuration that maps directly to daemon.json.
+# https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file.
+# NOTE: some settings may affect Colima's ability to start docker. e.g. `hosts`.
+#
+# EXAMPLE - disable buildkit
+# docker:
+#   features:
+#     buildkit: false
+#
+# EXAMPLE - add insecure registries
+# docker:
+#   insecure-registries:
+#     - myregistry.com:5000
+#     - host.docker.internal:5000
+#
+# Colima default behaviour: buildkit enabled
+# Default: {}
+docker: {}
+
+# Virtual Machine type (qemu, vz)
+# NOTE: this is macOS 13 only. For Linux and macOS <13.0, qemu is always used.
+#
+# vz is macOS virtualization framework and requires macOS 13
+#
+# Default: vz
+vmType: vz
+
+# Volume mount driver for the virtual machine (sshfs, 9p).
+#
+# 9p is more POSIX compliant and generally handles file permissions better.
+# However, it does not properly resolve symlinks (that are created on host).
+#
+# sshfs is faster than 9p but less reliable when there are lots
+# of concurrent reads or writes.
+#
+# Default: sshfs
+mountType: 9p
+
+# The CPU type for the virtual machine.
+# Options available for host emulation can be checked with: `qemu-system-$(arch) -cpu help`.
+# Instructions are also supported by appending to the cpu type e.g. "qemu64,+ssse3".
+# Default: host
+cpuType: ""
+
+# For a more general purpose virtual machine, Ubuntu container is optionally provided
+# as a layer on the virtual machine.
+# The underlying virtual machine is still accessible via `colima ssh --layer=false` or running `colima` in
+# the Ubuntu session.
+#
+# Default: false
+layer: false
+
+# Custom provision scripts for the virtual machine.
+# Provisioning scripts are executed on startup and therefore needs to be idempotent.
+#
+# EXAMPLE - script exected as root
+# provision:
+#   - mode: system
+#     script: apk add htop vim
+#
+# EXAMPLE - script exected as user
+# provision:
+#   - mode: user
+#     script: |
+#       [ -f ~/.provision ] && exit 0;
+#       echo provisioning as $USER...
+#       touch ~/.provision
+#
+# Default: []
+provision: []
+
+# Modify ~/.ssh/config automatically to include a SSH config for the virtual machine.
+# SSH config will still be generated in ~/.colima/ssh_config regardless.
+# Default: true
+sshConfig: false
+
+# Configure volume mounts for the virtual machine.
+# Colima mounts user's home directory by default to provide a familiar
+# user experience.
+#
+# EXAMPLE
+# mounts:
+#   - location: ~/secrets
+#     writable: false
+#   - location: ~/projects
+#     writable: true
+#
+# Colima default behaviour: $HOME and /tmp/colima are mounted as writable.
+# Default: []
+mounts:
+  - location: ___M4___DOTFILES__COLIMA__RWMOUNT___M4___
+    writable: true
+
+# Environment variables for the virtual machine.
+#
+# EXAMPLE
+# env:
+#   KEY: value
+#   ANOTHER_KEY: another value
+#
+# Default: {}
+env: {}
