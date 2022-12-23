@@ -51,6 +51,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"en.wikipedia.org"
 	"en.wiktionary.org"
 	"epita-alumni.org"
+	"epochconverter.com"
 	"forum.affinity.serif.com"
 	"forums.docker.com"
 	"fusionauth.io"
