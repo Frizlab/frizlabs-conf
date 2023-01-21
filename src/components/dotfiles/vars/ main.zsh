@@ -60,7 +60,7 @@ readonly DOTFILES__ENCRYPTED_TEMPLATES=(
 # All colima vars are expected to be changed in env-specific var files.
 DOTFILES__COLIMA__NCPU="2"
 DOTFILES__COLIMA__MEMORY="8"
-DOTFILES__COLIMA__RWMOUNT="/tmp"
+DOTFILES__COLIMA__RWMOUNT="/tmp/colima"
 
 # Sourcing env specific vars file
 test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true
