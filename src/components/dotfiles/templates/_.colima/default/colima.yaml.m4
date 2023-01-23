@@ -54,15 +54,15 @@ network:
   # Default: false
   address: false
   
-  # Custom DNS nameservers for the virtual machine.
+  # Custom DNS resolvers for the virtual machine.
   #
   # EXAMPLE
-  # dns: [1.1.1.1, 8.8.8.8]
+  # dns: [8.8.8.8, 1.1.1.1]
   #
   # Default: []
   dns: []
   
-  # DNS hostnames to resolve to custom targets using the internal Lima resolver.
+  # DNS hostnames to resolve to custom targets using the internal resolver.
   # This setting has no effect if a custom DNS resolver list is supplied above.
   # It does not configure the /etc/hosts files of any machine or container.
   # The value can be an IP address or another host.
@@ -71,6 +71,12 @@ network:
   # dnsHosts:
   #   example.com: 1.2.3.4
   dnsHosts: {}
+  
+  # Network driver to use (slirp, gvproxy), (requires vmType `qemu`)
+  #   - slirp is the default user mode networking provided by Qemu
+  #   - gvproxy is an alternative to VPNKit based on gVisor https://github.com/containers/gvisor-tap-vsock
+  # Default: gvproxy
+  driver: ""
 
 # ===================================================================== #
 # ADVANCED CONFIGURATION
@@ -116,7 +122,7 @@ vmType: vz
 # sshfs is faster than 9p but the least reliable of the options (when there are lots
 # of concurrent reads or writes).
 #
-# Default: virtiofs (for vz), 9p (for qemu)
+# Default: virtiofs (for vz), sshfs (for qemu)
 mountType: virtiofs
 
 # The CPU type for the virtual machine (requires vmType `qemu`).
