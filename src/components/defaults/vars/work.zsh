@@ -5,6 +5,7 @@ DEFAULTS__XCODE_THEME_ACTIONS+=(
 
 DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES+=(
 	"alertmanager-prod.1e42.net"
+	"console.happn.app"
 	"happn.pagerduty.com"
 	"happnapp.atlassian.net"
 	"office.1e42.net"
