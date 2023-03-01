@@ -23,6 +23,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"terminal-notifier"   "bin/terminal-notifier"
 	"the_silver_searcher" "bin/ag"
 	"tmux"                "bin/tmux"
+	"trash"               "bin/trash"
 	"tree"                "bin/tree"
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
