@@ -38,6 +38,7 @@ readonly DOTFILES__FILES=(
 	".inputrc"
 	".gitconfig"
 	".gitignore_global"
+	".psqlrc"
 )
 
 readonly DOTFILES__TEMPLATES=(
