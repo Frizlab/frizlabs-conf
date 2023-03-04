@@ -23,6 +23,7 @@ readonly DOTFILES__FOLDERS=(
 	".profile.d"
 	".shrc.d"
 	".ssh"
+	".psql_session"
 )
 
 readonly DOTFILES__FILES=(

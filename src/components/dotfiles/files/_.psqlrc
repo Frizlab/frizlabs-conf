@@ -1,22 +1,41 @@
--- From <https://news.ycombinator.com/item?id=34909670>
+-- Adapted from <https://news.ycombinator.com/item?id=34909670>
 
--- Show row count of last query in prompt.
--- Gosh, why did I do it like this...? There was a reason for it and it fixes
--- something, but I forgot what.
-select :'PROMPT1'='%/%R%x%# ' as default_prompt \gset
-\if :default_prompt
-  \set PROMPT1 '(%:ROW_COUNT:)%R%# '
-\endif
+-- We stay quiet for the time of the init (do not show changes acks).
+\set QUIET
 
-\set QUIET                                    \\-- Don't print welcome message etc.
-\set HISTFILE ~/.cache/psql-history- :DBNAME  \\-- Keep history per database
-\set HISTSIZE          -1                     \\-- Infinite history
-\set HISTCONTROL       ignoredups             \\-- Don't store duplicates in history
-\set PROMPT2           '%R%# '                \\-- No database name in the line continuation prompt.
-\set COMP_KEYWORD_CASE lower                  \\-- Complete keywords to lower case.
-\pset linestyle        unicode                \\-- Nicely formatted tables.
-\pset footer           off                    \\-- Don't display "(n rows)" at the end of the table.
-\pset null             'NULL'                 \\-- Display null values as NULL
-\timing                on                     \\-- Show query timings
 
-\set pretty '\\pset numericlocale'            \\-- Toggle between thousands separators in numbers
+\set HISTFILE          ~/.psql_session/ :DBNAME .history \\-- Keep history per database
+\set HISTCONTROL       ignoredups                        \\-- Don’t store duplicates in history
+\pset linestyle        unicode                           \\-- Nicely formatted tables.
+\pset null             'NULL'                            \\-- Display null values as NULL
+
+\set pretty '\\pset numericlocale'                       \\-- Toggle between thousands separators in numbers
+
+
+-- Init is done; we’re not quiet anymore (we _want_ that welcome message!).
+\unset QUIET
+
+
+
+----------------
+-- NOT WANTED --
+----------------
+-- These things were in the source psqlrc we’re adapted from, but we do not want them.
+
+-- Original comment from source:
+--    Show row count of last query in prompt.
+--    Gosh, why did I do it like this...?
+--    There was a reason for it and it fixes something, but I forgot what.
+-- As far as I understand, this way of doing thing checks whether the prompt is the default one and changes it only if it is.
+-- No idea why OP did this (and apparently he does not know either haha).
+-- Anyway, I prefer the original prompt and showing the number of lines normally as psql does by default.
+--select :'PROMPT1'='%/%R%x%# ' as default_prompt \gset
+--\if :default_prompt
+--	\set PROMPT1 '(%:ROW_COUNT:)%R%# '
+--\endif
+
+--\timing on                      \\-- Show query timings
+--\set  HISTSIZE          -1      \\-- Infinite history
+--\set  PROMPT2           '%R%# ' \\-- No database name in the line continuation prompt.
+--\set  COMP_KEYWORD_CASE lower   \\-- Complete keywords to lower case.
+--\pset footer            off     \\-- Don’t display "(n rows)" at the end of the table.
