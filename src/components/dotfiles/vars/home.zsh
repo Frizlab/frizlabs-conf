@@ -1,0 +1,3 @@
+DOTFILES__ENCRYPTED+=(
+	".ssh/config-$COMPUTER_GROUP"
+)

@@ -1,2 +1,6 @@
+DOTFILES__ENCRYPTED+=(
+	".ssh/config-$COMPUTER_GROUP"
+)
+
 DOTFILES__COLIMA__MEMORY="12"
 DOTFILES__COLIMA__RWMOUNT="/Volumes/Common/Documents"
