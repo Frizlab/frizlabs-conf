@@ -24,6 +24,8 @@ readonly DOTFILES__FOLDERS=(
 	".shrc.d"
 	".ssh"
 	".psql_session"
+	".colima"
+	".colima/default"
 )
 
 readonly DOTFILES__FILES=(
