@@ -53,9 +53,12 @@ readonly DOTFILES__TEMPLATES=(
 	".colima/default/colima.yaml"
 )
 
-readonly DOTFILES__ENCRYPTED=(
-	".ssh/config-$COMPUTER_GROUP"
+DOTFILES__ENCRYPTED=(
 )
+SSH_CONF_FOR_ENV=".ssh/config-$COMPUTER_GROUP"
+if [ -f "$COMPONENT_ROOT_FOLDER/files/_$SSH_CONF_FOR_ENV.cpt" ]; then DOTFILES__ENCRYPTED+=("$SSH_CONF_FOR_ENV"); fi
+unset SSH_CONF_FOR_ENV
+readonly DOTFILES__ENCRYPTED
 
 readonly DOTFILES__ENCRYPTED_TEMPLATES=(
 	".ssh/config"
