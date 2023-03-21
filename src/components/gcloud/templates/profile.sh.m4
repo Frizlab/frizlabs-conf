@@ -7,4 +7,5 @@
 #
 # \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/ \!/
 
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export PATH="${PATH}:___M4___GCLOUD_DIR___M4___/bin"
