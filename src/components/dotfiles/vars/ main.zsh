@@ -42,6 +42,7 @@ readonly DOTFILES__FILES=(
 	".gitconfig"
 	".gitignore_global"
 	".psqlrc"
+	".justfile"
 )
 
 readonly DOTFILES__TEMPLATES=(
@@ -51,6 +52,7 @@ readonly DOTFILES__TEMPLATES=(
 	".bashrc:dyn"
 	".vimrc:dyn"
 	".colima/default/colima.yaml"
+	".justfile:dyn"
 )
 
 # Not readonly because modified in env-specific var files.
