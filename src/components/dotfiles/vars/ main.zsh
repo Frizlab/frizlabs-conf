@@ -43,6 +43,7 @@ readonly DOTFILES__FILES=(
 	".gitignore_global"
 	".psqlrc"
 	".justfile"
+	".lldbinit"
 )
 
 readonly DOTFILES__TEMPLATES=(
