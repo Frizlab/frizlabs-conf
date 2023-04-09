@@ -1,3 +1,6 @@
+### git-wip ###
+bin_task__bin "frizlab" ":Darwin:Linux:" "bash/git-wip.sh"
+
 ### Offload Work ###
 bin_task__encrypted_bin "frizlab" ":Darwin:~home~server~vm~" "zsh/offload-work.sh.cpt"
 
