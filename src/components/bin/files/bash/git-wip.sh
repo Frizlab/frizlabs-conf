@@ -18,7 +18,6 @@ case "$action" in
 		git reset --hard HEAD~
 		;;
 	pull)
-		setopt pipefail
 		dirty_witness="$(git status --porcelain --untracked-files=no 2>/dev/null | head -n 1)"
 		test -z "$dirty_witness" || { echo "Refusing to pull WIP from dirty repo." >&2; exit 2; }
 		
