@@ -21,6 +21,12 @@ if test "$HOST_OS" = "Darwin"; then
 	{ res_check "$RES" &&   catchout RES libfiles__folder "$APP_DIR" "700"             && RES_LIST+=("$RES") }
 	{ res_check "$RES" &&   catchout RES libfiles__acl    "$APP_DIR" "$expected_acl"   && RES_LIST+=("$RES") }
 	log_task_from_res_list RES_LIST
+	
+	RES=; RES_LIST=()
+	start_task "Developer dir"
+	{ res_check "$RES" &&   catchout RES libfiles__folder "$DEVELOPER_DIR" "700"             && RES_LIST+=("$RES") }
+	{ res_check "$RES" &&   catchout RES libfiles__acl    "$DEVELOPER_DIR" "$expected_acl"   && RES_LIST+=("$RES") }
+	log_task_from_res_list RES_LIST
 fi
 
 # CLT subfolders

@@ -1,5 +1,5 @@
 # Source other vars (the file is split for readability).
-source "$SRC_FOLDER/vars/ main0-appdir.zsh"
+source "$SRC_FOLDER/vars/ main0-macosdirs.zsh"
 source "$SRC_FOLDER/vars/ main1-clt-tree.zsh"
 source "$SRC_FOLDER/vars/ main2-homebrew.zsh"
 source "$SRC_FOLDER/vars/ main3-envs.zsh"
