@@ -4,7 +4,7 @@ set -euo pipefail
 
 
 action=
-if test $# -eq 0; then   action="push"
+if   test $# -eq 0; then action="push"
 elif test $# -eq 1; then action="$1"
 fi
 
