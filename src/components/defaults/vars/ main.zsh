@@ -6,6 +6,7 @@ typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 # Not -r because we can modify this variable in the env specific vars file
 # Only useful when filter mode is whitelist
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
+	"https://ipfs.io/ipfs/QmbpRxBZ5HDZDVRoeAU8xFYnoP4r5eGCxdkmfFW3JbA6mq/"
 	"https://web.archive.org/web/20150908004746/https://developer.apple.com/library/mac/documentation/cocoa/conceptual/coredata/Articles/cdNSAttributes.html"
 	"https://web.archive.org/web/20150922144626/https://developer.apple.com/library/mac/documentation/General/Conceptual/DevPedia-CocoaCore/KVO.html"
 	"https://web.archive.org/web/20150922144639/https://developer.apple.com/library/mac/documentation/General/Conceptual/DevPedia-CocoaCore/KeyValueCoding.html"
@@ -36,6 +37,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"autoitscript.com"
 	"baeldung.com"
 	"betterprogramming.pub"
+	"bionconsulting.com"
 	"blog.canopas.com"
 	"blog.jooq.org"
 	"blog.logrocket.com"
@@ -80,6 +82,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"docs.gitlab.com"
 	"docs.k3s.io"
 	"docs.vapor.codes"
+	"easy-readers.ro"
+	"eclecticlight.co"
 	"econsulat.ro"
 	"elonmusk.today"
 	"en.wikipedia.org"
@@ -183,6 +187,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"serverfault.com"
 	"service-public.fr"
 	"showrss.info"
+	"simpleromanian.com"
 	"simplicityissota.substack.com"
 	"social.msdn.microsoft.com"
 	"social.technet.microsoft.com"
