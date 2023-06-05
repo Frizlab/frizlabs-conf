@@ -19,6 +19,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"speedtest-cli"       "bin/speedtest-cli"
 	"shellcheck"          "bin/shellcheck"
 	"swift-format"        "bin/swift-format"
+	"swift-outdated"      "bin/swift-outdated"
 	"tcl-tk"              "opt/tcl-tk/bin/tclsh"
 	"terminal-notifier"   "bin/terminal-notifier"
 	"the_silver_searcher" "bin/ag"
