@@ -158,8 +158,9 @@ if test "$(uname -s)" != "Darwin"; then
 fi
 
 # Search through history when something is typed.
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+# Disabled because it’s more annoying than helpful (I use ctrl-R to search through history).
+#bindkey '^[[A' up-line-or-search
+#bindkey '^[[B' down-line-or-search
 
 # Edit command line for ^X^E.
 autoload -z edit-command-line
