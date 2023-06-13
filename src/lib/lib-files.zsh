@@ -183,6 +183,8 @@ function libfiles__linknbk() {
 	}
 	run_and_log test "$(run_and_log_keep_stdout "$READLINK" -- "$dest")" = "$src" && { run_and_log test "$HOST_OS" != "Darwin" || run_and_log test "$(run_and_log_keep_stdout "$STAT" -f %Lp -- "$dest")" = "$lnkmode" } && { echo "ok"; return }
 	
+	# We delete the destination first: we already know it’s a link, but if it’s a link to a valid folder, the ln command will link the source inside it.
+	run_and_log "$RM" -f -- "$dest" || { log_task_failure "$LN failed"; echo "failed"; return }
 	run_and_log "$LN" -sf -- "$src" "$dest" || { log_task_failure "$LN failed"; echo "failed"; return }
 	{ run_and_log test "$HOST_OS" != "Darwin" || run_and_log "$CHMOD" -h -- "$lnkmode" "$dest" } || { log_task_failure "cannot set permission for link at path $dest"; echo "failed"; return }
 	echo "changed"
