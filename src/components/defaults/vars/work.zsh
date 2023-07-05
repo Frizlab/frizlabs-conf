@@ -8,7 +8,6 @@ DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES+=(
 	"console.happn.app"
 	"drive.happn.private"
 	"happn.pagerduty.com"
-	"happnapp.atlassian.net"
 	"office.1e42.net"
 	"vip-vault.pod0.happn.io"
 	"vmalertmanager-prod.1e42.net"
