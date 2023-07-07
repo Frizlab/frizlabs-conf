@@ -124,8 +124,9 @@ let knownKeys = Set([
 	"DVTSourceTextSyntaxFonts",
 	"DVTSourceTextSyntaxColors"
 ])
-guard Set(parsedSource.keys) == knownKeys else {
-	print("unknown or missing keys in source; bailing", to: &stderrStream)
+let knownKeys2 = knownKeys.subtracting(["DVTSourceTextInsertionPointColor", "DVTConsoleTextInsertionPointColor"])
+guard Set(parsedSource.keys) == knownKeys || Set(parsedSource.keys) == knownKeys2 else {
+	print("Unknown or missing keys in source; bailing.\n  Unknown keys: \(Set(parsedSource.keys).subtracting(knownKeys))\n  Missing keys: \(knownKeys.subtracting(parsedSource.keys))", to: &stderrStream)
 	exit(5)
 }
 
