@@ -8,11 +8,11 @@ m4_dnl Instead we have to do a template.
 m4_ifelse(___M4___COMPUTER_GROUP___M4___, `work',m4_dnl
 
 ssh-infra instance-name:
-	gcloud --project happn-infra compute ssh --tunnel-through-iap {{ instance-name }}
+	gcloud --project happn-infra compute ssh --tunnel-through-iap {{ instance-name }} -- -oForwardAgent=yes
 
 ssh-preprod instance-name:
-	gcloud --project happn-preprod compute ssh --tunnel-through-iap {{ instance-name }}
+	gcloud --project happn-preprod compute ssh --tunnel-through-iap {{ instance-name }} -- -oForwardAgent=yes
 
 ssh-dev instance-name:
-	gcloud --project happn-dev compute ssh --tunnel-through-iap {{ instance-name }}
+	gcloud --project happn-dev compute ssh --tunnel-through-iap {{ instance-name }} -- -oForwardAgent=yes
 )m4_dnl
