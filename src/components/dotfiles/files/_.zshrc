@@ -106,12 +106,14 @@ __show_git_branch() {
 	git_status_ret=$?
 	# Status 141 is 128 + 13 (13: SIGPIPE, 128: killed (IIUC)).
 	if [ "$git_status_ret" -ne 0 -a "$git_status_ret" -ne 141 ]; then return; fi
+	last_commit_msg="$(git log -1 --pretty="format:%B" 2>/dev/null || echo)"
 	
 	printf "[%%{\e[00;31m%%}"
 	printf "%s" "$(sed -En '/^## /s///p' <<<"$git_status")"
 	if   grep -Eq '^[^#?]' <<<"$git_status"; then printf '*'
 	elif grep -Eq '^\?'    <<<"$git_status"; then printf '~'
 	fi
+	test "$last_commit_msg" = "WIP" && printf " +wip"
 	printf "%%{\e[0m%%}]"
 }
 # We have to enable prompt substitutions for the git functions to work.
