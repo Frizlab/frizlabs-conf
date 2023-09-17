@@ -23,7 +23,7 @@ case "$action" in
 		
 		git fetch -f
 		git rebase
-		last_commit_msg="$(git log -1 --pretty=format:%B)"
+		last_commit_msg="$(git log -1 --pretty="format:%B" 2>/dev/null || echo)"
 		test "$last_commit_msg" = "WIP" || { echo "Last commit message is not WIP; aborting." >&2; exit 3; }
 		
 		git reset HEAD~
