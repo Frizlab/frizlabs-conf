@@ -28,74 +28,77 @@ echo "START: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 __show_git_branch() {
 	setopt pipefail; # Apparently there is no need for `setopt localoptions` here, though I’m not sure why.
 	
-	# iCloud stuff.
-	# We manually search for .git file or folder.
-	# If we find it, we’re probably in a git repo.
-	local p="$PWD"
-	local gitdir="$(realpath "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)"
-	local gitroot="$(realpath "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null)"
-	local iclouded=""
-	# p should in theory always be absolute.
-	# Let’s make sure of that (otherwise we have an infinite loop).
-	if test "${p:0:1}" = "/" -a '(' -z "$gitdir" -o -z "$gitroot" ')'; then
-		# git failed to find the top-level or git directory, so we search for it manually
-		# (some critical files from git dir might’ve been iclouded).
-		while test -n "$p"; do
-			if test -d "$p/.git"; then
-				gitroot="$p"
-				gitdir="$p/.git"
-				p=
-			elif test -f "$p/.git"; then
-				gitroot="$p"
-				gitdir="$(cd "$p"; echo "$(realpath "$(grep -E '^gitdir: ' ".git" 2>/dev/null | sed -E 's/^gitdir: //' 2>/dev/null)" 2>/dev/null)")"
-				p=
-			elif test -e "$p/..git.icloud"; then
-				iclouded="y"
-				p=
-			else
-				if test "$p" = "/"; then p=
-				else                     p="$(dirname "$p")" || p=
+	# We disable the check for iClouded repos as we do not need it anymore.
+	if false; then
+		# iCloud stuff.
+		# We manually search for .git file or folder.
+		# If we find it, we’re probably in a git repo.
+		local iclouded=""
+		local p="$PWD"
+		local gitdir="$(realpath "$(git rev-parse --git-dir 2>/dev/null)" 2>/dev/null)"
+		local gitroot="$(realpath "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null)"
+		# p should in theory always be absolute.
+		# Let’s make sure of that (otherwise we have an infinite loop).
+		if test "${p:0:1}" = "/" -a '(' -z "$gitdir" -o -z "$gitroot" ')'; then
+			# git failed to find the top-level or git directory, so we search for it manually
+			# (some critical files from git dir might’ve been iclouded).
+			while test -n "$p"; do
+				if test -d "$p/.git"; then
+					gitroot="$p"
+					gitdir="$p/.git"
+					p=
+				elif test -f "$p/.git"; then
+					gitroot="$p"
+					gitdir="$(cd "$p"; echo "$(realpath "$(grep -E '^gitdir: ' ".git" 2>/dev/null | sed -E 's/^gitdir: //' 2>/dev/null)" 2>/dev/null)")"
+					p=
+				elif test -e "$p/..git.icloud"; then
+					iclouded="y"
+					p=
+				else
+					if test "$p" = "/"; then p=
+					else                     p="$(dirname "$p")" || p=
+					fi
 				fi
-			fi
-		done
-	fi
-	
-	if test "$iclouded" != "y" -a -n "$gitdir" -a -n "$gitroot"; then
-		local -a to_search
-		case "$gitdir" in
-			"$gitroot"*) to_search=("$gitroot");;
-			*)           to_search=("$gitdir" "$gitroot");;
-		esac
-		for d in "${to_search[@]}"; do
-			# Try and search for matching files fast.
-			# It’s not easy.
-			# Best solution would be to have a cache.
-			# For instance a daemon could run and monitor fsevents and write somewhere when a repo has some file being evicted.
-			# Building on this, said tool could even give a nice GUI w/ list of repos and their current state.
-			# This is all and nice but it requires some work, and thus some time, that I do not have.
-			#
-			# First fast solution was to use mdfind.
-			# It is the perfect solution.
-			# Except mdfind skips a lot of hidden files/folders…
-			# For reference, the command: `mdfind -onlyin "$d" 'kMDItemFSName = *.icloud AND kMDItemFSInvisible = 1'`
-			# (The actual glob is '.*.icloud' but for whatever reason mdfind does not want to find files with full glob.)
-			#
-			# This having failed, I tried searchfs, which was a failure (did not find icloud files, and was not fast).
-			#
-			# Next up was fd.
-			# Results were better than find.
-			# Still not lightning fast, but I think it’ll be as good as I’ll get.
-			# We fallback on find if fd fails (not installed for instance…).
-			if test -n "$(fd -IHs1 '\..*\.icloud$' "$d" 2>/dev/null || find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
-				iclouded=y
-				break
-			fi
-		done
-	fi
-	
-	if test "$iclouded" = "y"; then
-		printf "[%%{\e[01;41m%%}iCloud%%{\e[0m%%}]"
-		return
+			done
+		fi
+		
+		if test "$iclouded" != "y" -a -n "$gitdir" -a -n "$gitroot"; then
+			local -a to_search
+			case "$gitdir" in
+				"$gitroot"*) to_search=("$gitroot");;
+				*)           to_search=("$gitdir" "$gitroot");;
+			esac
+			for d in "${to_search[@]}"; do
+				# Try and search for matching files fast.
+				# It’s not easy.
+				# Best solution would be to have a cache.
+				# For instance a daemon could run and monitor fsevents and write somewhere when a repo has some file being evicted.
+				# Building on this, said tool could even give a nice GUI w/ list of repos and their current state.
+				# This is all and nice but it requires some work, and thus some time, that I do not have.
+				#
+				# First fast solution was to use mdfind.
+				# It is the perfect solution.
+				# Except mdfind skips a lot of hidden files/folders…
+				# For reference, the command: `mdfind -onlyin "$d" 'kMDItemFSName = *.icloud AND kMDItemFSInvisible = 1'`
+				# (The actual glob is '.*.icloud' but for whatever reason mdfind does not want to find files with full glob.)
+				#
+				# This having failed, I tried searchfs, which was a failure (did not find icloud files, and was not fast).
+				#
+				# Next up was fd.
+				# Results were better than find.
+				# Still not lightning fast, but I think it’ll be as good as I’ll get.
+				# We fallback on find if fd fails (not installed for instance…).
+				if test -n "$(fd -IHs1 '\..*\.icloud$' "$d" 2>/dev/null || find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
+					iclouded="y"
+					break
+				fi
+			done
+		fi
+		
+		if test "$iclouded" = "y"; then
+			printf "[%%{\e[01;41m%%}iCloud%%{\e[0m%%}]"
+			return
+		fi
 	fi
 	
 	# No need for more than 2 lines of status in theory as untracked are shown at the end
