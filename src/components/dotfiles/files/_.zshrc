@@ -41,7 +41,7 @@ __show_git_branch() {
 		# Let’s make sure of that (otherwise we have an infinite loop).
 		if test "${p:0:1}" = "/" -a '(' -z "$gitdir" -o -z "$gitroot" ')'; then
 			# git failed to find the top-level or git directory, so we search for it manually
-			# (some critical files from git dir might’ve been iclouded).
+			#  (some critical files from git dir might’ve been iclouded).
 			while test -n "$p"; do
 				if test -d "$p/.git"; then
 					gitroot="$p"
@@ -79,15 +79,15 @@ __show_git_branch() {
 				# First fast solution was to use mdfind.
 				# It is the perfect solution.
 				# Except mdfind skips a lot of hidden files/folders…
-				# For reference, the command: `mdfind -onlyin "$d" 'kMDItemFSName = *.icloud AND kMDItemFSInvisible = 1'`
+				# For reference, the command: `mdfind -onlyin "$d" 'kMDItemFSName = *.icloud AND kMDItemFSInvisible = 1'`.
 				# (The actual glob is '.*.icloud' but for whatever reason mdfind does not want to find files with full glob.)
 				#
-				# This having failed, I tried searchfs, which was a failure (did not find icloud files, and was not fast).
+				# This having failed, I tried `searchfs`, which was a failure (did not find icloud files, and was not fast).
 				#
-				# Next up was fd.
-				# Results were better than find.
+				# Next up was `fd`.
+				# Results were better than `find`.
 				# Still not lightning fast, but I think it’ll be as good as I’ll get.
-				# We fallback on find if fd fails (not installed for instance…).
+				# We fallback to find if `fd` fails (not installed for instance…).
 				if test -n "$(fd -IHs1 '\..*\.icloud$' "$d" 2>/dev/null || find "$d" -type f -name ".*.icloud" -print -quit 2>/dev/null)"; then
 					iclouded="y"
 					break
@@ -101,10 +101,10 @@ __show_git_branch() {
 		fi
 	fi
 	
-	# No need for more than 2 lines of status in theory as untracked are shown at the end
+	# No need for more than 2 lines of status in theory as untracked are shown at the end.
 	git_status="$(git status -b --porcelain 2>/dev/null | head -n 3)"
 	git_status_ret=$?
-	# Status 141 is 128 + 13 (13: SIGPIPE, 128: killed (IIUC))
+	# Status 141 is 128 + 13 (13: SIGPIPE, 128: killed (IIUC)).
 	if [ "$git_status_ret" -ne 0 -a "$git_status_ret" -ne 141 ]; then return; fi
 	
 	printf "[%%{\e[00;31m%%}"
