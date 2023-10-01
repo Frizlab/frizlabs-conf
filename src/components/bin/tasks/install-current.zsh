@@ -1,3 +1,6 @@
+### mount-image-from-network ###
+bin_task__bin "frizlab" ":Darwin:" "bash/mount-image-from-network.sh"
+
 ### git-wip ###
 bin_task__bin "frizlab" ":Darwin:Linux:" "bash/git-wip.sh"
 
