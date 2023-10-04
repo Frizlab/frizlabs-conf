@@ -24,7 +24,7 @@ guard CommandLine.arguments.count >= 2 else {
 }
 
 
-let darkModeForSafariDefaultsName = "com.alexandrudenk.Dark-Mode-for-Safari.Dark-Mode"
+let darkModeForSafariDefaultsName = "com.alexandrudenk.Dark-Mode-for-Safari.Extension"
 
 /* Get the path of the plist that should be modified by this script.
  * The “correct” way would be to use the undocumented `_CFPreferencesCopyApplicationMap` function that the `defaults` tool uses.
