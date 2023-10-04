@@ -114,6 +114,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"epochconverter.com"
 	"ericasadun.com"
 	"esker.com"
+	"eterna.com.au"
 	"evian-tourisme.com"
 	"fluxcd.io"
 	"forum.affinity.serif.com"
