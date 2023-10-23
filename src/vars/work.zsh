@@ -3,7 +3,7 @@
 # Conf
 readonly DARK_MODE=false
 readonly DEFAULT_BREW_IS_SYSTEM=true
-readonly GCLOUD_DIR="$CLT_DIR/gougle-cloud-sdk"
+#readonly GCLOUD_DIR="$CLT_DIR/gougle-cloud-sdk"
 
 # Custom components
 DEFAULT_COMPONENTS_TO_INSTALL+=(
@@ -11,5 +11,5 @@ DEFAULT_COMPONENTS_TO_INSTALL+=(
 	"homebrew-user"   "pkgs-brew-user"
 	"homebrew-system" "pkgs-brew-system"
 	
-	"gcloud"
+#	"gcloud"
 )
