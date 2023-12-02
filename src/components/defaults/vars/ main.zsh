@@ -33,6 +33,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"apple.stackexchange.com"
 	"appleid.apple.com"
 	"appsloveworld.com"
+	"appstoreconnect.apple.com" # Thanks Apple for not supporting the Dark Mode you introduced…
 	"ascii-code.com"
 	"asciidoctor.org"
 	"askubuntu.com"
@@ -66,6 +67,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"cfspart.impots.gouv.fr"
 	"cloud.google.com"
 	"cloudflare.com"
+	"cobeisfresh.com"
 	"cocoacasts.com"
 	"codeburst.io"
 	"codeopinion.com"
@@ -232,6 +234,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"powerdmarc.com"
 	"predemande-permisdeconduire.ants.gouv.fr"
 	"prestigere.gercop-extranet.com"
+	"privatebin.info"
 	"projecteuler.net"
 	"proxie.app"
 	"psql-tips.org"
