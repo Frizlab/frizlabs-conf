@@ -41,7 +41,7 @@ if test "$HOST_OS" != "Linux"; then
 		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
 		"xcode-actions/tap/xct"                       "bin/xct"
 		"mxcl/made/swift-sh"                          "bin/swift-sh"
-		"happn-app/public/locmapper"                  "Cellar/locmapper"
+#		"happn-app/public/locmapper"                  "Cellar/locmapper"
 	)
 fi
 
