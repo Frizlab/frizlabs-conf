@@ -1,4 +1,10 @@
 ### mount-image-from-network ###
+bin_task__bin "frizlab" ":Darwin:" "bash/xcd.sh"
+
+### Dump Safari Tabs to stdout ###
+bin_task__wrapped_bin "frizlab" ":Darwin:" "bash/quit-xcode-gently.sh"
+
+### mount-image-from-network ###
 bin_task__bin "frizlab" ":Darwin:" "bash/mount-image-from-network.sh"
 
 ### git-wip ###

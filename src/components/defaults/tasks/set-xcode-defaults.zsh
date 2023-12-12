@@ -51,26 +51,27 @@ log_task_from_res "$RES"
 
 
 ### Text Editing – Indentation ###
+# The commented settings here are set in the xcd script.
 
-start_task "Xcode: set indent with tabs"
-catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentUsingTabs 1
-log_task_from_res "$RES"
+#start_task "Xcode: set indent with tabs"
+#catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentUsingTabs 1
+#log_task_from_res "$RES"
 
 start_task "Xcode: set tab width"
 catchout RES  libdefaults__set_int com.apple.dt.Xcode DVTTextIndentTabWidth 3
 log_task_from_res "$RES"
 
-start_task "Xcode: set indent width"
-catchout RES  libdefaults__set_int com.apple.dt.Xcode DVTTextIndentWidth 3
-log_task_from_res "$RES"
+#start_task "Xcode: set indent width"
+#catchout RES  libdefaults__set_int com.apple.dt.Xcode DVTTextIndentWidth 3
+#log_task_from_res "$RES"
 
 start_task "Xcode: set indent on paste"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentOnPaste 1
 log_task_from_res "$RES"
 
-start_task "Xcode: set indent Swift switch cases"
-catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentCase 1
-log_task_from_res "$RES"
+#start_task "Xcode: set indent Swift switch cases"
+#catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentCase 1
+#log_task_from_res "$RES"
 
 start_task "Xcode: set solo brace indent width"
 catchout RES  libdefaults__set_int com.apple.dt.Xcode DVTTextSoloBraceIndentWidth 3

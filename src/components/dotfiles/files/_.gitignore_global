@@ -1,2 +1,7 @@
 *~
 .DS_Store
+
+# For obscure reasons I have a git at the root of a disk.
+/.fseventsd/
+/.TemporaryItems/
+/.DocumentRevisions-V100/
