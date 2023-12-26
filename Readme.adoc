@@ -52,6 +52,10 @@ _Note_: The `log_task_from_res{,_list}` convenience expects `log_task_failure` o
 
 == TODOs
 
+=== Auto-Bell in Terminal for Long Commands
+
+https://news.ycombinator.com/item?id=38757107
+
 === Install the Developer Tools Automatically
 This should probably be a Brew formula in our private tap for convenience; then we’d only have to install the formula directly.
 
