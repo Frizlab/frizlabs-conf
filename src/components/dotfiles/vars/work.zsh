@@ -3,4 +3,4 @@ DOTFILES__ENCRYPTED+=(
 )
 
 DOTFILES__COLIMA__MEMORY="12"
-DOTFILES__COLIMA__RWMOUNT="/Volumes/Common/Documents"
+DOTFILES__COLIMA__RWMOUNT="/Users/frizlab/Developer"
