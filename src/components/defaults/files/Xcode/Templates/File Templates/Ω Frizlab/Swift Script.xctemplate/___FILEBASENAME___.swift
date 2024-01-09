@@ -1,14 +1,14 @@
 #!/usr/bin/swift sh
-
 import Foundation
 
-import ArgumentParser // apple/swift-argument-parser ~> 1.1.2
-import CLTLogger      // xcode-actions/clt-logger    ~> 0.3.6
-import Logging        // apple/swift-log             ~> 1.4.2
+import ArgumentParser /* @apple/swift-argument-parser ~> 1.2.0  */
+import CLTLogger      /* @xcode-actions/clt-logger    ~> 0.8.0  */
+import Logging        /* @apple/swift-log             ~> 1.5.3  */
+import XcodeTools     /* @xcode-actions               == 0.10.0 */
 
 
 
-/* Let’s bootstrap the logger before anything else. */
+/* Let’s bootstrap the logger first and make it available globally. */
 LoggingSystem.bootstrap{ _ in CLTLogger() }
 let logger: Logger = {
 	var ret = Logger(label: "main")
@@ -16,21 +16,21 @@ let logger: Logger = {
 	return ret
 }()
 
+
 /* Then call main. */
-___VARIABLE_mainCommandName:identifier___.main()
-
-
+_ = await Task{ await ___VARIABLE_mainCommandName:identifier___.main() }.value
 struct ___VARIABLE_mainCommandName:identifier___ : ParsableCommand {
 	
-	func run() throws {
-		/* swift-sh creates a binary whose path is not one we expect, so we cannot use main.path directly.
-		 * Using the _ env variable is **extremely** hacky, but seems to do the job…
-		 * See https://github.com/mxcl/swift-sh/issues/101 */
-		let fm = FileManager.default
-		let filepath = ProcessInfo.processInfo.environment["_"] ?? fm.currentDirectoryPath
-		fm.changeCurrentDirectoryPath(URL(fileURLWithPath: filepath).deletingLastPathComponent().appendingPathComponent("..").path)
+	func run() async throws {
+		let filepath = CommandLine.arguments.first ?? ""
+		FileManager.default.changeCurrentDirectoryPath(URL(fileURLWithPath: filepath).deletingLastPathComponent().deletingLastPathComponent().path)
 		
 		/* Start your code here. */
+		/* Here’s an example of calling a launching a subprocess and waiting for it to finish. */
+//		_ = try await ProcessInvocation(
+//			"bash", "-c", #"echo Hello world!"#,
+//			stdoutRedirect: .none, stderrRedirect: .none
+//		).invokeAndGetRawOutput()
 	}
 	
 }
