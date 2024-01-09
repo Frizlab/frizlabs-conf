@@ -38,10 +38,10 @@ struct Main : ParsableCommand {
 		
 		/* Start your code here. */
 		/* Here’s an example of calling a launching a subprocess and waiting for it to finish. */
-//		_ = try await ProcessInvocation(
-//			"bash", "-c", #"echo Hello world!"#,
-//			stdoutRedirect: .none, stderrRedirect: .none
-//		).invokeAndGetRawOutput()
+		// _ = try await ProcessInvocation(
+		// 	"bash", "-c", #"echo Hello world!"#,
+		// 	stdoutRedirect: .none, stderrRedirect: .none
+		// ).invokeAndGetRawOutput()
 	}
 	
 }
