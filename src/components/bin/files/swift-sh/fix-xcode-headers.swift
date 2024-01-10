@@ -1,10 +1,9 @@
 #!/usr/bin/swift sh
-
 import Foundation
 
-import ArgumentParser // apple/swift-argument-parser ~> 1.1.2
-import CLTLogger      // xcode-actions/clt-logger    ~> 0.3.6
-import Logging        // apple/swift-log             ~> 1.4.2
+import ArgumentParser /* @apple/swift-argument-parser ~> 1.2.0 */
+import CLTLogger      /* @xcode-actions/clt-logger    ~> 0.3.6 */
+import Logging        /* @apple/swift-log             ~> 1.4.2 */
 
 
 
@@ -16,11 +15,10 @@ let logger: Logger = {
 	return ret
 }()
 
+
 /* Then call main. */
-FixSourceHeaders.main()
-
-
-struct FixSourceHeaders : ParsableCommand {
+_ = await Task{ await FixSourceHeaders.main() }.value
+struct FixSourceHeaders : AsyncParsableCommand {
 	
 	func run() throws {
 		let fm = FileManager.default
@@ -34,7 +32,7 @@ struct FixSourceHeaders : ParsableCommand {
 			guard currentURL.pathExtension == "swift" else {continue}
 			
 			let fh = try FileHandle(forReadingFrom: currentURL)
-			let data = try fh.readData(ofLength: magic.count)
+			let data = try fh.read(upToCount: magic.count)
 			guard data == magic else {continue}
 			
 			logger.info("Rewriting file \(currentURL.path)")

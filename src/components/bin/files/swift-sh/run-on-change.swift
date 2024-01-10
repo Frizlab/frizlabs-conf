@@ -1,14 +1,14 @@
 #!/usr/bin/swift sh
-
 import Foundation
 
-import ArgumentParser  // apple/swift-argument-parser ~> 1.0.1
-import FSEventsWrapper // @Frizlab                    ~> 1.0.2
-import SwiftShell      // @kareman                    ~> 5.1.0
+import ArgumentParser  /* @apple/swift-argument-parser ~> 1.2.0 */
+import FSEventsWrapper /* @Frizlab                     ~> 1.0.2 */
+import SwiftShell      /* @kareman                     ~> 5.1.0 */
 
 
 
-struct Main : ParsableCommand {
+_ = await Task{ await Main.main() }.value
+struct Main : AsyncParsableCommand {
 	
 	@Argument(help: "The path to monitor")
 	var path: String
@@ -63,5 +63,3 @@ struct Main : ParsableCommand {
 	}
 	
 }
-
-Main.main()
