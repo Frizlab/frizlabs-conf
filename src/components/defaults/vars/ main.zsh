@@ -96,6 +96,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"developer.pagerduty.com"
 	"developer.twitter.com"
 	"developers.facebook.com"
+	"devops.stackexchange.com"
 	"devroom.io"
 	"digitalocean.com"
 	"discuss.hashicorp.com"
