@@ -1,7 +1,7 @@
 Some doc regarding Xcode templates:
-  https://aleahim.com/xcode-templates/
-  https://www.raywenderlich.com/26582967-xcode-project-and-file-templates
-  https://diamantidis.github.io/2019/07/21/xcode-custom-templates
+  <https://aleahim.com/xcode-templates/>
+  <https://www.raywenderlich.com/26582967-xcode-project-and-file-templates>
+  <https://diamantidis.github.io/2019/07/21/xcode-custom-templates>
 
 Also see /Applications/Xcode.app/Contents/Developer/Library/Xcode/Templates folder.
 
@@ -22,5 +22,5 @@ Possible Image values found:
 
 
 Some official doc related to the text templates:
-	- https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/devc8a500cb9
-	- https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0
+	- <https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/devc8a500cb9>
+	- <https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0>

@@ -21,7 +21,7 @@ bin_task__bin "frizlab" ":Darwin:" "swift-sh/fix-xcode-headers.swift"
 bin_task__bin "frizlab" ":Darwin:" "sh/deff.sh"
 
 ### mo3 encoder and decoder ###
-# From http://www.un4seen.com/
+# From <http://www.un4seen.com/>.
 # There is also a Linux and Windows version available for download on the site.
 bin_task__bin "un4seen" ":Darwin:" "bin/mo3enc"
 bin_task__bin "un4seen" ":Darwin:" "bin/unmo3"
@@ -76,8 +76,8 @@ bin_task__bin "frizlab" ":Darwin:Linux:" "swift/brew-find-poured-from-bottle.swi
 bin_task__bin "ian.abbott" ":Darwin:Linux:" "sh/ansi-colors.sh"
 
 ### abc2ps ###
-# http://web.archive.org/web/20090507154446/http://www.ihp-ffo.de:80/~msm/
-# http://web.archive.org/web/20100305171200/http://www.ihp-ffo.de/~msm/ReadMe.abc2ps
+# <http://web.archive.org/web/20090507154446/http://www.ihp-ffo.de:80/~msm/>
+# <http://web.archive.org/web/20100305171200/http://www.ihp-ffo.de/~msm/ReadMe.abc2ps>
 bin_task__bin "michael.methfessel" ":Darwin:" "bin/abc2ps"
 
 ### abcppc ###
@@ -110,12 +110,12 @@ bin_task__bin "bbsteam" ":Darwin:Linux:" "bash/bash-arrays.sh"
 bin_task__bin "frizlab" ":Darwin:Linux:" "python2/ios-backup-to-files.py"
 
 ### ls mbdb ###
-# Original author is unclear; but script comes from this stackoverflow question https://stackoverflow.com/questions/3085153.
+# Original author is unclear; but script comes from this stackoverflow question <https://stackoverflow.com/questions/3085153>.
 # Linux compat is untested
 bin_task__bin "galloglass" ":Darwin:Linux:" "python2/ls-mbdb.py"
 
 ### gem list leaves ###
-# https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa
+# <https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa>
 # Linux compat is untested
 bin_task__bin "astyagun" ":Darwin:Linux:" "sh/gem-list-leaves.sh"
 
@@ -153,7 +153,7 @@ bin_task__bin "frizlab" ":Darwin:Linux:" "sh/fill-empty-dirs.sh"
 bin_task__bin "frizlab" ":Darwin:" "sh/remove-quarantine.sh"
 
 ### Make Link ###
-# This binary allows hard-linking directories. It’s dangerous, don’t do it! See https://stackoverflow.com/a/4707231 for more info.
+# This binary allows hard-linking directories. It’s dangerous, don’t do it! See <https://stackoverflow.com/a/4707231> for more info.
 bin_task__bin "frizlab" ":Darwin:~work~" "bin/make-link"
 bin_task__doc "frizlab" ":Darwin:~work~" "man/man1" "docs/make-link.1"
 

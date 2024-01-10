@@ -3,7 +3,7 @@
 # The shebang is not necessarily needed, but shellcheck wants it.
 
 # Init file for interactive bash shell.
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+# See <https://github.com/Frizlab/frizlabs-conf> for more info.
 
 echo "ENTER: .bashrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
@@ -52,7 +52,7 @@ PS1='\[\033[01;36m\]\#\[\033[0m\] \\ \[\033[00;32m\]\t\[\033[0m\] / \[\033[00;33
 # - If we ever wanted to set PROMPT_COMMAND (we don’t need it now but why not), we should be careful and keep the previous PROMPT_COMMAND value:
 #      PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }new_code_here"
 #   See /etc/bashrc_Apple_Terminal for some additional info.
-#   Some light info on this var: https://stackoverflow.com/a/3058366
+#   Some light info on this var: <https://stackoverflow.com/a/3058366>.
 
 # Bash specific alias
 alias h='cat ~/.bash_sessions/*.history*'

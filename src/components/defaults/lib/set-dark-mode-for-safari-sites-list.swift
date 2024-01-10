@@ -28,7 +28,7 @@ let darkModeForSafariDefaultsName = "com.alexandrudenk.Dark-Mode-for-Safari.Exte
 
 /* Get the path of the plist that should be modified by this script.
  * The “correct” way would be to use the undocumented `_CFPreferencesCopyApplicationMap` function that the `defaults` tool uses.
- * See https://gist.github.com/jessepeterson/a46562565affbe87789e and https://stackoverflow.com/a/20719428 */
+ * See <https://gist.github.com/jessepeterson/a46562565affbe87789e> and <https://stackoverflow.com/a/20719428>. */
 guard let libURL = try? FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
 	print("could not get the library path of the current user", to: &stderrStream)
 	print("failed")

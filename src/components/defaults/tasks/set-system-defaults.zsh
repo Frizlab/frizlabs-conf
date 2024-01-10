@@ -120,8 +120,8 @@ start_task "macOS: set short date format to a sane value (year/month/day)"
 catchout RES  libdefaults__set_plist NSGlobalDomain AppleICUDateFormatStrings '{1 = "y/MM/dd";}'
 log_task_from_res "$RES"
 
-# https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/
-# https://github.com/tech-otaku/menu-bar-clock (more up-to-date than blog post)
+# <https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/>
+# <https://github.com/tech-otaku/menu-bar-clock> (more up-to-date than blog post)
 # We do not do `AppleICUForce12HourTime`; maybe we should, idk.
 start_task "macOS: set menubar clock format"
 { res_check "$RES" &&   catchout RES  libdefaults__set_str  com.apple.menuextra.clock DateFormat "EEE d MMM 'at'  HH:mm:ss" && RES_LIST+=("$RES") }

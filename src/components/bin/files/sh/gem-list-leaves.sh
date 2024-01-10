@@ -1,6 +1,6 @@
 #!/bin/sh
-# List Ruby gems, that are not a dependency of any other gem (analog of `brew leaves`)
-# https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa
+# List Ruby gems, that are not a dependency of any other gem (analog of `brew leaves`).
+# <https://gist.github.com/astyagun/290b783045afffb8190a0c75ab76d0fa>
 
 
 GEMS_FILE=`mktemp`

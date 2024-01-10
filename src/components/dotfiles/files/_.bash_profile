@@ -3,7 +3,7 @@
 # The shebang is not necessarily needed, but shellcheck wants it.
 
 # Init file for login bash shell.
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+# See <https://github.com/Frizlab/frizlabs-conf> for more info.
 
 echo "ENTER: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
@@ -24,15 +24,15 @@ echo "START: .bash_profile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
 # Bash history control.
 # Set to ignore duplicates in history, as well as lines starting with a space.
-# Note: An alias for this is ignoreboth
+# Note: An alias for this is ignoreboth.
 # Note2: Technically this is POSIX-compliant (this is after all simply an export of a variable) but as it is only useful for bash, we keep it here.
 export HISTCONTROL=ignoredups:ignorespace
 
-# !12 will retype command #12, NOT reexecute it without asking
+# !12 will retype command #12, NOT reexecute it without asking.
 shopt -s histverify
 
-# Allow one-off typing errors
-# https://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin
+# Allow one-off typing errors.
+# <https://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin>
 shopt -s cdspell
 
 

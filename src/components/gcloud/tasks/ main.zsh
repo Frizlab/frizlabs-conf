@@ -1,7 +1,7 @@
 # Install the google cloud sdk and add its path to the PATH.
 # TODO: Check checksum
 
-# Update URLs from https://cloud.google.com/sdk/docs/install
+# Update URLs from <https://cloud.google.com/sdk/docs/install>.
 tar_url=
 tar_shasum=
 case "$HOST_OS:$HOST_ARCH" in

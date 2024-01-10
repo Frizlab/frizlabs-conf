@@ -1,6 +1,6 @@
 # Some doc:
-#    https://babodee.wordpress.com/2016/04/09/launchctl-2-0-syntax/
-#    https://ss64.com/osx/launchctl.html
+#    <https://babodee.wordpress.com/2016/04/09/launchctl-2-0-syntax/>
+#    <https://ss64.com/osx/launchctl.html>
 
 ## Usage: install_user_launch_agent label
 ## label should be of the reverse DNS form (e.g. me.frizlab.the-best-agent)

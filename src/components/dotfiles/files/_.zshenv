@@ -3,7 +3,7 @@
 # The shebang is not necessarily needed, but shellcheck wants it.
 
 # Init file for ALL zsh shells. Including zsh from scripts! Called first.
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+# See <https://github.com/Frizlab/frizlabs-conf> for more info.
 
 echo "ENTER: .zshenv" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 

@@ -3,7 +3,7 @@
 # The shebang is not necessarily needed, but shellcheck wants it.
 
 # Init file for interactive zsh shell.
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+# See <https://github.com/Frizlab/frizlabs-conf> for more info.
 
 echo "ENTER: .zshrc" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 
@@ -119,7 +119,7 @@ __show_git_branch() {
 # We have to enable prompt substitutions for the git functions to work.
 # We also set transientrprompt to remove RPS1 when the command has been accepted.
 setopt promptsubst transientrprompt
-# Emulate \# from bash: https://superuser.com/a/696900
+# Emulate \# from bash: <https://superuser.com/a/696900>.
 [[ $FRZ_ZSHPROMPT_CMD_COUNT -ge 1 ]] || FRZ_ZSHPROMPT_CMD_COUNT=1
 preexec() { ((FRZ_ZSHPROMPT_CMD_COUNT++)) }
 # Notes:
@@ -144,8 +144,8 @@ bindkey '^W' backward-kill-space-word
 # Also fix suppr key which does not work out of the box.
 bindkey '^[[3~' delete-char
 
-# Some zsh options we like
-# Mostly from there https://scriptingosx.com/2019/06/moving-to-zsh-part-3-shell-options/
+# Some zsh options we like.
+# Mostly from there <https://scriptingosx.com/2019/06/moving-to-zsh-part-3-shell-options/>.
 #setopt nocaseglob; # To set globing to be case-insensitive (not set, we are on a cs fs)
 setopt auto_cd; # Auto cd to directories without the need to add cd
 setopt glob_complete; # Do not expand glob w/ tab (to be more bash-like)
@@ -155,7 +155,7 @@ setopt hist_reduce_blanks; # Remove blanks in history
 setopt extended_history; # Also store timestamp in history
 setopt hist_ignore_space; # Do not store commands starting with space (after next command)
 setopt hist_no_store; # Do not store history and fc commands in history
-#setopt correct correct_all; # Propose correction for incorrect commands in Terminal; disabled because I don’t like it
+#setopt correct correct_all; # Propose correction for incorrect commands in Terminal; disabled because I don’t like it.
 if test "$(uname -s)" != "Darwin"; then
 	# Add to history incrementally instead of when shell quits.
 	# Not enabled on macOS because it disables state restoration.

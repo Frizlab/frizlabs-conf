@@ -7,7 +7,7 @@ case "$HOST_OS" in
 	Linux)
 		# AFAIK there there is no official path for Linuxbrew on arm64 (because there are no bottles for this arch for Linux).
 		# So we use a custom path for the arm64 Linux brew install.
-		# See https://docs.brew.sh/Homebrew-on-Linux#arm
+		# See <https://docs.brew.sh/Homebrew-on-Linux#arm>.
 		readonly HOMEBREW_ARM64_SYSTEM_DIR="/home/linuxbrew/.linuxbrew-arm64"
 		readonly HOMEBREW_X86_SYSTEM_DIR="/home/linuxbrew/.linuxbrew"
 	;;

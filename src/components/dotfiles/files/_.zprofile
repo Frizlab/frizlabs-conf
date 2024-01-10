@@ -3,7 +3,7 @@
 # The shebang is not necessarily needed, but shellcheck wants it.
 
 # Init file for login zsh shell.
-# See https://github.com/Frizlab/frizlabs-conf for more info.
+# See <https://github.com/Frizlab/frizlabs-conf> for more info.
 
 echo "ENTER: .zprofile" >>"${FRZCNF_SH_INIT_DEBUG_OUTPUT:-/dev/null}"
 

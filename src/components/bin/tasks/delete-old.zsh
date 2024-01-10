@@ -69,7 +69,7 @@ bin_task__delete_bin "<unknown>" "ts2mov"
 
 ### QTCoffee ###
 # Version: 1.2.5
-# URL: http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html
+# URL: <http://web.archive.org/web/20150802051715/http://www.3am.pair.com/QTCoffee.html>.
 # Reason: Uses QuickTime; 32-bits only
 bin_task__delete_bin "3amcoffee" "catmovie"
 bin_task__delete_bin "3amcoffee" "chapcutmovie"

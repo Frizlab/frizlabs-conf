@@ -45,7 +45,7 @@ for browser in "${@:-Safari}"; do
 			log "stdout: BROWSER: '"$browser"'"
 			tell application "'"$browser"'"
 				repeat with theWindow in windows
-					-- For the bounds definition: https://www.macosxautomation.com/applescript/firsttutorial/11.html
+					-- For the bounds definition: <https://www.macosxautomation.com/applescript/firsttutorial/11.html>.
 					set b to bounds of theWindow
 					-- The distance in pixels from the left side of the screen to the left side of the window.
 					set ll to (item 1 of b)
