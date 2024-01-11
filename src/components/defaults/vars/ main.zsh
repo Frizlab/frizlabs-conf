@@ -1,10 +1,10 @@
-# Not -r because we modify this variable in the env specific vars file
+# Not -r because we modify this variable in the env specific vars file.
 typeset -a DEFAULTS__XCODE_THEME_ACTIONS=(
 	"mono"
 )
 
-# Not -r because we can modify this variable in the env specific vars file
-# Only useful when filter mode is whitelist
+# Not -r because we can modify this variable in the env specific vars file.
+# Only useful when filter mode is whitelist.
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"https://ipfs.io/ipfs/QmbpRxBZ5HDZDVRoeAU8xFYnoP4r5eGCxdkmfFW3JbA6mq/"
 	"https://web.archive.org/web/20150908004746/https://developer.apple.com/library/mac/documentation/cocoa/conceptual/coredata/Articles/cdNSAttributes.html"
@@ -330,8 +330,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"youperv.com"
 	"zewo.io"
 )
-# Not -r because we can modify this variable in the env specific vars file
-# Only useful when filter mode is blacklist
+# Not -r because we can modify this variable in the env specific vars file.
+# Only useful when filter mode is blacklist.
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
@@ -517,5 +517,5 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 )
 
 
-# Sourcing env specific vars file
+# Sourcing env specific vars file.
 test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true
