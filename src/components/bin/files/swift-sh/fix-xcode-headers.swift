@@ -1,4 +1,4 @@
-#!/usr/bin/swift sh
+#!/usr/bin/env -S swift-sh --
 import Foundation
 
 import ArgumentParser /* @apple/swift-argument-parser ~> 1.2.0 */

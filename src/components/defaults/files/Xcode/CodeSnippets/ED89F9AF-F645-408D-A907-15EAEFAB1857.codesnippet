@@ -9,7 +9,11 @@
 		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>#!/usr/bin/swift sh
+	<!--
+   Note about the shebang:
+   On macOS we could _probably_ use “#!swift-sh --” directly as it seems the kernel searches the PATH for the executable.
+   Also, the -S option for env does not seem to do much on macOS, but is mandatory for Linux. -->
+	<string>#!/usr/bin/env -S swift-sh --
 import Foundation
 
 import ArgumentParser /* @apple/swift-argument-parser ~&gt; 1.2.0  */
