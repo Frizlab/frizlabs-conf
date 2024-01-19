@@ -34,7 +34,7 @@ let logger: Logger = {
 
 /* Then call main. */
 _ = await Task{ await Main.main() }.value
-struct Main : ParsableCommand {
+struct Main : AsyncParsableCommand {
 	
 	func run() async throws {
 		let filepath = CommandLine.arguments.first ?? ""
