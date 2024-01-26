@@ -28,7 +28,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"tree"                "bin/tree"
 	"watch"               "bin/watch"
 	"wget"                "bin/wget"
-	"youtube-dl"          "bin/youtube-dl"
+	"yt-dlp"              "bin/yt-dlp"
 )
 if test "$HOST_OS" != "Linux"; then
 	# These formulae do not compile on Linux (at the time of writing), so we only add them when we’re not on Linux.
