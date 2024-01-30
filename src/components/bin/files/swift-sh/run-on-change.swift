@@ -32,7 +32,7 @@ struct Main : AsyncParsableCommand {
 	var shell: String = "zsh"
 	
 	@Option(name: .shortAndLong, help: "The minimum interval of time that has to happen between two launches of the script.")
-	var throttleMilliseconds: String = "zsh"
+	var throttleMilliseconds: Double = 250
 	
 	@Argument(help: "The path to monitor.")
 	var path: String
@@ -43,7 +43,7 @@ struct Main : AsyncParsableCommand {
 	func run() async throws {
 		logger.info("Starting path observation.")
 		let fsEventsStream = FSEventAsyncStream(path: path, flags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagFileEvents))
-		for await event in fsEventsStream._throttle(for: .milliseconds(250)) {
+		for await event in fsEventsStream._throttle(for: .milliseconds(throttleMilliseconds)) {
 			logger.debug("Got new FSEvent.", metadata: ["event": "\(event)"])
 			logger.info("Executing command.", metadata: ["date": "\(Date())"])
 			do {
