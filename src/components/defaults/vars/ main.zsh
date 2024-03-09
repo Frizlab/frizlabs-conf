@@ -402,14 +402,15 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"localhost"
 	
 	"9gag.com"
+	"aaronbos.dev" # Already dark
 	"about.me"
 	"accounts.panic.com"
 	"anasinorbi.ro"
 	"anti-captcha.com"
+	"app.amplitude.com" # Already dynamic, but not detected as such
 	"app.n26.com"
 	"appartager.com"
 	"apple.com"
-	"appleid.apple.com"
 	"assure.ameli.fr"
 	"auth.eversports.com"
 	"authors.apple.com"
@@ -422,6 +423,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"billetreduc.com"
 	"brew.sh"
 	"browser.kagi.com"
+	"browserbench.org"
+	"business.apple.com" # Does not work
 	"camanis.net"
 	"canva.com"
 	"cinemaspathegaumont.com"
@@ -441,12 +444,16 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"disneyplus.com"
 	"docs.brew.sh"
 	"docs.docker.com"
+	"docs.github.com" # Already dynamic, but not detected as such
+	"docs.python.org" # Already dynamic, but not detected as such
 	"draves.org"
 	"duckduckgo.com"
+	"dudzik.co" # Already dark; does not work
 	"duriansoftware.com"
 	"electricsheep.org"
 	"espace-assure.gmf.fr"
 	"espace-republique.fr"
+	"etherscan.io" # Already dynamic, but not detected as such
 	"eversports.fr"
 	"everytimezone.com"
 	"facebook.com"
@@ -460,10 +467,13 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"furyroom.fr"
 	"gist.github.com"
 	"github.com"
+	"gitlab.com"
 	"gmf.fr"
 	"happn.com"
+	"help.kagi.com" # Already dark
 	"help.steampowered.com"
 	"hi-way.io"
+	"hiandrewquinn.github.io" # Already dynamic, but not detected as such
 	"home.vollink.com"
 	"homepages.cwi.nl"
 	"hotels.le-mont-saint-michel.com"
@@ -475,8 +485,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"informatiiconsulare.ro"
 	"jegeremacartenavigo.fr"
 	"kagi.com"
+	"kimcartoon.li" # Already dark
 	"lapcatsoftware.com"
 	"le-mont-saint-michel.com"
+	"learn.microsoft.com" # Does not work
 	"leetcode.com"
 	"lg.com"
 	"lidentitenumerique.laposte.fr"
@@ -499,25 +511,30 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"netnewswire.com"
 	"nextcomputers.org"
 	"nextstep33.info"
+	"nitric.io" # Already dark
 	"noob-tv.com"
 	"nsdateformatter.com"
 	"nuskin.com"
 	"ohanaware.com"
 	"oui.sncf"
 	"oxyd.games"
+	"packaging.python.org"
 	"parametric.press"
 	"pavillonwagram.com"
 	"paypal.com"
 	"pizzahut.fr"
 	"plateforme-covid-idf.aphp.fr"
 	"pointerpointer.com"
+	"postgresql.org"
 	"powerlanguage.co.uk"
 	"prepacode-enpc.fr"
 	"primevideo.com"
+	"quora.com" # Does not work
 	"receive-sms.com"
 	"reddit.com"
 	"redditp.com"
 	"responsivepx.com"
+	"rlimit.com"
 	"sailorhg.com"
 	"sashalakhman.com"
 	"scrolldit.com"
@@ -533,8 +550,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"steamcommunity.com"
 	"store.serif.com"
 	"store.steampowered.com"
+	"studio.blender.org" # Does not work
 	"support.apple.com"
 	"swift.org"
+	"swiftpackageindex.com"
 	"taquin.net"
 	"test.hozana.org"
 	"theotokos.fr"
