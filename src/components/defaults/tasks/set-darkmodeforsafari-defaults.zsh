@@ -10,7 +10,7 @@ log_task_from_res "$RES"
 
 start_task "Dark Mode for Safari: set filter mode to whitelist"
 # 0 is blacklist (apply to all except…), 1 is whitelist (apply to none except…)
-catchout RES  libdefaults__set_int "com.alexandrudenk.Dark-Mode-for-Safari.Extension" "SITE_FILTER_KEY" 1
+catchout RES  libdefaults__set_int "com.alexandrudenk.Dark-Mode-for-Safari.Extension" "SITE_FILTER_KEY" 0
 log_task_from_res "$RES"
 
 start_task "Dark Mode for Safari: set blacklist"
