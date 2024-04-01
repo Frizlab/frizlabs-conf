@@ -420,7 +420,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"beta.you.com"
 	"bienvenueaumontsaintmichel.com"
 	"bienvenueaumontsaintmichel.fr"
-	"billetreduc.com"
+	"billetreduc.com" # Already dynamic, but not detected as such
+	"blog.trl.sn"
 	"brew.sh"
 	"browser.kagi.com"
 	"browserbench.org"
