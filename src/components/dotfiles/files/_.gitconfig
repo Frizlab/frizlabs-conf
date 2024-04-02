@@ -21,7 +21,8 @@
 	pushf = push --force-with-lease
 	# Thanks @scalbatty! (GitHub username)
 	# bbd is for “branches by date”.
-	bbd = for-each-ref --sort='authordate:iso8601' --format='%(color:bold)%(authordate:relative)%(color:reset)%09%(refname:short)' refs/heads
+	# Branches whose upstream is gone are in red.
+	bbd = for-each-ref --sort='authordate:iso8601' --format='%(color:bold)%(authordate:relative)%(color:reset)%09%(if:equals=[gone])%(upstream:track)%(then)%(color:red)%(end)%(refname:short)%(color:reset)' refs/heads
 	# We assume
 	#  1/ we’re at the root of the conf repo when this command is run, and
 	#  2/ there are only dark mode updates done in the vars files of the defaults component.
