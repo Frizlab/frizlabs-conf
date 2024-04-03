@@ -431,6 +431,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"cinemaspathegaumont.com"
 	"cnpnet.cnp.fr"
 	"cocacola.fr"
+	"coinbase.com" # Already dynamic, but not detected as such
 	"connexion.numericable.fr"
 	"css-tricks.com"
 	"daringfireball.net"
@@ -506,6 +507,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"moncompte.numericable.fr"
 	"moncompte.sncf.com"
 	"mondossiernotaire.fr"
+	"mozilla.github.io" # Already dark
 	"msha.ke"
 	"my.ionos.fr"
 	"nativeconnect.app"
@@ -514,10 +516,12 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nextstep33.info"
 	"nitric.io" # Already dark
 	"noob-tv.com"
+	"notion.so" # Already dynamic, but not detected as such
 	"nsdateformatter.com"
 	"nuskin.com"
 	"ohanaware.com"
 	"oui.sncf"
+	"ounapuu.ee" # Already dark
 	"oxyd.games"
 	"packaging.python.org"
 	"parametric.press"
@@ -542,6 +546,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"secure.digiposte.fr"
 	"selfservicerepair.com"
 	"sha256algorithm.com"
+	"sixcolors.com" # Already dynamic, but not detected as such
 	"sketch.com"
 	"sncf.com"
 	"soap2day.ac"
