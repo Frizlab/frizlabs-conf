@@ -8,4 +8,6 @@ DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES+=(
 )
 
 DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES+=(
+	"console.firebase.google.com" # Dynamic, not detected as such
+	"studio.mojo.video"
 )

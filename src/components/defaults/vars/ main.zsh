@@ -460,6 +460,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"everytimezone.com"
 	"facebook.com"
 	"fastvideoindexer.com"
+	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
 	"fly.io"
 	"formulae.brew.sh"
@@ -495,6 +496,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"lg.com"
 	"lidentitenumerique.laposte.fr"
 	"linear.app"
+	"linuxize.com" # Already dynamic, but not detected as such
 	"loneliness.one"
 	"louvre.fr"
 	"macintoshgarden.org"
@@ -518,6 +520,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"noob-tv.com"
 	"notion.so" # Already dynamic, but not detected as such
 	"nsdateformatter.com"
+	"nshipster.com" # Already dynamic, but not detected as such
 	"nuskin.com"
 	"ohanaware.com"
 	"oui.sncf"
@@ -530,6 +533,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"pizzahut.fr"
 	"plateforme-covid-idf.aphp.fr"
 	"pointerpointer.com"
+	"porn-blog.xyz" # Already dark
 	"postgresql.org"
 	"powerlanguage.co.uk"
 	"prepacode-enpc.fr"
