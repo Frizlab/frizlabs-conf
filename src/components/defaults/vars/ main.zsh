@@ -415,6 +415,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"auth.eversports.com"
 	"authors.apple.com"
 	"autodiscover.mail.frostland.fr"
+	"avanderlee.com" # Already dynamic, but not detected as such
 	"batou.dev"
 	"beta.music.apple.com"
 	"beta.you.com"
@@ -448,6 +449,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"docs.docker.com"
 	"docs.github.com" # Already dynamic, but not detected as such
 	"docs.python.org" # Already dynamic, but not detected as such
+	"docs.swift.org" # Already dynamic, but not detected as such
 	"draves.org"
 	"duckduckgo.com"
 	"dudzik.co" # Already dark; does not work
@@ -462,6 +464,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fastvideoindexer.com"
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
+	"fluence.network" # Already dark
 	"fly.io"
 	"formulae.brew.sh"
 	"forums.macrumors.com"
@@ -479,7 +482,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"hiandrewquinn.github.io" # Already dynamic, but not detected as such
 	"home.vollink.com"
 	"homepages.cwi.nl"
+	"honeypot.net" # Already dynamic, but not detected as such
 	"hotels.le-mont-saint-michel.com"
+	"hurl.wtf" # Does not work (and already dark)
 	"icloud.com"
 	"icloud.developer.apple.com"
 	"ikea.com"
@@ -518,6 +523,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nextstep33.info"
 	"nitric.io" # Already dark
 	"noob-tv.com"
+	"notes.ghed.in" # Already dynamic, but not detected as such
 	"notion.so" # Already dynamic, but not detected as such
 	"nsdateformatter.com"
 	"nshipster.com" # Already dynamic, but not detected as such
@@ -530,6 +536,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"parametric.press"
 	"pavillonwagram.com"
 	"paypal.com"
+	"peps.python.org" # Already dynamic, but not detected as such
 	"pizzahut.fr"
 	"plateforme-covid-idf.aphp.fr"
 	"pointerpointer.com"
@@ -600,6 +607,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"www3.yggtorrent.nz"
 	"www3.yggtorrent.pe"
 	"www5.yggtorrent.la"
+	"x.com" # Already dynamic, but not detected as such
+	"xstumbl.com" # Does not work
 	"yespark.fr"
 	"yggtorrent.ch"
 	"yggtorrent.gg"
