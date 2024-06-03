@@ -12,9 +12,8 @@ typeset -A PKGS_BREW_USER__CASKS=(
 	
 	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
 	
-	"happn-app/public/base64"           "Caskroom/base64"
-	"happn-app/public/locmapper-app"    "Caskroom/locmapper-app"
-	"happn-app/public/locmapper-linter" "Caskroom/locmapper-linter"
+	"happn-app/public/base64"     "Caskroom/base64"
+	"frizlab/perso/locmapper-app" "Caskroom/locmapper-app"
 )
 
 
