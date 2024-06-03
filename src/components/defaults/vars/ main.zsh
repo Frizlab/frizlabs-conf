@@ -409,8 +409,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"anti-captcha.com"
 	"app.amplitude.com" # Already dynamic, but not detected as such
 	"app.n26.com"
+	"app.slack.com" # Already dynamic, but not detected as such
 	"appartager.com"
 	"apple.com"
+	"ashgw.me" # Already dark
 	"assure.ameli.fr"
 	"auth.eversports.com"
 	"authors.apple.com"
@@ -430,6 +432,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"camanis.net"
 	"canva.com"
 	"cinemaspathegaumont.com"
+	"clipbook.app" # Already dark
 	"cnpnet.cnp.fr"
 	"cocacola.fr"
 	"coinbase.com" # Already dynamic, but not detected as such
@@ -454,6 +457,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"duckduckgo.com"
 	"dudzik.co" # Already dark; does not work
 	"duriansoftware.com"
+	"eisfunke.com" # Already dark
 	"electricsheep.org"
 	"espace-assure.gmf.fr"
 	"espace-republique.fr"
@@ -466,6 +470,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"feathericons.com"
 	"fluence.network" # Already dark
 	"fly.io"
+	"foon.uk" # Already dynamic, but not detected as such
 	"formulae.brew.sh"
 	"forums.macrumors.com"
 	"forums.swift.org"
@@ -491,6 +496,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ilmarilauhakangas.fi"
 	"imdb.com"
 	"informatiiconsulare.ro"
+	"interieur.gouv.fr" # Already dynamic, but not detected as such
 	"jegeremacartenavigo.fr"
 	"kagi.com"
 	"kimcartoon.li" # Already dark
@@ -509,7 +515,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"macos9lives.com"
 	"madamevoyeur.com"
 	"mariahealthandbeauty.mynuskin.com"
+	"meatfighter.com" # Already dark
 	"mindbodyonline.com"
+	"minus-ze.ro" # Already dynamic, but not detected as such
 	"mobile.twitter.com"
 	"moncompte.numericable.fr"
 	"moncompte.sncf.com"
@@ -523,6 +531,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nextstep33.info"
 	"nitric.io" # Already dark
 	"noob-tv.com"
+	"nopeforge.org" # Already dark
 	"notes.ghed.in" # Already dynamic, but not detected as such
 	"notion.so" # Already dynamic, but not detected as such
 	"nsdateformatter.com"
@@ -533,6 +542,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ounapuu.ee" # Already dark
 	"oxyd.games"
 	"packaging.python.org"
+	"pangeasoft.net" # Already dark
 	"parametric.press"
 	"pavillonwagram.com"
 	"paypal.com"
@@ -540,11 +550,13 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"pizzahut.fr"
 	"plateforme-covid-idf.aphp.fr"
 	"pointerpointer.com"
+	"polpiella.dev" # Already dynamic, but not detected as such
 	"porn-blog.xyz" # Already dark
 	"postgresql.org"
 	"powerlanguage.co.uk"
 	"prepacode-enpc.fr"
 	"primevideo.com"
+	"quic.video" # Already dark
 	"quora.com" # Does not work
 	"receive-sms.com"
 	"reddit.com"
@@ -578,6 +590,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"thewatchcartoononline.tv"
 	"ticketlouvre.fr"
 	"torrentleech.org"
+	"trace.yshui.dev" # Already dark
 	"try.constructor.dev"
 	"tumblr.com"
 	"tv.apple.com"
@@ -608,6 +621,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"www3.yggtorrent.pe"
 	"www5.yggtorrent.la"
 	"x.com" # Already dynamic, but not detected as such
+	"xeiaso.net" # Already dynamic, but not detected as such
 	"xstumbl.com" # Does not work
 	"yespark.fr"
 	"yggtorrent.ch"
