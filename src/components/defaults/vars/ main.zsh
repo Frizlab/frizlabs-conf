@@ -406,6 +406,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"about.me"
 	"accounts.panic.com"
 	"anasinorbi.ro"
+	"andrewlock.net" # Already dark; does not work
 	"anti-captcha.com"
 	"app.amplitude.com" # Already dynamic, but not detected as such
 	"app.n26.com"
@@ -437,6 +438,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"cocacola.fr"
 	"coinbase.com" # Already dynamic, but not detected as such
 	"connexion.numericable.fr"
+	"crablang.org" # Already dark
 	"css-tricks.com"
 	"daringfireball.net"
 	"dash.cloudflare.com"
@@ -545,6 +547,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nshipster.com" # Already dynamic, but not detected as such
 	"nuskin.com"
 	"ohanaware.com"
+	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
 	"ounapuu.ee" # Already dark
 	"oxyd.games"
