@@ -40,7 +40,7 @@ if test "$HOST_OS" != "Linux"; then
 		# Needs Swift.
 		# I could `brew install swift`, but it’s expensive, probably (probably because I tried and it failed).
 		"frizlab/perso/find-unreferenced-xcode-files" "bin/find-unreferenced-xcode-files"
-		"frizlab/perso/locmapper"                     "bin/locmapper"
+		"xcode-actions/tap/locmapper"                 "bin/locmapper"
 		"xcode-actions/tap/swift-sh"                  "bin/swift-sh"
 		"xcode-actions/tap/xct"                       "bin/xct"
 	)
