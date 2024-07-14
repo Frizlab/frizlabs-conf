@@ -31,3 +31,5 @@
 	defaultBranch = main
 [checkout]
 	defaultRemote = origin
+[rebase]
+	updateRefs = true
