@@ -473,6 +473,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fastvideoindexer.com"
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
+	"fikfap.com" # Already dark
 	"fluence.network" # Already dark
 	"fly.io"
 	"foon.uk" # Already dynamic, but not detected as such
@@ -594,6 +595,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"studio.blender.org" # Does not work
 	"support.apple.com"
 	"swift.org"
+	"swiftonserver.com" # Already dynamic, but not detected as such
 	"swiftpackageindex.com"
 	"taquin.net"
 	"test.hozana.org"
