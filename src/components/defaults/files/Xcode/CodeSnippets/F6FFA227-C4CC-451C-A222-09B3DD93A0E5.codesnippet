@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>metadata</string>
+	<string>metabase</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeBlock</string>
+		<string>CodeExpression</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>metadata: ["&lt;#key#&gt;": "\(&lt;#value#&gt;)"]</string>
+	<string>["&lt;#key#&gt;": "\(&lt;#value#&gt;)"]</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>F6FFA227-C4CC-451C-A222-09B3DD93A0E5</string>
 	<key>IDECodeSnippetLanguage</key>
@@ -17,7 +17,7 @@
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Logger Metadata</string>
+	<string>Logger Metadata Base</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
