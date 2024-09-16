@@ -5,6 +5,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"fd"                  "bin/fd"
 	"git-gui"             "bin/gitk"
 	"git-lfs"             "bin/git-lfs"
+	"gopass"              "bin/gopass"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
 	"jq"                  "bin/jq"
