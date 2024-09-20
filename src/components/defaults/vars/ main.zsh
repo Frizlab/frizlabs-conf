@@ -415,6 +415,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"appartager.com"
 	"apple.com"
 	"ashgw.me" # Already dark
+	"ashishb.net" # Already dark; does not work
 	"assure.ameli.fr"
 	"auth.eversports.com"
 	"authors.apple.com"
@@ -443,6 +444,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"connexion.numericable.fr"
 	"crablang.org" # Already dark
 	"css-tricks.com"
+	"cuntempire.com" # Does not work
 	"daringfireball.net"
 	"dash.cloudflare.com"
 	"dashboard.nativeconnect.app"
@@ -478,6 +480,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"everytimezone.com"
 	"facebook.com"
 	"facegram.co.za" # Does not work
+	"fanvue.com" # Already dynamic, but not detected as such
+	"faphouse.com" # Already dynamic (when forced to), but not detected as such
 	"fastvideoindexer.com"
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
@@ -513,6 +517,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ikea.com"
 	"ilmarilauhakangas.fi"
 	"imdb.com"
+	"inessential.com" # Already dynamic, but not detected as such
 	"informatiiconsulare.ro"
 	"inspect.new" # Already dark; does not work
 	"interieur.gouv.fr" # Already dynamic, but not detected as such
@@ -520,6 +525,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
 	"kennethnym.com" # Already dynamic, but not detected as such
+	"kibty.town" # Already dark; does not work
 	"kimcartoon.li" # Already dark
 	"lapcatsoftware.com"
 	"le-mont-saint-michel.com"
@@ -554,6 +560,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"netnewswire.com"
 	"nextcomputers.org"
 	"nextstep33.info"
+	"nightwater.email" # Already dark; does not work
 	"nitric.io" # Already dark
 	"noob-tv.com"
 	"nopeforge.org" # Already dark
@@ -621,6 +628,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"thetvdb.com"
 	"thewatchcartoononline.tv"
 	"ticketlouvre.fr"
+	"tinyapps.org" # Already dynamic, but not detected as such
 	"togever.co"
 	"torrentleech.org"
 	"tour.gleam.run" # Already dark
