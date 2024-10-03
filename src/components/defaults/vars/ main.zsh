@@ -510,6 +510,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"homepages.cwi.nl"
 	"honeypot.net" # Already dynamic, but not detected as such
 	"hotels.le-mont-saint-michel.com"
+	"htmx.org" # Already dynamic, but not detected as such
 	"hurl.wtf" # Does not work (and already dark)
 	"hypermedia.systems" # Already dynamic, but not detected as such
 	"icloud.com"
@@ -545,6 +546,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"mariahealthandbeauty.mynuskin.com"
 	"meatfighter.com" # Already dark
 	"mega.nz" # Already dynamic, but not detected as such
+	"messenger.com" # Already dynamic, but not detected as such
 	"milovana.com" # Already dark
 	"mindbodyonline.com"
 	"minus-ze.ro" # Already dynamic, but not detected as such
