@@ -9,7 +9,7 @@
 		<string>CodeExpression</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>["&lt;#key#&gt;": "\(&lt;#value#&gt;)"]</string>
+	<string>metadata: ["&lt;#key#&gt;": "\(&lt;#value#&gt;)"]</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>F6FFA227-C4CC-451C-A222-09B3DD93A0E5</string>
 	<key>IDECodeSnippetLanguage</key>
