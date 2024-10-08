@@ -111,9 +111,10 @@ start_task "macOS: set bottom-left corner action"
 { res_check "$RES" &&   catchout RES  libdefaults__set_int com.apple.dock wvous-bl-modifier 0 && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
 
-start_task "macOS: re-enable slow-motion animation with shift (hidden default)"
-catchout RES  libdefaults__set_bool com.apple.dock slow-motion-allowed 1
-log_task_from_res "$RES"
+# This is very fun, but breaks the ctrl-shift-array up or down shortcut to multi-line select in Xcode, so we disable it.
+#start_task "macOS: re-enable slow-motion animation with shift (hidden default)"
+#catchout RES  libdefaults__set_bool com.apple.dock slow-motion-allowed 1
+#log_task_from_res "$RES"
 
 # Note: I’m not fully confident this is actually used anywhere…
 start_task "macOS: set system-wide search engine"
