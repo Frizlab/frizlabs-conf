@@ -435,6 +435,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bsky.app" # Already dynamic, but not detected as such
 	"business.apple.com" # Does not work
 	"camanis.net"
+	"campsite.com" # Already dynamic, but not detected as such
 	"canva.com"
 	"cinemaspathegaumont.com"
 	"clipbook.app" # Already dark
@@ -588,6 +589,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"pointerpointer.com"
 	"polpiella.dev" # Already dynamic, but not detected as such
 	"porn-blog.xyz" # Already dark
+	"pornbay.org" # Already dark
 	"postgresql.org"
 	"powerlanguage.co.uk"
 	"prepacode-enpc.fr"
@@ -641,6 +643,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"tvtime.com"
 	"twitch.tv" # Already dark
 	"twitter.com"
+	"underpassapp.com" # Already dynamic, but not detected as such
 	"userinyerface.com"
 	"useyourloaf.com"
 	"vapor.codes"
