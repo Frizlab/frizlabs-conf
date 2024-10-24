@@ -18,7 +18,8 @@
 	last = log -1 HEAD
 	fa = fetch -pPtf
 	pr = pull --rebase
-	pushf = push --force-with-lease
+	# <https://stackoverflow.com/a/67016769>
+	pushf = push --force-with-lease --force-if-includes
 	# Thanks @scalbatty! (GitHub username)
 	# bbd is for “branches by date”.
 	# Branches whose upstream is gone are in red.

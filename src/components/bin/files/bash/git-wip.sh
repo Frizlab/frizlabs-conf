@@ -14,7 +14,7 @@ case "$action" in
 	push)
 		git add .
 		git commit -am"WIP"
-		git push;# --force-with-lease
+		git push;# --force-with-lease --force-if-includes
 		git reset --hard HEAD~
 		;;
 	pull)
@@ -28,7 +28,7 @@ case "$action" in
 		
 		git reset HEAD~
 		git add .
-		git push --force-with-lease
+		git push --force-with-lease --force-if-includes
 		;;
 	*)
 		echo "Usage: $0 [push|pull]" >&2
