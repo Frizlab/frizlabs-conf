@@ -418,6 +418,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ashishb.net" # Already dark; does not work
 	"assure.ameli.fr"
 	"auth.eversports.com"
+	"auth.wiki" # Already dynamic, but not detected as such
 	"authors.apple.com"
 	"autodiscover.mail.frostland.fr"
 	"avanderlee.com" # Already dynamic, but not detected as such
