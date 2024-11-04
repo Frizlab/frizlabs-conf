@@ -8,6 +8,7 @@ typeset -A PKGS_BREW_USER__CASKS=(
 	"chalk"       "Caskroom/chalk"
 	"dash"        "Caskroom/dash"
 	"imageoptim"  "Caskroom/imageoptim"
+	"mints"       "Caskroom/mints"
 	"netnewswire" "Caskroom/netnewswire"
 	
 	"frizlab/perso/my-web-quirks" "Caskroom/my-web-quirks"
