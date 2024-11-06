@@ -452,6 +452,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"dashboard.nativeconnect.app"
 	"dashboard.twitch.tv" # Already dark
 	"datatracker.ietf.org" # Already dynamic, but not detected as such
+	"david.guillot.me" # Already dark; does not work
 	"denudeart.com" # Does not work
 	"departmentmap.store"
 	"developer.apple.com"
@@ -488,6 +489,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
 	"fikfap.com" # Already dark
+	"finnvoorhees.com" # Already dynamic, but not detected as such
 	"fluence.network" # Already dark
 	"fly.io"
 	"foon.uk" # Already dynamic, but not detected as such
@@ -513,6 +515,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"honeypot.net" # Already dynamic, but not detected as such
 	"hotels.le-mont-saint-michel.com"
 	"htmx.org" # Already dynamic, but not detected as such
+	"hulylabs.com" # Already dynamic, but not detected as such
 	"hurl.wtf" # Does not work (and already dark)
 	"hypermedia.systems" # Already dynamic, but not detected as such
 	"icloud.com"
@@ -552,6 +555,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"milovana.com" # Already dark
 	"mindbodyonline.com"
 	"minus-ze.ro" # Already dynamic, but not detected as such
+	"mlumiste.com" # Already dark; does not work
 	"mobile.twitter.com"
 	"moncompte.numericable.fr"
 	"moncompte.sncf.com"
@@ -634,6 +638,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"thewatchcartoononline.tv"
 	"ticketlouvre.fr"
 	"tinyapps.org" # Already dynamic, but not detected as such
+	"titledrops.net" # Already dark; does not work
 	"togever.co"
 	"torrentleech.org"
 	"tour.gleam.run" # Already dark
