@@ -34,3 +34,5 @@
 	defaultRemote = origin
 [rebase]
 	updateRefs = true
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
