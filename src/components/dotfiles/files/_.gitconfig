@@ -36,3 +36,5 @@
 	updateRefs = true
 [blame]
 	ignoreRevsFile = .git-blame-ignore-revs
+[submodule]
+	recurse = true
