@@ -507,6 +507,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
 	"geoff.greer.fm" # Already dynamic, but not detected as such
+	"getwhisky.app" # Already dynamic, but not detected as such
 	"gist.github.com"
 	"github.com"
 	"gitlab.com"
@@ -541,6 +542,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"jegeremacartenavigo.fr"
 	"jonifen.co.uk" # Already dark; does not work
 	"joshtumath.uk" # Already dynamic, but not detected as such
+	"jpcamara.com" # Already dynamic, but not detected as such
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
 	"kaveland.no" # Already dark; does not work
@@ -563,6 +565,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"macos9lives.com"
 	"madamevoyeur.com"
 	"mariahealthandbeauty.mynuskin.com"
+	"martinheinz.dev" # Already dark; does not work
 	"meatfighter.com" # Already dark
 	"mega.nz" # Already dynamic, but not detected as such
 	"messenger.com" # Already dynamic, but not detected as such
@@ -600,6 +603,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"packaging.python.org"
 	"pangeasoft.net" # Already dark
 	"parametric.press"
+	"paulefou.com" # Already dark; does not work
 	"pavillonwagram.com"
 	"paypal.com"
 	"peps.python.org" # Already dynamic, but not detected as such
@@ -646,6 +650,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"swift.org"
 	"swiftonserver.com" # Already dynamic, but not detected as such
 	"swiftpackageindex.com"
+	"swifttoolkit.dev" # Already dynamic, but not detected as such
+	"swiftwithmajid.com" # Already dark; does not work
 	"taimapp.io" # Already dark; does not work
 	"taquin.net"
 	"test.hozana.org"
