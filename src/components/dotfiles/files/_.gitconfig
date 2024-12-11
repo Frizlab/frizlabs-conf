@@ -36,5 +36,7 @@
 	updateRefs = true
 [blame]
 	ignoreRevsFile = .git-blame-ignore-revs
-[submodule]
-	recurse = true
+# Not sure what this actually does but I like having control over the submodules anyway, so we disable it.
+#[submodule]
+#	recurse = true
+
