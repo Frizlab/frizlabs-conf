@@ -410,6 +410,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
 	"andrewlock.net" # Already dark; does not work
 	"anti-captcha.com"
+	"anvaka.github.io" # Already dark; does not work
 	"app.amplitude.com" # Already dynamic, but not detected as such
 	"app.n26.com"
 	"app.slack.com" # Already dynamic, but not detected as such
@@ -431,6 +432,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bienvenueaumontsaintmichel.fr"
 	"billetreduc.com" # Already dynamic, but not detected as such
 	"blackentropy.bearblog.dev" # Already dark; does not work
+	"blog.jonas.foo" # Already dark; does not work
 	"blog.kagi.com" # Already dynamic, but not detected as such
 	"blog.trl.sn"
 	"brew.sh"
@@ -563,6 +565,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"macintoshgarden.org"
 	"macintoshrepository.org"
 	"macos9lives.com"
+	"macstories.net" # Already dynamic, but not detected as such
 	"madamevoyeur.com"
 	"mariahealthandbeauty.mynuskin.com"
 	"martinheinz.dev" # Already dark; does not work
@@ -658,6 +661,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"theotokos.fr"
 	"thetvdb.com"
 	"thewatchcartoononline.tv"
+	"theyseeyourphotos.com" # Already dark; does not work
 	"ticketlouvre.fr"
 	"tinyapps.org" # Already dynamic, but not detected as such
 	"titledrops.net" # Already dark; does not work
