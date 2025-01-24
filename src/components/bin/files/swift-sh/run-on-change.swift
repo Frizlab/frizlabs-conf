@@ -25,8 +25,8 @@ let logger: Logger = {
 
 ProcessInvocationConfig.logger = nil
 
-_ = await Task{ await Main.main() }.value
-struct Main : AsyncParsableCommand {
+_ = await Task{ await RunOnChange.main() }.value
+struct RunOnChange : AsyncParsableCommand {
 	
 	@Option(name: .shortAndLong, help: #"The shell to use for running the script. The shell will be run like so:\#n   $shell -c "$command""#)
 	var shell: String = "zsh"
