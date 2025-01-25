@@ -1,17 +1,13 @@
 #!/usr/bin/env -S swift-sh --
 import Foundation
-#if canImport(System)
-import System
-#else
-import SystemPackage     /* @apple/swift-system                     ~> 1.0.0 */
-#endif
 
 import ArgumentParser    /* @apple/swift-argument-parser            ~> 1.3.0 */
 import AsyncAlgorithms   /* @apple/swift-async-algorithms           ~> 1.0.0 */
-import CLTLogger         /* @xcode-actions/clt-logger               ~> 0.8.0 */
+import CLTLogger         /* @xcode-actions/clt-logger               ~> 1.0.0-beta */
 import FSEventsWrapper   /* @Frizlab                                ~> 2.1.0 */
 import Logging           /* @apple/swift-log                        ~> 1.5.3 */
-import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta */
+import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta.3 */
+import SystemPackage     /* @apple/swift-system                     ~> 1.0.0 */
 
 
 
