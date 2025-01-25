@@ -440,6 +440,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"blog.kagi.com" # Already dynamic, but not detected as such
 	"blog.mggross.com" # Already dynamic, but not detected as such
 	"blog.trl.sn"
+	"book.swiftwasm.org" # Dynamic-ish; does not work
 	"brew.sh"
 	"browser.kagi.com"
 	"browserbench.org"
