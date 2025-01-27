@@ -3,7 +3,7 @@ import Foundation
 
 import ArgumentParser    /* @apple/swift-argument-parser            ~> 1.3.0 */
 import AsyncAlgorithms   /* @apple/swift-async-algorithms           ~> 1.0.0 */
-import CLTLogger         /* @xcode-actions/clt-logger               ~> 1.0.0-beta */
+import CLTLogger         /* @xcode-actions/clt-logger               ~> 1.0.0-rc */
 import FSEventsWrapper   /* @Frizlab                                ~> 2.1.0 */
 import Logging           /* @apple/swift-log                        ~> 1.5.3 */
 import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta.3 */
@@ -12,7 +12,7 @@ import SystemPackage     /* @apple/swift-system                     ~> 1.0.0 */
 
 
 /* Let’s bootstrap the logger first and make it available globally. */
-LoggingSystem.bootstrap { _ in CLTLogger() }
+LoggingSystem.bootstrap(CLTLogger.init, metadataProvider: nil)
 let logger: Logger = {
 	var ret = Logger(label: "main")
 	ret.logLevel = .info
