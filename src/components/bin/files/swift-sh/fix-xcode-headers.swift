@@ -2,13 +2,13 @@
 import Foundation
 
 import ArgumentParser /* @apple/swift-argument-parser ~> 1.2.0 */
-import CLTLogger      /* @xcode-actions/clt-logger    ~> 0.3.6 */
+import CLTLogger      /* @xcode-actions/clt-logger    ~> 1.0.0-rc */
 import Logging        /* @apple/swift-log             ~> 1.4.2 */
 
 
 
 /* Let’s bootstrap the logger before anything else. */
-LoggingSystem.bootstrap{ _ in CLTLogger() }
+LoggingSystem.bootstrap(CLTLogger.init, metadataProvider: nil)
 let logger: Logger = {
 	var ret = Logger(label: "main")
 	ret.logLevel = .info
