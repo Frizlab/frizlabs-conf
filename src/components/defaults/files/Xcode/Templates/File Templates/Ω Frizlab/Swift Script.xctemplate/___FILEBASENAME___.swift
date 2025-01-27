@@ -1,10 +1,10 @@
 #!/usr/bin/env -S swift-sh --
 import Foundation
 
-import ArgumentParser /* @apple/swift-argument-parser ~> 1.2.0  */
-import CLTLogger      /* @xcode-actions/clt-logger    ~> 1.0.0-rc */
-import Logging        /* @apple/swift-log             ~> 1.5.3  */
-import XcodeTools     /* @xcode-actions               == 0.10.0 */
+import ArgumentParser    /* @apple/swift-argument-parser            ~> 1.3.0 */
+import CLTLogger         /* @xcode-actions/clt-logger               ~> 1.0.0-rc */
+import Logging           /* @apple/swift-log                        ~> 1.5.3 */
+import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta.3 */
 
 
 
