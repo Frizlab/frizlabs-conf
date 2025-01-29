@@ -1,3 +1,6 @@
+### test-onwasi ###
+bin_task__bin "frizlab" ":Darwin:Linux:" "bash/test-onwasi.sh"
+
 ### test-ondroid ###
 bin_task__bin "frizlab" ":Darwin:Linux:" "bash/test-ondroid.sh"
 
