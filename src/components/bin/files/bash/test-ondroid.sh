@@ -52,5 +52,8 @@ cp "$PATH_TO_SWIFT_LIBS"/*.so "$pack_destination/.build/$SWIFT_SDK_NAME/debug/" 
 
 # Sync the pack to the device and run the test suite.
 # Note push --sync does NOT delete absent files from the device.
-"$adb_path" push --sync "$pack_destination" "/data/local/tmp/$package_name-testing" || { echo "Failed syncing pack to device." >&2; exit 1; }
-"$adb_path" shell "cd /data/local/tmp/$package_name-testing; ./.build/$SWIFT_SDK_NAME/debug/${package_name}PackageTests.xctest"
+readonly remote_pack_path="/data/local/tmp/$package_name-testing"
+# We assume no quotes in the remote pack path…
+"$adb_path" shell "rm -fr \"$remote_pack_path\""
+"$adb_path" push "$pack_destination" "$remote_pack_path" || { echo "Failed syncing pack to device." >&2; exit 1; }
+"$adb_path" shell "cd \"$remote_pack_path\"; \"./.build/$SWIFT_SDK_NAME/debug/${package_name}PackageTests.xctest\""
