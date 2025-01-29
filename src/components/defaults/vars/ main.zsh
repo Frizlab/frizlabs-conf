@@ -517,6 +517,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"formulae.brew.sh"
 	"forums.macrumors.com"
 	"forums.swift.org"
+	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
@@ -677,6 +678,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"studio.blender.org" # Does not work
 	"sundayswift.com" # Already dynamic, but not detected as such
 	"support.apple.com"
+	"susam.github.io" # Already dark; does not work
 	"swift.org"
 	"swiftonserver.com" # Already dynamic, but not detected as such
 	"swiftpackageindex.com"
