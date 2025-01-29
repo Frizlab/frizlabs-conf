@@ -1,3 +1,6 @@
+### test-ondroid ###
+bin_task__bin "frizlab" ":Darwin:Linux:" "bash/test-ondroid.sh"
+
 ### mount-image-from-network ###
 bin_task__bin "frizlab" ":Darwin:" "bash/xcd.sh"
 
