@@ -50,7 +50,7 @@ alias x='chmod ug+x'
 alias top='top -o cpu'
 alias rem='trash'
 alias cd..='cd ..'
-alias reload-shell='exec $SHELL -l'; # “Reloads” the current shell (starts a new login shell while replacing current one)
+alias reload-shell='exec $SHELL'; # “Reloads” the current shell (no -l option because apparently zsh is launched w/o it in Terminal; not sure why though…).
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 alias pass="gopass"; # Even though it’s written in go gopass is still miles better than pass (is it hard though?).
 
