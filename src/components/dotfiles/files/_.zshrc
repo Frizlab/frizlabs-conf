@@ -109,10 +109,71 @@ __show_git_branch() {
 	last_commit_msg="$(git log -1 --pretty="format:%B" 2>/dev/null || echo)"
 	
 	printf "[%%{\e[00;31m%%}"
-	printf "%s" "$(sed -En '/^## /s///p' <<<"$git_status")"
-	if   grep -Eq '^[^#?]' <<<"$git_status"; then printf '*'
-	elif grep -Eq '^\?'    <<<"$git_status"; then printf '~'
-	fi
+	# Let’s parse the status to create the string to display.
+	# Among other, we shorten the branch name and omit the upstream branch name if it is the same as the branch name.
+	# We also add a star at the end of the string if there are modifications in the repo
+	#  and a tilde if there are untracked files (and no other modifications).
+	awk '
+		# This:
+		# - Replaces the "/frizlab/" part of a branch name by "/me/";
+		# - Replaces the "feature/" part of a branch name by "feat/" (if the branch starts with this);
+		# - Tries to shorten the branch name if possible/needed (currently not implemented).
+		function process_branch_name(branch_name) {
+			sub(/^feature\//, "feat/", branch_name)
+			sub(/\/frizlab\//, "/me/", branch_name)
+			# TODO: Find other ways of shortening a branch name if needed.
+			return branch_name
+		}
+		
+		BEGIN {
+			found_diffs = 0
+			found_untracked = 0
+		}
+		
+		/^## / {
+			# Remove the "## " prefix.
+			branch_name_with_upstream = substr($0, 4)
+			# We assume the whole string to be valid.
+			# A valid branch name cannot contain "...", so if the string is found we have a branch name with an upstream.
+			split_index = index(branch_name_with_upstream, "...")
+			if (split_index == 0) {
+				# No upstream, we just return the full string.
+				printf "%s", branch_name_with_upstream
+			} else {
+				# Let’s retrieve the branch name and the upstream name.
+				branch_name = substr(branch_name_with_upstream, 1, split_index - 1)
+				upstream = substr(branch_name_with_upstream, split_index + 3)
+				# Now let’s find the remote name.
+				split_index = index(upstream, "/")
+				if (split_index == 0) {
+					# Weird: we seem to have an upstream with an invalid name as it contains no "/".
+					# Let’s bail and print the whole branch with the upstream.
+					printf "%s", process_branch_name(branch_name_with_upstream)
+				} else {
+					# We do have a slash in the upstream.
+					# We do not check whether it’s non-empty or other validations as we do not care.
+					upstream_name = substr(upstream, 1, split_index - 1)
+					upstream_branch_name = substr(upstream, split_index + 1)
+					if (branch_name == upstream_branch_name) {
+						# The branch name is the same as the upstream branch name.
+						# Let’s shorten the output.
+						printf "%s...%s", process_branch_name(branch_name), upstream_name
+					} else {
+						# The names differ, we print the whole thing, but shorten the branch names.
+						printf "%s...%s/%s", process_branch_name(branch_name), upstream_name, process_branch_name(upstream_branch_name)
+					}
+				}
+			}
+		}
+		
+		/^[^#?]/ {found_diffs     = 1}
+		/^\?/    {found_untracked = 1}
+		
+		END {
+			if      (found_diffs     != 0) {printf "*"}
+			else if (found_untracked != 0) {printf "~"}
+		}
+	' <<<"$git_status"
 	test "$last_commit_msg" = "WIP" && printf " +wip"
 	printf "%%{\e[0m%%}]"
 }
