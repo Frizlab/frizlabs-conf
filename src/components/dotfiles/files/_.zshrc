@@ -142,13 +142,23 @@ __show_git_branch() {
 			} else {
 				# Let’s retrieve the branch name and the upstream name.
 				branch_name = substr(branch_name_with_upstream, 1, split_index - 1)
-				upstream = substr(branch_name_with_upstream, split_index + 3)
+				upstream_with_info = substr(branch_name_with_upstream, split_index + 3)
+				# Let’s split the upstream and the info.
+				# We assume we have the expected format when a single space delimits the info and the upstream.
+				split_index = index(upstream_with_info, " ")
+				if (split_index > 0) {
+					upstream = substr(upstream_with_info, 1, split_index - 1)
+					info = substr(upstream_with_info, split_index)
+				} else {
+					upstream = upstream_with_info
+					info = ""
+				}
 				# Now let’s find the remote name.
 				split_index = index(upstream, "/")
 				if (split_index == 0) {
 					# Weird: we seem to have an upstream with an invalid name as it contains no "/".
 					# Let’s bail and print the whole branch with the upstream.
-					printf "%s", process_branch_name(branch_name_with_upstream)
+					printf "%s%s", process_branch_name(branch_name_with_upstream), info
 				} else {
 					# We do have a slash in the upstream.
 					# We do not check whether it’s non-empty or other validations as we do not care.
@@ -157,10 +167,10 @@ __show_git_branch() {
 					if (branch_name == upstream_branch_name) {
 						# The branch name is the same as the upstream branch name.
 						# Let’s shorten the output.
-						printf "%s...%s", process_branch_name(branch_name), upstream_name
+						printf "%s...%s%s", process_branch_name(branch_name), upstream_name, info
 					} else {
 						# The names differ, we print the whole thing, but shorten the branch names.
-						printf "%s...%s/%s", process_branch_name(branch_name), upstream_name, process_branch_name(upstream_branch_name)
+						printf "%s...%s/%s%s", process_branch_name(branch_name), upstream_name, process_branch_name(upstream_branch_name), info
 					}
 				}
 			}
