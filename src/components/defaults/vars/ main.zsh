@@ -523,7 +523,6 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"furyroom.fr"
 	"geoff.greer.fm" # Already dynamic, but not detected as such
 	"getwhisky.app" # Already dynamic, but not detected as such
-	"ghostty.org" # Already dark; does not work
 	"ghuntley.com" # Already dynamic, but not detected as such
 	"gist.github.com"
 	"github.com"
@@ -667,6 +666,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sixcolors.com" # Already dynamic, but not detected as such
 	"sketch.com"
 	"sncf.com"
+	"sniffnet.net" # Already dark; does not work
 	"soap2day.ac"
 	"soundcloud.com"
 	"soundhound.com"
