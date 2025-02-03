@@ -138,7 +138,7 @@ __show_git_branch() {
 			split_index = index(branch_name_with_upstream, "...")
 			if (split_index == 0) {
 				# No upstream, we just return the full string.
-				printf "%s", branch_name_with_upstream
+				printf "%s", process_branch_name(branch_name_with_upstream)
 			} else {
 				# Let’s retrieve the branch name and the upstream name.
 				branch_name = substr(branch_name_with_upstream, 1, split_index - 1)
