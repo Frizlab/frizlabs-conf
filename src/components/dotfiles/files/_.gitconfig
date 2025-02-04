@@ -28,7 +28,7 @@
 	#  1/ we’re at the root of the conf repo when this command is run, and
 	#  2/ there are only dark mode updates done in the vars files of the defaults component.
 	commit-and-push-dark-mode-update = "!test \"$(git log -1 --pretty=format:%B HEAD)\" = 'Update Dark Mode whitelist' && { git commit ./src/components/defaults/vars --amend --no-edit && git pushf; } || { git commit ./src/components/defaults/vars -m 'Update Dark Mode whitelist' && git push; }"
-	hn = rev-parse --abbrev-ref HEAD
+	b = rev-parse --abbrev-ref HEAD
 [init]
 	defaultBranch = main
 [checkout]
