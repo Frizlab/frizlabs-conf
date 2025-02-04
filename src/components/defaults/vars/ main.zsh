@@ -436,6 +436,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bienvenueaumontsaintmichel.fr"
 	"billetreduc.com" # Already dynamic, but not detected as such
 	"blackentropy.bearblog.dev" # Already dark; does not work
+	"blog.freron.com" # Already dynamic, but not detected as such
 	"blog.jonas.foo" # Already dark; does not work
 	"blog.kagi.com" # Already dynamic, but not detected as such
 	"blog.mggross.com" # Already dynamic, but not detected as such
@@ -445,6 +446,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"browser.kagi.com"
 	"browserbench.org"
 	"bsky.app" # Already dynamic, but not detected as such
+	"buildsettingextractor.com" # Already dark; does not work
 	"business.apple.com" # Does not work
 	"camanis.net"
 	"campsite.com" # Already dynamic, but not detected as such
@@ -569,6 +571,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"kennethnym.com" # Already dynamic, but not detected as such
 	"kibty.town" # Already dark; does not work
 	"kimcartoon.li" # Already dark
+	"kubamartin.com" # Already dark; does not work
 	"lapcatsoftware.com"
 	"le-mont-saint-michel.com"
 	"learn.microsoft.com" # Does not work
@@ -698,6 +701,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"torrentleech.org"
 	"tour.gleam.run" # Already dark
 	"trace.yshui.dev" # Already dark
+	"trench.dev" # Already dark; does not work
 	"try.constructor.dev"
 	"tumblr.com"
 	"tv.apple.com"
