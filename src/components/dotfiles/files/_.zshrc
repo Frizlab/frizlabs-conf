@@ -184,7 +184,8 @@ __show_git_branch() {
 			else if (found_untracked != 0) {printf "~"}
 		}
 	' <<<"$git_status"
-	test "$last_commit_msg" = "WIP" && printf " +wip"
+	{ test -z "$last_commit_msg" && printf " +nop" } || \
+	{ test "$last_commit_msg" = "WIP" && printf " +wip" }
 	printf "%%{\e[0m%%}]"
 }
 # We have to enable prompt substitutions for the git functions to work.
