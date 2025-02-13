@@ -436,6 +436,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bienvenueaumontsaintmichel.fr"
 	"billetreduc.com" # Already dynamic, but not detected as such
 	"blackentropy.bearblog.dev" # Already dark; does not work
+	"blintzbase.com" # Already dynamic, but not detected as such
 	"blog.freron.com" # Already dynamic, but not detected as such
 	"blog.jonas.foo" # Already dark; does not work
 	"blog.kagi.com" # Already dynamic, but not detected as such
