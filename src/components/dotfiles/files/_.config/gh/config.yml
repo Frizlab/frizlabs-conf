@@ -30,4 +30,8 @@ browser:
 # Aliases allow you to create nicknames for gh commands.
 aliases:
    # This is a work alias, but for simplicity I allow it in the global config.
-   distribute: '!gh workflow run build_manual_trigger.yml -r $(git branch --show-current) -f message="$1 -"'
+   # The alternative would be to have a template, which is annoying because the config would no longer be an alias in ~/.config,
+   #  or have two different files with the proper one being chosen at install time, which is annoying because both files would be practically the same.
+   # (Second alternative is not supported yet but not complicated to implement.)
+   # If the two config for home and work gh would differ much at some point we might migrate to the second alternative.
+   mojo_distribute: '!gh workflow run "build_manual_trigger.yml" -r "$(git branch --show-current)" -f message="$1"'
