@@ -29,3 +29,4 @@ browser:
 
 # Aliases allow you to create nicknames for gh commands.
 aliases:
+   distribute: '!gh workflow run "build_manual_trigger.yml" -r "$(git branch --show-current)" -f message="$1"'
