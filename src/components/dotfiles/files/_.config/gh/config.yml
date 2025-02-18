@@ -10,7 +10,6 @@ prompt: enabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
     distribute: '!gh workflow run build_manual_trigger.yml -r $(git branch --show-current) -f message="$1 -"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
