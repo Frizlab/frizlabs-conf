@@ -1,3 +1,8 @@
+# ⚠️ IMPORTANT ######################################## #
+# This file is currently not installed at all.          #
+# Add it in the DOTFILES__FILES variable to install it. #
+# ##################################################### #
+
 # The current version of the config schema
 version: 1
 

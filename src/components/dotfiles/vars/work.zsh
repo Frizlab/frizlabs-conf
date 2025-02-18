@@ -1,3 +1,11 @@
+DOTFILES__FOLDERS+=(
+	".config/gh"
+)
+
+DOTFILES__FILES+=(
+	".config/gh/config.yml"
+)
+
 DOTFILES__ENCRYPTED+=(
 	".ssh/config-$COMPUTER_GROUP"
 )

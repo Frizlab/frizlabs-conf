@@ -13,7 +13,8 @@ unset decrypted_string
 readonly DOTFILES__BACKUP_DIR="$HOME/.:dotfiles_backups"
 readonly DOTFILES__BACKUP_DIR_MODE="700"
 
-readonly DOTFILES__FOLDERS=(
+# readonly later only because modified in env-specific var files.
+DOTFILES__FOLDERS=(
 	".zshenv.d"
 	".zprofile.d"
 	".zshrc.d"
@@ -27,10 +28,10 @@ readonly DOTFILES__FOLDERS=(
 	".colima"
 	".colima/default"
 	".config"
-	".config/gh"
 )
 
-readonly DOTFILES__FILES=(
+# readonly later only because modified in env-specific var files.
+DOTFILES__FILES=(
 	".zshenv"
 	".zprofile"
 	".zshrc"
@@ -46,7 +47,6 @@ readonly DOTFILES__FILES=(
 	".psqlrc"
 	".justfile"
 	".lldbinit"
-	".config/gh/config.yml"
 )
 
 readonly DOTFILES__TEMPLATES=(
@@ -59,7 +59,7 @@ readonly DOTFILES__TEMPLATES=(
 	".justfile:dyn"
 )
 
-# Not readonly because modified in env-specific var files.
+# readonly later only because modified in env-specific var files.
 DOTFILES__ENCRYPTED=(
 )
 
@@ -68,9 +68,18 @@ readonly DOTFILES__ENCRYPTED_TEMPLATES=(
 )
 
 # All colima vars are expected to be changed in env-specific var files.
+# We put them readonly after the env-specific var files import.
 DOTFILES__COLIMA__NCPU="2"
 DOTFILES__COLIMA__MEMORY="8"
 DOTFILES__COLIMA__RWMOUNT="/tmp/colima"
 
 # Sourcing env specific vars file
 test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true
+
+
+readonly DOTFILES__FOLDERS
+readonly DOTFILES__FILES
+readonly DOTFILES__ENCRYPTED
+readonly DOTFILES__COLIMA__NCPU
+readonly DOTFILES__COLIMA__MEMORY
+readonly DOTFILES__COLIMA__RWMOUNT
