@@ -26,6 +26,8 @@ readonly DOTFILES__FOLDERS=(
 	".psql_session"
 	".colima"
 	".colima/default"
+	".config"
+	".config/gh"
 )
 
 readonly DOTFILES__FILES=(
@@ -44,6 +46,7 @@ readonly DOTFILES__FILES=(
 	".psqlrc"
 	".justfile"
 	".lldbinit"
+	".config/gh/config.yml"
 )
 
 readonly DOTFILES__TEMPLATES=(
