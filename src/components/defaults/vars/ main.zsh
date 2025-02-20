@@ -481,6 +481,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"discordapp.com"
 	"disneyplus.com"
 	"docs.brew.sh"
+	"docs.directus.io" # Dynamic-ish; does not work
 	"docs.docker.com"
 	"docs.github.com" # Already dynamic, but not detected as such
 	"docs.huly.io" # Already dynamic (kind of), but not detected as such
@@ -581,7 +582,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"lidentitenumerique.laposte.fr"
 	"linear.app"
 	"linuxize.com" # Already dynamic, but not detected as such
+	"lmnt.me" # Already dark; does not work
 	"loneliness.one"
+	"lookaway.app" # Already dark; does not work
 	"louvre.fr"
 	"maciejwalkowiak.com" # Already dynamic, but not detected as such
 	"macintoshgarden.org"
@@ -596,6 +599,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"messenger.com" # Already dynamic, but not detected as such
 	"milovana.com" # Already dark
 	"mindbodyonline.com"
+	"mint-energie.com" # Does not work
 	"minus-ze.ro" # Already dynamic, but not detected as such
 	"mlumiste.com" # Already dark; does not work
 	"mobile.twitter.com"
