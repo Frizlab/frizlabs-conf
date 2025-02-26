@@ -153,6 +153,10 @@ start_task "Xcode: set scm file review view"
 catchout RES  libdefaults__set_int com.apple.dt.Xcode IDESourceControlReviewFilesSelectedChoice 6
 log_task_from_res "$RES"
 
+start_task "Xcode: check spelling while typing"
+catchout RES  libdefaults__set_bool com.apple.dt.Xcode AutomaticallyCheckSpellingWhileTyping 1
+log_task_from_res "$RES"
+
 
 ### Mark: Advanced
 
