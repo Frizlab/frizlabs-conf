@@ -1,7 +1,7 @@
 # Setup some defaults for Xcode
 
 
-### Navigation ###
+### Mark: Navigation
 
 start_task "Xcode: set jump to definition on cmd-click"
 catchout RES  libdefaults__set_int com.apple.dt.Xcode IDECommandClickOnCodeAction 1
@@ -16,7 +16,7 @@ catchout RES  libdefaults__set_str com.apple.dt.Xcode IDEEditorCoordinatorTarget
 log_task_from_res "$RES"
 
 
-### Text Editing – Display ###
+### Mark: Text Editing – Display
 
 start_task "Xcode: set show code folding ribbon"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextShowFoldingSidebar 1
@@ -35,7 +35,7 @@ catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextEditorWrapsLines 0
 log_task_from_res "$RES"
 
 
-### Text Editing – Editing ###
+### Mark: Text Editing – Editing
 
 start_task "Xcode: set no auto-insert braces"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextAutoInsertCloseBrace 0
@@ -50,7 +50,7 @@ catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextAutoEncloseSelecti
 log_task_from_res "$RES"
 
 
-### Text Editing – Indentation ###
+### Mark: Text Editing – Indentation
 # The commented settings here are set in the xcd script.
 
 #start_task "Xcode: set indent with tabs"
@@ -82,7 +82,7 @@ catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextIndentCaseInC 1
 log_task_from_res "$RES"
 
 
-### Text Editor ###
+### Mark: Text Editor
 
 start_task "Xcode: set hide Minimap"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode DVTTextShowMinimap 0
@@ -97,7 +97,7 @@ catchout RES  libdefaults__set_int com.apple.dt.Xcode IDEEditorDefaultCodeReview
 log_task_from_res "$RES"
 
 
-### Key Bindings ###
+### Mark: Key Bindings
 
 # Note: We could copy instead of link the idekeybindings file as Xcode first remove the file then rewrites it when it modifies it.
 start_task "Xcode: set smart beginning and ending of lines"
@@ -108,7 +108,7 @@ local -r KB_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBac
 log_task_from_res_list RES_LIST
 
 
-### Font and Color Themes ###
+### Mark: Font and Color Themes
 
 # Note: AFAIK we could install the modified Xcode themes w/ the same name as the builtin ones; Xcode would use the modified ones.
 #       Might be a future TODO as having an explicit variant of the theme is good for clarity, but in our case not really necessary.
@@ -123,7 +123,7 @@ catchout RES  libdefaults__set_str com.apple.dt.Xcode XCFontAndColorCurrentTheme
 log_task_from_res "$RES"
 
 
-### Other ###
+### Mark: Other
 
 start_task "Xcode: link template macros from conf folder to Xcode user data"
 local -r TM_DEST_FILE="$HOME/Library/Developer/Xcode/UserData/IDETemplateMacros.plist"
@@ -154,14 +154,14 @@ catchout RES  libdefaults__set_int com.apple.dt.Xcode IDESourceControlReviewFile
 log_task_from_res "$RES"
 
 
-### Advanced ###
+### Mark: Advanced
 
 start_task "Xcode: do close windows when app quit"
 catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0
 log_task_from_res "$RES"
 
 
-### Hidden ###
+### Mark: Hidden
 
 start_task "Xcode: reset show build operation duration to default"
 catchout RES  libdefaults__remove_key com.apple.dt.Xcode ShowBuildOperationDuration
