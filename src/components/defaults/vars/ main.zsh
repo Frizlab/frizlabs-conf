@@ -541,6 +541,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"help.steampowered.com"
 	"hi-way.io"
 	"hiandrewquinn.github.io" # Already dynamic, but not detected as such
+	"hitchdev.com" # Already dark; does not work
 	"home.vollink.com"
 	"homepages.cwi.nl"
 	"honeypot.net" # Already dynamic, but not detected as such
@@ -556,6 +557,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"icloud.developer.apple.com"
 	"ikea.com"
 	"ilmarilauhakangas.fi"
+	"imagemagick.org" # Already dynamic, but not detected as such
 	"imdb.com"
 	"inessential.com" # Already dynamic, but not detected as such
 	"informatiiconsulare.ro"
@@ -660,6 +662,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"reddit.com"
 	"redditp.com"
 	"responsivepx.com"
+	"rexporn.sex" # Dynamic-ish; does not work
 	"rlimit.com"
 	"sailorhg.com"
 	"saint-eugene.net" # Does not work
