@@ -508,6 +508,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"facegram.co.za" # Does not work
 	"fanvue.com" # Already dynamic, but not detected as such
 	"faphouse.com" # Already dynamic (when forced to), but not detected as such
+	"fastcall.dev" # Already dark; does not work
 	"fastvideoindexer.com"
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
@@ -523,6 +524,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"forums.swift.org"
 	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
+	"fuma-nama.vercel.app" # Already dark; does not work
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
 	"geoff.greer.fm" # Already dynamic, but not detected as such
@@ -581,6 +583,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"learn.microsoft.com" # Does not work
 	"leetcode.com"
 	"lg.com"
+	"lgug2z.com" # Already dark, but not detected as such
 	"lidentitenumerique.laposte.fr"
 	"linear.app"
 	"linuxize.com" # Already dynamic, but not detected as such
@@ -615,6 +618,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"my.ionos.fr"
 	"nativeconnect.app"
 	"netnewswire.com"
+	"nav.al" # Already dynamic, but not detected as such
 	"nextcomputers.org"
 	"nextstep33.info"
 	"nightwater.email" # Already dark; does not work
@@ -673,7 +677,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sectigo.com" # Does not work
 	"secure.digiposte.fr"
 	"selfservicerepair.com"
+	"sepolia.app.tea.xyz" # Already dark; does not work
 	"sha256algorithm.com"
+	"simplewebserver.org" # Already dynamic, but not detected as such
 	"sixcolors.com" # Already dynamic, but not detected as such
 	"sketch.com"
 	"sncf.com"
