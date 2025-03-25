@@ -412,6 +412,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"anti-captcha.com"
 	"anvaka.github.io" # Already dark; does not work
 	"app.amplitude.com" # Already dynamic, but not detected as such
+	"app.fastmail.com" # Already dynamic, but not detected as such
 	"app.n26.com"
 	"app.qonto.com" # Already dynamic, but not detected as such
 	"app.slack.com" # Already dynamic, but not detected as such
@@ -449,6 +450,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bsky.app" # Already dynamic, but not detected as such
 	"buildsettingextractor.com" # Already dark; does not work
 	"business.apple.com" # Does not work
+	"calendar.google.com" # Already dynamic, but not detected as such
 	"camanis.net"
 	"campsite.com" # Already dynamic, but not detected as such
 	"canva.com"
@@ -464,6 +466,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"crablang.org" # Already dark
 	"css-tricks.com"
 	"cuntempire.com" # Does not work
+	"customers.securitasdirect.fr" # Already dynamic, but not detected as such
 	"daringfireball.net"
 	"dash.cloudflare.com"
 	"dashboard.nativeconnect.app"
@@ -490,6 +493,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"docs.python.org" # Already dynamic, but not detected as such
 	"docs.swift.org" # Already dynamic, but not detected as such
 	"draves.org"
+	"drive.google.com" # Already dynamic, but not detected as such
 	"duckduckgo.com"
 	"dudzik.co" # Already dark; does not work
 	"duriansoftware.com"
@@ -498,6 +502,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"electricsheep.org"
 	"enterprisedb.com" # Mostly dark; does not work
 	"eporner.com" # Already dark
+	"erome.com" # Already dark; does not work
 	"espace-assure.gmf.fr"
 	"espace-republique.fr"
 	"etherscan.io" # Already dynamic, but not detected as such
@@ -508,6 +513,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"facegram.co.za" # Does not work
 	"fanvue.com" # Already dynamic, but not detected as such
 	"faphouse.com" # Already dynamic (when forced to), but not detected as such
+	"fastcall.dev" # Already dark; does not work
 	"fastvideoindexer.com"
 	"fatbobman.com" # Already dynamic, but not detected as such
 	"feathericons.com"
@@ -523,9 +529,11 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"forums.swift.org"
 	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
+	"fuma-nama.vercel.app" # Already dark; does not work
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
 	"geoff.greer.fm" # Already dynamic, but not detected as such
+	"geoguessr.com" # Already dark; does not work
 	"getwhisky.app" # Already dynamic, but not detected as such
 	"ghuntley.com" # Already dynamic, but not detected as such
 	"gist.github.com"
@@ -581,6 +589,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"learn.microsoft.com" # Does not work
 	"leetcode.com"
 	"lg.com"
+	"lgug2z.com" # Already dark, but not detected as such
 	"lidentitenumerique.laposte.fr"
 	"linear.app"
 	"linuxize.com" # Already dynamic, but not detected as such
@@ -588,6 +597,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"loneliness.one"
 	"lookaway.app" # Already dark; does not work
 	"louvre.fr"
+	"macg.co" # Already dynamic, but not detected as such
 	"maciejwalkowiak.com" # Already dynamic, but not detected as such
 	"macintoshgarden.org"
 	"macintoshrepository.org"
@@ -615,6 +625,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"my.ionos.fr"
 	"nativeconnect.app"
 	"netnewswire.com"
+	"nav.al" # Already dynamic, but not detected as such
 	"nextcomputers.org"
 	"nextstep33.info"
 	"nightwater.email" # Already dark; does not work
@@ -651,6 +662,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"pornbay.org" # Already dark
 	"postgresql.org"
 	"powerlanguage.co.uk"
+	"predemande-permisdeconduire.ants.gouv.fr" # Already dynamic, but not detected as such
 	"prepacode-enpc.fr"
 	"primevideo.com"
 	"psi3.ru" # Already dark; does not work
@@ -673,7 +685,11 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sectigo.com" # Does not work
 	"secure.digiposte.fr"
 	"selfservicerepair.com"
+	"sepolia.app.tea.xyz" # Already dark; does not work
 	"sha256algorithm.com"
+	"sharesome.com" # Supports dark mode, though manually
+	"simonsafar.com" # Already dark; does not work
+	"simplewebserver.org" # Already dynamic, but not detected as such
 	"sixcolors.com" # Already dynamic, but not detected as such
 	"sketch.com"
 	"sncf.com"
@@ -719,10 +735,12 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"underpassapp.com" # Already dynamic, but not detected as such
 	"userinyerface.com"
 	"useyourloaf.com"
+	"vale.rocks" # Already dynamic, but not detected as such
 	"vapor.codes"
 	"vimeo.com"
 	"vinay.sh" # Already dark; does not work
 	"voscomptesenligne.labanquepostale.fr"
+	"vuejs.org" # Already dynamic, but not detected as such
 	"wannonce.com"
 	"watchcartoononline.com"
 	"web.archive.org"
