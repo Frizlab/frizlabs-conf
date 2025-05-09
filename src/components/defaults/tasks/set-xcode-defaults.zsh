@@ -100,6 +100,7 @@ log_task_from_res "$RES"
 ### Mark: Key Bindings
 
 # Note: We could copy instead of link the idekeybindings file as Xcode first remove the file then rewrites it when it modifies it.
+RES=; RES_LIST=()
 start_task "Xcode: set smart beginning and ending of lines"
 local -r KB_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
 local -r KB_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
@@ -160,9 +161,11 @@ log_task_from_res "$RES"
 
 ### Mark: Advanced
 
+RES=; RES_LIST=()
 start_task "Xcode: do close windows when app quit"
-catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0
-log_task_from_res "$RES"
+{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0     && RES_LIST+=("$RES") }
+{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode IDEDisableStateRestoration 1   && RES_LIST+=("$RES") }
+log_task_from_res_list RES_LIST
 
 
 ### Mark: Hidden
