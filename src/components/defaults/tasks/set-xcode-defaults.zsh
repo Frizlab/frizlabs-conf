@@ -163,8 +163,10 @@ log_task_from_res "$RES"
 
 RES=; RES_LIST=()
 start_task "Xcode: do close windows when app quit"
-{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0     && RES_LIST+=("$RES") }
-{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode IDEDisableStateRestoration 1   && RES_LIST+=("$RES") }
+{  res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode NSQuitAlwaysKeepsWindows 0     && RES_LIST+=("$RES") }
+# Nope, abort!
+# This is to not restore the workspace state, and we very much do want that.
+#{ res_check "$RES" &&   catchout RES  libdefaults__set_bool com.apple.dt.Xcode IDEDisableStateRestoration 1   && RES_LIST+=("$RES") }
 log_task_from_res_list RES_LIST
 
 
