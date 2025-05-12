@@ -746,6 +746,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"web.archive.org"
 	"webmail.imm.fr"
 	"webmail.numericable.fr"
+	"wheeloftime.fandom.com" # Already dark; does not work
 	"wiki.torrentleech.org"
 	"wildblue.digital"
 	"winonx.com"
