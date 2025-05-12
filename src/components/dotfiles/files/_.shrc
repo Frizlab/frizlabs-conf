@@ -53,6 +53,7 @@ alias rem='trash'
 alias cd..='cd ..'
 alias reload-shell='exec $SHELL'; # “Reloads” the current shell (no -l option because apparently zsh is launched w/o it in Terminal; not sure why though…).
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
+alias rutorrent-read-report-from-clipboard="pbpaste | recode html..ascii | sed -E 's/\[\.\]/./g' | xmllint --format - | pygmentize -l xml"
 
 # Package aliases
 # The brew-all function is in shrc:dyn
