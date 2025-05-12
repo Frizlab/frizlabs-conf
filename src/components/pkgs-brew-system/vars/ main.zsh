@@ -15,6 +15,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"p7zip"               "bin/7z"
 	"pass"                "bin/pass"
 	"pstree"              "bin/pstree"
+	"pygments"            "bin/pygmentize"
 	"python3"             "bin/python3"
 	"ruby"                "opt/ruby/bin/ruby"
 	"rsync"               "bin/rsync"
