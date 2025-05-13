@@ -69,7 +69,7 @@ function libbrew__install_brew_package() {
 	if test "${path_to_check:0:1}" = "/"; then run_and_log test ! -e              "$path_to_check" || { echo "ok"; return }
 	else                                       run_and_log test ! -e "$brew_prefix/$path_to_check" || { echo "ok"; return }; fi
 	HOMEBREW_NO_ANALYTICS=1 \
-	HOMEBREW_NO_AUTO_UPDATE=0 HOMEBREW_AUTO_UPDATE_SECS=259200 \
+	HOMEBREW_NO_AUTO_UPDATE= HOMEBREW_AUTO_UPDATE_SECS=259200 \
 	HOMEBREW_CASK_OPTS="$FRZ_HOMEBREW_CASK_OPTS_BASE $additional_cask_options" \
 	run_and_log "${arch_launch[@]}" "$brew_prefix/bin/brew" install "$@" -- "$package_name" || { log_task_failure "cannot install using brew in prefix $brew_prefix"; echo "failed"; return }
 	echo "changed"
