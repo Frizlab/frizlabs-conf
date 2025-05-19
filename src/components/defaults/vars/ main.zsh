@@ -428,6 +428,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"autodiscover.mail.frostland.fr"
 	"avanderlee.com" # Already dynamic, but not detected as such
 	"aznude.com" # Already dark; does not work
+	"babesrater.com" # Not dark, but auto-dark does not work (content images are darkened too)
 	"batou.dev"
 	"bauble.studio" # Already dynamic, but not detected as such
 	"benji.dog" # Already dynamic, but not detected as such
