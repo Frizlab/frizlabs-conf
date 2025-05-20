@@ -35,7 +35,7 @@ m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',
 PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
 
 # We force the brew installation of the following binaries:
-#    - rsync: System’s rsync is very old;
+#    - rsync: System’s rsync is OpenRSync;
 #    - ruby: System’s ruby is old and some gems fail to install/update;
 #    - python: System’s python3 might be ok, but I’ve learned not to rely on system binaries (we have no guarantees; they are installed because the system needs them).
 #              IMPORTANT: “pip3 install” will install in the system brew prefix folder. Use “pip3 install --user” to install in ~/clt/envs/python3.
