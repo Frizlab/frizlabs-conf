@@ -424,6 +424,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"assure.ameli.fr"
 	"auth.eversports.com"
 	"auth.wiki" # Already dynamic, but not detected as such
+	"auth0.com" # Already dynamic, but not detected as such
 	"authors.apple.com"
 	"autodiscover.mail.frostland.fr"
 	"avanderlee.com" # Already dynamic, but not detected as such
@@ -455,6 +456,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"camanis.net"
 	"campsite.com" # Already dynamic, but not detected as such
 	"canva.com"
+	"celebrityrater.com" # Does not work
 	"cimgf.com" # Does not work
 	"cinemaspathegaumont.com"
 	"clipbook.app" # Already dark
@@ -464,6 +466,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"coinbase.com" # Already dynamic, but not detected as such
 	"community.letsencrypt.org" # Already dynamic, but not detected as such
 	"connexion.numericable.fr"
+	"contextch.at" # Already dynamic, but not detected as such
 	"crablang.org" # Already dark
 	"css-tricks.com"
 	"cuntempire.com" # Does not work
@@ -478,6 +481,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"departmentmap.store"
 	"devblogs.microsoft.com" # Retarded on-off switch for dark mode w/o automatic switching
 	"developer.apple.com"
+	"developer.okta.com" # Dynamic-ish; does not work
 	"developers.cloudflare.com"
 	"deviantart.com"
 	"dgerrells.com" # Already dark; does not work
@@ -487,6 +491,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"docs.brew.sh"
 	"docs.directus.io" # Dynamic-ish; does not work
 	"docs.docker.com"
+	"docs.duendesoftware.com" # Already dynamic, but not detected as such
 	"docs.github.com" # Already dynamic, but not detected as such
 	"docs.huly.io" # Already dynamic (kind of), but not detected as such
 	"docs.k3s.io" # Already dynamic, but not detected as such
@@ -555,6 +560,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"homepages.cwi.nl"
 	"honeypot.net" # Already dynamic, but not detected as such
 	"hotels.le-mont-saint-michel.com"
+	"hotnessrater.com" # Does not work
 	"htmx.org" # Already dynamic, but not detected as such
 	"huly.io" # Already dark, but not detected as such
 	"huly.togever.co" # Already dynamic, but not detected as such
@@ -562,10 +568,13 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"hurl.wtf" # Does not work (and already dark)
 	"hypermedia.systems" # Already dynamic, but not detected as such
 	"ianthehenry.com" # Already dynamic, but not detected as such
+	"ibm.com" # Already dynamic, but not detected as such
 	"icloud.com"
 	"icloud.developer.apple.com"
+	"igen.fr" # Already dynamic, but not detected as such
 	"ikea.com"
 	"ilmarilauhakangas.fi"
+	"inotherwords.app" # Does not work
 	"imagemagick.org" # Already dynamic, but not detected as such
 	"imdb.com"
 	"inessential.com" # Already dynamic, but not detected as such
@@ -578,12 +587,14 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"joshtumath.uk" # Already dynamic, but not detected as such
 	"jpcamara.com" # Already dynamic, but not detected as such
 	"jprx.io" # Already dark; does not work
+	"jwt.io" # Already dynamic, but not detected as such
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
 	"kaveland.no" # Already dark; does not work
 	"kennethnym.com" # Already dynamic, but not detected as such
 	"kibty.town" # Already dark; does not work
 	"kimcartoon.li" # Already dark
+	"kodeco.com" # Already dynamic, but not detected as such
 	"kubamartin.com" # Already dark; does not work
 	"lapcatsoftware.com"
 	"le-mont-saint-michel.com"
@@ -643,6 +654,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
 	"ounapuu.ee" # Already dark
+	"ouverture-pas-facile.fr" # Does not work
 	"oxyd.games"
 	"packaging.python.org"
 	"pangeasoft.net" # Already dark
@@ -710,8 +722,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"swift.org"
 	"swiftonserver.com" # Already dynamic, but not detected as such
 	"swiftpackageindex.com"
+	"swiftsenpai.com" # Already dynamic, but not detected as such
 	"swifttoolkit.dev" # Already dynamic, but not detected as such
 	"swiftwithmajid.com" # Already dark; does not work
+	"swiftyplace.com" # Already dynamic, but not detected as such
 	"taimapp.io" # Already dark; does not work
 	"taquin.net"
 	"test.hozana.org"
