@@ -401,6 +401,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
 	
+	"404media.co" # Already dark; does not work
 	"9gag.com"
 	"aaronbos.dev" # Already dark
 	"about.me"
@@ -533,6 +534,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"formulae.brew.sh"
 	"forums.macrumors.com"
 	"forums.swift.org"
+	"fossa.com" # Already dark; does not work
 	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
 	"fuma-nama.vercel.app" # Already dark; does not work
