@@ -20,6 +20,8 @@
 	pr = pull --rebase
 	# <https://stackoverflow.com/a/67016769>
 	pushf = push --force-with-lease --force-if-includes
+	pushff = push --force-with-lease
+	pushfff = push --force
 	# Thanks @scalbatty! (GitHub username)
 	# bbd is for “branches by date”.
 	# Branches whose upstream is gone are in red.
