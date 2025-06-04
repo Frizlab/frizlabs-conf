@@ -401,17 +401,21 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
 	
+	"0x44.xyz" # Already dark; does not work
+	"404media.co" # Already dark; does not work
 	"9gag.com"
 	"aaronbos.dev" # Already dark
 	"about.me"
 	"accounts.panic.com"
 	"adventofcode.com" # Already dark; does not work
+	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
 	"andrewlock.net" # Already dark; does not work
 	"anti-captcha.com"
 	"anvaka.github.io" # Already dark; does not work
 	"app.amplitude.com" # Already dynamic, but not detected as such
+	"app.bitrise.io" # Does not work
 	"app.fastmail.com" # Already dynamic, but not detected as such
 	"app.n26.com"
 	"app.qonto.com" # Already dynamic, but not detected as such
@@ -444,6 +448,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"blog.jonas.foo" # Already dark; does not work
 	"blog.kagi.com" # Already dynamic, but not detected as such
 	"blog.mggross.com" # Already dynamic, but not detected as such
+	"blog.thenewoil.org" # Already dynamic, but not detected as such
 	"blog.trl.sn"
 	"book.swiftwasm.org" # Dynamic-ish; does not work
 	"brew.sh"
@@ -479,6 +484,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"david.guillot.me" # Already dark; does not work
 	"denudeart.com" # Does not work
 	"departmentmap.store"
+	"designcode.io" # Already dynamic, but not detected as such
 	"devblogs.microsoft.com" # Retarded on-off switch for dark mode w/o automatic switching
 	"developer.apple.com"
 	"developer.okta.com" # Dynamic-ish; does not work
@@ -533,6 +539,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"formulae.brew.sh"
 	"forums.macrumors.com"
 	"forums.swift.org"
+	"fossa.com" # Already dark; does not work
 	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
 	"fuma-nama.vercel.app" # Already dark; does not work
@@ -545,6 +552,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"gist.github.com"
 	"github.com"
 	"gitlab.com"
+	"gizvault.com" # Already dark; does not work
 	"gleam.run" # Does not work
 	"gmf.fr"
 	"greptile.com" # Already dynamic, but not detected as such
@@ -587,6 +595,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"joshtumath.uk" # Already dynamic, but not detected as such
 	"jpcamara.com" # Already dynamic, but not detected as such
 	"jprx.io" # Already dark; does not work
+	"js1024.fun" # Already dark; does not work
 	"jwt.io" # Already dynamic, but not detected as such
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
@@ -606,6 +615,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"linear.app"
 	"linuxize.com" # Already dynamic, but not detected as such
 	"lmnt.me" # Already dark; does not work
+	"login-frizlab.togever.co"
 	"loneliness.one"
 	"lookaway.app" # Already dark; does not work
 	"louvre.fr"
@@ -642,6 +652,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nextstep33.info"
 	"nightwater.email" # Already dark; does not work
 	"nitric.io" # Already dark
+	"nodegram.org" # Already dark; does not work
 	"noob-tv.com"
 	"nopeforge.org" # Already dark
 	"notes.ghed.in" # Already dynamic, but not detected as such
@@ -650,7 +661,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nshipster.com" # Already dynamic, but not detected as such
 	"nullpt.rs" # Already dark; does not work
 	"nuskin.com"
+	"obdev.at" # Already dark; does not work
 	"ohanaware.com"
+	"one.dash.cloudflare.com" # Already dynamic, but not detected as such
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
 	"ounapuu.ee" # Already dark
