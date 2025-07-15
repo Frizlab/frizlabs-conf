@@ -26,6 +26,8 @@
 	# bbd is for “branches by date”.
 	# Branches whose upstream is gone are in red.
 	bbd = for-each-ref --sort='authordate:iso8601' --format='%(color:bold)%(authordate:relative)%(color:reset)%09%(if:equals=[gone])%(upstream:track)%(then)%(color:red)%(end)%(refname:short)%(color:reset)' refs/heads
+	# git “branches by date, current”: same as bbd, but only for the current branches (no archive, backports, etc. and no develop, main, etc.).
+	bbdc = "!git bbd | grep -Ev -e 'archive/' -e 'backport/' -e 'main' -e 'develop' -e 'base' -e 'reviews'"
 	# We assume
 	#  1/ we’re at the root of the conf repo when this command is run, and
 	#  2/ there are only dark mode updates done in the vars files of the defaults component.
