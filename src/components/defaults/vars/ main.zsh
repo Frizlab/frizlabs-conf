@@ -401,6 +401,25 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
 	
+	"togever.co"
+	"www.togever.co"
+	"login-frizlab.togever.co"
+	"login-dev.togever.co"
+	"login-preprod.togever.co"
+	"login.togever.co"
+	"app-frizlab.togever.co"
+	"app-dev.togever.co"
+	"app-preprod.togever.co"
+	"app.togever.co"
+	"pro-frizlab.togever.co"
+	"pro-dev.togever.co"
+	"pro-preprod.togever.co"
+	"pro.togever.co"
+	"admin-frizlab.togever.co"
+	"admin-dev.togever.co"
+	"admin-preprod.togever.co"
+	"admin.togever.co"
+	
 	"0x44.xyz" # Already dark; does not work
 	"404media.co" # Already dark; does not work
 	"9gag.com"
@@ -473,6 +492,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"connexion.numericable.fr"
 	"contextch.at" # Already dynamic, but not detected as such
 	"crablang.org" # Already dark
+	"cs3110.github.io" # Already dynamic, but not detected as such
 	"css-tricks.com"
 	"cuntempire.com" # Does not work
 	"customers.securitasdirect.fr" # Already dynamic, but not detected as such
@@ -510,6 +530,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"dudzik.co" # Already dark; does not work
 	"duriansoftware.com"
 	"dz4k.com" # Already dark; does not work
+	"efe.me" # Already dark; does not work
 	"eisfunke.com" # Already dark
 	"electricsheep.org"
 	"enterprisedb.com" # Mostly dark; does not work
@@ -662,6 +683,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nullpt.rs" # Already dark; does not work
 	"nuskin.com"
 	"obdev.at" # Already dark; does not work
+	"obrhubr.org" # Already dynamic, but not detected as such
 	"ohanaware.com"
 	"one.dash.cloudflare.com" # Already dynamic, but not detected as such
 	"opensource.apple.com" # Already dynamic, but not detected as such
@@ -752,9 +774,11 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"togever.co"
 	"torrentleech.org"
 	"tour.gleam.run" # Already dark
+	"tpl.house" # Already dark; does not work
 	"trace.yshui.dev" # Already dark
 	"trench.dev" # Already dark; does not work
 	"try.constructor.dev"
+	"tucson-josh.com" # Already dark; does not work
 	"tumblr.com"
 	"tv.apple.com"
 	"tvtime.com"
@@ -791,6 +815,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"www5.yggtorrent.la"
 	"x.com" # Already dynamic, but not detected as such
 	"xeiaso.net" # Already dynamic, but not detected as such
+	"xn--gckvb8fzb.com" # Already dynamic, but not detected as such
 	"xstumbl.com" # Does not work
 	"xvideos.com" # Has “automatic” switching that does not work, but sometimes we do get dark mode anyway…
 	"yespark.fr"
