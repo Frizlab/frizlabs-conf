@@ -8,6 +8,7 @@ typeset -A PKGS_BREW_SYSTEM__MAIN_FORMULAE=(
 	"gopass"              "bin/gopass"
 	"gti"                 "bin/gti"
 	"htop"                "bin/htop"
+	"infat"               "bin/infat"
 	"jq"                  "bin/jq"
 	"just"                "bin/just"
 	"lftp"                "bin/lftp"
