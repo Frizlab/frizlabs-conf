@@ -453,6 +453,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"arstechnica.com" # Already dark, but not detected as such
 	"ashgw.me" # Already dark
 	"ashishb.net" # Already dark; does not work
+	"askwwdc.com" # Already dynamic, but not detected as such
 	"assure.ameli.fr"
 	"auth.eversports.com"
 	"auth.wiki" # Already dynamic, but not detected as such
@@ -474,6 +475,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"blaines-blog.com" # Already dark; does not work
 	"blintzbase.com" # Already dynamic, but not detected as such
 	"blog.freron.com" # Already dynamic, but not detected as such
+	"blog.howardjohn.info" # Already dark; does not work
 	"blog.jonas.foo" # Already dark; does not work
 	"blog.kagi.com" # Already dynamic, but not detected as such
 	"blog.mggross.com" # Already dynamic, but not detected as such
@@ -503,6 +505,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"community.letsencrypt.org" # Already dynamic, but not detected as such
 	"connexion.numericable.fr"
 	"contextch.at" # Already dynamic, but not detected as such
+	"coppolaemilio.com" # Already dynamic, but not detected as such
 	"coryetzkorn.com" # Already dynamic, but not detected as such
 	"crablang.org" # Already dark
 	"cs3110.github.io" # Already dynamic, but not detected as such
@@ -637,6 +640,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
 	"kaveland.no" # Already dark; does not work
+	"keith.github.io" # Already dynamic, but not detected as such
 	"kennethnym.com" # Already dynamic, but not detected as such
 	"kibty.town" # Already dark; does not work
 	"kimcartoon.li" # Already dark
@@ -682,6 +686,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"msha.ke"
 	"mxb.dev" # Already dynamic, but not detected as such
 	"my.ionos.fr"
+	"n0rdy.foo" # Already dark; does not work
 	"nativeconnect.app"
 	"netnewswire.com"
 	"nav.al" # Already dynamic, but not detected as such
@@ -767,6 +772,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"soundhound.com"
 	"stackoverflow.com"
 	"steamcommunity.com"
+	"steipete.me" # Already dynamic, but not detected as such
 	"stephango.com" # Has manual dark mode, does not work when dark (autodetected on load)
 	"stocknear.com" # Does not work
 	"store.serif.com"
@@ -786,6 +792,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"taimapp.io" # Already dark; does not work
 	"taquin.net"
 	"taylor.gl" # Already dark; turns to light
+	"tea.xyz" # Already dark; does not work
 	"test.hozana.org"
 	"theotokos.fr"
 	"thetvdb.com"
