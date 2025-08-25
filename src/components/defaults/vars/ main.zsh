@@ -628,6 +628,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"informatiiconsulare.ro"
 	"inspect.new" # Already dark; does not work
 	"interieur.gouv.fr" # Already dynamic, but not detected as such
+	"jadarma.github.io" # Already dynamic, but not detected as such
 	"janet.guide" # Already dynamic, but not detected as such
 	"jegeremacartenavigo.fr"
 	"jola.dev" # Already dark; does not work
