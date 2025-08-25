@@ -247,6 +247,19 @@ bindkey "^X^E" edit-command-line
 # Convenient alias for macOS.
 alias h='cat ~/.zsh_sessions/*.history*'
 
+# Function to remove a specific entry from the history.
+# Takes the history line number in argument, or -n to remove the nth line.
+# From <https://stackoverflow.com/a/63494728>.
+# TODO: There are issues if the command to remove contains non-ASCII characters…
+hc() {
+	# Prevent the specified history line from being saved.
+	local HISTORY_IGNORE="${(b)$(fc -ln "$1" "$1")}"
+	# Write out history to file, excluding lines that match `$HISTORY_IGNORE`,
+	#  then clear the current history and reload it from the history file.
+	fc -W && fc -p "$HISTFILE" "$HISTSIZE" "$SAVEHIST"
+	# Print results.
+	print -r "Deleted '$HISTORY_IGNORE' from history."
+}
 
 
 ### Let’s import .zshrc.d/*.sh files
