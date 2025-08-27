@@ -5,6 +5,8 @@ typeset -A PKGS_BREW_USER__FORMULAE=(
 
 # Not -r because we modify this variable in the env specific vars file.
 typeset -A PKGS_BREW_USER__CASKS=(
+	"apparency"   "Caskroom/apparency"
+	"archaeology" "Caskroom/archaeology"
 	"chalk"       "Caskroom/chalk"
 	"dash"        "Caskroom/dash"
 	"imageoptim"  "Caskroom/imageoptim"
