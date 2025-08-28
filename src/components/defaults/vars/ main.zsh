@@ -436,6 +436,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"about.me"
 	"accounts.panic.com"
 	"adventofcode.com" # Already dark; does not work
+	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
@@ -498,6 +499,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"cinemaspathegaumont.com"
 	"clipbook.app" # Already dark
 	"cloud.livekit.io" # Already dark; does not work
+	"cloudsquid.substack.com" # Already dark; makes it light
 	"cnpnet.cnp.fr"
 	"cocacola.fr"
 	"codepen.io" # Already dark; does not work
@@ -579,6 +581,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fossa.com" # Already dark; does not work
 	"frizlab.github.io" # Already dynamic, but not detected as such
 	"fuckingswiftui.com"
+	"fuckupmysite.com" # Already dark; does not work
 	"fuma-nama.vercel.app" # Already dark; does not work
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
@@ -854,6 +857,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"yggtorrent.ch"
 	"yggtorrent.gg"
 	"yggtorrent.la"
+	"yggtorrent.top" # Does not work
 	"you.com"
 	"zazzle.com"
 	"zazzle.fr"
