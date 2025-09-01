@@ -621,6 +621,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ibm.com" # Already dynamic, but not detected as such
 	"icloud.com"
 	"icloud.developer.apple.com"
+	"idonthavespotify.sjdonado.com" # Already dark; does not work
 	"igen.fr" # Already dynamic, but not detected as such
 	"ikea.com"
 	"ilmarilauhakangas.fi"
