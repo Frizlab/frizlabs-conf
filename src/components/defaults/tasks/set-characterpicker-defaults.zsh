@@ -21,6 +21,7 @@ catchout RES  libdefaults__set_plist com.apple.CharacterPicker Favorites:com.app
 		\"com.apple.cpk:{\\\"char\\\":\\\"↑\\\"}\",       /* Best up   arrow. */
 		\"com.apple.cpk:{\\\"char\\\":\\\"↓\\\"}\",       /* Best down arrow. */
 		\"com.apple.cpk:{\\\"char\\\":\\\"𝓕\\\"}\",       /* My brand, kind of :) */
+		\"com.apple.cpk:{\\\"char\\\":\\\"№\\\"}\",       /* Abbreviation for number (in French mostly AFAIK). */
 		\"com.apple.cpk:{\\\"char\\\":\\\"⍼\\\"}\"        /* Right angle with downwards zigzag arrow. See <https://ionathan.ch/2022/04/09/angzarr.html>. */
 	)
 "
