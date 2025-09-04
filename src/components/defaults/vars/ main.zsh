@@ -435,7 +435,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"aaronbos.dev" # Already dark
 	"about.me"
 	"accounts.panic.com"
+	"accounts.sapphire.moe" # Already dark; does not work
+	"adamtuttle.codes" # Already dynamic, but not detected as such
 	"adventofcode.com" # Already dark; does not work
+	"aidarwinawards.org" # Already dynamic, but not detected as such
 	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
@@ -451,7 +454,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"app.slack.com" # Already dynamic, but not detected as such
 	"appartager.com"
 	"apple.com"
+	"archive.org" # Does not work
 	"arstechnica.com" # Already dark, but not detected as such
+	"arvinpoddar.com" # Already dark; does not work
 	"ashgw.me" # Already dark
 	"ashishb.net" # Already dark; does not work
 	"askwwdc.com" # Already dynamic, but not detected as such
@@ -585,11 +590,13 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"fuma-nama.vercel.app" # Already dark; does not work
 	"fusionauth.io" # Already dynamic, but not detected as such
 	"furyroom.fr"
+	"gamesbymason.com" # Already dark; does not work
 	"geoff.greer.fm" # Already dynamic, but not detected as such
 	"geoguessr.com" # Already dark; does not work
 	"getwhisky.app" # Already dynamic, but not detected as such
 	"ghuntley.com" # Already dynamic, but not detected as such
 	"gist.github.com"
+	"github.blog" # Already dark; does not work
 	"github.com"
 	"gitlab.com"
 	"gizvault.com" # Already dark; does not work
@@ -711,8 +718,10 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nuskin.com"
 	"obdev.at" # Already dark; does not work
 	"obrhubr.org" # Already dynamic, but not detected as such
+	"oci.dag.dev" # Already dynamic, but not detected as such
 	"ohanaware.com"
 	"one.dash.cloudflare.com" # Already dynamic, but not detected as such
+	"openai.com" # Already dynamic, but not detected as such
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
 	"ounapuu.ee" # Already dark
@@ -721,7 +730,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"packaging.python.org"
 	"pangeasoft.net" # Already dark
 	"parametric.press"
+	"pauladamsmith.com" # Does not work
 	"paulefou.com" # Already dark; does not work
+	"paulsmith.github.io" # Already dark; does not work
 	"pavillonwagram.com"
 	"paypal.com"
 	"peps.python.org" # Already dynamic, but not detected as such
@@ -741,6 +752,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"prepacode-enpc.fr"
 	"primevideo.com"
 	"psi3.ru" # Already dark; does not work
+	"pwy.io" # Already dark; does not work
 	"quic.video" # Already dark
 	"quora.com" # Does not work
 	"raniseth.com" # Already dynamic, but not detected as such
@@ -755,6 +767,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sailorhg.com"
 	"saint-eugene.net" # Does not work
 	"samueloph.dev" # Already dark
+	"sapphire.moe" # Does not work
 	"sashalakhman.com"
 	"scottspence.com" # Already dynamic, but not detected as such
 	"scrolldit.com"
@@ -813,6 +826,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"trace.yshui.dev" # Already dark
 	"trench.dev" # Already dark; does not work
 	"try.constructor.dev"
+	"tryghostship.dev" # Already dark; does not work
 	"tucson-josh.com" # Already dark; does not work
 	"tumblr.com"
 	"tv.apple.com"
