@@ -19,6 +19,7 @@ source "./tasks/set-characterpicker-defaults.zsh"
 source "./tasks/set-iphonesimulator-defaults.zsh"
 source "./tasks/set-higtypography-defaults.zsh"
 source "./tasks/set-windowmanager-defaults.zsh"
+source "./tasks/set-container-defaults.zsh"
 
 # We don’t use Nova anymore.
 # It was a fun experiment, but the whole app is sadly not that good.
