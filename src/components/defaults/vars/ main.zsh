@@ -401,6 +401,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"172.16.0.1"
 	"localhost"
 	
+	"frostland.fr"
+	
 	"togever.co"
 	"www.togever.co"
 	"admin-frizlab.togever.co"
@@ -517,6 +519,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"crablang.org" # Already dark
 	"cs3110.github.io" # Already dynamic, but not detected as such
 	"css-tricks.com"
+	"csscolorize.com" # Does not work
 	"cuntempire.com" # Does not work
 	"customers.securitasdirect.fr" # Already dynamic, but not detected as such
 	"daringfireball.net"
@@ -575,6 +578,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"feathericons.com"
 	"fikfap.com" # Already dark
 	"filen.io" # Already dark; does not work
+	"fingerprint.goldenowl.ai" # Already dark; does not work
 	"finnvoorhees.com" # Already dynamic, but not detected as such
 	"fivestars.blog" # Already dynamic, but not detected as such
 	"fluence.network" # Already dark
@@ -672,6 +676,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"loneliness.one"
 	"lookaway.app" # Already dark; does not work
 	"louvre.fr"
+	"m365.cloud.microsoft" # Already dynamic, but not detected as such
 	"macg.co" # Already dynamic, but not detected as such
 	"maciejwalkowiak.com" # Already dynamic, but not detected as such
 	"macintoshgarden.org"
@@ -725,6 +730,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
 	"ounapuu.ee" # Already dark
+	"outlook.office.com" # Already dynamic, but not detected as such
 	"ouverture-pas-facile.fr" # Does not work
 	"oxyd.games"
 	"packaging.python.org"
@@ -810,6 +816,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"taimapp.io" # Already dark; does not work
 	"taquin.net"
 	"taylor.gl" # Already dark; turns to light
+	"tc39.es" # Already dynamic, but not detected as such
 	"tea.xyz" # Already dark; does not work
 	"test.hozana.org"
 	"theotokos.fr"
