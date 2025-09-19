@@ -5,8 +5,8 @@ set -euo pipefail
 # For now we use a fixed Swift toolchain, SDK name and co.
 # We’ll have to change those when our local machine configuration changes.
 readonly SWIFT_SDK_NAME="aarch64-unknown-linux-android24"
-readonly SWIFT_TOOLCHAIN="$HOME/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain"
-readonly PATH_TO_SWIFT_LIBS="$HOME/Library/org.swift.swiftpm/swift-sdks/swift-6.0.3-RELEASE-android-24-0.1.artifactbundle/swift-6.0.3-release-android-24-sdk/android-27c-sysroot/usr/lib/aarch64-linux-android"
+readonly SWIFT_TOOLCHAIN="$HOME/Library/Developer/Toolchains/swift-6.2-RELEASE.xctoolchain"
+readonly PATH_TO_SWIFT_LIBS="$HOME/Library/org.swift.swiftpm/swift-sdks/swift-6.2-RELEASE-android-24-0.1.artifactbundle/swift-6.2-release-android-24-sdk/android-27d-sysroot/usr/lib/aarch64-linux-android"
 
 # Verify adb exists where we think it does.
 # This is very ad-hoc and oh so specific to my machine and configuration!
