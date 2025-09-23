@@ -10,18 +10,22 @@ readonly PATH_TO_SWIFT_LIBS="$HOME/Library/org.swift.swiftpm/swift-sdks/swift-6.
 
 # Verify adb exists where we think it does.
 # This is very ad-hoc and oh so specific to my machine and configuration!
-readonly adb_path="$HOME/.local/share/android/sdk/platform-tools/adb"
+readonly android_sdk_path="$HOME/.local/share/android/sdk"
+readonly adb_path="$android_sdk_path/platform-tools/adb"
 test -x "$adb_path" || {
 	echo "adb is not at the expected location." >&2
 	exit 1
 }
 
 # Let’s see if we can run a shell command on any device.
-# To run a device manually, one can run `emulator -avd $AVD_ID -no-boot-anim -no-window` for instance.
 # We do not check on which device the command run and assume any device is fine.
 "$adb_path" shell true || {
 	echo "Cannot start a shell on an avd device." >&2
 	echo "Please make sure you have at least one device up and running." >&2
+	echo "Cheat sheet:" >&2
+	echo "-> To list emulators: $android_sdk_path/emulator/emulator -list-avds" >&2
+	echo "-> To start a device: $android_sdk_path/emulator/emulator -avd \$AVD_ID -no-boot-anim -no-window" >&2
+	echo "   The device will be started in a foreground process, and killed when the process is Ctrl-C’d." >&2
 	"$adb_path" kill-server
 	exit 1
 }
