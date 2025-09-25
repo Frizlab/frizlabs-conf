@@ -441,6 +441,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"adamtuttle.codes" # Already dynamic, but not detected as such
 	"adventofcode.com" # Already dark; does not work
 	"aidarwinawards.org" # Already dynamic, but not detected as such
+	"ajmoon.com" # Already dark; does not work
 	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
@@ -798,6 +799,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"steamcommunity.com"
 	"steipete.me" # Already dynamic, but not detected as such
 	"stephango.com" # Has manual dark mode, does not work when dark (autodetected on load)
+	"stevedylandev.bearblog.dev" # Already dark; does not work
 	"stocknear.com" # Does not work
 	"store.serif.com"
 	"store.steampowered.com"
