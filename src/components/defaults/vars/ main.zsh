@@ -441,6 +441,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"adamtuttle.codes" # Already dynamic, but not detected as such
 	"adventofcode.com" # Already dark; does not work
 	"aidarwinawards.org" # Already dynamic, but not detected as such
+	"ajmoon.com" # Already dark; does not work
 	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
@@ -528,6 +529,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"dashboard.twitch.tv" # Already dark
 	"datatracker.ietf.org" # Already dynamic, but not detected as such
 	"david.guillot.me" # Already dark; does not work
+	"demian.ferrei.ro" # Already dynamic, but not detected as such
 	"denudeart.com" # Does not work
 	"departmentmap.store"
 	"designcode.io" # Already dynamic, but not detected as such
@@ -638,6 +640,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"ilmarilauhakangas.fi"
 	"inotherwords.app" # Does not work
 	"imagemagick.org" # Already dynamic, but not detected as such
+	"imaglr.com" # Already dark; does not work
 	"imdb.com"
 	"inessential.com" # Already dynamic, but not detected as such
 	"informatiiconsulare.ro"
@@ -798,6 +801,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"steamcommunity.com"
 	"steipete.me" # Already dynamic, but not detected as such
 	"stephango.com" # Has manual dark mode, does not work when dark (autodetected on load)
+	"stevedylandev.bearblog.dev" # Already dark; does not work
 	"stocknear.com" # Does not work
 	"store.serif.com"
 	"store.steampowered.com"
