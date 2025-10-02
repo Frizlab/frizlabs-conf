@@ -21,12 +21,6 @@ for b in Safari SafariTechnologyPreview; do
 	catchout RES  libdefaults__set_bool "com.apple.$b" ShowOverlayStatusBar 1
 	log_task_from_res "$RES"
 	
-	# We used to have a very complicated setup here where we tried and anticipate the changes to the toolbar that the show standalone tab bar setting entails.
-	# However after some testing it seems changing this single key is enough, and the rest follows whenever it wants.
-	start_task "$b: use separate tab layout"
-	catchout RES  libdefaults__set_bool "com.apple.$b" ShowStandaloneTabBar 1
-	log_task_from_res "$RES"
-	
 	start_task "$b: always show the tab bar"
 	catchout RES  libdefaults__set_bool "com.apple.$b" AlwaysShowTabBar 1
 	log_task_from_res "$RES"
