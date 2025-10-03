@@ -497,6 +497,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"bsky.app" # Already dynamic, but not detected as such
 	"buildsettingextractor.com" # Already dark; does not work
 	"business.apple.com" # Does not work
+	"buttondown.com" # Already dynamic, but not detected as such
 	"calendar.google.com" # Already dynamic, but not detected as such
 	"camanis.net"
 	"campsite.com" # Already dynamic, but not detected as such
@@ -542,6 +543,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"discord.com"
 	"discordapp.com"
 	"disneyplus.com"
+	"dlo.me" # Already dark; does not work
 	"docs.brew.sh"
 	"docs.directus.io" # Dynamic-ish; does not work
 	"docs.docker.com"
