@@ -1,3 +1,6 @@
+### fix-reboot ###
+bin_task__bin "frizlab" ":Darwin:" "applescript/fix-reboot.applescript"
+
 ### test-onwasi ###
 bin_task__bin "frizlab" ":Darwin:Linux:" "bash/test-onwasi.sh"
 
