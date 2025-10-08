@@ -398,6 +398,8 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 # Not -r because we can modify this variable in the env specific vars file.
 # Only useful when filter mode is blacklist.
 typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
+	"https://chunqiuyiyu.github.io/xie/"
+	
 	"172.16.0.1"
 	"localhost"
 	
@@ -512,6 +514,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"cloudsquid.substack.com" # Already dark; makes it light
 	"cnpnet.cnp.fr"
 	"cocacola.fr"
+	"code.visualstudio.com" # Already dynamic, but not detected as such
 	"codepen.io" # Already dark; does not work
 	"coinbase.com" # Already dynamic, but not detected as such
 	"community.letsencrypt.org" # Already dynamic, but not detected as such
@@ -520,18 +523,22 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"coppolaemilio.com" # Already dynamic, but not detected as such
 	"coryetzkorn.com" # Already dynamic, but not detected as such
 	"crablang.org" # Already dark
+	"cruzgodar.com" # Already dynamic, but not detected as such
 	"cs3110.github.io" # Already dynamic, but not detected as such
 	"css-tricks.com"
 	"csscolorize.com" # Does not work
 	"cuntempire.com" # Does not work
 	"customers.securitasdirect.fr" # Already dynamic, but not detected as such
+	"daily.dev" # Already dark; does not work
 	"daringfireball.net"
 	"dash.cloudflare.com"
 	"dashboard.nativeconnect.app"
 	"dashboard.twitch.tv" # Already dark
+	"data-star.dev" # Already dark; does not work
 	"datatracker.ietf.org" # Already dynamic, but not detected as such
 	"david.guillot.me" # Already dark; does not work
 	"demian.ferrei.ro" # Already dynamic, but not detected as such
+	"denodell.com" # Already dynamic, but not detected as such
 	"denudeart.com" # Does not work
 	"departmentmap.store"
 	"designcode.io" # Already dynamic, but not detected as such
@@ -587,7 +594,6 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"finnvoorhees.com" # Already dynamic, but not detected as such
 	"fivestars.blog" # Already dynamic, but not detected as such
 	"fluence.network" # Already dark
-	"fly.io"
 	"foon.uk" # Already dynamic, but not detected as such
 	"formulae.brew.sh"
 	"forums.macrumors.com"
@@ -690,6 +696,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"macos9lives.com"
 	"macstories.net" # Already dynamic, but not detected as such
 	"madamevoyeur.com"
+	"maml.dev" # Already dynamic, but not detected as such
 	"mariahealthandbeauty.mynuskin.com"
 	"martinheinz.dev" # Already dark; does not work
 	"meatfighter.com" # Already dark
@@ -764,10 +771,12 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"prepacode-enpc.fr"
 	"primevideo.com"
 	"psi3.ru" # Already dark; does not work
+	"pwascore.com" # Has manual toggle (annoyingly)
 	"pwy.io" # Already dark; does not work
 	"quic.video" # Already dark
 	"quora.com" # Does not work
 	"raniseth.com" # Already dynamic, but not detected as such
+	"react.dev" # Already dynamic, but not detected as such
 	"receive-sms.com"
 	"recyclebin.zip" # Already dark; does not work
 	"reddit.com"
@@ -847,6 +856,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"tvtime.com"
 	"twitch.tv" # Already dark
 	"twitter.com"
+	"typescriptlang.org" # Already dark; does not work
 	"underpassapp.com" # Already dynamic, but not detected as such
 	"userinyerface.com"
 	"useyourloaf.com"
@@ -888,6 +898,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"yggtorrent.la"
 	"yggtorrent.top" # Does not work
 	"you.com"
+	"zayenz.se" # Already dark; does not work
 	"zazzle.com"
 	"zazzle.fr"
 	"zx2c4.com" # Already dark; does not work
