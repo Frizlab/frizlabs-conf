@@ -15,7 +15,7 @@ import SystemPackage     /* @apple/swift-system                     ~> 1.0.0 */
 LoggingSystem.bootstrap(CLTLogger.init, metadataProvider: nil)
 let logger: Logger = {
 	var ret = Logger(label: "main")
-	ret.logLevel = .info
+	ret.logLevel = .notice
 	return ret
 }()
 
