@@ -30,6 +30,9 @@ struct RunOnChange : AsyncParsableCommand {
 	@Option(name: .shortAndLong, help: "The minimum interval of time that has to happen between two launches of the script.")
 	var throttleMilliseconds: Double = 250
 	
+	@Flag(name: .shortAndLong, inversion: .prefixedNo, help: "Whether to start the command once before monitoring the given path.")
+	var startCommandOnLaunch: Bool = true
+	
 	@Argument(help: "The path to monitor.")
 	var path: String
 	
@@ -38,6 +41,10 @@ struct RunOnChange : AsyncParsableCommand {
 	
 	func run() async throws {
 		let runningState = RunningState()
+		
+		if startCommandOnLaunch {
+			Task{ await runCommand(runningState: runningState) }
+		}
 		
 		logger.info("Starting path observation.")
 		let fsEventsStream = FSEventAsyncStream(path: path, flags: FSEventStreamCreateFlags(kFSEventStreamCreateFlagFileEvents))
