@@ -449,6 +449,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"anasinorbi.ro"
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
 	"andrewlock.net" # Already dark; does not work
+	"andrews.substack.com" # Already dark; does not work
 	"anti-captcha.com"
 	"anvaka.github.io" # Already dark; does not work
 	"app.amplitude.com" # Already dynamic, but not detected as such
@@ -809,6 +810,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"soap2day.ac"
 	"soundcloud.com"
 	"soundhound.com"
+	"sourceforge.net" # Does not work
 	"stackoverflow.com"
 	"steamcommunity.com"
 	"steipete.me" # Already dynamic, but not detected as such
