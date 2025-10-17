@@ -28,6 +28,7 @@ DOTFILES__FOLDERS=(
 	".colima"
 	".colima/default"
 	".config"
+	".config/zed"
 )
 
 # readonly later only because modified in env-specific var files.
@@ -47,6 +48,7 @@ DOTFILES__FILES=(
 	".psqlrc"
 	".justfile"
 	".lldbinit"
+	".config/zed/settings.json"
 )
 
 readonly DOTFILES__TEMPLATES=(
