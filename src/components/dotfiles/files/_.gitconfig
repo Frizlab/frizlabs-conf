@@ -41,8 +41,13 @@
 	defaultRemote = origin
 [rebase]
 	updateRefs = true
-[blame]
-	ignoreRevsFile = .git-blame-ignore-revs
+
+# So, this option is amazing.
+# However, if the file does not exist (most repo), blame fails.
+# It’s stupid, but that’s how it is, so I’m disabling this option.
+#[blame]
+#	ignoreRevsFile = .git-blame-ignore-revs
+
 # Not sure what this actually does but I like having control over the submodules anyway, so we disable it.
 #[submodule]
 #	recurse = true
