@@ -1,0 +1,85 @@
+/* Zed keymap
+ *
+ * For information on binding keys, see the Zed documentation: <https://zed.dev/docs/key-bindings>.
+ *
+ * To see the default key bindings run `zed: open default keymap` from the command palette. */
+[
+	{
+		"context": "Workspace",
+		"bindings": {
+			// "shift shift": "file_finder::Toggle"
+		}
+	},
+	{
+		"context": "Editor && vim_mode == insert",
+		"bindings": {
+			// "j k": "vim::NormalBefore"
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"cmd-left": [
+				"editor::MoveToBeginningOfLine",
+				{
+					"stop_at_soft_wraps": false,
+					"stop_at_indent": false
+				}
+			]
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-a": [
+				"editor::MoveToBeginningOfLine",
+				{
+					"stop_at_soft_wraps": false,
+					"stop_at_indent": true
+				}
+			]
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"home": null
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"cmd-shift-left": [
+				"editor::SelectToBeginningOfLine",
+				{
+					"stop_at_soft_wraps": false,
+					"stop_at_indent": false
+				}
+			]
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-shift-a": [
+				"editor::SelectToBeginningOfLine",
+				{
+					"stop_at_soft_wraps": false,
+					"stop_at_indent": false
+				}
+			]
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"shift-home": null
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"escape": "editor::ShowCompletions"
+		}
+	}
+]

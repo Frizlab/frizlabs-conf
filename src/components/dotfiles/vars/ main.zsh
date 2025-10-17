@@ -49,6 +49,7 @@ DOTFILES__FILES=(
 	".justfile"
 	".lldbinit"
 	".config/zed/settings.json"
+	".config/zed/keymap.json"
 )
 
 readonly DOTFILES__TEMPLATES=(
