@@ -782,6 +782,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"recyclebin.zip" # Already dark; does not work
 	"reddit.com"
 	"redditp.com"
+	"regex101.com" # Already dynamic, but not detected as such
 	"responsivepx.com"
 	"rexporn.sex" # Dynamic-ish; does not work
 	"rlimit.com"
