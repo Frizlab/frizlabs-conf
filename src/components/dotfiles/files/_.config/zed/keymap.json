@@ -81,5 +81,17 @@
 		"bindings": {
 			"escape": "editor::ShowCompletions"
 		}
+	},
+	{
+		"context": "ProjectPanel",
+		"bindings": {
+			"cmd-d": null
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"cmd-d": "editor::DuplicateLineDown"
+		}
 	}
 ]

@@ -5,6 +5,17 @@
  * To see all of Zed's default settings without changing your custom settings,
  *  run `zed: open default settings` from the command palette (cmd-shift-p). */
 {
+	"agent": {
+		"model_parameters": [],
+		"enable_feedback": false
+	},
+	"tabs": {
+		"close_position": "left",
+		"show_close_button": "hover"
+	},
+	"tab_bar": {
+		"show": true
+	},
 	"git": {
 		"inline_blame": {
 			"enabled": false
