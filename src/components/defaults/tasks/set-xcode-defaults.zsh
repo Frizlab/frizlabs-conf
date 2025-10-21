@@ -101,7 +101,7 @@ log_task_from_res "$RES"
 
 # Note: We could copy instead of link the idekeybindings file as Xcode first remove the file then rewrites it when it modifies it.
 RES=; RES_LIST=()
-start_task "Xcode: set smart beginning and ending of lines"
+start_task "Xcode: fix key bindings"
 local -r KB_DEST_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
 local -r KB_BACKUP_FOLDER="$HOME/Library/Developer/Xcode/UserData/KeyBindingsBackups"
 { res_check "$RES" &&   catchout RES  libfiles__linknbk "$COMPONENT_ROOT_FOLDER/files/Xcode/Frizlab.idekeybindings" "$KB_DEST_FOLDER/Frizlab.idekeybindings" "644" "$KB_BACKUP_FOLDER" "755"   && RES_LIST+=("$RES") }
