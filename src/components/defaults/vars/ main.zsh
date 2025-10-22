@@ -495,6 +495,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"blog.thenewoil.org" # Already dynamic, but not detected as such
 	"blog.trl.sn"
 	"book.swiftwasm.org" # Dynamic-ish; does not work
+	"bradley.chatha.dev" # Already dark; does not work
 	"brew.sh"
 	"browser.kagi.com"
 	"browserbench.org"
@@ -619,6 +620,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"gleam.run" # Does not work
 	"glfmn.io" # Already dynamic, but not detected as such
 	"gmf.fr"
+	"gog.com" # Already dynamic, but not detected as such
 	"greptile.com" # Already dynamic, but not detected as such
 	"happn.app" # Already dark; does not work
 	"happn.com"
@@ -662,6 +664,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"jola.dev" # Already dark; does not work
 	"jonifen.co.uk" # Already dark; does not work
 	"joshtumath.uk" # Already dynamic, but not detected as such
+	"joshwcomeau.com" # Dynamic-ish; does not work
 	"jpcamara.com" # Already dynamic, but not detected as such
 	"jprx.io" # Already dark; does not work
 	"js1024.fun" # Already dark; does not work
@@ -681,6 +684,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"leetcode.com"
 	"lg.com"
 	"lgug2z.com" # Already dark, but not detected as such
+	"libera.chat" # Already dynamic, but not detected as such
 	"lidentitenumerique.laposte.fr"
 	"linear.app"
 	"linuxize.com" # Already dynamic, but not detected as such
@@ -740,6 +744,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"oci.dag.dev" # Already dynamic, but not detected as such
 	"ohanaware.com"
 	"one.dash.cloudflare.com" # Already dynamic, but not detected as such
+	"onedrive.live.com" # Already dynamic, but not detected as such
 	"openai.com" # Already dynamic, but not detected as such
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"oui.sncf"
@@ -790,6 +795,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sailorhg.com"
 	"saint-eugene.net" # Does not work
 	"samueloph.dev" # Already dark
+	"sandbox.cloudflare.com" # Already dynamic, but not detected as such
 	"sapphire.moe" # Does not work
 	"sashalakhman.com"
 	"scottspence.com" # Already dynamic, but not detected as such
@@ -862,6 +868,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"typescriptlang.org" # Already dark; does not work
 	"underpassapp.com" # Already dynamic, but not detected as such
 	"userinyerface.com"
+	"useworkflow.dev" # Already dynamic, but not detected as such
 	"useyourloaf.com"
 	"vale.rocks" # Already dynamic, but not detected as such
 	"vapor.codes"
