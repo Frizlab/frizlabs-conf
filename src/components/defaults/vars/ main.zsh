@@ -513,6 +513,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"calendar.google.com" # Already dynamic, but not detected as such
 	"camanis.net"
 	"campsite.com" # Already dynamic, but not detected as such
+	"caniuse.com" # Already dynamic, but not detected as such
 	"canva.com"
 	"cborbook.com" # Already dynamic, but not detected as such
 	"celebrityrater.com" # Does not work
@@ -585,6 +586,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"enterprisedb.com" # Mostly dark; does not work
 	"eporner.com" # Already dark
 	"erome.com" # Already dark; does not work
+	"esbuild.github.io" # Already dynamic, but not detected as such
 	"espace-assure.gmf.fr"
 	"espace-republique.fr"
 	"etherscan.io" # Already dynamic, but not detected as such
@@ -682,6 +684,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"jprx.io" # Already dark; does not work
 	"js1024.fun" # Already dark; does not work
 	"jwt.io" # Already dynamic, but not detected as such
+	"jyn.dev" # Already dark; does not work
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
 	"kaveland.no" # Already dark; does not work
@@ -784,6 +787,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"plausible.io" # Already dynamic, but not detected as such
 	"podcasts.apple.com" # Already dynamic, but not detected as such
 	"pointerpointer.com"
+	"pointfree.co" # Already dynamic, but not detected as such
 	"polpiella.dev" # Already dynamic, but not detected as such
 	"porn-blog.xyz" # Already dark
 	"pornbay.org" # Already dark
@@ -870,6 +874,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"titledrops.net" # Already dark; does not work
 	"tomscheers.github.io" # Already dark; does not work
 	"torrentleech.org"
+	"totaltypescript.com" # Already dark; does not work
 	"tour.gleam.run" # Already dark
 	"tpl.house" # Already dark; does not work
 	"trace.yshui.dev" # Already dark
@@ -916,6 +921,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"www5.yggtorrent.la"
 	"x.com" # Already dynamic, but not detected as such
 	"xeiaso.net" # Already dynamic, but not detected as such
+	"xjavascript.com" # Already dark; does not work
 	"xn--gckvb8fzb.com" # Already dynamic, but not detected as such
 	"xslt.rip" # Already dark; does not work
 	"xstumbl.com" # Does not work
