@@ -25,4 +25,9 @@ for b in Safari SafariTechnologyPreview; do
 	catchout RES  libdefaults__set_bool "com.apple.$b" AlwaysShowTabBar 1
 	log_task_from_res "$RES"
 	
+	
+	start_task "$b: enable internal debug menu"
+	catchout RES  libdefaults__set_bool "com.apple.$b" IncludeInternalDebugMenu 1
+	log_task_from_res "$RES"
+	
 done
