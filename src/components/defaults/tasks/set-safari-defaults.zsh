@@ -26,6 +26,11 @@ for b in Safari SafariTechnologyPreview; do
 	log_task_from_res "$RES"
 	
 	
+	start_task "$b: do not darken video when player is visible"
+	catchout RES  libdefaults__set_bool "com.apple.$b" InternalDebugHostedBlurMaterialInMediaControlsEnabled 0
+	log_task_from_res "$RES"
+	
+	
 	start_task "$b: enable internal debug menu"
 	catchout RES  libdefaults__set_bool "com.apple.$b" IncludeInternalDebugMenu 1
 	log_task_from_res "$RES"
