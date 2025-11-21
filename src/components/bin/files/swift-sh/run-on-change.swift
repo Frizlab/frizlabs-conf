@@ -66,7 +66,7 @@ struct RunOnChange : AsyncParsableCommand {
 		
 		do {
 			logger.info("Executing command.", metadata: ["date": "\(Date())"])
-			_ = try await ProcessInvocation(FilePath(shell), "-c", command, stdinRedirect: .none(setFgPgID: true), stdoutRedirect: .none, stderrRedirect: .none).invokeAndGetRawOutput()
+			_ = try await ProcessInvocation(FilePath(shell), "-c", command, stdinRedirect: .none(setFgPgID: false), stdoutRedirect: .none, stderrRedirect: .none).invokeAndGetRawOutput()
 			logger.info("Command completed successfully.")
 		} catch {
 			logger.info("Command exited w/ error.", metadata: ["error": "\(error)"])
