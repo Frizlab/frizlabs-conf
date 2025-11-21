@@ -6,7 +6,7 @@ import AsyncAlgorithms   /* @apple/swift-async-algorithms           ~> 1.0.0 */
 import CLTLogger         /* @xcode-actions/clt-logger               ~> 1.0.0-rc */
 import FSEventsWrapper   /* @Frizlab                                ~> 2.1.0 */
 import Logging           /* @apple/swift-log                        ~> 1.5.3 */
-import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta.3 */
+import ProcessInvocation /* @xcode-actions/swift-process-invocation ~> 1.0.0-beta.5 */
 import SystemPackage     /* @apple/swift-system                     ~> 1.0.0 */
 
 
