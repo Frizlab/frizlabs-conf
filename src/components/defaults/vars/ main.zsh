@@ -466,6 +466,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"apple.com"
 	"apps.apple.com" # Already dynamic, but not detected as such
 	"apps.umbrel.com" # Does not work
+	"appwrite.io" # Does not work
 	"archive.org" # Does not work
 	"arewedecentralizedyet.online" # Already dark; does not work
 	"arjun.md" # Already dynamic, but not detected as such
@@ -586,6 +587,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"docs.k3s.io" # Already dynamic, but not detected as such
 	"docs.page" # Already dark; does not work
 	"docs.python.org" # Already dynamic, but not detected as such
+	"docs.swifdroid.com" # Already dark; does not work
 	"docs.swift.org" # Already dynamic, but not detected as such
 	"downdetector.com" # Does not work
 	"downdetectorsdowndetector.com" # Already dark; does not work
@@ -815,6 +817,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"one.dash.cloudflare.com" # Already dynamic, but not detected as such
 	"onedrive.live.com" # Already dynamic, but not detected as such
 	"openai.com" # Already dynamic, but not detected as such
+	"openart.ai" # Already dark; does not work
 	"opensource.apple.com" # Already dynamic, but not detected as such
 	"optimizedbyotto.com" # Already dark; does not work
 	"orabrowser.com" # Already dark; does not work
@@ -910,7 +913,9 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"support.apple.com"
 	"susam.github.io" # Already dark; does not work
 	"susam.net" # Already dynamic, but not detected as such
+	"swifdroid.com" # Already dark; does not work
 	"swift.org"
+	"swift.stream" # Already dark; does not work
 	"swiftonserver.com" # Already dynamic, but not detected as such
 	"swiftpackageindex.com"
 	"swiftsenpai.com" # Already dynamic, but not detected as such
