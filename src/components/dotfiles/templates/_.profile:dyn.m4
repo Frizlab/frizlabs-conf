@@ -30,8 +30,8 @@ m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',
 
 ### PATH Management ###
 
-# Default PATH is (or was, when checked): /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
-# We remove /usr/local/bin; we’ll add it later, _after_ /usr/bin & co
+# Default PATH is (or was, when checked): `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin`.
+# We remove /usr/local/bin; we’ll add it later, _after_ /usr/bin & co.
 PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
 
 # We force the brew installation of the following binaries:
