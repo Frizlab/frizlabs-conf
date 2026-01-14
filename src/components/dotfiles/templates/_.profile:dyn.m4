@@ -30,9 +30,11 @@ m4_ifelse(___M4___HOST_OS___M4___:___M4___HOST_ARCH___M4___, `Darwin:arm64',
 
 ### PATH Management ###
 
+m4_changecom(`#')m4_dnl
 # Default PATH is (or was, when checked): `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin`.
 # We remove /usr/local/bin; we’ll add it later, _after_ /usr/bin & co.
 PATH="$(echo "$PATH" | sed -Ee 's|:?/usr/local/bin:?||')"
+m4_changecom(`m4_#')m4_dnl
 
 # We force the brew installation of the following binaries:
 #    - rsync: System’s rsync is OpenRSync;
