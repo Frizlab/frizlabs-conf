@@ -56,7 +56,8 @@ typeset -A PKGS_BREW_SYSTEM__X86_FORMULAE=(
 
 # Not -r because we modify this variable in the env specific vars file.
 typeset -A PKGS_BREW_SYSTEM__CASKS=(
-	"appcleaner" "Caskroom/appcleaner" # And **NOT** app-cleaner!
+	"appcleaner"   "Caskroom/appcleaner" # And **NOT** app-cleaner!
+	"sublime-text" "Caskroom/sublime-text" # And **NOT** app-cleaner!
 )
 
 
