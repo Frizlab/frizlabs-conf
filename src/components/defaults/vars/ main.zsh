@@ -447,6 +447,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"aiforswes.com" # Already dark; does not work
 	"ajmoon.com" # Already dark; does not work
 	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
+	"allaboutberlin.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
 	"anasinorbi.ro"
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
@@ -561,6 +562,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"daiz.moe" # Already dark; does not work
 	"danielleheberling.xyz" # Already dynamic, but not detected as such
 	"daringfireball.net"
+	"darioamodei.com" # Already dynamic, but not detected as such
 	"dash.cloudflare.com"
 	"dashboard.nativeconnect.app"
 	"dashboard.twitch.tv" # Already dark
@@ -597,6 +599,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"docs.huly.io" # Already dynamic (kind of), but not detected as such
 	"docs.k3s.io" # Already dynamic, but not detected as such
 	"docs.page" # Already dark; does not work
+	"docs.pytest.org" # Already dynamic, but not detected as such
 	"docs.python.org" # Already dynamic, but not detected as such
 	"docs.sublimetext.io" # Already dynamic, but not detected as such
 	"docs.swifdroid.com" # Already dark; does not work
