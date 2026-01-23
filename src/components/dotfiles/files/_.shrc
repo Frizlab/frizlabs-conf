@@ -51,6 +51,7 @@ alias x='chmod ug+x'
 alias top='top -o cpu'
 alias rem='trash'
 alias cd..='cd ..'
+alias sub='open -b com.sublimetext.4'
 alias reload-shell='exec $SHELL'; # “Reloads” the current shell (no -l option because apparently zsh is launched w/o it in Terminal; not sure why though…).
 alias kill-dock="osascript -e 'tell application \"Dock\" to quit'"
 alias rutorrent-read-report-from-clipboard="pbpaste | recode html..latin1 | sed -E 's/\[\.\]/./g' | xmllint --format - | pygmentize -l xml"
