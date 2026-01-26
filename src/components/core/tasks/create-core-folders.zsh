@@ -29,7 +29,8 @@ if test "$HOST_OS" = "Darwin"; then
 	log_task_from_res_list RES_LIST
 fi
 
-# CLT subfolders
+
+# CLT subfolders.
 
 task__folder "$CLT_ENVS_DIR" "755"
 task__folder "$CLT_LOGS_DIR" "755"
@@ -42,3 +43,13 @@ task__folder "$THIRD_PARTY_SBIN_DIR" "755"
 
 task__folder "$FIRST_PARTY_SHARE_DIR" "755"
 task__folder "$THIRD_PARTY_SHARE_DIR" "755"
+
+
+# The home of the different environment is set as read-only.
+# The goal is to explicitly forbid installing global packages for Python, Ruby and co.
+# Instead one should use virtual envs (or equivalent).
+
+task__folder "$PYTHON_DIR" "555"
+task__folder "$RUBY_DIR" "555"
+task__folder "$NPM_DIR" "555"
+task__folder "$GO_DIR" "555"
