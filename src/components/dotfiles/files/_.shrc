@@ -59,9 +59,9 @@ alias rutorrent-read-report-from-clipboard="pbpaste | recode html..latin1 | sed 
 # Package aliases
 # The brew-all function is in shrc:dyn
 alias pip3-upgrade-all='pip3 list --outdated --format=json | jq -r '"'"'.[] | "\(.name)==\(.latest_version)"'"'"' | grep -v -e wheel -e setuptools | cut -d= -f1 | xargs pip3 install --user --break-system --upgrade --no-warn-script-location'
-alias upgrade-all='brew-all update; printf "\n"; brew-all upgrade; printf "\n\033[1;35mpip3 upgrade\033[0m\n"; pip3-upgrade-all; printf "\n\033[1;35mgem upgrade\033[0m\n"; gem update'
-alias upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source; printf "\n\033[1;35mpip3 upgrade\033[0m\n"; pip3-upgrade-all; printf "\n\033[1;35mgem upgrade\033[0m\n"; gem update'
-alias clean-all='brew-all cleanup -s; printf "\n\033[1;35mgem cleanup\033[0m\n"; gem cleanup'
+alias brew-upgrade-all='brew-all update; printf "\n"; brew-all upgrade'
+alias brew-upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source'
+alias brew-clean-all='brew-all cleanup -s'
 # Safeguard non --user pip3 installs. This spawns a sub-shell. I don’t care. Have I mentioned I hate pip?
 alias pip3='__fuck_pip'
 
