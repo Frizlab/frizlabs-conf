@@ -620,6 +620,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"egym-wellpass.com" # Does not work
 	"eisfunke.com" # Already dark
 	"electricsheep.org"
+	"elementary.codes" # Already dark; does not work
 	"ellie.wtf" # Already dynamic, but not detected as such
 	"enterprisedb.com" # Mostly dark; does not work
 	"eporner.com" # Already dark
@@ -832,6 +833,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"nextstep33.info"
 	"nightwater.email" # Already dark; does not work
 	"nitric.io" # Already dark
+	"nmn.sh" # Already dynamic, but not detected as such
 	"noclip.website" # Does not work
 	"nodegram.org" # Already dark; does not work
 	"nodejs.org" # Already dynamic, but not detected as such
@@ -936,6 +938,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"sitepoint.com" # Already dynamic, but not detected as such
 	"sixcolors.com" # Already dynamic, but not detected as such
 	"sketch.com"
+	"skip.dev" # Dynamic-ish; does not work
 	"slopdetective.kagi.com" # Already dark; does not work
 	"sncf.com"
 	"sniffnet.net" # Already dark; does not work
@@ -1047,6 +1050,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"x.com" # Already dynamic, but not detected as such
 	"xcancel.com" # Already dark; does not work
 	"xeiaso.net" # Already dynamic, but not detected as such
+	"xikipedia.org" # Already dark; does not work
 	"xjavascript.com" # Already dark; does not work
 	"xn--gckvb8fzb.com" # Already dynamic, but not detected as such
 	"xoscript.com" # Already dark; does not work
