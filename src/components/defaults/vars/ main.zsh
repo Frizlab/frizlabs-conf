@@ -1072,5 +1072,6 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 )
 
 
-# Sourcing env specific vars file.
+# Sourcing env specific and local vars files.
 test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true
+test -f "./vars/  local.zsh"         && source "./vars/  local.zsh"         || true

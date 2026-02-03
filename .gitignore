@@ -2,6 +2,9 @@
 .DS_Store
 xcuserdata/
 
+# Local overrides for the different tasks.
+  local.zsh
+
 # The cache (saved pass, compiled ccrypt, etc.)
 /.cache/
 

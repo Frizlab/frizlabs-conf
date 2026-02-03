@@ -19,5 +19,6 @@ if [ "$HOST_OS" = "Darwin" ]; then
 fi
 
 
-# Sourcing env specific vars file
-source "$SRC_FOLDER/vars/$COMPUTER_GROUP.zsh"
+# Sourcing env specific and local vars files.
+test -f "$SRC_FOLDER/vars/$COMPUTER_GROUP.zsh" && source "$SRC_FOLDER/vars/$COMPUTER_GROUP.zsh" || true
+test -f "$SRC_FOLDER/vars/  local.zsh"         && source "$SRC_FOLDER/vars/  local.zsh"         || true

@@ -76,8 +76,9 @@ DOTFILES__COLIMA__NCPU="2"
 DOTFILES__COLIMA__MEMORY="8"
 DOTFILES__COLIMA__RWMOUNT="/tmp/colima"
 
-# Sourcing env specific vars file
+# Sourcing env specific and local vars files.
 test -f "./vars/$COMPUTER_GROUP.zsh" && source "./vars/$COMPUTER_GROUP.zsh" || true
+test -f "./vars/  local.zsh"         && source "./vars/  local.zsh"         || true
 
 
 readonly DOTFILES__FOLDERS
