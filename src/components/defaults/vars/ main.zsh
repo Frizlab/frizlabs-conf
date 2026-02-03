@@ -441,6 +441,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"about.me"
 	"accounts.panic.com"
 	"accounts.sapphire.moe" # Already dark; does not work
+	"acrobat.adobe.com" # Already dynamic, but not detected as such
 	"adamtuttle.codes" # Already dynamic, but not detected as such
 	"adventofcode.com" # Already dark; does not work
 	"aidarwinawards.org" # Already dynamic, but not detected as such
@@ -449,6 +450,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"aleksandrhovhannisyan.com" # Already dynamic, but not detected as such
 	"allaboutberlin.com" # Already dynamic, but not detected as such
 	"altcha.org" # Already dynamic, but not detected as such
+	"amit.prasad.me" # Already dark; does not work
 	"anasinorbi.ro"
 	"anatolyzenkov.com" # Already dynamic, but not detected as such
 	"andrewlock.net" # Already dark; does not work
@@ -576,6 +578,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"denodell.com" # Already dynamic, but not detected as such
 	"denudeart.com" # Does not work
 	"departmentmap.store"
+	"depthfirst.com" # Already dark; does not work
 	"designcode.io" # Already dynamic, but not detected as such
 	"devblogs.microsoft.com" # Retarded on-off switch for dark mode w/o automatic switching
 	"developer.apple.com"
@@ -689,6 +692,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"h4x0r.org" # Already dark
 	"haasiy.main.jp" # Already dark; does not work
 	"hackaday.com" # Already dark; does not work
+	"hackers-1995.vercel.app" # Already dark; does not work
 	"happn.app" # Already dark; does not work
 	"happn.com"
 	"hardbreak.wiki" # Already dynamic, but not detected as such
@@ -753,6 +757,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"jsfiddle.net" # Already dynamic (after manually toggling the only reasonable option, aka. system), but not detected as such anyways
 	"justfuckingusecloudflare.com" # Already dark; does not work
 	"jwt.io" # Already dynamic, but not detected as such
+	"jwz.org" # Already dark; does not work
 	"jyn.dev" # Already dark; does not work
 	"k0sproject.io" # Already dark; does not work
 	"kagi.com"
@@ -822,6 +827,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"mongodb.com" # Already dynamic, but not detected as such
 	"mozilla.github.io" # Already dark
 	"msha.ke"
+	"music.apple.com" # Already dynamic, but not detected as such
 	"mxb.dev" # Already dynamic, but not detected as such
 	"my.ionos.fr"
 	"n0rdy.foo" # Already dark; does not work
@@ -829,6 +835,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"netnewswire.com"
 	"nastystereo.com" # Already dark; does not work
 	"nav.al" # Already dynamic, but not detected as such
+	"nekocalc.com" # Already dynamic, but not detected as such
 	"nextcomputers.org"
 	"nextstep33.info"
 	"nightwater.email" # Already dark; does not work
@@ -946,6 +953,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"soundcloud.com"
 	"soundhound.com"
 	"sourceforge.net" # Does not work
+	"st.suckless.org" # Already dynamic, but not detected as such
 	"stackoverflow.com"
 	"stanislas.blog" # Already dynamic, but not detected as such
 	"steamcommunity.com"
@@ -1036,6 +1044,7 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_BLACKLISTED_SITES=(
 	"willhbr.net" # Already dynamic, but not detected as such
 	"winonx.com"
 	"woob.tech"
+	"word.cloud.microsoft" # Does not work
 	"world.hey.com" # Already dynamic, but not detected as such
 	"ww3.yggtorrent.gg"
 	"www.apple.com"
