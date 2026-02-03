@@ -4,7 +4,11 @@ case "$HOST_OS:$HOST_ARCH" in
 	Darwin:arm64)
 		start_task "install user homebrew arm64"; catchout RES  libbrew__install_homebrew                         "$HOMEBREW_ARM64_USER_DIR"; log_task_from_res "$RES"
 		# We do not really need x86 homebrew in theory, but let’s keep it just in case, because we can.
-		start_task "install user homebrew x86";   catchout RES  libbrew__install_homebrew "--force-arch" "x86_64" "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$RES"
+		# We only install it if running programs using the x86_64 architecture is possible.
+		# Note we assume if the `true` binary does not have the x86_64 architecture it would not make sense to have Homebrew installed for x86 anyways.
+		if arch -x86_64 /usr/bin/true 2>/dev/null; then
+			start_task "install user homebrew x86";   catchout RES  libbrew__install_homebrew "--force-arch" "x86_64" "$HOMEBREW_X86_USER_DIR";   log_task_from_res "$RES"
+		fi
 	;;
 	
 	Linux:aarch64)
