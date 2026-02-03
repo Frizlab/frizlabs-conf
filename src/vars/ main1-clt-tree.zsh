@@ -23,7 +23,7 @@ readonly THIRD_PARTY_SHARE_DIR="$THIRD_PARTY_CLT_DIR/share"
 readonly THIRD_PARTY_BASH_COMPLETIONS="$THIRD_PARTY_SHARE_DIR/bash/completions"
 readonly THIRD_PARTY_ZSH_SITE_FUNCTIONS="$THIRD_PARTY_SHARE_DIR/zsh/site-functions"
 
-# The x86 user Homebrew instance directory
-readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"
 # The arm64 user Homebrew instance directory
 readonly HOMEBREW_ARM64_USER_DIR="$CLT_DIR/homebrew-arm64"
+# The x86 user Homebrew instance directory
+readonly HOMEBREW_X86_USER_DIR="$CLT_DIR/homebrew-x86"

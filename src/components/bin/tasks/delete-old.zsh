@@ -37,7 +37,7 @@ bin_task__delete_bin "frizlab" "my_split"
 bin_task__delete_doc "frizlab" "dump-safari-tabs/dump-safari-tabs.sh"
 
 ### Local Homebrew Install ###
-# Reason: Replaced by a script to install homebrew unconditionally.
+# Reason: Replaced by a script to install Homebrew unconditionally.
 bin_task__delete_bin "frizlab" "local-brew-install"
 
 ### Xcode Project Version Manager ###

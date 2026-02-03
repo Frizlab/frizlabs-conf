@@ -11,7 +11,7 @@ case "$HOST_OS" in
 		readonly HOMEBREW_ARM64_SYSTEM_DIR="/home/linuxbrew/.linuxbrew-arm64"
 		readonly HOMEBREW_X86_SYSTEM_DIR="/home/linuxbrew/.linuxbrew"
 	;;
-	*) fatal "Unknown host $HOST_OS; cannot set homebrew paths.";;
+	*) fatal "Unknown host $HOST_OS; cannot set Homebrew paths.";;
 esac
 
 case "$HOST_ARCH" in
@@ -24,5 +24,5 @@ case "$HOST_ARCH" in
 		readonly HOMEBREW_USER_DIR="$HOMEBREW_X86_USER_DIR"
 		readonly HOMEBREW_SYSTEM_DIR="$HOMEBREW_X86_SYSTEM_DIR"
 	;;
-	*) fatal "Unknown arch $HOST_ARCH; cannot set homebrew paths.";;
+	*) fatal "Unknown arch $HOST_ARCH; cannot set Homebrew paths.";;
 esac

@@ -11,7 +11,7 @@
 #    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 #
 #
-# Another thing: Installing homebrew in /usr/local is not supported by the script we use to install homebrew.
+# Another thing: Installing Homebrew in /usr/local is not supported by the script we use to install Homebrew.
 # Homebrew workarounds /usr/local not being writable without sudo by installing itself in /usr/local/Homebrew instead and
 #  creating only the required folders in /usr/local and
 #  symlinking stuff from the Homebrew folder to the expected folders.
@@ -28,8 +28,8 @@
 #    ln -sf /usr/local/Homebrew/bin/brew /usr/local/bin/brew
 #    /usr/local/bin/brew update --force
 #
-# We should modify the script so it supports installing to a custom homebrew prefix, with a custom install folder
-#  (untar in custom install folder, and create necessary directories in homebrew prefix, then link brew, then brew update).
+# We should modify the script so it supports installing to a custom Homebrew prefix, with a custom install folder
+#  (untar in custom install folder, and create necessary directories in Homebrew prefix, then link brew, then brew update).
 
 
 case "$HOST_OS:$HOST_ARCH" in
