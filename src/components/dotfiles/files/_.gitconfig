@@ -2,7 +2,8 @@
 	name = Frizlab
 	email = fload@me.com
 [push]
-	default = current
+	default = upstream
+	autoSetupRemote = true
 [diff]
 	tool = opendiff
 [filter "lfs"]
