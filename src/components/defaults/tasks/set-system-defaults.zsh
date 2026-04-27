@@ -116,6 +116,10 @@ log_task_from_res_list RES_LIST
 #catchout RES  libdefaults__set_bool com.apple.dock slow-motion-allowed 1
 #log_task_from_res "$RES"
 
+start_task "macOS: mark hidden apps in the dock with transparency"
+catchout RES  libdefaults__set_bool com.apple.dock showhidden 1
+log_task_from_res "$RES"
+
 # Note: I’m not fully confident this is actually used anywhere…
 start_task "macOS: set system-wide search engine"
 catchout RES  libdefaults__set_plist NSGlobalDomain NSPreferredWebServices '{NSWebServicesProviderWebSearch = {NSDefaultDisplayName = DuckDuckGo; NSProviderIdentifier = "com.duckduckgo";};}'
