@@ -61,7 +61,7 @@ alias rutorrent-read-report-from-clipboard="pbpaste | recode html..latin1 | sed 
 alias pip3-upgrade-all='pip3 list --outdated --format=json | jq -r '"'"'.[] | "\(.name)==\(.latest_version)"'"'"' | grep -v -e wheel -e setuptools | cut -d= -f1 | xargs pip3 install --user --break-system --upgrade --no-warn-script-location'
 alias brew-upgrade-all='brew-all update; printf "\n"; brew-all upgrade'
 alias brew-upgrade-all-force-build='brew-all update; printf "\n"; brew-all upgrade --build-from-source'
-alias brew-clean-all='brew-all cleanup -s'
+alias brew-clean-all='brew-all cleanup -s --prune=all'
 # Safeguard non --user pip3 installs. This spawns a sub-shell. I don’t care. Have I mentioned I hate pip?
 alias pip3='__fuck_pip'
 
