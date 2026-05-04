@@ -5,7 +5,20 @@
  * To see all of Zed's default settings without changing your custom settings,
  *  run `zed: open default settings` from the command palette (cmd-shift-p). */
 {
+	"project_panel": {
+		"dock": "left"
+	},
+	"outline_panel": {
+		"dock": "left"
+	},
+	"collaboration_panel": {
+		"dock": "left"
+	},
+	"git_panel": {
+		"dock": "left"
+	},
 	"agent": {
+		"dock": "right",
 		"model_parameters": [],
 		"enable_feedback": false
 	},
