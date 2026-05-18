@@ -250,4 +250,18 @@ ReadPrefs
 Interface
 
 
-# ~*~ sublime: set_encoding()=Western (Mac Roman) ~*~
+# (Deactivated) modeline to set the proper encoding to this file (add the missing ~ at the beginning and the end to reactivate):
+#    *~ sublime: set_encoding()=Western (Mac Roman) ~*
+#
+# This is deactivated because it does not work.
+# Well, technically it does call set_encoding,
+#  but set_encoding does not re-open the file with the given encoding.
+# Instead, it will set the encoding to the file, so that when it is saved, the given encoding is used.
+#
+# Encoding detection on opening the file is done as such:
+#    - Try to open as UTF-8, if it works it’s cool;
+#    - Otherwise check UTF-16 BOM indicator;
+#    - Finally, as a fallback, use "Western (Windows 1252)".
+# (From <https://forum.sublimetext.com/t/16194/2>.)
+#
+# All of this is highly disappointing.
