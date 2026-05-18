@@ -248,3 +248,6 @@ set all(decvalue:m) 30
 set all(decvalue:s) 00
 ReadPrefs
 Interface
+
+
+# ~*~ sublime: set_encoding()=Western (Mac Roman) ~*~
