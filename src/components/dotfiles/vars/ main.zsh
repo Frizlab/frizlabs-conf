@@ -30,6 +30,7 @@ DOTFILES__FOLDERS=(
 	".config"
 	".config/zed"
 	".config/yt-dlp"
+	".config/container"
 )
 
 # readonly later only because modified in env-specific var files.
@@ -52,6 +53,7 @@ DOTFILES__FILES=(
 	".config/zed/settings.json"
 	".config/zed/keymap.json"
 	".config/yt-dlp/config"
+	".config/container/config.toml"
 )
 
 readonly DOTFILES__TEMPLATES=(
