@@ -41,7 +41,8 @@
 [checkout]
 	defaultRemote = origin
 [rebase]
-	updateRefs = true
+	# Looked like a good idea to set this to true at first, but it has been more annoying than anything in practice, so we set it back to false.
+	updateRefs = false
 
 # So, this option is amazing.
 # However, if the file does not exist (most repo), blame fails.
