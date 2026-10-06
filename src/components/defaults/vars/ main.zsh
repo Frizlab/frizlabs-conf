@@ -135,7 +135,6 @@ typeset -a DEFAULTS__DARK_MODE_FOR_SAFARI_WHITELISTED_SITES=(
 	"docs.datomic.com"
 	"docs.getutm.app"
 	"docs.gitea.io"
-	"docs.gitlab.com"
 	"docs.k3s.io"
 	"docs.opencv.org"
 	"docs.oracle.com"
